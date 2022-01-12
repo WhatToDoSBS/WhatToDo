@@ -32,6 +32,7 @@ public class CrawlingTest {
             utils.crawling(rankNm, rankNmList);
             utils.crawling(company, companyList);
 
+            System.out.println(utils.crawling(rankNm, rankNmList));
         } catch (IOException e) {
             e.printStackTrace();
         }
