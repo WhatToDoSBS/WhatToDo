@@ -4,15 +4,13 @@
 <c:set var="actionVal" value="/board/write" />
 <c:set var="submitVal" value="WRITE" />
 <c:set var="iboardVal" value="0" />
-<%--<c:set var="icategoryVal" value="${param.icategory}" />--%>
-<%--&lt;%&ndash;<c:if test="${requestScope.data != null && requestScope.data.iboard > 0}">&ndash;%&gt;--%>
-<%--&lt;%&ndash;    <c:set var="titleVal" value="수정" />&ndash;%&gt;--%>
-<%--&lt;%&ndash;    <c:set var="actionVal" value="/board/mod" />&ndash;%&gt;--%>
-<%--&lt;%&ndash;    <c:set var="submitVal" value="MOD" />&ndash;%&gt;--%>
-<%--&lt;%&ndash;    <c:set var="iboardVal" value="${requestScope.data.iboard}" />&ndash;%&gt;--%>
-<%--&lt;%&ndash;    <c:set var="icategoryVal" value="0" />&ndash;%&gt;--%>
-<%--&lt;%&ndash;</c:if>&ndash;%&gt;--%>
-<%--<div class="flex-container flex-center flex-direction-column">--%>
+<c:if test="${requestScope.data != null && requestScope.data.iboard > 0}">
+    <c:set var="titleVal" value="수정" />
+    <c:set var="actionVal" value="/board/mod" />
+    <c:set var="submitVal" value="MOD" />
+    <c:set var="iboardVal" value="${requestScope.data.iboard}" />
+</c:if>
+<div class="flex-container flex-center flex-direction-column">
     <h1>${titleVal}</h1>
     <form action="${actionVal}" method="post">
 <%--        <input type="hidden" name="iboard" value="${iboardVal}">--%>

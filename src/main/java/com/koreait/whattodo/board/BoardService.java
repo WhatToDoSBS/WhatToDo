@@ -36,6 +36,17 @@ public class BoardService {
         }
         return detail;
     }
+
+    public int updBoard(BoardEntity entity) {
+        try {
+            entity.setIuser(userUtils.getLoginUserPk());
+            return mapper.updBoard(entity);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
     public int delBoard(BoardEntity entity) {
         entity.setIuser(userUtils.getLoginUserPk());
         entity.setIsdel(1);

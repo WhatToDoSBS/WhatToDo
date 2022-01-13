@@ -51,6 +51,18 @@ public class BoardController {
         model.addAttribute("data", service.selBoard(entity));
     }
 
+    @GetMapping("/mod")
+    public String mod(BoardEntity entity, Model model) {
+        model.addAttribute("data", service.selBoard(entity));
+        return "board/write";
+    }
+
+    @PostMapping("/mod")
+    public String modProc(BoardEntity entity) {
+        int result = service.updBoard(entity);
+        return "redirect:/board/detail?iboard=" + entity.getIboard();
+    }
+
     @GetMapping("/del")
     public String delProc(BoardEntity entity) {
         int result = service.delBoard(entity);

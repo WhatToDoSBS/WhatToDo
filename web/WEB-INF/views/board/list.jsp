@@ -31,7 +31,9 @@
             </c:otherwise>
         </c:choose>
 <%--        <c:if test="${sessionScope.loginUser != null}">--%>
-            <input type="button" value="글쓰기" onclick="location.href='/board/write'">
+        <div id="writeBtnContainer">
+        <div id="writeBtn" onclick="location.href='/board/write'">글쓰기</div>
+        </div>
 <%--        </c:if>--%>
     </div>
 </div>

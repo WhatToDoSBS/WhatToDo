@@ -16,16 +16,9 @@ CREATE TABLE menu_category(
                               nmval VARCHAR(20) NOT NULL,
                               orderby TINYINT NOT NULL DEFAULT 0
 )
-INSERT INTO menu_category (nm)
+INSERT INTO menu_category (nm, nmval)
 VALUES
-('게임'),
-('넷플릭스'),
-('유튜브'),
-('게시판');
-
-INSERT INTO menu_category (nmval)
-VALUES
-    ('game'),
-    ('netflix'),
-    ('youtube'),
-    ('list');
+('게임', 'game'),
+('넷플릭스', 'netflix'),
+('유튜브', 'youtube'),
+('게시판', 'list');
