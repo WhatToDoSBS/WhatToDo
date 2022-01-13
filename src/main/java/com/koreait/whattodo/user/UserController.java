@@ -10,4 +10,7 @@ public class UserController {
 
     @GetMapping("/login")
     public void login() {}
+
+    @GetMapping("/join")
+    public void join() {}
 }
