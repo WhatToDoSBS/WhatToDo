@@ -3,7 +3,7 @@
     <form action="">
         <div class="choiceBtn_section">
             <div class="choiceBtn_section_line rating">
-                <label for="">평가 :vbncnbvc
+                <label for="">평가 :
                     <button>띵작</button>
                     <button>수작</button>
                     <button>중간 이상</button>
