@@ -36,7 +36,6 @@ public class BoardService {
         }
         return detail;
     }
-
     public int delBoard(BoardEntity entity) {
         entity.setIuser(userUtils.getLoginUserPk());
         entity.setIsdel(1);

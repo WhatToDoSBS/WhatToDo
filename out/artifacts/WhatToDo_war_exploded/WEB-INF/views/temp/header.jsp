@@ -5,7 +5,7 @@
 <tiles:importAttribute name="menuList"/>
 <div class="header">
     <h1>뭐하Gee</h1>
-    <span class="login">로그인</span>
+    <span class="login"><a href="/user/login">로그인</a></span>
 </div>
 <div class="header_menu">
     <%-- <ul>
