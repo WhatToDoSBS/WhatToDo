@@ -8,5 +8,6 @@ import lombok.Setter;
 public class BoardCategoryEntity {
     private int icategory;
     private String nm;
+    private String nmval;
     private int orderby;
 }

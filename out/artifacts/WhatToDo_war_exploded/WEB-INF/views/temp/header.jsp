@@ -16,7 +16,7 @@
     </ul> --%>
     <ul>
     <c:forEach items="${menuList}" var="item">
-        <li>${item.nm}</li>
+        <li onclick= location.href="/board/${item.nmval}">${item.nm}</li>
     </c:forEach>
     </ul>
 </div>
