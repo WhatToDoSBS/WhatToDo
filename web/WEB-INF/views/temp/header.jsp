@@ -5,7 +5,7 @@
 <tiles:importAttribute name="menuList"/>
 <div class="header">
     <h1>뭐하Gee</h1>
-    <span class="login"><a href="/user/login">로그인</a></span>
+    <span class="login">로그인</span>
 </div>
 <div class="header_menu">
     <%-- <ul>
@@ -16,7 +16,7 @@
     </ul> --%>
     <ul>
     <c:forEach items="${menuList}" var="item">
-        <li onclick= location.href="/board/${item.nmval}">${item.nm}</li>
+        <li>${item.nm}</li>
     </c:forEach>
     </ul>
 </div>

@@ -16,4 +16,5 @@ public class UserEntity {
     private String profileimg;
     private String rdt;
     private String mdt;
+
 }

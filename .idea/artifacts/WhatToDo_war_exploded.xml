@@ -6,6 +6,7 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="WhatToDo" />
+          <element id="module-output" name="WhatToDo-seongwan" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.3.30.RELEASE" />
@@ -43,9 +44,9 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.13.1" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.13.1" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.13.1" />
-          <element id="library" level="project" name="Maven: org.jsoup:jsoup:1.14.3" />
         </element>
       </element>
+      <element id="javaee-facet-resources" facet="WhatToDo-seongwan/web/Web" />
     </root>
   </artifact>
 </component>
