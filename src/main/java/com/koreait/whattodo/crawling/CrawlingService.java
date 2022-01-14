@@ -21,7 +21,9 @@ public class CrawlingService {
 
     public void insert(String url) {
         Document doc = null;
-        List<CrawlingMecaRankEntity> list = new ArrayList<CrawlingMecaRankEntity>();
+        List<CrawlingMecaRankEntity> numList = new ArrayList<CrawlingMecaRankEntity>();
+        List<CrawlingMecaRankEntity> nameList = new ArrayList<CrawlingMecaRankEntity>();
+        List<CrawlingMecaRankEntity> companyList = new ArrayList<CrawlingMecaRankEntity>();
 
 
         try {
@@ -35,14 +37,29 @@ public class CrawlingService {
         Elements rankNm = doc.select("div.game-name > a"); // 게임 이름
         Elements company = doc.select("div.game-info > span.company"); // 회사 명
 
+        for(Element element : rankNum) {
+            CrawlingMecaRankEntity entity = new CrawlingMecaRankEntity();
+            String name = element.text();
+
+            entity.setRankNm(name);
+            numList.add(entity);
+        }
         for(Element element : rankNm) {
             CrawlingMecaRankEntity entity = new CrawlingMecaRankEntity();
             String name = element.text();
 
             entity.setRankNm(name);
-            list.add(entity);
+            nameList.add(entity);
         }
-        mapper.insertName(list);
+        for(Element element : company) {
+            CrawlingMecaRankEntity entity = new CrawlingMecaRankEntity();
+            String name = element.text();
+
+            entity.setRankNm(name);
+            companyList.add(entity);
+        }
+
+        mapper.insertName(nameList);
 
     }
 }
