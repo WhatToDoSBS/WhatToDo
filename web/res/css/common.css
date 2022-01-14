@@ -49,7 +49,7 @@ body {
 
 .header_menu li:hover {
     cursor: pointer;
-    background-color: black;
+    background-color: dimgray;
     color: white;
 }
 
@@ -168,3 +168,12 @@ body {
 }
 table, td, th { border: 1px solid #4f4f4f; border-collapse: collapse; }
 td, th { padding: 7px; }
+
+.clicked {
+    background-color: lightgreen;
+}
+
+.menu-selected {
+    background-color: black;
+    color: white;
+}

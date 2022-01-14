@@ -3,15 +3,15 @@
     <form action="">
         <div class="choiceBtn_section">
             <div class="choiceBtn_section_line rating">
-                <label for="">평가 :
+                <label>평가 :
                     <button>띵작</button>
                     <button>수작</button>
                     <button>중간 이상</button>
                     <button>망작</button>
                 </label>
             </div>
-            <div class="choiceBtn_section_line popular">
-                <label for="">인기 :
+            <div class="choiceBtn_section_line popular ">
+                <label>인기 :
                     <button>많은</button>
                     <button>보통</button>
                     <button>적은</button>
@@ -19,7 +19,7 @@
                 </label>
             </div>
             <div class="choiceBtn_section_line kinds">
-                <label for="">종류 :
+                <label>종류 :
                     <button>RPG</button>
                     <button>FPS</button>
                     <button>MMORPG</button>
@@ -29,7 +29,7 @@
                 </label>
             </div>
             <div class="choiceBtn_section_line theme">
-                <label for="">테마 :
+                <label>테마 :
                     <button>오픈월드</button>
                     <button>생존</button>
                     <button>애니메이션</button>
@@ -37,7 +37,7 @@
                 </label>
             </div>
             <div class="choiceBtn_section_line playerNum">
-                <label for="">플레이어수 :
+                <label>플레이어수 :
                     <button>나 혼자</button>
                     <button>단 둘이</button>
                     <button>에블바디</button>
