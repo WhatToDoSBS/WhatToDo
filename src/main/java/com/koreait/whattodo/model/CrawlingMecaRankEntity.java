@@ -8,6 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class CrawlingMecaRankEntity {
+    private int irank;
     private String rankNum;
     private String rankNm;
     private String company;

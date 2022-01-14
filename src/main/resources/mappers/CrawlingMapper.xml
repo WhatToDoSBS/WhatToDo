@@ -5,6 +5,5 @@
         <foreach collection="list" open="DECLARE BEGIN" close="; END;" separator=";" item="rank">
             INSERT INTO meca_rankdb (rankNm) VALUES (#{rank.rankNm})
         </foreach>
-
     </insert>
 </mapper>
