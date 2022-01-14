@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div>
-    <h1>회원가입</h1>
+    <h1></h1>
     <form action="/user/join" method="post">
         <div>ID : <input type="text" name="uid"></div>
         <div>PW : <input type="password" name="upw"></div>
