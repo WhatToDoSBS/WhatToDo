@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="container">
+    <div>
+        <h1>GAME 뭐하지?</h1>
+    </div>
     <form action="" id="gameBtnFrm">
         <div class="choiceBtn_section">
             <div class="choiceBtn_section_line rating">

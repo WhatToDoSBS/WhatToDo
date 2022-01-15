@@ -52,7 +52,7 @@ public class CrawlingTest {
                 entity.setRankNm((String)rankNmList.get(i));
                 entity.setCompany((String)companyList.get(i));
                 list.add(entity);
-                System.out.println(list.get(i));
+                System.out.println((CrawlingMecaRankEntity)list.get(i));
             }
 
 

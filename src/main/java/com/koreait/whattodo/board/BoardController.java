@@ -1,5 +1,6 @@
 package com.koreait.whattodo.board;
 
+import com.koreait.whattodo.crawling.CrawlingService;
 import com.koreait.whattodo.model.BoardEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,10 @@ public class BoardController {
 
     @Autowired
     private BoardService service;
+
+    @Autowired
+    private CrawlingService crawlingService;
+
 
     @GetMapping("/game")
     public void game() {}
@@ -55,5 +60,11 @@ public class BoardController {
     public String delProc(BoardEntity entity) {
         int result = service.delBoard(entity);
         return "redirect:/board/list";
+    }
+
+    @GetMapping("/ranking")
+    public void ranking() {
+        String url = "https://www.gamemeca.com/ranking.php";
+        crawlingService.insert(url);
     }
 }
