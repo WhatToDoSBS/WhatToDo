@@ -1,7 +1,6 @@
 package com.koreait.whattodo.crawling;
 
-import com.koreait.whattodo.Utils;
-import com.koreait.whattodo.model.CrawlingMecaRankEntity;
+import com.koreait.whattodo.model.MecaRankEntity;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -14,8 +13,7 @@ import java.util.List;
 
 public class CrawlingTest {
     public static void main(String[] args) {
-
-        // 게임메카에서 크롤링해서 가져오는 과정
+        /* 게임메카에서 크롤링해서 가져오는 과정
 
         final String RankURL = "https://www.gamemeca.com/ranking.php";
         Connection con = Jsoup.connect(RankURL);
@@ -29,7 +27,7 @@ public class CrawlingTest {
             List rankNmList = new ArrayList<>();    // 게임 리스트
             List companyList = new ArrayList<>();   // 회사 리스트
 
-            CrawlingMecaRankEntity entity = new CrawlingMecaRankEntity();
+            MecaRankEntity entity = new MecaRankEntity();
             for(Element element : rankNum) {
                 String num = element.text();
 
@@ -46,19 +44,20 @@ public class CrawlingTest {
                 companyList.add(companyNm);
             }
 
-            List<CrawlingMecaRankEntity> list = new ArrayList<>();
+            List<MecaRankEntity> list = new ArrayList<>();
             for(int i=0;i<rankNmList.size();i++) {
                 entity.setRankNum((String)rankNumList.get(i));
                 entity.setRankNm((String)rankNmList.get(i));
                 entity.setCompany((String)companyList.get(i));
                 list.add(entity);
-                System.out.println((CrawlingMecaRankEntity)list.get(i));
+                System.out.println((MecaRankEntity)list.get(i));
             }
 
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+         */
 
     }
 }
