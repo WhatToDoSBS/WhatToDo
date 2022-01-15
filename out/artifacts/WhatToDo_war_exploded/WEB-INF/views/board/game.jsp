@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="container">
-    <form action="">
+    <form action="" id="gameBtnFrm">
         <div class="choiceBtn_section">
             <div class="choiceBtn_section_line rating">
                 <label for="">평가 :
-                    <button>띵작</button>
+                    <button id="aaa">띵작</button>
                     <button>수작</button>
                     <button>중간 이상</button>
                     <button>망작</button>

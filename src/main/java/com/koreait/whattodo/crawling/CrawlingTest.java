@@ -1,9 +1,11 @@
 package com.koreait.whattodo.crawling;
 
 import com.koreait.whattodo.Utils;
+import com.koreait.whattodo.model.CrawlingMecaRankEntity;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
@@ -27,23 +29,32 @@ public class CrawlingTest {
             List rankNmList = new ArrayList<>();    // 게임 리스트
             List companyList = new ArrayList<>();   // 회사 리스트
 
-            // 리스트에 크롤링을 넣는 작업
-            Utils utils = new Utils();
-            List crawlingRankNum = utils.crawling(rankNum, rankNumList);
-            List crawlingRankNm = utils.crawling(rankNm, rankNmList);
-            List crawlingCompany = utils.crawling(company, companyList);
+            CrawlingMecaRankEntity entity = new CrawlingMecaRankEntity();
+            for(Element element : rankNum) {
+                String num = element.text();
 
-            String[][] mecaRankList = new String[crawlingRankNm.size()][];
-
-            for(int i=0; i<crawlingRankNm.size();i++) {
-                for (int j=0; j<3;j++) {
-                    mecaRankList[i][0] = (String) crawlingRankNum.get(j);
-                    mecaRankList[i][1] = (String) crawlingRankNm.get(j);
-                    mecaRankList[i][2] = (String) crawlingCompany.get(j);
-                    System.out.println(mecaRankList[i][0] + mecaRankList[i][1] + mecaRankList[i][2]);
-                }
-                System.out.println();
+                rankNumList.add(num);
             }
+            for(Element element : rankNm) {
+                String name = element.text();
+
+                rankNmList.add(name);
+            }
+            for(Element element : company) {
+                String companyNm = element.text();
+
+                companyList.add(companyNm);
+            }
+
+            List<CrawlingMecaRankEntity> list = new ArrayList<>();
+            for(int i=0;i<rankNmList.size();i++) {
+                entity.setRankNum((String)rankNumList.get(i));
+                entity.setRankNm((String)rankNmList.get(i));
+                entity.setCompany((String)companyList.get(i));
+                list.add(entity);
+                System.out.println(list.get(i));
+            }
+
 
         } catch (IOException e) {
             e.printStackTrace();

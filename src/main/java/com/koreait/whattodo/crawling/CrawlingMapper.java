@@ -7,5 +7,5 @@ import java.util.List;
 
 @Mapper
 public interface CrawlingMapper {
-    public void insertName(List<CrawlingMecaRankEntity> list);
+    void insertRankMecaDb(List<CrawlingMecaRankEntity> listName);
 }

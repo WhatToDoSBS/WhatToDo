@@ -21,10 +21,9 @@ public class CrawlingService {
 
     public void insert(String url) {
         Document doc = null;
-        List<CrawlingMecaRankEntity> numList = new ArrayList<CrawlingMecaRankEntity>();
-        List<CrawlingMecaRankEntity> nameList = new ArrayList<CrawlingMecaRankEntity>();
-        List<CrawlingMecaRankEntity> companyList = new ArrayList<CrawlingMecaRankEntity>();
-
+        List rankNumList = new ArrayList<>();   // 순위 번호 리스트
+        List rankNmList = new ArrayList<>();    // 게임 리스트
+        List companyList = new ArrayList<>();   // 회사 리스트
 
         try {
             doc = Jsoup.connect(url).get();
@@ -37,29 +36,30 @@ public class CrawlingService {
         Elements rankNm = doc.select("div.game-name > a"); // 게임 이름
         Elements company = doc.select("div.game-info > span.company"); // 회사 명
 
+        CrawlingMecaRankEntity entity = new CrawlingMecaRankEntity();
+        List<CrawlingMecaRankEntity> list = new ArrayList<>();
         for(Element element : rankNum) {
-            CrawlingMecaRankEntity entity = new CrawlingMecaRankEntity();
-            String name = element.text();
+            String num = element.text();
 
-            entity.setRankNm(name);
-            numList.add(entity);
+            rankNumList.add(num);
         }
         for(Element element : rankNm) {
-            CrawlingMecaRankEntity entity = new CrawlingMecaRankEntity();
             String name = element.text();
 
-            entity.setRankNm(name);
-            nameList.add(entity);
+            rankNmList.add(name);
         }
         for(Element element : company) {
-            CrawlingMecaRankEntity entity = new CrawlingMecaRankEntity();
-            String name = element.text();
+            String companyNm = element.text();
 
-            entity.setRankNm(name);
-            companyList.add(entity);
+            companyList.add(companyNm);
         }
-
-        mapper.insertName(nameList);
+        for(int i=0;i<rankNmList.size();i++) {
+            entity.setRankNum((String)rankNumList.get(i));
+            entity.setRankNm((String)rankNmList.get(i));
+            entity.setCompany((String)companyList.get(i));
+            list.add(entity);
+            mapper.insertRankMecaDb(list.get(i));
+        }
 
     }
 }
