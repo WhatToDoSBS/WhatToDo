@@ -13,8 +13,8 @@
 <%--&lt;%&ndash;    <c:set var="icategoryVal" value="0" />&ndash;%&gt;--%>
 <%--&lt;%&ndash;</c:if>&ndash;%&gt;--%>
 <%--<div class="flex-container flex-center flex-direction-column">--%>
-<h1>${titleVal}</h1>
 <form action="${actionVal}" method="post">
+    <h1>${titleVal}</h1>
     <%--        <input type="hidden" name="iboard" value="${iboardVal}">--%>
     <%--        <input type="hidden" name="icategory" value="${icategoryVal}">--%>
     <div>

@@ -13,7 +13,7 @@ import java.util.List;
 
 public class CrawlingTest {
     public static void main(String[] args) {
-        /* 게임메카에서 크롤링해서 가져오는 과정
+        // 게임메카에서 크롤링해서 가져오는 과정
 
         final String RankURL = "https://www.gamemeca.com/ranking.php";
         Connection con = Jsoup.connect(RankURL);
@@ -28,15 +28,16 @@ public class CrawlingTest {
             List companyList = new ArrayList<>();   // 회사 리스트
 
             MecaRankEntity entity = new MecaRankEntity();
+
             for(Element element : rankNum) {
                 String num = element.text();
-
                 rankNumList.add(num);
             }
             for(Element element : rankNm) {
                 String name = element.text();
-
+                String nmLink = element.getElementsByAttribute("href").attr("href");
                 rankNmList.add(name);
+                System.out.println(nmLink);
             }
             for(Element element : company) {
                 String companyNm = element.text();
@@ -50,14 +51,13 @@ public class CrawlingTest {
                 entity.setRankNm((String)rankNmList.get(i));
                 entity.setCompany((String)companyList.get(i));
                 list.add(entity);
-                System.out.println((MecaRankEntity)list.get(i));
             }
 
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-         */
+
 
     }
 }

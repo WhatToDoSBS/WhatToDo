@@ -1,8 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div>
-    <h1>YOUTUBE 뭐보지?</h1>
-</div>
 <form action="">
+    <h1>YOUTUBE 뭐보지?</h1>
     <div class="choiceBtn_section">
         <div class="choiceBtn_section_line rating">
             <label for="">평가 :
