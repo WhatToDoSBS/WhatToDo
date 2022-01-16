@@ -45,4 +45,20 @@
         WHERE iboard = ${iboard}
         AND iuser = ${iuser}
     </update>
+
+    <select id="selPrevNext" resultType="BoardPrevNextVo">
+        <![CDATA[
+            SELECT
+            (SELECT iboard FROM freeboard
+            WHERE isdel = 0
+            AND iboard < ${iboard}
+            ORDER BY iboard
+            LIMIT 1) AS previboard,
+            (SELECT iboard FROM freeboard
+            WHERE isdel = 0
+            AND iboard > ${iboard}
+            ORDER BY iboard
+            LIMIT 1) AS nextiboard
+]]>
+    </select>
 </mapper>

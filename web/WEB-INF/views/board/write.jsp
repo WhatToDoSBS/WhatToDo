@@ -7,11 +7,11 @@
 <c:if test="${requestScope.data != null && requestScope.data.iboard > 0}">
     <c:set var="titleVal" value="수정" />
     <c:set var="actionVal" value="/board/mod" />
-    <c:set var="submitVal" value="MOD" />
+    <c:set var="submitVal" value="수정" />
     <c:set var="iboardVal" value="${requestScope.data.iboard}" />
 </c:if>
 <div class="flex-container flex-center flex-direction-column">
-    <h1>${titleVal}</h1>
+    <h1 id="wTitle">${titleVal}</h1>
     <form action="${actionVal}" method="post">
 <%--        <input type="hidden" name="iboard" value="${iboardVal}">--%>
 <%--        <input type="hidden" name="icategory" value="${icategoryVal}">--%>
@@ -23,6 +23,6 @@
             <label>내용 : <textarea name="ctnt"><c:out value="${requestScope.data.ctnt}" /></textarea>
             </label>
         </div>
-        <div><input type="submit" value="${submitVal}"></div>
+        <div><input class="boardBtn" type="submit" value="${submitVal}"></div>
     </form>
 </div>

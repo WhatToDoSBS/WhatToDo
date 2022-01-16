@@ -193,3 +193,39 @@ button.pnBtn.clicked {
     background-color: black;
     color: white;
 }
+
+#dtCtnt {
+    font-size: x-large;
+    border: 1px solid mediumaquamarine;
+    padding: 20px;
+    margin: 10px;
+}
+
+.boardBtn {
+    border: none;
+    margin: 5px;
+    background-color: lightsteelblue;
+}
+
+#dTitle {
+    margin-bottom: 20px;
+    padding-top: 20px;
+    border-top: 1px solid mediumaquamarine;
+    font-size: x-large;
+}
+
+#wTitle {
+    margin-bottom: 20px;
+    padding-top: 20px;
+    font-size: x-large;
+}
+
+#pnBtns {
+    display: flex;
+    justify-content: space-between;
+}
+
+#mdBtns {
+    display: flex;
+    justify-content: flex-end;
+}

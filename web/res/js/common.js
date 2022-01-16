@@ -33,13 +33,21 @@ function pnClickedRmv() {
     }
 }
 
-rtBtns.forEach(function (item) {
-    item.addEventListener('click', function (e) {
+for (let i = 0; i < rtBtns.length; i++) {
+    rtBtns[i].addEventListener("click", function (e) {
         e.preventDefault();
         rtClickedRmv();
-        item.classList.add("clicked");
+        rtBtns[i].classList.add("clicked");
     })
-});
+}
+
+// rtBtns.forEach(function (item) {
+//     item.addEventListener('click', function (e) {
+//         e.preventDefault();
+//         rtClickedRmv();
+//         item.classList.add("clicked");
+//     })
+// });
 ppBtns.forEach(function (item) {
     item.addEventListener('click', function (e) {
         e.preventDefault();

@@ -1,6 +1,8 @@
 package com.koreait.whattodo.board;
 
 import com.koreait.whattodo.model.BoardEntity;
+import com.koreait.whattodo.model.BoardPrevNextVo;
+import com.koreait.whattodo.model.BoardVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,6 +50,9 @@ public class BoardController {
             lastIp = req.getRemoteAddr();
         }
         entity.setLastip(lastIp);
+        BoardVo vo = (BoardVo) service.selBoard(entity);
+        BoardPrevNextVo pnVo = service.selPrevNext(vo);
+        model.addAttribute("prevNext", pnVo);
         model.addAttribute("data", service.selBoard(entity));
     }
 
