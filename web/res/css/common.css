@@ -169,8 +169,24 @@ body {
 table, td, th { border: 1px solid #4f4f4f; border-collapse: collapse; }
 td, th { padding: 7px; }
 
-.clicked {
+button.rtBtn.clicked {
     background-color: lightgreen;
+}
+
+button.ppBtn.clicked {
+    background-color: lightblue;
+}
+
+button.kdBtn.clicked {
+    background-color: lightpink;
+}
+
+button.thmBtn.clicked {
+    background-color: lightseagreen;
+}
+
+button.pnBtn.clicked {
+    background-color: lightslategray;
 }
 
 .menu-selected {
