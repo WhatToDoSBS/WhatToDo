@@ -5,4 +5,15 @@
         INSERT INTO t_board_cmt (iboard, iuser, ctnt)
         VALUES (${iboard}, ${iuser}, #{ctnt})
     </insert>
+    
+    <select id="selBoardCmtList" resultType="BoardCmtVo">
+        SELECT *
+        FROM t_board_cmt
+        WHERE iboard = %{iboard}
+    </select>
+
+    <delete id="delBoardCmt">
+        DELETE FROM t_board_cmt
+        WHERE icmt = ${icmt}
+    </delete>
 </mapper>

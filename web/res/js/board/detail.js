@@ -10,7 +10,7 @@ if(cmtFrmElem) {
         let cmtVal = cmtFrmElem.ctnt.value;
         if(cmtVal.length === 0) {
             alert("내용을 입력해 주세요.");
-        } else if (cmtVal.includes("<") && cmtVal.includes(">")) {
+        } else if (cmtVal.includes("<") || cmtVal.includes(">")) {
             alert("내용에 < 혹은 >를 사용하실 수 없습니다.");
         } else {
             insBoardCmtAjax(cmtVal);
@@ -51,12 +51,16 @@ if(delBtnElem) {
 let lastPBtnElem = document.querySelector('.lastPBtn');
 let lastNBtnElem = document.querySelector('.lastNBtn');
 
-lastPBtnElem.addEventListener('click', (e) => {
-    e.preventDefault();
-    alert("마지막 글입니다.");
-})
+if(lastPBtnElem) {
+    lastPBtnElem.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert("마지막 글입니다.");
+    })
+}
 
-lastNBtnElem.addEventListener('click', (e) => {
-    e.preventDefault();
-    alert("최신 글입니다.");
-})
+if(lastNBtnElem) {
+    lastNBtnElem.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert("최신 글입니다.");
+    })
+}
