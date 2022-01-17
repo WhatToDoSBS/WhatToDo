@@ -1,8 +1,10 @@
-package com.koreait.whattodo;
+package com.koreait.whattodo.crawling;
 
+import com.koreait.whattodo.model.MecaRankEntity;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
@@ -11,8 +13,8 @@ import java.util.List;
 
 public class CrawlingTest {
     public static void main(String[] args) {
-
         // 게임메카에서 크롤링해서 가져오는 과정
+
         final String RankURL = "https://www.gamemeca.com/ranking.php";
         Connection con = Jsoup.connect(RankURL);
 
@@ -25,15 +27,37 @@ public class CrawlingTest {
             List rankNmList = new ArrayList<>();    // 게임 리스트
             List companyList = new ArrayList<>();   // 회사 리스트
 
-            // 리스트에 크롤링을 넣는 작업
-            Utils utils = new Utils();
-            utils.crawling(rankNum, rankNumList);
-            utils.crawling(rankNm, rankNmList);
-            utils.crawling(company, companyList);
+            MecaRankEntity entity = new MecaRankEntity();
 
-            System.out.println(utils.crawling(rankNm, rankNmList));
+            for(Element element : rankNum) {
+                String num = element.text();
+                rankNumList.add(num);
+            }
+            for(Element element : rankNm) {
+                String name = element.text();
+                String nmLink = element.getElementsByAttribute("href").attr("href");
+                rankNmList.add(name);
+                System.out.println(nmLink);
+            }
+            for(Element element : company) {
+                String companyNm = element.text();
+
+                companyList.add(companyNm);
+            }
+
+            List<MecaRankEntity> list = new ArrayList<>();
+            for(int i=0;i<rankNmList.size();i++) {
+                entity.setRankNum((String)rankNumList.get(i));
+                entity.setRankNm((String)rankNmList.get(i));
+                entity.setCompany((String)companyList.get(i));
+                list.add(entity);
+            }
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
 }
