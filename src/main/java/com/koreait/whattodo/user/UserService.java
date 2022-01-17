@@ -14,7 +14,13 @@ public class UserService {
         return mapper.insUser(entity);
     }
 
-    public UserEntity login(UserEntity entity) {
-        return mapper.selUser(entity);
+    public int login(UserEntity entity) {
+        UserEntity result = mapper.selUser(entity);
+        if (result == null) {
+            return 0; // 로그인 실패
+        } else if (result.getUpw().equals(entity.getUpw())) {
+            return 1; // 성공
+        }
+        return 2; // 비번 오류
     }
 }
