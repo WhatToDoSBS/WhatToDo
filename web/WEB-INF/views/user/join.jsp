@@ -3,7 +3,10 @@
 <div>
     <h1>회원가입</h1>
     <form action="/user/join" method="post" id="join_frm">
-        <div>ID : <input type="text" name="uid"></div>
+        <div>
+            <h3>아이디</h3>
+            <input type="text" name="uid">
+        </div>
         <div>PW : <input type="password" name="upw"></div>
         <div>PW-Check : <input type="password" name="upw-check"></div>
         <div>NAME : <input type="text" name="nm"></div>
