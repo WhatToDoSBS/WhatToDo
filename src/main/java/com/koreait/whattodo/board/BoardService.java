@@ -2,6 +2,8 @@ package com.koreait.whattodo.board;
 
 import com.koreait.whattodo.UserUtils;
 import com.koreait.whattodo.model.BoardEntity;
+import com.koreait.whattodo.model.BoardPrevNextVo;
+import com.koreait.whattodo.model.BoardVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,9 +38,24 @@ public class BoardService {
         }
         return detail;
     }
+
+    public int updBoard(BoardEntity entity) {
+        try {
+            entity.setIuser(userUtils.getLoginUserPk());
+            return mapper.updBoard(entity);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
     public int delBoard(BoardEntity entity) {
         entity.setIuser(userUtils.getLoginUserPk());
         entity.setIsdel(1);
         return mapper.updBoard(entity);
+    }
+
+    public BoardPrevNextVo selPrevNext(BoardVo vo) {
+        return mapper.selPrevNext(vo);
     }
 }
