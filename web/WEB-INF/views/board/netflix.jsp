@@ -3,6 +3,7 @@
     <form action="" id="choiceBtnFrm">
         <!-- data 담아놓음 -->
         <div class="data"
+             data-mecaRank="${requestScope.mecaRankList}"
         data-mecaRankNum="${requestScope.mecaRankList.rankNum}"
         data-mecaRankNm="${requestScope.mecaRankList.rankNm}"
         data-mecaRankCompany="${requestScope.mecaRankList.company}"

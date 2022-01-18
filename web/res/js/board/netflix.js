@@ -5,9 +5,18 @@
     funBtn = choiceBtnFrm.querySelector('.fun-btn');
     dataList = document.querySelector('.data');
 
-    mecaRankNum = dataList.dataset.mecaRankNum;
+
 
     funBtn.addEventListener('click',(e)=>{
         e.preventDefault();
+        let mecaRankList = dataList.dataset.mecaRank;
+        let mecaRankNum = dataList.dataset.mecaRankNum;
+        let mecaRankNm = dataList.dataset.mecaRankNm;
+        let mecaCompany = dataList.dataset.mecaRankCompany;
+        let steamRankNum = dataList.dataset.steamRankNum;
+        let steamRankNm = dataList.dataset.steamRankNm;
+
+        console.log(mecaRankList);
+        var whatGame = document.createTextNode("test");
     })
 }
