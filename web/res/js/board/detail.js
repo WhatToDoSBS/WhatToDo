@@ -58,7 +58,7 @@ if(cmtListElem) {
     const setCmtList = (list) => {
 
         if(list.length === 0) {
-            cmtListElem.innerText = '댓글 없음';
+            cmtListElem.innerText = '댓글이 없습니다.';
             return;
         }
 
@@ -117,7 +117,24 @@ const delCmt = (icmt, tr) => {
     fetch(`/board/cmt/${icmt}`,
         {'method': 'delete',
         'headers': { 'Content-Type': 'application/json' }
-        },)
+        }, data => {
+        if(data.result) {
+            tr.remove();
+
+            // if(getTrLen() === 1) {
+            //     const cmtListElem = document.querySelector("#cmt_list");
+            //     cmtListElem.innerText = '댓글이 없습니다.';
+            // }
+        } else {
+            alert("댓글을 삭제할 수 없습니다.");
+        }
+        });
+}
+
+const getTrLen = ()=> {
+    const cmtListElem = document.querySelector('#cmt_list');
+    const trArr = cmtListElem.querySelectorAll('table tr');
+    return trArr.length;
 }
 
 let delBtnElem = document.querySelector("#delBtn");
