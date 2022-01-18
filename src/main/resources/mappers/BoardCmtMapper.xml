@@ -9,7 +9,8 @@
     <select id="selBoardCmtList" resultType="BoardCmtVo">
         SELECT *
         FROM t_board_cmt
-        WHERE iboard = %{iboard}
+        WHERE iboard = #{iboard}
+        ORDER BY icmt
     </select>
 
     <delete id="delBoardCmt">

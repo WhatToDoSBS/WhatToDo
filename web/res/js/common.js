@@ -3,11 +3,6 @@ let ppBtns = document.querySelectorAll(".ppBtn");
 let kdBtns = document.querySelectorAll(".kdBtn");
 let thmBtns = document.querySelectorAll(".thmBtn");
 let pnBtns = document.querySelectorAll(".pnBtn");
-let rtLbElem = document.querySelector("#rtLb");
-let ppLbElem = document.querySelector("#ppLb");
-let kdLbElem = document.querySelector("#kdLb");
-let thmLbElem = document.querySelector("#thmLb");
-let pnLbElem = document.querySelector("#pnLb");
 
 function rtClickedRmv() {
     for (let i=0; i<rtBtns.length; i++) {

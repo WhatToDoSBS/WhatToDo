@@ -27,5 +27,5 @@
             <input class="boardBtn" type="button" id="cmt_submit" value="댓글 달기">
         </form>
     </div>
-    <div id="cmt_list">댓글 리스트</div>
+    <div id="cmt_list"></div>
 </div>

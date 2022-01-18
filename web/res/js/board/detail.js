@@ -46,14 +46,12 @@ let cmtListElem = document.querySelector("#cmt_list");
 if(cmtListElem) {
     const iboard = dataElem.dataset.iboard;
     const getCmtList = () => {
-        fetch(`/board/cmt/${iboard}`, {
-            method: 'GET',
-        })
+        fetch(`/board/cmt/${iboard}`)
             .then(res => {
                 return res.json();
             }).then(data => {
                 console.log(data);
-                setCmtList(list)
+                setCmtList(data);
         });
     }
 
@@ -111,6 +109,8 @@ if(cmtListElem) {
         // }
         table.appendChild(tr);
     }
+    getCmtList();
+
 }
 
 const delCmt = (icmt, tr) => {
