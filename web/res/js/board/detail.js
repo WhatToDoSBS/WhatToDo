@@ -36,6 +36,90 @@ if(cmtFrmElem) {
     }
 }
 
+const item = {
+    icmt: data.result,
+    iuser: parseInt(dataElem.dataset.iuser),
+    ctnt: cmtFrmElem.ctnt.value,
+}
+
+let cmtListElem = document.querySelector("#cmt_list");
+if(cmtListElem) {
+    const iboard = dataElem.dataset.iboard;
+    const getCmtList = () => {
+        fetch(`/board/cmt/${iboard}`, {
+            method: 'GET',
+        })
+            .then(res => {
+                return res.json();
+            }).then(data => {
+                console.log(data);
+                setCmtList(list)
+        });
+    }
+
+    const setCmtList = (list) => {
+
+        if(list.length === 0) {
+            cmtListElem.innerText = '댓글 없음';
+            return;
+        }
+
+        const table = document.createElement('table');
+        table.innerHTML = `
+        <tr>
+            <th>NO</th>
+            <th>내용</th>
+            <th>필명</th>
+            <th></th>
+        </tr>
+        `
+        list.forEach(item => {
+            makeTr(table, item);
+        });
+        cmtListElem.appendChild(table);
+    }
+
+    const makeTr = (table, item) => {
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+        <td>${item.icmt}</td>
+        <td>${item.ctnt}</td>
+        <td>${item.iuser}</td>
+        `;
+
+        const td = document.createElement('td');
+        tr.appendChild(td);
+
+        // if(parseInt(dataElem.dataset.iuser)===item.iuser) {
+        const modBtn = document.createElement("input");
+        modBtn.type = 'button';
+        modBtn.value = '수정';
+
+        const delBtn = document.createElement("input");
+        delBtn.type = 'button';
+        delBtn.value = '삭제';
+
+        delBtn.addEventListener('click', ()=> {
+            if(confirm("삭제하시겠습니가?")) {
+                delCmt(item.icmt, tr);
+            }
+        });
+
+        td.appendChild(modBtn);
+        td.appendChild(delBtn);
+        // }
+        table.appendChild(tr);
+    }
+}
+
+const delCmt = (icmt, tr) => {
+    fetch(`/board/cmt/${icmt}`,
+        {'method': 'delete',
+        'headers': { 'Content-Type': 'application/json' }
+        },)
+}
+
 let delBtnElem = document.querySelector("#delBtn");
 
 if(delBtnElem) {

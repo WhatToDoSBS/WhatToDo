@@ -27,4 +27,10 @@ public class BoardCmtService {
         return mapper.selBoardCmtList(entity);
     }
 
+    public int delboard(int icmt) {
+        BoardCmtEntity entity = new BoardCmtEntity();
+        entity.setIcmt(icmt);
+        entity.setIuser(userUtils.getLoginUserPk());
+        return mapper.delBoardCmt(entity);
+    }
 }
