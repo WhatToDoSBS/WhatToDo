@@ -86,10 +86,6 @@ table { border-collapse: collapse; }
     margin-bottom: 3vh;
 }
 
-.container .search_section {
-    margin-bottom: 20vh;
-}
-
 .choiceBtn_section_line {
     margin: 10px 0;
 }
@@ -187,6 +183,7 @@ table { border-collapse: collapse; }
         transform: scale(1);
     }
 }
+
 table, td, th { border: 1px solid #4f4f4f; border-collapse: collapse; }
 td, th { padding: 7px; }
 

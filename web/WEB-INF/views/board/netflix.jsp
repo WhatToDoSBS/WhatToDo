@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="container">
-    <form action="">
+    <form action="" id="choiceBtnFrm">
         <!-- data 담아놓음 -->
         <div class="data"
         data-mecaRankNum="${requestScope.mecaRankList.rankNum}"
@@ -56,4 +56,7 @@
             <button class="fun-btn">뭐하Gee?</button>
         </div>
     </form>
+    <div class="display_result">
+        <span class="result_span">오늘 해볼 게임은?</span>
+    </div>
 </div>
