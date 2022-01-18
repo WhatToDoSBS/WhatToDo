@@ -23,7 +23,7 @@ body {
 }
 
 table { border-collapse: collapse; }
-a:link, a:visited, a:hover, a:active { color: white; }
+
 
 .header,
 .footer {
@@ -38,7 +38,7 @@ a:link, a:visited, a:hover, a:active { color: white; }
     align-items: center;
 }
 
-
+.header a:link, a:visited { color: white; }
 
 .header .login {
     position: absolute;
