@@ -1,9 +1,7 @@
 package com.koreait.whattodo.board;
 
 import com.koreait.whattodo.crawling.CrawlingService;
-import com.koreait.whattodo.model.BoardEntity;
-import com.koreait.whattodo.model.MecaRankEntity;
-import com.koreait.whattodo.model.SteamRankEntity;
+import com.koreait.whattodo.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,7 +52,23 @@ public class BoardController {
             lastIp = req.getRemoteAddr();
         }
         entity.setLastip(lastIp);
+        BoardVo vo = (BoardVo) service.selBoard(entity);
+        BoardPrevNextVo pnVo = service.selPrevNext(vo);
+        model.addAttribute("prevNext", pnVo);
         model.addAttribute("data", service.selBoard(entity));
+
+    }
+
+    @GetMapping("/mod")
+    public String mod(BoardEntity entity, Model model) {
+        model.addAttribute("data", service.selBoard(entity));
+        return "board/write";
+    }
+
+    @PostMapping("/mod")
+    public String modProc(BoardEntity entity) {
+        int result = service.updBoard(entity);
+        return "redirect:/board/detail?iboard=" + entity.getIboard();
     }
 
     @GetMapping("/del")

@@ -9,4 +9,5 @@ public class BoardCategoryEntity {
     private int icategory;
     private String nm;
     private int orderby;
+    private String nmval;
 }
