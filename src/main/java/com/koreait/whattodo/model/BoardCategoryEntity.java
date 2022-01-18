@@ -10,5 +10,4 @@ public class BoardCategoryEntity {
     private String nmval;
     private String nm;
     private int orderby;
-    private String nmval;
 }
