@@ -23,7 +23,6 @@ public class BoardController {
     @Autowired
     private CrawlingService crawlingService;
 
-
     @GetMapping("/game")
     public void game() {}
 

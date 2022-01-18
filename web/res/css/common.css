@@ -69,7 +69,7 @@ a:link, a:visited, a:hover, a:active { color: white; }
 
 .header_menu li:hover {
     cursor: pointer;
-    background-color: black;
+    background-color: dimgray;
     color: white;
 }
 
@@ -189,3 +189,64 @@ a:link, a:visited, a:hover, a:active { color: white; }
 }
 table, td, th { border: 1px solid #4f4f4f; border-collapse: collapse; }
 td, th { padding: 7px; }
+
+button.rtBtn.clicked {
+    background-color: lightgreen;
+}
+
+button.ppBtn.clicked {
+    background-color: lightblue;
+}
+
+button.kdBtn.clicked {
+    background-color: lightpink;
+}
+
+button.thmBtn.clicked {
+    background-color: lightseagreen;
+}
+
+button.pnBtn.clicked {
+    background-color: lightslategray;
+}
+
+.menu-selected {
+    background-color: black;
+    color: white;
+}
+
+#dtCtnt {
+    font-size: x-large;
+    border: 1px solid mediumaquamarine;
+    padding: 20px;
+    margin: 10px;
+}
+
+.boardBtn {
+    border: none;
+    margin: 5px;
+    background-color: lightsteelblue;
+}
+
+#dTitle {
+    margin-bottom: 20px;
+    padding-top: 20px;
+    border-top: 1px solid mediumaquamarine;
+    font-size: x-large;
+}
+
+#wTitle {
+    margin-bottom: 20px;
+    padding-top: 20px;
+    font-size: x-large;
+}
+
+#pnBtns {
+    display: flex;
+    justify-content: space-between;
+}
+
+#mdBtns {
+    display: flex;
+    justify-content: flex-end;
+}
