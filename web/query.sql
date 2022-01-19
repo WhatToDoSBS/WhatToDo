@@ -46,3 +46,10 @@ CREATE TABLE t_user
     CONSTRAINT PRIMARY KEY (iuser),
     CONSTRAINT UNIQUE (uid)
 );
+
+CREATE TABLE freeboard_like(
+    iboard INT UNSIGNED,
+    iuser INT UNSIGNED,
+    rdt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (iboard, iuser)
+);
