@@ -99,11 +99,64 @@ let cmtListElem = document.querySelector("#cmt_list");
         const modBtn = document.createElement("input");
         modBtn.type = 'button';
         modBtn.value = '수정';
+        modBtn.addEventListener('click', () => {
+            const tdArr = tr.querySelectorAll('td');
+            const tdCell = tdArr[1];//댓글 내용
+
+            const modInput = document.createElement('input');
+            modInput.value = item.ctnt;
+            const saveBtn = document.createElement('input');
+            saveBtn.type = 'button';
+            saveBtn.value = '저장';
+            saveBtn.addEventListener('click', () => {
+                const param = {
+                    icmt : item.icmt,
+                    ctnt : modInput.value
+                }
+                fetch('/board/cmt', {
+                    'method': 'put',
+                    'headers': { 'Content-Type': 'application/json' },
+                    'body': JSON.stringify(param)
+                })
+                    .then(data => {
+                        console.log(data);
+                        tdCell.innerText = modInput.value;
+                        item.ctnt = modInput.value;
+                        removeCancelBtn();
+                    })
+                    .catch(data => {
+                        alert("댓글 작성에 실패했습니다.");
+                        console.log(data);
+                    })
+            });
+            tdCell.innerHTML = null;
+            tdCell.appendChild(modInput);
+            tdCell.appendChild(saveBtn);
+
+            const cancelBtn = document.createElement('input');
+            cancelBtn.type = 'button';
+            cancelBtn.value = '취소';
+            cancelBtn.addEventListener('click', () => {
+                tdCell.innerText = item.ctnt;
+                removeCancelBtn();
+            });
+
+            const removeCancelBtn = () => {
+                modBtn.classList.remove('hidden');
+                delBtn.classList.remove('hidden');
+                cancelBtn.remove();
+            }
+
+            td.insertBefore(cancelBtn, modBtn);
+            modBtn.classList.add('hidden');
+            delBtn.classList.add('hidden');
+        });
+
+
 
         const delBtn = document.createElement("input");
         delBtn.type = 'button';
         delBtn.value = '삭제';
-
         delBtn.addEventListener('click', ()=> {
             if(confirm("댓글을 삭제하시겠습니까?")) {
                 delCmt(item.icmt, tr);
