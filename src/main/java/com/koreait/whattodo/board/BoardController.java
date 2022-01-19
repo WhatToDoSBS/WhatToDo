@@ -31,8 +31,6 @@ public class BoardController {
     @GetMapping("/youtube")
     public void youtube() {}
 
-    @GetMapping("/netflix")
-    public void netflix() {}
 
     @GetMapping("/list")
     public String list(BoardEntity entity, Model model) {
