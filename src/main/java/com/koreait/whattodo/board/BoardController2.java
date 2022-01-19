@@ -23,6 +23,9 @@ public class BoardController2 {
     @Autowired
     private CrawlingService crawlingService;
 
+    @GetMapping("/netflix")
+    public void netflix() {}
+
     @GetMapping("/ranking")
     public String ranking(Model model, MecaRankEntity entity, SteamRankEntity steamRankEntity) throws IOException {
         String mecaUrl = "https://www.gamemeca.com/ranking.php";
