@@ -36,9 +36,9 @@ public class BoardController2 {
         return "board/ranking";
     }
 
-    @GetMapping("/rankingjson")
+    @GetMapping("/mecarankingjson")
     @ResponseBody
-    public String rankingjson(MecaRankEntity entity, HttpServletResponse res) throws IOException {
+    public String mecarankingjson(MecaRankEntity entity, HttpServletResponse res) throws IOException {
         String mecaUrl = "https://www.gamemeca.com/ranking.php";
         String steamUrl = "https://store.steampowered.com/stats/?l=koreana";
 
@@ -53,4 +53,5 @@ public class BoardController2 {
         System.out.println(mecaListJson);
         return mecaListJson;
     }
+
 }
