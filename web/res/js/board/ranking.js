@@ -21,8 +21,8 @@
             randomMecaRankNmArr.push(item.rankNm);
         });
         // 랜덤 숫자 도출 및 게임 도출
-        const randomNum = Math.floor((Math.random()*randomMecaRankNumArr.length) + 1);
-        console.log(randomMecaRankNmArr[randomNum]);
+        const randomNum = Math.floor((Math.random()*randomMecaRankNumArr.length)+1);
+        console.log('오늘 하실 게임은~ ' + randomMecaRankNumArr[randomNum] + '위인 '+ randomMecaRankNmArr[randomNum]);
     }
 }
 
