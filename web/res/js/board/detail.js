@@ -99,6 +99,7 @@ let cmtListElem = document.querySelector("#cmt_list");
         const modBtn = document.createElement("input");
         modBtn.type = 'button';
         modBtn.value = '수정';
+        modBtn.classList.add('boardBtn');
         modBtn.addEventListener('click', () => {
             const tdArr = tr.querySelectorAll('td');
             const tdCell = tdArr[1];//댓글 내용
@@ -108,6 +109,7 @@ let cmtListElem = document.querySelector("#cmt_list");
             const saveBtn = document.createElement('input');
             saveBtn.type = 'button';
             saveBtn.value = '저장';
+            saveBtn.classList.add('boardBtn');
             saveBtn.addEventListener('click', () => {
                 const param = {
                     icmt : item.icmt,
@@ -136,6 +138,7 @@ let cmtListElem = document.querySelector("#cmt_list");
             const cancelBtn = document.createElement('input');
             cancelBtn.type = 'button';
             cancelBtn.value = '취소';
+            cancelBtn.classList.add('boardBtn');
             cancelBtn.addEventListener('click', () => {
                 tdCell.innerText = item.ctnt;
                 removeCancelBtn();
@@ -157,6 +160,7 @@ let cmtListElem = document.querySelector("#cmt_list");
         const delBtn = document.createElement("input");
         delBtn.type = 'button';
         delBtn.value = '삭제';
+        delBtn.classList.add('boardBtn');
         delBtn.addEventListener('click', ()=> {
             if(confirm("댓글을 삭제하시겠습니까?")) {
                 delCmt(item.icmt, tr);
