@@ -7,7 +7,8 @@ CREATE TABLE freeboard(
                           hits INT UNSIGNED DEFAULT 0,
                           isdel TINYINT UNSIGNED DEFAULT 0,
                           rdt DATETIME DEFAULT CURRENT_TIMESTAMP,
-                          mdt DATETIME DEFAULT CURRENT_TIMESTAMP
+                          mdt DATETIME DEFAULT CURRENT_TIMESTAMP,
+                          lastip varchar(15)
 )
 
 CREATE TABLE menu_category(
