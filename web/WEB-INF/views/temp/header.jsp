@@ -12,8 +12,8 @@
 </div>
 <div class="header_menu">
     <ul>
-    <c:forEach items="${menuList}" var="item">
-        <li class="${lastPath == ''.concat(item.nmval) ? 'menu-selected' : ''}" onclick= location.href="/board/${item.nmval}">${item.nm}</li>
-    </c:forEach>
+        <c:forEach items="${menuList}" var="item">
+            <li class="${lastPath == ''.concat(item.nmval) ? 'menu-selected' : ''}" onclick= location.href="/board/${item.nmval}">${item.nm}</li>
+        </c:forEach>
     </ul>
 </div>

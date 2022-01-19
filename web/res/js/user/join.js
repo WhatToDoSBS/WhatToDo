@@ -12,13 +12,13 @@ joinFrmElem.addEventListener('submit', (e) => {
     if (!idRegex.test(uid)) {
         alert('아이디는 대소문자, 숫자조합으로 4~15글자가 되어야 합니다.');
     }else if (!pwRegex.test(upw)) {
-        alert('비밀번호는 대소문자, 숫자, !@_ 조합으로 4~20글자가 되어야 합니다.');
+        alert('올바른 비밀번호를 작성해 주세요..');
         e.preventDefault();
     } else if(upw !== upwChk) {
-        alert('비밀번호와 체크 비밀번호를 확인해 주세요.');
+        alert('비밀번호가 맞지 않습니다.');
         e.preventDefault();
     } else if(!nmRegex.test(nm)) {
-        alert('이름은 한글로 2~5글자가 되어야 합니다.');
+        alert('올바른 이름을 작성해주세요.');
         e.preventDefault();
     } else if(idChkState !== 1) {
         switch (idChkState) {
