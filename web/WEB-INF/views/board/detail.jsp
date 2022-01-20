@@ -13,7 +13,11 @@
         <a href="/board/list"><button class="boardBtn">글 목록</button> </a>
         <a href="/board/detail?iboard=${requestScope.prevNext.nextiboard}" class="${requestScope.prevNext.nextiboard == 0 ? 'lastNBtn' : ''}"><button class="boardBtn">다음 글</button></a>
     </div>
-    <div id="dtCtnt"><c:out value="${data.ctnt}" /></div>
+    <div id="dtCtnt"><pre><c:out value="${data.ctnt}" /></pre></div>
+<%--    <c:if test="#{sessionScope.loginUser != null}">--%>
+    <i class="far fa-heart"></i>
+<%--    </c:if>--%>
+
 
 <%--    <c:if test="${sessionScope.loginUser.iuser == data.iuser}">--%>
         <div id="mdBtns">

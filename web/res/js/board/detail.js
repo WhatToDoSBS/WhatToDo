@@ -25,8 +25,8 @@ if(cmtFrmElem) {
         };
         fetch('/board/cmt', {
             'method' : 'post',
-            'headers': { 'Content-Type': 'application/json' },
-            'body' : JSON.stringify(param)
+            'headers' : { 'Content-Type': 'application/json' },
+            'body' : JSON.stringify(param),
         })
             .then(res => res.json())
             .then(data => {
