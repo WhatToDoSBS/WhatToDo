@@ -1,3 +1,7 @@
 .container {
     flex-direction: column;
 }
+
+.result_span {
+    display: none;
+}
