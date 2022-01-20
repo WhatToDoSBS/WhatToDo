@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="left_section">
-    <div>
-        <div>게임</div>
+    <div class="flex-center flex-direction-column ranking">
+        <div class="ranking_title">게임</div>
         <div><img src="/res/img/board/lol.jpg" alt="" class="random_img"></div>
     </div>
     <div>유튜브</div>

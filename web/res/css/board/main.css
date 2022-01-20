@@ -4,6 +4,19 @@
     grid-template-rows: repeat(3, minmax(200px, auto));
 }
 
+.left_section .ranking {
+    text-align: center;
+}
+
+.left_section .random_img {
+    width: 100px;
+    height: 100px;
+}
+
+.left_section .ranking_title {
+
+}
+
 .member_section {
     display: inline-block;
     text-align: left;
@@ -13,7 +26,3 @@
     height: 30vh;
 }
 
-.random_img {
-    width: 100px;
-    height: 100px;
-}
