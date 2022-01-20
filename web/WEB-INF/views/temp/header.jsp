@@ -7,7 +7,7 @@
     <h1>뭐하Gee</h1>
     <c:choose>
         <c:when test="${sessionScope.loginUser != null}">
-            <a href="/user/logout">로그아웃</a>
+            <a class="login" href="/user/logout">로그아웃</a>
         </c:when>
         <c:otherwise>
             <a class="login" href="/user/login">로그인</a>
