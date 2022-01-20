@@ -233,3 +233,58 @@ if(lastNBtnElem) {
         alert("최신 글입니다.");
     })
 }
+
+const likeBtnElem = document.querySelector('#likeBtn');
+const isLike = () => {
+    fetch(`/board/like/${iboard}`, (data) => {
+        switch (data.result) {
+            case 0:
+                break;
+            case 1:
+                break;
+        }
+    });
+}
+
+const offLike = () => {
+    if(likeBtnElem) {
+        likeBtnElem.classList.remove('fas');
+        likeBtnElem.classList.add('far');
+    }
+}
+
+const onLike = () => {
+    if(likeBtnElem) {
+        likeBtnElem.classList.remove('far');
+        likeBtnElem.classList.add('fas');
+    }
+}
+
+// if(dataElem.dataset.iuser) {
+    isLike();
+    likeBtnElem.addEventListener('click', (e) => {
+        if(e.target.classList.contains('far')) {
+            const param = {iboard}
+
+            fetch('/board/like', {
+                'method': 'post',
+                'headers': { 'Content-Type': 'application/json' },
+                'body': JSON.stringify(param)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    onLike();
+                })
+        } else  {
+            fetch(`/board/like/${iboard}`, {
+                'method': 'delete',
+                'headers': { 'Content-Type': 'application/json' },
+            }).then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    offLike();
+                });
+        }
+    })
+// }

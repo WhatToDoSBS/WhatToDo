@@ -15,7 +15,7 @@
     </div>
     <div id="dtCtnt"><pre><c:out value="${data.ctnt}" /></pre></div>
 <%--    <c:if test="#{sessionScope.loginUser != null}">--%>
-    <i class="far fa-heart"></i>
+    <i id="likeBtn" class="far fa-heart"></i>
 <%--    </c:if>--%>
 
 
