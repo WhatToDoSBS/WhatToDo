@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="search_section">
-            <button class="fun-btn">뭐하Gee?</button>
+            <button type="button" class="fun-btn">뭐하Gee?</button>
         </div>
     </form>
     <div class="display_result">

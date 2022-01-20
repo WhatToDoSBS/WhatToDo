@@ -51,11 +51,13 @@
             }
         })
     }
+
+    // 인기도 버튼 값
     let ppBtnReturnNum = 0;
+
     ppBtns.forEach(function (item) {
         item.addEventListener('click', function (e) {
             e.preventDefault();
-
             switch (item.innerText) {
                 case '많은':
                     ppBtnReturnNum = 1;
@@ -74,8 +76,6 @@
                     console.log(ppBtnReturnNum);
                     break;
             }
-            return ppBtnReturnNum;
-
 
             if(e.target.classList.contains("clicked")) {
                 ppClickedRmv();
@@ -84,12 +84,8 @@
                 item.classList.add("clicked");
             }
 
-            console.log('결과값:'+ ppBtnReturnNum);
         })
     });
-    
-
-
     kdBtns.forEach(function (item) {
         item.addEventListener('click', function (e) {
             e.preventDefault();
@@ -125,12 +121,13 @@
         })
     });
 
-
+    // 뭐하Gee 버튼 관련
     funBtn = document.querySelector('.fun-btn');
     funBtn.addEventListener('click', function (e) {
         e.preventDefault();
-
         getMecaRandomGame(mecaurl);
+
+        console.log(ppBtnReturnNum);
     })
 
     /* 랜덤값 도출 */
@@ -144,7 +141,7 @@
             return res.json();
         }).then((data)=> {
             console.log(data);
-            const meca = mecaRandomGame(data);
+            mecaRandomGame(data);
         }).catch((err)=> {
             console.log(err);
         });
@@ -162,7 +159,13 @@
             randomMeca.push(item);
         });
         // 랜덤 숫자 도출 및 게임 도출
-        const randomNum = Math.floor((Math.random()*randomMecaRankNumArr.length)+1);
+        let randomNum = Math.floor((Math.random()*randomMecaRankNumArr.length)+1);
+        switch (ppBtnReturnNum) {
+            case 1:
+                randomNum = Math.floor(Math.random()*10);
+                break;
+        }
+
         let whatGame = randomMecaRankNmArr[randomNum];
         let whatRankNum = randomMecaRankNumArr[randomNum];
 
