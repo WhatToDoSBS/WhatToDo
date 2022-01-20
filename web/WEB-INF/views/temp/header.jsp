@@ -7,7 +7,7 @@
 <c:set var="splitURI" value="${fn:split(currentPagePath, '/')}"/>
 <c:set var="lastPath" value="${splitURI[fn:length(splitURI) - 1]}"/>
 <div class="header">
-    <h1>뭐하Gee</h1>
+    <a href="/board/main"><h1>뭐하Gee</h1></a>
     <span class="login"><a href="/user/login">로그인</a></span>
 </div>
 <div class="header_menu">

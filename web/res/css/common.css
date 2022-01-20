@@ -9,6 +9,12 @@
 .sliver { color: var(--sliver); }
 .bronze { color: var(--bronze); }
 
+/* -----display 관련------- */
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
 
 * {
     margin: 0;
@@ -24,7 +30,6 @@ body {
 
 table { border-collapse: collapse; }
 
-
 .header,
 .footer {
     width: 100%;
@@ -32,7 +37,7 @@ table { border-collapse: collapse; }
     text-align: center;
     background-color: black;
     color: white;
-    height: 10%;
+    height: 5%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -74,12 +79,11 @@ table { border-collapse: collapse; }
 }
 
 .container {
-    text-align: center;
     display: flex;
     justify-content: space-evenly;
     flex-direction: row;
     padding: 20px 0;
-    min-height: 500px;
+    min-height: 700px;
 }
 
 .container .choiceBtn_section {

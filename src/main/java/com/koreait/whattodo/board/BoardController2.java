@@ -39,6 +39,9 @@ public class BoardController2 {
         return "board/ranking";
     }
 
+    @GetMapping("/main")
+    public void main() {}
+
     @GetMapping("/mecarankingjson")
     @ResponseBody
     public String mecarankingjson(MecaRankEntity entity, HttpServletResponse res) throws IOException {
