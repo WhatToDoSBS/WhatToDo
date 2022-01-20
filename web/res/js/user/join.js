@@ -11,10 +11,7 @@
             const upwChk = joinFrmElem.querySelector('#upw-chk').value;
             const nm = joinFrmElem.nm.value;
 
-            console.log(uid);
-            console.log(upw);
-            console.log(upwChk);
-            console.log(nm);
+
 
         });
     }
