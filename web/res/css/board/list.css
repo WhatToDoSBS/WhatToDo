@@ -19,3 +19,7 @@
     background-color: antiquewhite;
     cursor: pointer;
 }
+
+td, th { border-color: lightseagreen}
+
+table { margin-top: 20px}

@@ -52,7 +52,7 @@
             (SELECT iboard FROM freeboard
             WHERE isdel = 0
             AND iboard < ${iboard}
-            ORDER BY iboard
+            ORDER BY iboard desc
             LIMIT 1) AS previboard,
             (SELECT iboard FROM freeboard
             WHERE isdel = 0

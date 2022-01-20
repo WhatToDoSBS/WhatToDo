@@ -11,6 +11,7 @@
 
 
 * {
+    padding: 0;
     margin: 0;
     list-style: none;
     text-decoration: none;
@@ -76,7 +77,8 @@ table { border-collapse: collapse; }
 .container {
     text-align: center;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    align-items: center;
     flex-direction: row;
     padding: 20px 0;
     min-height: 500px;
@@ -232,11 +234,7 @@ button.pnBtn.clicked {
     font-size: x-large;
 }
 
-#wTitle {
-    margin-bottom: 20px;
-    padding-top: 20px;
-    font-size: x-large;
-}
+
 
 #pnBtns {
     display: flex;
@@ -247,3 +245,4 @@ button.pnBtn.clicked {
     display: flex;
     justify-content: flex-end;
 }
+

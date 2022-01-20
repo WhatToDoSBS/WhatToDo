@@ -30,10 +30,10 @@
                 </table>
             </c:otherwise>
         </c:choose>
-<%--        <c:if test="${sessionScope.loginUser != null}">--%>
+        <c:if test="${sessionScope.loginUser != null}">
         <div id="writeBtnContainer">
         <div id="writeBtn" onclick="location.href='/board/write'">글쓰기</div>
         </div>
-<%--        </c:if>--%>
+        </c:if>
     </div>
 </div>

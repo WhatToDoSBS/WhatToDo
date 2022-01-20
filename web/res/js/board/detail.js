@@ -32,9 +32,12 @@ if(cmtFrmElem) {
             .then(data => {
                 console.log(data);
                 const tableElem = document.querySelector('table');
-                tableElem.remove();
-                getCmtList();
+                if(tableElem){
+                    tableElem.remove();
+                }
+                cmtListElem.innerText = '';
                 cmtFrmElem.ctnt.value = null;
+                getCmtList();
 
             }).catch(e => {
             console.log(e);
@@ -181,22 +184,15 @@ const delCmt = (icmt, tr) => {
     fetch(`/board/cmt/${icmt}`,
         {'method': 'delete',
             'headers': { 'Content-Type': 'application/json' }
-        }, data => {
-            if (data.result) {
-                tr.remove();
-                // if(getTrLen() === 1) {
-                //     const cmtListElem = document.querySelector("#cmt_list");
-                //     cmtListElem.innerText = '댓글이 없습니다.';
-                // }
-            } else {
-                alert("댓글을 삭제할 수 없습니다.");
-            }
-        }).then( data => {
-            console.log(data)
-    const tableElem = document.querySelector('table');
-    tableElem.remove();
-    getCmtList();}
-    );
+        }).then(res => res.json())
+        .then(data => {
+        console.log(data.result);
+            const tableElem = document.querySelector('table');
+            tableElem.remove();
+        getCmtList();
+    }).catch(e=> {
+        console.log(e)
+        });
 }
 
 const getTrLen = ()=> {
@@ -236,15 +232,23 @@ if(lastNBtnElem) {
 
 const likeBtnElem = document.querySelector('#likeBtn');
 const isLike = () => {
-    fetch(`/board/like/${iboard}`, (data) => {
-        switch (data.result) {
-            case 0:
-                break;
-            case 1:
-                break;
-        }
-    });
+    fetch(`/board/like/${iboard}`)
+        .then(res => res.json())
+        .then((data) => {
+            switch (data.result) {
+                case 0:
+                    offLike();
+                    break;
+                case 1:
+                    onLike();
+                    break;
+            }
+        })
+        .catch((e) => {
+            console.log(e);
+        });
 }
+isLike();
 
 const offLike = () => {
     if(likeBtnElem) {
@@ -261,7 +265,7 @@ const onLike = () => {
 }
 
 // if(dataElem.dataset.iuser) {
-    isLike();
+
     likeBtnElem.addEventListener('click', (e) => {
         if(e.target.classList.contains('far')) {
             const param = {iboard}
