@@ -43,10 +43,8 @@ public class BoardController2 {
     @ResponseBody
     public String mecarankingjson(MecaRankEntity entity, HttpServletResponse res) throws IOException {
         String mecaUrl = "https://www.gamemeca.com/ranking.php";
-        String steamUrl = "https://store.steampowered.com/stats/?l=koreana";
 
         crawlingService.insertMeca(mecaUrl);
-        crawlingService.insertSteam(steamUrl);
 
         // json ajax통신
         Gson gson = new Gson();
@@ -55,6 +53,22 @@ public class BoardController2 {
 
         System.out.println(mecaListJson);
         return mecaListJson;
+    }
+
+    @GetMapping("/steamrankingjson")
+    @ResponseBody
+    public String steamrankingjson(SteamRankEntity entity, HttpServletResponse res) throws IOException {
+        String steamUrl = "https://store.steampowered.com/stats/?l=koreana";
+
+        crawlingService.insertSteam(steamUrl);
+
+        // json ajax통신
+        Gson gson = new Gson();
+
+        String steamListJson = gson.toJson(crawlingService.steamRankList(entity));
+
+        System.out.println(steamListJson);
+        return steamListJson;
     }
 
 }
