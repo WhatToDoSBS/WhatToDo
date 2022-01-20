@@ -16,21 +16,19 @@ CREATE TABLE menu_category(
                               nmval VARCHAR(20) NOT NULL,
                               orderby TINYINT NOT NULL DEFAULT 0
 )
-INSERT INTO menu_category (nm, nmval)
+INSERT INTO menu_category (nm)
 VALUES
-('게임', 'game'),
-('넷플릭스', 'netflix'),
-('유튜브', 'youtube'),
-('게시판', 'list');
+('게임'),
+('넷플릭스'),
+('유튜브'),
+('게시판');
 
-CREATE TABLE freeboard_cmt(
-icmt INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-iboard INT UNSIGNED NOT NULL,
-iuser INT UNSIGNED NOT NULL,
-ctnt TEXT NOT NULL,
-rdt DATETIME DEFAULT CURRENT_TIMESTAMP,
-mdt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-)
+INSERT INTO menu_category (nmval)
+VALUES
+    ('game'),
+    ('netflix'),
+    ('youtube'),
+    ('list');
 
 CREATE TABLE t_user
 (
