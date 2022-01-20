@@ -2,10 +2,16 @@
     display: block;
 }
 
+.join_container > h1 {
+    padding: 10px 0 15px 0;
+}
+
+.join_container > form > div {
+    padding-bottom: 30px;
+}
 
 .join_title {
     text-align: center;
-
 }
 
 .textBox {
@@ -42,6 +48,10 @@
     color: #ffffff;
     border: none;
     border-radius: 4px;
+}
+
+.submit_btn:hover {
+    background-color: #008d62;
 }
 
 
