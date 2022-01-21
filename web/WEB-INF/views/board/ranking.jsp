@@ -13,7 +13,7 @@
             </tr>
             <c:forEach items="${requestScope.mecaRankList}" var="item">
                 <tr>
-                    <td>
+                    <td id="data" data-mecaRankNum="${item.rankNum}">
                             <%--eq는 문자열이나 숫자가 같다는 의미--%>
                         <c:choose>
                             <c:when test="${item.rankNum eq '1'}"><i class="fas fa-crown gold"></i></c:when>

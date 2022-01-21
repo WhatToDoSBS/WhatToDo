@@ -13,6 +13,6 @@ public interface BoardMapper {
     BoardEntity selBoard(BoardEntity entity);
     int insBoard(BoardEntity entity);
     int addHits(BoardEntity entity);
-    int updBoard(BoardEntity entit);
+    int updBoard(BoardEntity entity);
     BoardPrevNextVo selPrevNext(BoardVo vo);
 }
