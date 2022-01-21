@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="login_font">
     <h1>Login</h1>
+    <div>${requestScope.msg}</div>
 </div>
 <form class="login_container" method="post" action="/user/login">
     <div>ID : <input type="text" name="uid" class="login_input"></div>

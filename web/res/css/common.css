@@ -2,10 +2,6 @@
     --gold:#FFDF00;
     --sliver:#C0C0C0;
     --bronze:#c49c48;
-    --main-color:#e3f2fd;
-    --main-color-dark:#b1bfca;
-    --main-color-darker:rgb(145 145 146);
-    --menu-radius:10px;
 }
 
 /* -----색상------- */
@@ -13,16 +9,6 @@
 .sliver { color: var(--sliver); }
 .bronze { color: var(--bronze); }
 
-/* -----display 관련------- */
-.flex-center {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-}
-
-.flex-direction-column {
-    flex-direction: column;
-}
 
 * {
     margin: 0;
@@ -38,94 +24,62 @@ body {
 
 table { border-collapse: collapse; }
 
-a:visited { color: black; }
-
-/* --- header --- */
 
 .header,
 .footer {
     width: 100%;
     padding: 5vh 0;
     text-align: center;
-    background-color: var(--main-color);
+    background-color: black;
     color: white;
-    height: 5%;
+    height: 10%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.header span { color: black; font-family: 'Black Han Sans', sans-serif; font-weight: normal;}
-
-.header .main_title {
-    font-size: 64px;
-}
+.header a:link, a:visited { color: white; }
 
 .header .login {
     position: absolute;
     right: 20px;
     top:10px;
-    padding: 5px 10px;
-}
-
-.header .login a {
-    color:var(--main-color-dark);
-    font-family: 'Nanum Gothic', sans-serif;
-    font-weight: bolder;
-}
-.header .login a:hover {
-    color:var(--main-color-darker);
 }
 
 .header_menu {
     width: 100%;
+    height: 5vh;
     display: flex;
     justify-content: center;
-    background-color: var(--main-color-dark);
+    border-bottom: 1.5px solid black;
 }
 
 .header_menu ul {
-    color: white;
     padding-left: 0;
     margin: 0;
 }
 
 .header_menu li {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Nanum Gothic', sans-serif;
-    font-weight: normal;
+    font-weight: bold;
     font-size: 20px;
     float: left;
-    margin: 7px 30px;
-    padding: 5px 20px;
+    margin: 10px 30px;
+    padding: 0 20px;
 }
 
 .header_menu li:hover {
-    border-radius: var(--menu-radius);
     cursor: pointer;
-    color: var(--main-color-darker);
-}
-
-.header_menu .menu-selected {
-    border-radius: var(--menu-radius);
-    background-color: var(--main-color-darker);
+    background-color: dimgray;
     color: white;
 }
-
-.header_menu .menu-selected:hover {
-    color: white;
-}
-
-/* --- container --- */
 
 .container {
+    text-align: center;
     display: flex;
     justify-content: space-evenly;
     flex-direction: row;
     padding: 20px 0;
-    min-height: 700px;
+    min-height: 500px;
 }
 
 .container .choiceBtn_section {
@@ -251,6 +205,11 @@ button.thmBtn.clicked {
 
 button.pnBtn.clicked {
     background-color: lightslategray;
+}
+
+.menu-selected {
+    background-color: black;
+    color: white;
 }
 
 #dtCtnt {

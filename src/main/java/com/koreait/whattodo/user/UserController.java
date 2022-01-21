@@ -40,6 +40,12 @@ public class UserController {
         return "redirect:/user/login";
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpSession hs) {
+        hs.invalidate();
+        return "redirect:/user/login";
+    }
+
     @GetMapping("/join")
     public void join() {}
 

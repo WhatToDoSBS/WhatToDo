@@ -1,6 +1,7 @@
-package com.koreait.whattodo.board;
+package com.koreait.whattodo.crawling;
 
 import com.google.gson.Gson;
+import com.koreait.whattodo.board.BoardService;
 import com.koreait.whattodo.crawling.CrawlingService;
 import com.koreait.whattodo.model.MecaRankEntity;
 import com.koreait.whattodo.model.SteamRankEntity;
@@ -16,7 +17,7 @@ import java.io.IOException;
 
 @Controller
 @RequestMapping(value = "/board", produces = "application/text; charset=UTF-8") // js 한글깨짐 방지
-public class BoardController2 {
+public class CrawlingController {
     @Autowired
     private BoardService service;
 

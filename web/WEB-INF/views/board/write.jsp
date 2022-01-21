@@ -10,19 +10,17 @@
     <c:set var="submitVal" value="수정" />
     <c:set var="iboardVal" value="${requestScope.data.iboard}" />
 </c:if>
-<div class="flex-container flex-center flex-direction-column">
+<div id="writeContainer" class="flex-container flex-center flex-direction-column">
     <h1 id="wTitle">${titleVal}</h1>
-    <form action="${actionVal}" method="post">
+    <form id="writeFrm" action="${actionVal}" method="post">
         <input type="hidden" name="iboard" value="${iboardVal}">
 <%--        <input type="hidden" name="icategory" value="${icategoryVal}">--%>
-        <div>
-            <label>제목 : <input type="text" name="title" value="<c:out value='${requestScope.data.title}'/>">
-            </label>
+        <div id="writeElem1">
+            <input type="text" name="title" placeholder="제목을 입력하세요." value="<c:out value='${requestScope.data.title}'/>">
         </div>
-        <div>
-            <label>내용 : <textarea name="ctnt"><c:out value="${requestScope.data.ctnt}" /></textarea>
-            </label>
+        <div id="writeElem2">
+            <textarea name="ctnt" placeholder="내용을 입력하세요."><c:out value="${requestScope.data.ctnt}" /></textarea>
         </div>
-        <div><input class="boardBtn" type="submit" value="${submitVal}"></div>
+        <div id="writeElem3"><input class="writeBtn" type="submit" value="${submitVal}"></div>
     </form>
 </div>

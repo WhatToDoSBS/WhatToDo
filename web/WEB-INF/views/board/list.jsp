@@ -2,7 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div>
+
     <h1>자유게시판</h1>
+    <div id="paging">
+    <select>
+        <option value="10">10개씩 보기</option>
+        <option value="15">15개씩 보기</option>
+        <option value="20">20개씩 보기</option>
+    </select>
+    </div>
     <div>
         <c:choose>
             <c:when test="${fn:length(requestScope.list) == 0}">
@@ -29,8 +37,13 @@
                 </table>
             </c:otherwise>
         </c:choose>
-        <%--        <c:if test="${sessionScope.loginUser != null}">--%>
-        <input type="button" value="글쓰기" onclick="location.href='/board/write'">
-        <%--        </c:if>--%>
+        <div id="pageIdx">
+
+        </div>
+        <c:if test="${sessionScope.loginUser != null}">
+        <div id="writeBtnContainer">
+        <div id="writeBtn" onclick="location.href='/board/write'">글쓰기</div>
+        </div>
+        </c:if>
     </div>
 </div>
