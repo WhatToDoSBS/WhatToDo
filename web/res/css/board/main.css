@@ -1,4 +1,4 @@
-.left_section {
+.left_section .recommend_section {
     display: grid;
     grid-template-columns: repeat(2, 200px);
     grid-template-rows: repeat(3, minmax(200px, auto));
@@ -8,13 +8,14 @@
     text-align: center;
 }
 
-.left_section .random_img {
-    width: 100px;
-    height: 100px;
+.left_section .ranking_title {
+    text-align: left;
+    margin-bottom: 10px;
 }
 
-.left_section .ranking_title {
-
+.left_section .random_img {
+    width: 150px;
+    height: 200px;
 }
 
 .member_section {
@@ -26,3 +27,14 @@
     height: 30vh;
 }
 
+.title {
+    display: block;
+    border-bottom: 1px solid black;
+}
+.right_section .member_list ul {
+    padding: 0;
+}
+.right_section .member_list li {
+    margin: 10px 0;
+    color: black;
+}

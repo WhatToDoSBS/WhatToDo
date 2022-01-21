@@ -23,7 +23,6 @@
                 <button class="ppBtn">많은</button>
                 <button class="ppBtn">보통</button>
                 <button class="ppBtn">적은</button>
-                <button class="ppBtn">상관 무</button>
             </label>
         </div>
         <div class="choiceBtn_section_line kinds">

@@ -2,6 +2,10 @@
     --gold:#FFDF00;
     --sliver:#C0C0C0;
     --bronze:#c49c48;
+    --main-color:#e3f2fd;
+    --main-color-dark:#b1bfca;
+    --main-color-darker:rgb(145 145 146);
+    --menu-radius:10px;
 }
 
 /* -----색상------- */
@@ -34,12 +38,16 @@ body {
 
 table { border-collapse: collapse; }
 
+a:visited { color: black; }
+
+/* --- header --- */
+
 .header,
 .footer {
     width: 100%;
     padding: 5vh 0;
     text-align: center;
-    background-color: black;
+    background-color: var(--main-color);
     color: white;
     height: 5%;
     display: flex;
@@ -47,40 +55,70 @@ table { border-collapse: collapse; }
     align-items: center;
 }
 
-.header a:link, a:visited { color: white; }
+.header span { color: black; font-family: 'Black Han Sans', sans-serif; font-weight: normal;}
+
+.header .main_title {
+    font-size: 64px;
+}
 
 .header .login {
     position: absolute;
     right: 20px;
     top:10px;
+    padding: 5px 10px;
+}
+
+.header .login a {
+    color:var(--main-color-dark);
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: bolder;
+}
+.header .login a:hover {
+    color:var(--main-color-darker);
 }
 
 .header_menu {
     width: 100%;
-    height: 5vh;
     display: flex;
     justify-content: center;
-    border-bottom: 1.5px solid black;
+    background-color: var(--main-color-dark);
 }
 
 .header_menu ul {
+    color: white;
     padding-left: 0;
     margin: 0;
 }
 
 .header_menu li {
-    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: normal;
     font-size: 20px;
     float: left;
-    margin: 10px 30px;
-    padding: 0 20px;
+    margin: 7px 30px;
+    padding: 5px 20px;
 }
 
 .header_menu li:hover {
+    border-radius: var(--menu-radius);
     cursor: pointer;
-    background-color: dimgray;
+    color: var(--main-color-darker);
+}
+
+.header_menu .menu-selected {
+    border-radius: var(--menu-radius);
+    background-color: var(--main-color-darker);
     color: white;
 }
+
+.header_menu .menu-selected:hover {
+    color: white;
+}
+
+/* --- container --- */
 
 .container {
     display: flex;
@@ -215,11 +253,6 @@ button.pnBtn.clicked {
     background-color: lightslategray;
 }
 
-.menu-selected {
-    background-color: black;
-    color: white;
-}
-
 #dtCtnt {
     font-size: x-large;
     border: 1px solid mediumaquamarine;
@@ -254,4 +287,12 @@ button.pnBtn.clicked {
 #mdBtns {
     display: flex;
     justify-content: flex-end;
+}
+
+
+/* --- footer --- */
+
+.footer {
+    font-family: 'Nanum Gothic', sans-serif;
+    color: black;
 }

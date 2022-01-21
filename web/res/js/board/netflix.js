@@ -14,28 +14,31 @@
     let pnBtns = document.querySelectorAll(".pnBtn");
 
     function rtClickedRmv() {
-        for (let i=0; i<rtBtns.length; i++) {
+        for (let i = 0; i < rtBtns.length; i++) {
             rtBtns[i].classList.remove("clicked");
         }
     }
+
     function ppClickedRmv() {
-        for (let i=0; i<ppBtns.length; i++) {
+        for (let i = 0; i < ppBtns.length; i++) {
             ppBtns[i].classList.remove("clicked");
         }
     }
+
     function kdClickedRmv() {
-        for (let i=0; i<kdBtns.length; i++) {
+        for (let i = 0; i < kdBtns.length; i++) {
             kdBtns[i].classList.remove("clicked");
         }
     }
+
     function thmClickedRmv() {
-        for (let i=0; i<thmBtns.length; i++) {
+        for (let i = 0; i < thmBtns.length; i++) {
             thmBtns[i].classList.remove("clicked");
         }
     }
 
     function pnClickedRmv() {
-        for (let i=0; i<pnBtns.length; i++) {
+        for (let i = 0; i < pnBtns.length; i++) {
             pnBtns[i].classList.remove("clicked");
         }
     }
@@ -43,7 +46,7 @@
     for (let i = 0; i < rtBtns.length; i++) {
         rtBtns[i].addEventListener("click", function (e) {
             e.preventDefault();
-            if(e.target.classList.contains("clicked")) {
+            if (e.target.classList.contains("clicked")) {
                 rtClickedRmv();
             } else {
                 rtClickedRmv();
@@ -61,23 +64,16 @@
             switch (item.innerText) {
                 case '많은':
                     ppBtnReturnNum = 1;
-                    console.log(ppBtnReturnNum);
                     break;
                 case '보통':
                     ppBtnReturnNum = 2;
-                    console.log(ppBtnReturnNum);
                     break;
                 case '적은':
                     ppBtnReturnNum = 3;
-                    console.log(ppBtnReturnNum);
-                    break;
-                case '상관 무':
-                    ppBtnReturnNum = 4;
-                    console.log(ppBtnReturnNum);
                     break;
             }
 
-            if(e.target.classList.contains("clicked")) {
+            if (e.target.classList.contains("clicked")) {
                 ppClickedRmv();
             } else {
                 ppClickedRmv();
@@ -89,7 +85,7 @@
     kdBtns.forEach(function (item) {
         item.addEventListener('click', function (e) {
             e.preventDefault();
-            if(e.target.classList.contains("clicked")) {
+            if (e.target.classList.contains("clicked")) {
                 kdClickedRmv();
             } else {
                 kdClickedRmv();
@@ -100,7 +96,7 @@
     thmBtns.forEach(function (item) {
         item.addEventListener('click', function (e) {
             e.preventDefault();
-            if(e.target.classList.contains("clicked")) {
+            if (e.target.classList.contains("clicked")) {
                 thmClickedRmv();
             } else {
                 thmClickedRmv();
@@ -112,7 +108,7 @@
     pnBtns.forEach(function (item) {
         item.addEventListener('click', function (e) {
             e.preventDefault();
-            if(e.target.classList.contains("clicked")) {
+            if (e.target.classList.contains("clicked")) {
                 pnClickedRmv();
             } else {
                 pnClickedRmv();
@@ -125,31 +121,54 @@
     funBtn = document.querySelector('.fun-btn');
     funBtn.addEventListener('click', function (e) {
         e.preventDefault();
-        getMecaRandomGame(mecaurl);
-
-        console.log(ppBtnReturnNum);
+        let random = Math.floor(Math.random()*2)+1;
+        console.log('random:' + random);
+        switch (random) {
+            case 1:
+                getMecaRandomGame(mecaurl);
+                break;
+            case 2:
+                getSteamRandomGame(steamurl);
+                break;
+        }
     })
 
     /* 랜덤값 도출 */
 
     var mecaurl = '/board/mecarankingjson';
-    var steamurl = '/board/steamrankingjson';
+    var steamurl = '/board/steamrankingjso  n';
 
     // 랜덤게임 서버에서 불러서(fetch) 출력해주는 함수
-    function getMecaRandomGame(url) {
-        fetch(url).then((res)=> {
+    function getMecaRandomGame(url) {   // 게임메카 데이터
+        fetch(url).then((res) => {
             return res.json();
-        }).then((data)=> {
+        }).then((data) => {
             console.log(data);
             mecaRandomGame(data);
-        }).catch((err)=> {
+        }).catch((err) => {
             console.log(err);
         });
     }
 
+    // 랜덤게임 서버에서 불러서(fetch) 출력해주는 함수
+    function getSteamRandomGame(url) {   // 게임메카 데이터
+        fetch(url).then((res) => {
+            return res.json();
+        }).then((data) => {
+            console.log(data);
+            steamRandomGame(data);
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+
     const randomMecaRankNumArr = [];
     const randomMecaRankNmArr = [];
     const randomMeca = [];
+    const randomSteamRankNumArr = [];
+    const randomSteamRankNmArr = [];
+    const randomSteam = [];
 
     // mecarank 랜덤함수
     function mecaRandomGame(data) {
@@ -159,24 +178,72 @@
             randomMeca.push(item);
         });
         // 랜덤 숫자 도출 및 게임 도출
-        let randomNum = Math.floor((Math.random()*randomMecaRankNumArr.length)+1);
+        // min <= number <= max
+        // Math.floor(Math.random() * (max - min + 1)) + min;
+        let randomNum = Math.floor((Math.random() * randomMecaRankNumArr.length) + 1);
+        let numArrange = 10;    // 범위 10개 도출
+        let min = 0;    // 최솟값
         switch (ppBtnReturnNum) {
-            case 1:
-                randomNum = Math.floor(Math.random()*10);
+            case 1: // 1위~10위
+                randomNum = Math.floor(Math.random() * numArrange);
+                break;
+            case 2: // 11위~20위
+                min = 10;
+                randomNum = Math.floor(Math.random() * numArrange) + min;
+                break;
+            case 3: // 21위~50위
+                min = 20;
+                numArrange = 30;
+                randomNum = Math.floor(Math.random() * numArrange) + min;
                 break;
         }
 
         let whatGame = randomMecaRankNmArr[randomNum];
-        let whatRankNum = randomMecaRankNumArr[randomNum];
 
-        gameRecommandDisplay(whatRankNum, whatGame);
-        const randomMecaJson = JSON.stringify(randomMeca);
+        gameRecommandDisplay(whatGame);
+        const randomMecaJson = JSON.stringify(randomMeca);  // Object를 String으로
         return randomMecaJson;  // meca게임 List를 담은 배열 리턴
     }
 
+    // steam 랜덤함수
+    function steamRandomGame(data) {
+        data.forEach(function (item) {
+            randomSteamRankNumArr.push(item.rankNum);
+            randomSteamRankNmArr.push(item.rankNm);
+            randomSteam.push(item);
+        });
+        // 랜덤 숫자 도출 및 게임 도출
+        // min <= number <= max
+        // Math.floor(Math.random() * (max - min + 1)) + min;
+        let randomNum = Math.floor((Math.random() * randomSteamRankNumArr.length) + 1);
+        let numArrange = 20;    // 범위, 10개 도출
+        let min = 0;    // 최솟값
+        switch (ppBtnReturnNum) {
+            case 1: // 1위~20위
+                randomNum = Math.floor(Math.random() * numArrange);
+                break;
+            case 2: // 21위~50위
+                min = 20;
+                numArrange = 30;
+                randomNum = Math.floor(Math.random() * numArrange) + min;
+                break;
+            case 3: // 51위~100위
+                min = 50;
+                numArrange = 50;
+                randomNum = Math.floor(Math.random() * numArrange) + min;
+                break;
+        }
+
+        let whatGame = randomSteamRankNmArr[randomNum];
+
+        gameRecommandDisplay(whatGame);
+        const randomSteamJson = JSON.stringify(randomSteam);  // Object를 String으로
+        return randomSteamJson;  // steam게임 List를 담은 배열 리턴
+    }
+
     // 화면창에 결과값을 띄움
-    function gameRecommandDisplay(whatRankNum, whatGame) {
+    function gameRecommandDisplay(whatGame) {
         displayResultSpan.style.display = 'inline-block';
-        displayResultSpan.innerHTML = '오늘 이 게임 어때요? <b>' + whatRankNum + '위 : ' + whatGame + '</b>';
+        displayResultSpan.innerHTML = '오늘 이 게임 어때요? <b>' + whatGame + '</b>';
     }
 }
