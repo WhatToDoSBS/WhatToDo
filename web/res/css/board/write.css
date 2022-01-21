@@ -1,6 +1,6 @@
 .container {}
 
-#writeContainer{ display: flex;flex-direction: column; margin: 0; width: 70%;
+#writeContainer{ display: flex;flex-direction: column; margin: 0; width: 60%;
         }
 
 #writeFrm {}
