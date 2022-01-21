@@ -5,9 +5,7 @@
     const upwInput = joinFrmElem.querySelector('#upwInput');
     const upwChkInput = joinFrmElem.querySelector('#upw-chk');
 
-    const idRegex = /^([a-zA-Z0-9]{4,15})$/;
-    const pwRegex = /^([a-zA-Z0-9!@_]{4,20})$/;
-    const nmRegex = /^([가-힣]{2,5})$/;
+
 
     // 회원가입 실행여부
     if(joinFrmElem) {
@@ -84,7 +82,7 @@
             }
         };
 
-
+        // 패스워드 정규식 확인
         upwInput.addEventListener('blur',(e) => {
             const upw = joinFrmElem.upw.value;
             if (!pwRegex.test(upw)) {
