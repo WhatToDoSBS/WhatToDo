@@ -1,10 +1,10 @@
 .container {
-    flex-direction: column;
+    display: block;
+    padding: 50px 0 20px 0;
 }
 
-.login_font {
-    height: 5rem;
-    position: center;
+.login_form > h1:first-child {
+    padding-bottom: 1.5rem;
 }
 
 .login_container {
