@@ -1,6 +1,6 @@
 let cmtFrmElem = document.querySelector("#cmtFrm");
 let dataElem = document.querySelector("#data");
-
+let iboard = dataElem.dataset.iboard;
 if(cmtFrmElem) {
     cmtFrmElem.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -14,6 +14,7 @@ if(cmtFrmElem) {
             alert("내용에 < 혹은 >를 사용하실 수 없습니다.");
         } else {
             insBoardCmtAjax(cmtVal);
+            // location.href="/board/detail?iboard="+ iboard;
         }
     });
 
@@ -30,17 +31,185 @@ if(cmtFrmElem) {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
+                const tableElem = document.querySelector('table');
+                tableElem.remove();
+                getCmtList();
+                cmtFrmElem.ctnt.value = null;
+
             }).catch(e => {
-                console.log(e);
+            console.log(e);
         })
     }
 }
+
+const item = {
+    icmt: data.result,
+    iuser: parseInt(dataElem.dataset.iuser),
+    ctnt: cmtFrmElem.ctnt.value,
+}
+
+let cmtListElem = document.querySelector("#cmt_list");
+
+    // const iboard = dataElem.dataset.iboard;
+    const getCmtList = () => {
+        fetch(`/board/cmt/${iboard}`)
+            .then(res => {
+                return res.json();
+            }).then(data => {
+            console.log(data);
+            setCmtList(data);
+        });
+    }
+
+    const setCmtList = (list) => {
+
+        if(list.length === 0) {
+            cmtListElem.innerText = '댓글이 없습니다.';
+            return;
+        }
+
+        const table = document.createElement('table');
+        table.innerHTML = `
+        <tr>
+            <th>NO</th>
+            <th>내용</th>
+            <th>필명</th>
+            <th></th>
+        </tr>
+        `
+        list.forEach(item => {
+            makeTr(table, item);
+        });
+        cmtListElem.appendChild(table);
+    }
+
+    const makeTr = (table, item) => {
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+        <td>${item.icmt}</td>
+        <td>${item.ctnt}</td>
+        <td>${item.iuser}</td>
+        `;
+
+        const td = document.createElement('td');
+        tr.appendChild(td);
+
+        // if(parseInt(dataElem.dataset.iuser)===item.iuser) {
+        const modBtn = document.createElement("input");
+        modBtn.type = 'button';
+        modBtn.value = '수정';
+        modBtn.classList.add('boardBtn');
+        modBtn.addEventListener('click', () => {
+            const tdArr = tr.querySelectorAll('td');
+            const tdCell = tdArr[1];//댓글 내용
+
+            const modInput = document.createElement('input');
+            modInput.value = item.ctnt;
+            const saveBtn = document.createElement('input');
+            saveBtn.type = 'button';
+            saveBtn.value = '저장';
+            saveBtn.classList.add('boardBtn');
+            saveBtn.addEventListener('click', () => {
+                const param = {
+                    icmt : item.icmt,
+                    ctnt : modInput.value
+                }
+                fetch('/board/cmt', {
+                    'method': 'put',
+                    'headers': { 'Content-Type': 'application/json' },
+                    'body': JSON.stringify(param)
+                })
+                    .then(data => {
+                        console.log(data);
+                        tdCell.innerText = modInput.value;
+                        item.ctnt = modInput.value;
+                        removeCancelBtn();
+                    })
+                    .catch(data => {
+                        alert("댓글 작성에 실패했습니다.");
+                        console.log(data);
+                    })
+            });
+            tdCell.innerHTML = null;
+            tdCell.appendChild(modInput);
+            tdCell.appendChild(saveBtn);
+
+            const cancelBtn = document.createElement('input');
+            cancelBtn.type = 'button';
+            cancelBtn.value = '취소';
+            cancelBtn.classList.add('boardBtn');
+            cancelBtn.addEventListener('click', () => {
+                tdCell.innerText = item.ctnt;
+                removeCancelBtn();
+            });
+
+            const removeCancelBtn = () => {
+                modBtn.classList.remove('hidden');
+                delBtn.classList.remove('hidden');
+                cancelBtn.remove();
+            }
+
+            td.insertBefore(cancelBtn, modBtn);
+            modBtn.classList.add('hidden');
+            delBtn.classList.add('hidden');
+        });
+
+
+
+        const delBtn = document.createElement("input");
+        delBtn.type = 'button';
+        delBtn.value = '삭제';
+        delBtn.classList.add('boardBtn');
+        delBtn.addEventListener('click', ()=> {
+            if(confirm("댓글을 삭제하시겠습니까?")) {
+                delCmt(item.icmt, tr);
+                // location.href='/board/detail?iboard='+iboard;
+            }
+        });
+
+        td.appendChild(modBtn);
+        td.appendChild(delBtn);
+        // }
+        table.appendChild(tr);
+    }
+    getCmtList();
+
+
+
+const delCmt = (icmt, tr) => {
+    fetch(`/board/cmt/${icmt}`,
+        {'method': 'delete',
+            'headers': { 'Content-Type': 'application/json' }
+        }, data => {
+            if (data.result) {
+                tr.remove();
+                // if(getTrLen() === 1) {
+                //     const cmtListElem = document.querySelector("#cmt_list");
+                //     cmtListElem.innerText = '댓글이 없습니다.';
+                // }
+            } else {
+                alert("댓글을 삭제할 수 없습니다.");
+            }
+        }).then( data => {
+            console.log(data)
+    const tableElem = document.querySelector('table');
+    tableElem.remove();
+    getCmtList();}
+    );
+}
+
+const getTrLen = ()=> {
+    const cmtListElem = document.querySelector('#cmt_list');
+    const trArr = cmtListElem.querySelectorAll('table tr');
+    return trArr.length;
+}
+
 
 let delBtnElem = document.querySelector("#delBtn");
 
 if(delBtnElem) {
     delBtnElem.addEventListener('click', () => {
-        let iboard = dataElem.dataset.iboard;
 
         if(confirm("삭제하시겠습니까?")) {
             location.href=`/board/del/?iboard=${iboard}`;

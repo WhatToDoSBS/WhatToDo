@@ -1,27 +1,29 @@
 package com.koreait.whattodo.board;
 
+import com.google.gson.Gson;
 import com.koreait.whattodo.crawling.CrawlingService;
-import com.koreait.whattodo.model.BoardEntity;
-import com.koreait.whattodo.model.MecaRankEntity;
-import com.koreait.whattodo.model.SteamRankEntity;
+import com.koreait.whattodo.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
 @Controller
-@RequestMapping("/board")
+@RequestMapping(value = "/board", produces = "application/text; charset=UTF-8") // js 한글깨짐 방지
 public class BoardController {
 
     @Autowired
     private BoardService service;
-
-    @Autowired
-    private CrawlingService crawlingService;
 
     @GetMapping("/game")
     public void game() {}
@@ -29,8 +31,6 @@ public class BoardController {
     @GetMapping("/youtube")
     public void youtube() {}
 
-    @GetMapping("/netflix")
-    public void netflix() {}
 
     @GetMapping("/list")
     public String list(BoardEntity entity, Model model) {
@@ -54,25 +54,28 @@ public class BoardController {
             lastIp = req.getRemoteAddr();
         }
         entity.setLastip(lastIp);
+        BoardVo vo = (BoardVo) service.selBoard(entity);
+        BoardPrevNextVo pnVo = service.selPrevNext(vo);
+        model.addAttribute("prevNext", pnVo);
         model.addAttribute("data", service.selBoard(entity));
+
+    }
+
+    @GetMapping("/mod")
+    public String mod(BoardEntity entity, Model model) {
+        model.addAttribute("data", service.selBoard(entity));
+        return "board/write";
+    }
+
+    @PostMapping("/mod")
+    public String modProc(BoardEntity entity) {
+        int result = service.updBoard(entity);
+        return "redirect:/board/detail?iboard=" + entity.getIboard();
     }
 
     @GetMapping("/del")
     public String delProc(BoardEntity entity) {
         int result = service.delBoard(entity);
         return "redirect:/board/list";
-    }
-
-    @GetMapping("/ranking")
-    public String ranking(Model model, MecaRankEntity entity, SteamRankEntity steamRankEntity) {
-        String mecaUrl = "https://www.gamemeca.com/ranking.php";
-        String steamUrl = "https://store.steampowered.com/stats/?l=koreana";
-
-        crawlingService.insertMeca(mecaUrl);
-        crawlingService.insertSteam(steamUrl);
-
-        model.addAttribute("mecaRankList", crawlingService.mecaRankList(entity));
-        model.addAttribute("steamRankList", crawlingService.steamRankList(steamRankEntity));
-        return "board/ranking";
     }
 }

@@ -23,7 +23,7 @@ body {
 }
 
 table { border-collapse: collapse; }
-a:link, a:visited, a:hover, a:active { color: white; }
+
 
 .header,
 .footer {
@@ -38,7 +38,7 @@ a:link, a:visited, a:hover, a:active { color: white; }
     align-items: center;
 }
 
-
+.header a:link, a:visited { color: white; }
 
 .header .login {
     position: absolute;
@@ -84,10 +84,6 @@ a:link, a:visited, a:hover, a:active { color: white; }
 
 .container .choiceBtn_section {
     margin-bottom: 3vh;
-}
-
-.container .search_section {
-    margin-bottom: 20vh;
 }
 
 .choiceBtn_section_line {
@@ -187,5 +183,6 @@ a:link, a:visited, a:hover, a:active { color: white; }
         transform: scale(1);
     }
 }
+
 table, td, th { border: 1px solid #4f4f4f; border-collapse: collapse; }
 td, th { padding: 7px; }

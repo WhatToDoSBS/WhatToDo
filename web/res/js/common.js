@@ -36,10 +36,18 @@ function pnClickedRmv() {
 for (let i = 0; i < rtBtns.length; i++) {
     rtBtns[i].addEventListener("click", function (e) {
         e.preventDefault();
-        rtClickedRmv();
-        rtBtns[i].classList.add("clicked");
+        if(e.target.classList.contains("clicked")) {
+            rtClickedRmv();
+        } else {
+            rtClickedRmv();
+            rtBtns[i].classList.add("clicked");
+        }
     })
 }
+// const rtClicked = rtLbElem.querySelector(".clicked")
+// if(rtClicked) {
+//     rtClicked.addEventListener('click', rtClicked.classList.remove("clicked"));
+// }
 
 // rtBtns.forEach(function (item) {
 //     item.addEventListener('click', function (e) {
@@ -51,28 +59,46 @@ for (let i = 0; i < rtBtns.length; i++) {
 ppBtns.forEach(function (item) {
     item.addEventListener('click', function (e) {
         e.preventDefault();
-        ppClickedRmv();
-        item.classList.add("clicked");
+        if(e.target.classList.contains("clicked")) {
+            ppClickedRmv();
+        } else {
+            ppClickedRmv();
+            item.classList.add("clicked");
+        }
     })
 });
 kdBtns.forEach(function (item) {
     item.addEventListener('click', function (e) {
         e.preventDefault();
-        kdClickedRmv();
-        item.classList.add("clicked");
+        if(e.target.classList.contains("clicked")) {
+            kdClickedRmv();
+        } else {
+            kdClickedRmv();
+            item.classList.add("clicked");
+        }
     })
 });
 thmBtns.forEach(function (item) {
     item.addEventListener('click', function (e) {
         e.preventDefault();
-        thmClickedRmv();
-        item.classList.add("clicked");
+        if(e.target.classList.contains("clicked")) {
+            thmClickedRmv();
+        } else {
+            thmClickedRmv();
+            item.classList.add("clicked");
+        }
+
     })
 });
 pnBtns.forEach(function (item) {
     item.addEventListener('click', function (e) {
         e.preventDefault();
-        pnClickedRmv();
-        item.classList.add("clicked");
+        if(e.target.classList.contains("clicked")) {
+            pnClickedRmv();
+        } else {
+            pnClickedRmv();
+            item.classList.add("clicked");
+        }
+
     })
 });

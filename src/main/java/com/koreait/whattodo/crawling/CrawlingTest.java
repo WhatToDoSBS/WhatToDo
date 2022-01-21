@@ -1,5 +1,6 @@
 package com.koreait.whattodo.crawling;
 
+import com.google.gson.Gson;
 import com.koreait.whattodo.model.MecaRankEntity;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -8,6 +9,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,22 +39,21 @@ public class CrawlingTest {
                 String name = element.text();
                 String nmLink = element.getElementsByAttribute("href").attr("href");
                 rankNmList.add(name);
-                System.out.println(nmLink);
+                System.out.println("이미지 태그 가져오기 : " + nmLink);
             }
             for(Element element : company) {
                 String companyNm = element.text();
 
                 companyList.add(companyNm);
             }
-
             List<MecaRankEntity> list = new ArrayList<>();
             for(int i=0;i<rankNmList.size();i++) {
                 entity.setRankNum((String)rankNumList.get(i));
                 entity.setRankNm((String)rankNmList.get(i));
                 entity.setCompany((String)companyList.get(i));
                 list.add(entity);
+                System.out.println(list);
             }
-
 
         } catch (IOException e) {
             e.printStackTrace();
