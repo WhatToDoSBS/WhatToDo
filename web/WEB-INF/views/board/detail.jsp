@@ -13,7 +13,7 @@
         <a href="/board/detail?iboard=${requestScope.prevNext.nextiboard}" class="${requestScope.prevNext.nextiboard == 0 ? 'lastNBtn' : ''}"><button class="boardBtn">다음 글</button></a>
     </div>
     <div id="dtCtnt"><pre><c:out value="${data.ctnt}" /></pre></div>
-    <c:if test="#{sessionScope.loginUser != null}">
+    <c:if test="${sessionScope.loginUser != null}">
     <i id="likeBtn" class="far fa-heart"></i>
     </c:if>
 
@@ -28,7 +28,7 @@
     <div id="cmt_list"></div>
     <div>
         <form id="cmtFrm">
-            <input type="text" name="ctnt">
+            <input id="cmtTxt" type="text" name="ctnt">
             <input class="boardBtn" type="button" id="cmt_submit" value="댓글 달기">
         </form>
     </div>

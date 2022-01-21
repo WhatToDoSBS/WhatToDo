@@ -12,7 +12,7 @@
 #writeElem2 { display: flex; flex-direction: column;
 }
 
-#writeElem3 { display: flex; flex-direction: column;
+#writeElem3 { display: flex; flex-direction: column; align-items: center;
 }
 
 .writeBtn {
@@ -21,6 +21,7 @@
     border: none;
     padding: 5px 10px;
     margin-top: 20px;
+    width: 50%;
 }
 
 p {display: inline-block;}

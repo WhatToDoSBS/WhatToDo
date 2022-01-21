@@ -1,5 +1,5 @@
 #writeBtn {
-    padding:1rem 8rem;
+    padding:1rem 5rem;
     font-size: 20px;
     font-weight: bold;
     background-color: greenyellow;
@@ -22,4 +22,10 @@
 
 td, th { border-color: lightseagreen}
 
-table { margin-top: 20px}
+table { margin-top: 10px}
+
+#paging { margin-top: 10px; display: flex; justify-content: right}
+
+#pageIdx { display: flex; justify-content: center}
+
+.pageNm { font-size: large; padding: 7px 3px;}

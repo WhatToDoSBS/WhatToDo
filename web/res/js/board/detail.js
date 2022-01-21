@@ -76,7 +76,7 @@ let cmtListElem = document.querySelector("#cmt_list");
         <tr>
             <th>NO</th>
             <th>내용</th>
-            <th>필명</th>
+            <th>작성자</th>
             <th></th>
         </tr>
         `

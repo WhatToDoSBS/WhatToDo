@@ -2,3 +2,13 @@ i { color: pink; font-size: x-large; font-weight: bold}
 
 #cmt_list { display: flex; justify-content: center; margin-top: 10px; margin-bottom: 10px;}
 
+tr, th, td {
+    border: 1px solid lightsteelblue;
+}
+
+table { width: 100%}
+
+#cmtTxt {
+    width: 75%;
+    border-color: lightgrey;
+}
