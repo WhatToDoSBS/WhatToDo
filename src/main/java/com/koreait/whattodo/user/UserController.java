@@ -59,4 +59,10 @@ public class UserController {
         return "redirect:/user/join";
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/user/login";
+    }
+
 }

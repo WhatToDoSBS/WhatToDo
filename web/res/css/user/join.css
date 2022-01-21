@@ -27,7 +27,7 @@
 
 .selBox {
     border-radius: 4px;
-    padding: 10px 230px 10px 8px;
+    padding: 10px 205px 10px 8px;
     border: solid 1px #dddddd;
 }
 
@@ -36,9 +36,21 @@
     outline: none;
 }
 
-.err_msg {
+.msg_n {
+    display: none;
+
+}
+
+.err_msg_b {
     font-weight: normal;
     color: red;
+    display: block;
+}
+
+.successMsg {
+    font-weight: normal;
+    color: green;
+    display: block;
 }
 
 
