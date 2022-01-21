@@ -4,11 +4,11 @@ import com.koreait.whattodo.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
@@ -16,6 +16,14 @@ public class UserController {
 
     @Autowired
     private UserService service;
+
+    @GetMapping("/idChk/{uid}")
+    @ResponseBody
+    public Map<String, Integer> idChk(@PathVariable String uid) {
+        Map<String, Integer> res = new HashMap();
+        res.put("result", service.idChk(uid));
+        return res;
+    }
 
     @GetMapping("/login")
     public void login() {}
@@ -55,7 +63,7 @@ public class UserController {
         if (result == 1) {
             return "redirect:/user/login";
         }
-        model.addAttribute("msg", "회원가입에 실패하였습니다.");
+        model.addAttribute("msg", "알 수 없는 오류로 회원가입에 실패하였습니다.");
         return "redirect:/user/join";
     }
 
