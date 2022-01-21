@@ -1,0 +1,40 @@
+.left_section .recommend_section {
+    display: grid;
+    grid-template-columns: repeat(2, 200px);
+    grid-template-rows: repeat(3, minmax(200px, auto));
+}
+
+.left_section .ranking {
+    text-align: center;
+}
+
+.left_section .ranking_title {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.left_section .random_img {
+    width: 150px;
+    height: 200px;
+}
+
+.member_section {
+    display: inline-block;
+    text-align: left;
+    height: 30vh;
+}
+.tech_section {
+    height: 30vh;
+}
+
+.title {
+    display: block;
+    border-bottom: 1px solid black;
+}
+.right_section .member_list ul {
+    padding: 0;
+}
+.right_section .member_list li {
+    margin: 10px 0;
+    color: black;
+}
