@@ -136,7 +136,7 @@
     /* 랜덤값 도출 */
 
     var mecaurl = '/board/mecarankingjson';
-    var steamurl = '/board/steamrankingjso  n';
+    var steamurl = '/board/steamrankingjson';
 
     // 랜덤게임 서버에서 불러서(fetch) 출력해주는 함수
     function getMecaRandomGame(url) {   // 게임메카 데이터
