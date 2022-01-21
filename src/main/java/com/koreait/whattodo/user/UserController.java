@@ -26,7 +26,15 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public void login() {}
+    public String login(UserEntity entity, HttpSession session) {
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+        // 로그인한 유저의 경우 로그인창으로 접근 막음
+        if (loginUser != null) {
+            return "redirect:/board/list";
+        }
+
+        return "user/login";
+    }
 
     @PostMapping("/login")
     public String loginPost(UserEntity entity, HttpSession session, Model model) {
@@ -49,7 +57,14 @@ public class UserController {
     }
 
     @GetMapping("/join")
-    public void join() {}
+    public String join(UserEntity entity, HttpSession session) {
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+        // 로그인 세션을 가져와서 로그인한 유저일경우 회원가입접근 막음
+        if (loginUser != null) {
+            return "redirect:/board/list";
+        }
+        return "user/join";
+    }
 
     @PostMapping("/join")
     public String joinPost(UserEntity entity, HttpSession session, Model model) {
