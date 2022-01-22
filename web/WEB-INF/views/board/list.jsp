@@ -6,9 +6,9 @@
     <h1>자유게시판</h1>
     <div id="paging">
     <select>
-        <option value="10">10개씩 보기</option>
-        <option value="15">15개씩 보기</option>
-        <option value="20">20개씩 보기</option>
+        <option value=10>10개씩 보기</option>
+        <option value=15>15개씩 보기</option>
+        <option value=20>20개씩 보기</option>
     </select>
     </div>
     <div>
