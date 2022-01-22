@@ -6,9 +6,12 @@ tr, th, td {
     border: 1px solid lightsteelblue;
 }
 
+td { padding: 0px 7px}
+
 table { width: 100%}
 
 #cmtTxt {
     width: 75%;
     border-color: lightgrey;
 }
+.boardBtn { padding: 5px; color: #444444; font-weight: bolder; background-color: lightgreen}
