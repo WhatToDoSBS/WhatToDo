@@ -24,7 +24,13 @@ public class BoardController2 {
     private CrawlingService crawlingService;
 
     @GetMapping("/netflix")
-    public void netflix() {}
+    public void netflix() {
+        String mecaUrl = "https://www.gamemeca.com/ranking.php";
+        String steamUrl = "https://store.steampowered.com/stats/?l=koreana";
+
+        crawlingService.insertMeca(mecaUrl);
+        crawlingService.insertSteam(steamUrl);
+    }
 
     @GetMapping("/ranking")
     public String ranking(Model model, MecaRankEntity entity, SteamRankEntity steamRankEntity) throws IOException {
