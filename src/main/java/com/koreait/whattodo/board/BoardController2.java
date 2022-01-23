@@ -87,4 +87,18 @@ public class BoardController2 {
         return steamListJson;
     }
 
+    @GetMapping("/ratinggamejson")
+    @ResponseBody
+    public String ratinggamejson(RatingEntity entity, HttpServletResponse res) throws IOException {
+        // String ratingUrl = "https://namu.wiki/w/%EB%A9%94%ED%83%80%ED%81%AC%EB%A6%AC%ED%8B%B1/MUST-PLAY%20%EB%AA%A9%EB%A1%9D";
+
+        // json ajax통신
+        Gson gson = new Gson();
+
+        String ratingListJson = gson.toJson(crawlingService.ratingList(entity));
+
+        System.out.println(ratingListJson);
+        return ratingListJson;
+    }
+
 }

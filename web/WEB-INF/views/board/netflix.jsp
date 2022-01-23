@@ -14,8 +14,7 @@
             <label id="rtLb">평가 :
                 <button class="rtBtn">띵작</button>
                 <button class="rtBtn">수작</button>
-                <button class="rtBtn">중간 이상</button>
-                <button class="rtBtn">망작</button>
+                <button class="rtBtn">평작</button>
             </label>
         </div>
         <div class="choiceBtn_section_line popular ">
