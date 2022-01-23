@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping(value = "/board", produces = "application/text; charset=UTF-8") // js 한글깨짐 방지
@@ -53,7 +56,19 @@ public class BoardController2 {
     }
 
     @GetMapping("/main")
-    public void main() {}
+    public void main(Model model, RatingEntity ratingEntity) {
+        String ratingUrl = "https://namu.wiki/w/%EB%A9%94%ED%83%80%ED%81%AC%EB%A6%AC%ED%8B%B1/MUST-PLAY%20%EB%AA%A9%EB%A1%9D";
+        crawlingService.insertRating(ratingUrl);
+
+        List<RatingEntity> list = crawlingService.ratingList(ratingEntity);
+
+        // 1부터 List갯수만큼의 난수 생성
+        Random random = new Random(); //랜덤 객체 생성(디폴트 시드값 : 현재시간)
+        random.setSeed(System.currentTimeMillis()); //시드값 설정을 따로 할수도 있음
+        int randomGameNum = random.nextInt(list.size())+1;
+        System.out.println("랜덤 [게임] 숫자 : " + (random.nextInt(list.size())+1));
+        model.addAttribute("randomGame", list.get(randomGameNum).getGameNm());
+    }
 
     @GetMapping("/mecarankingjson")
     @ResponseBody
