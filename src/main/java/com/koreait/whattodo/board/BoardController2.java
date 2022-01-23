@@ -48,7 +48,7 @@ public class BoardController2 {
         model.addAttribute("mecaRankList", crawlingService.mecaRankList(entity));
         model.addAttribute("steamRankList", crawlingService.steamRankList(steamRankEntity));
         model.addAttribute("ratingList", crawlingService.ratingList(ratingEntity));
-        System.out.println(crawlingService.ratingList(ratingEntity));
+
         return "board/ranking";
     }
 

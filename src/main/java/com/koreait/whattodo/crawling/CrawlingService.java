@@ -138,7 +138,6 @@ public class CrawlingService {
             rateNmList.add(gameNm);
         }
         rateNmList.remove(0);   // 앞에 하나(텍스트) 삭제
-        System.out.println(rateNmList);
 
         for(Element element: ratingGameNum) {    // PC게임 순위 크롤링
             String gameNum = element.text();
@@ -153,7 +152,6 @@ public class CrawlingService {
             rateRatingList.add(gameRating);
         }
         rateRatingList.remove(0);   // 앞에 하나(텍스트) 삭제
-        System.out.println(rateRatingList);
 
         // 반복해서 들어가지 않도록 테이블 안에 내용이 있으면 비우는 과정.
         mapper.delRating();
