@@ -8,7 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class RatingEntity {
-    private int rum;
+    private int rnum;
     private String gameNm;
     private String gameRating;
     private String gameRank;

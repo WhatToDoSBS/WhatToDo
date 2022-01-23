@@ -162,7 +162,6 @@
         });
     }
 
-
     const randomMecaRankNumArr = [];
     const randomMecaRankNmArr = [];
     const randomMeca = [];
