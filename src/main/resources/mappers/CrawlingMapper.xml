@@ -32,4 +32,20 @@
     <select id="steamRankList" resultType="SteamRankEntity">
         SELECT rankNum, rankNm FROM steam_rankdb ORDER BY irank
     </select>
+
+    <!-- 게임 rating 관련 -->
+    <insert id="insertRatingDb">
+        INSERT INTO rating_Game(gameNm, gameRating, gameRank) VALUES
+        <foreach collection="list" open="(" close=")" separator="),(" item="rating">
+            #{rating.gameNm}, #{rating.gameRating}, #{rating.gameRank}
+        </foreach>
+    </insert>
+
+    <delete id="delRating">
+        DELETE FROM rating_Game
+    </delete>
+
+    <select id="ratingList" resultType="RatingEntity">
+        SELECT gameRank, gameNm, gameRating FROM rating_Game ORDER BY rnum
+    </select>
 </mapper>

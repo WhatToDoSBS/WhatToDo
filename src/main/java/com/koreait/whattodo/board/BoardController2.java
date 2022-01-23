@@ -3,6 +3,7 @@ package com.koreait.whattodo.board;
 import com.google.gson.Gson;
 import com.koreait.whattodo.crawling.CrawlingService;
 import com.koreait.whattodo.model.MecaRankEntity;
+import com.koreait.whattodo.model.RatingEntity;
 import com.koreait.whattodo.model.SteamRankEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,21 +28,26 @@ public class BoardController2 {
     public void netflix() {
         String mecaUrl = "https://www.gamemeca.com/ranking.php";
         String steamUrl = "https://store.steampowered.com/stats/?l=koreana";
+        String ratingUrl = "https://namu.wiki/w/%EB%A9%94%ED%83%80%ED%81%AC%EB%A6%AC%ED%8B%B1/MUST-PLAY%20%EB%AA%A9%EB%A1%9D";
 
         crawlingService.insertMeca(mecaUrl);
         crawlingService.insertSteam(steamUrl);
+        crawlingService.insertRating(ratingUrl);
     }
 
     @GetMapping("/ranking")
-    public String ranking(Model model, MecaRankEntity entity, SteamRankEntity steamRankEntity) throws IOException {
+    public String ranking(Model model, MecaRankEntity entity, SteamRankEntity steamRankEntity, RatingEntity ratingEntity) throws IOException {
         String mecaUrl = "https://www.gamemeca.com/ranking.php";
         String steamUrl = "https://store.steampowered.com/stats/?l=koreana";
+        String ratingUrl = "https://namu.wiki/w/%EB%A9%94%ED%83%80%ED%81%AC%EB%A6%AC%ED%8B%B1/MUST-PLAY%20%EB%AA%A9%EB%A1%9D";
 
         crawlingService.insertMeca(mecaUrl);
         crawlingService.insertSteam(steamUrl);
+        crawlingService.insertRating(ratingUrl);
 
         model.addAttribute("mecaRankList", crawlingService.mecaRankList(entity));
         model.addAttribute("steamRankList", crawlingService.steamRankList(steamRankEntity));
+        model.addAttribute("ratingList", crawlingService.ratingList(ratingEntity));
         return "board/ranking";
     }
 
