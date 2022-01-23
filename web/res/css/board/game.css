@@ -1,0 +1,13 @@
+.container .container { align-items: center}
+
+.choiceBtn_section button {padding: 10px 20px; border-radius: 15px;}
+
+.container .choiceBtn_section {
+    margin-bottom: 7vh;
+}
+label { font-size: large; font-weight: bolder; color: mediumslateblue}
+
+.choiceBtn_section_line { margin: 20px 0;}
+
+.fun-btn { font-weight: bolder;
+    font-size: larger; }
