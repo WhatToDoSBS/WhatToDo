@@ -55,6 +55,11 @@ CREATE TABLE meca_rankdb (
                              PRIMARY KEY (irank)
 );
 
+// 게임메카 추가
+ALTER TABLE meca_rankdb ADD COLUMN genre VARCHAR(10);
+ALTER TABLE meca_rankdb ADD COLUMN cash VARCHAR(10);
+
+
 // 스팀 크롤링 DB
 CREATE TABLE steam_rankdb (
                               irank INT AUTO_INCREMENT,
@@ -63,19 +68,10 @@ CREATE TABLE steam_rankdb (
                               PRIMARY KEY (irank)
 );
 
-// 게임메카 게임랭크 담는 DB
-CREATE TABLE meca_rankdb (
-                             irank INT AUTO_INCREMENT,
-                             rankNum VARCHAR(10),
-                             rankNm VARCHAR(100),
-                             company VARCHAR(50),
-                             PRIMARY KEY (irank)
-);
-
-// 스팀 크롤링 DB
-CREATE TABLE steam_rankdb (
-                              irank INT AUTO_INCREMENT,
-                              rankNum VARCHAR(10),
-                              rankNm VARCHAR(100),
-                              PRIMARY KEY (irank)
+// 게임 평점 크롤링 DB
+CREATE TABLE rating_Game(
+                            rnum INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                            gameNm VARCHAR(100),
+                            gameRating VARCHAR(10),
+                            gameRank VARCHAR(10)
 );
