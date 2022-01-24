@@ -7,9 +7,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class MecaRankEntity {
+public class MecaRankSengEntity {
     private int irank;
-    private String rankNum;
     private String rankNm;
     private String company;
     private String genre;
