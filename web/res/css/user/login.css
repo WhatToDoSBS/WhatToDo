@@ -1,14 +1,11 @@
 .container {
     display: block;
+    text-align: center;
     padding: 50px 0 20px 0;
 }
 
 .login_form > h1:first-child {
     padding-bottom: 1.5rem;
-}
-
-.login_container {
-    position: center;
 }
 
 .login_container > div {
@@ -49,3 +46,14 @@
 a:link, a:visited, a:active { color: black; }
 
 a:hover { color: #C0C0C0 }
+
+
+.msg_n {
+    display: none;
+}
+
+.err_msg_b {
+    font-weight: normal;
+    color: red;
+    display: block;
+}

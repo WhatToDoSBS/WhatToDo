@@ -46,10 +46,13 @@ public class UserController {
 
         int result = service.login(entity);
         switch (result) {
+            case 0:
+                model.addAttribute("msg", "알 수 없는 이유로 오류가 생겼습니다 <br>잠시후 다시 시도해주세요.");
+                return "redirect:/user/login";
             case 1:
                 return "redirect:/board/list";
             case 2:
-                model.addAttribute("msg", "로그인에 실패하였습니다.");
+                model.addAttribute("msg", "로그인 실패.");
                 return "redirect:/user/login";
         }
         model.addAttribute("msg", "계정이 존재하지 않습니다.");

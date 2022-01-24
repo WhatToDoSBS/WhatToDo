@@ -45,9 +45,19 @@ CREATE TABLE t_user
     CONSTRAINT UNIQUE (uid)
 );
 
-CREATE TABLE freeboard_like(
-    iboard INT UNSIGNED,
-    iuser INT UNSIGNED,
-    rdt DATETIME DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (iboard, iuser)
+// 게임메카 게임랭크 담는 DB
+CREATE TABLE meca_rankdb (
+                             irank INT AUTO_INCREMENT,
+                             rankNum VARCHAR(10),
+                             rankNm VARCHAR(100),
+                             company VARCHAR(50),
+                             PRIMARY KEY (irank)
+);
+
+// 스팀 크롤링 DB
+CREATE TABLE steam_rankdb (
+                              irank INT AUTO_INCREMENT,
+                              rankNum VARCHAR(10),
+                              rankNm VARCHAR(100),
+                              PRIMARY KEY (irank)
 );
