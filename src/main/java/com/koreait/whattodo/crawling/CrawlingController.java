@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.w3c.dom.Document;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -124,7 +125,7 @@ public class CrawlingController {
     //모바일 게임
     @GetMapping("/game")
     public void game() {
-        String mobileUrl = "https://www.mobileindex.com/mi-chart/top-100/top-games";
+        String mobileUrl = "https://trees.gamemeca.com/gamerank/#1521881342483-b44f2106-9b8d";
 
         crawlingService.insertMobile(mobileUrl);
     }
@@ -132,7 +133,7 @@ public class CrawlingController {
     @GetMapping("/mobilerankingjson")
     @ResponseBody
     public String mobileRankJson(MobileRankEntity entity, HttpServletResponse res) throws IOException {
-        String mobileUrl = "https://www.mobileindex.com/mi-chart/top-100/top-games";
+        String mobileUrl = "https://trees.gamemeca.com/gamerank/#1521881342483-b44f2106-9b8d";
 
         crawlingService.insertMobile(mobileUrl);
 

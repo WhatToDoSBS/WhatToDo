@@ -187,9 +187,9 @@ public class CrawlingService {
         }
 
         // 크롤링 과정
-        Elements rankNum = doc.select("section.mi-chart.top100>.table>tbody>tr>td:first-child");    // 순위 번호(1,2,3...) 가져오기
-        Elements gameNm = doc.select("section.mi-chart.top100>.table span.app-name>span>span:first-of-type"); // 게임 이름
-        Elements company = doc.select("section.mi-chart.top100>.table span.app-name>span>span:last-of-type"); // 회사 명
+        Elements rankNum = doc.select("td.column-1");    // 순위 번호(1,2,3...) 가져오기
+        Elements gameNm = doc.select("td.column-2 > a"); // 게임 이름
+        Elements company = doc.select("td.column-3"); // 회사 명
 
         // 크롤링해서 가져온 값의 text만 뽑아서 리스트에 담음.
         for(Element element : rankNum) {
@@ -212,7 +212,8 @@ public class CrawlingService {
 
         List<MobileRankEntity> list = new ArrayList<>();
         // for문이 한 번 돌 때마다 한 행씩 추가.
-        for(int i=0;i<gameNmList.size();i++) {
+        //0~39까지 모바일 , 40~79까지 pc온라인, 80~119까지 스팀
+        for(int i=0;i< rankNumList.size();i++) {
             entity.setRankNum((String)rankNumList.get(i));
             entity.setGameNm((String)gameNmList.get(i));
             entity.setCompany((String)companyList.get(i));
