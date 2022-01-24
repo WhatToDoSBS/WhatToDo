@@ -67,7 +67,7 @@ public class BoardController2 {
         random.setSeed(System.currentTimeMillis()); //시드값 설정을 따로 할수도 있음
         int randomGameNum = random.nextInt(list.size())+1;
         System.out.println("랜덤 [게임] 숫자 : " + (random.nextInt(list.size())+1));
-        model.addAttribute("randomGame", list.get(randomGameNum).getGameNm());
+        model.addAttribute("randomGame", list.get(randomGameNum-1).getGameNm());
     }
 
     @GetMapping("/mecarankingjson")

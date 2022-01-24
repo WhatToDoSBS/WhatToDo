@@ -189,27 +189,30 @@
             // min <= number <= max
             // Math.floor(Math.random() * (max - min + 1)) + min;
             let randomNum = Math.floor((Math.random() * data.length) + 1);
-            let numArrange = 15;    // 범위, 15개 도출
+            let numArrange = 10;    // 범위, 15개 도출
             let min = 0;    // 최솟값
-            switch (rtBtnReturnNum) {
-                case 1: // 1위~15위
-                    randomNum = Math.floor(Math.random() * numArrange);
-                    break;
-                case 2: // 16위~45위
-                    min = 15;
-                    numArrange = 30;
-                    randomNum = Math.floor(Math.random() * numArrange) + min;
-                    break;
-                case 3: // 46위~95위
-                    min = 45;
-                    numArrange = 50;
-                    randomNum = Math.floor(Math.random() * numArrange) + min;
-                    break;
-            }
+            btnSwitch(rtBtnReturnNum,randomNum, numArrange, min)
             gameRecommandDisplay(data[randomNum].gameNm);
         }).catch((err) => {
             console.log(err);
         });
+    }
+
+    function btnSwitch(btnName, randomNum, numArrange, min) {
+        switch (btnName) {
+            case 1: // 1위~10위
+                randomNum = Math.floor(Math.random() * numArrange);
+                break;
+            case 2: // 11위~30위
+                min = 10;
+                numArrange = 20;
+                randomNum = Math.floor(Math.random() * numArrange) + min;
+                break;
+            case 3: // 31위~50위
+                min = 30;
+                randomNum = Math.floor(Math.random() * numArrange) + min;
+                break;
+        }
     }
 
     // 각 List의 요소들을 담는 randomList 변수 선언
@@ -303,8 +306,6 @@
             randomRating.push(item);
         });
     }*/
-
-
 
     // 화면창에 결과값을 띄움
     function gameRecommandDisplay(whatGame) {

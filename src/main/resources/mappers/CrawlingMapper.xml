@@ -14,7 +14,7 @@
     </delete>
     
     <select id="mecaRankList" resultType="MecaRankEntity">
-        SELECT rankNum, rankNm, company FROM meca_rankdb ORDER BY irank
+        SELECT rankNum, rankNm, company FROM meca_rankdb ORDER BY irank LIMIT 50;
     </select>
 
     <!-- 스팀 관련 -->
@@ -30,7 +30,7 @@
     </delete>
 
     <select id="steamRankList" resultType="SteamRankEntity">
-        SELECT rankNum, rankNm FROM steam_rankdb ORDER BY irank
+        SELECT rankNum, rankNm FROM steam_rankdb ORDER BY irank LIMIT 50;
     </select>
 
     <!-- 게임 rating 관련 -->
@@ -46,6 +46,6 @@
     </delete>
 
     <select id="ratingList" resultType="RatingEntity">
-        SELECT gameRank, gameNm, gameRating FROM rating_Game ORDER BY rnum
+        SELECT gameRank, gameNm, gameRating FROM rating_Game ORDER BY rnum LIMIT 50;
     </select>
 </mapper>
