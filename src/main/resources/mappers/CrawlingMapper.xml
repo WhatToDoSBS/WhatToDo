@@ -48,4 +48,20 @@
     <select id="ratingList" resultType="RatingEntity">
         SELECT gameRank, gameNm, gameRating FROM rating_Game ORDER BY rnum
     </select>
+
+<!--  모바일게임 순위  /-->
+    <insert id="insertMobileRankDb">
+        INSERT INTO mobile_rankdb(gameNm, rankNum, company) VALUES
+        <foreach collection="list" open="(" close=")" separator="),(" item="rank">
+            #{rank.gameNm}, #{rank.rankNum}, #{rank.company}
+        </foreach>
+    </insert>
+
+    <delete id="delMobileRank">
+        DELETE FROM mobile_rankdb
+    </delete>
+
+    <select id="mobileRankList" resultType="MobileRankEntity">
+        SELECT rankNum, gameNm, company FROM mobile_rankdb ORDER BY irank
+    </select>
 </mapper>

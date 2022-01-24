@@ -61,3 +61,11 @@ CREATE TABLE steam_rankdb (
                               rankNm VARCHAR(100),
                               PRIMARY KEY (irank)
 );
+
+// 게임 평점 크롤링 DB
+CREATE TABLE rating_Game(
+                            rnum INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                            gameNm VARCHAR(100),
+                            gameRating VARCHAR(10),
+                            gameRank VARCHAR(10)
+);

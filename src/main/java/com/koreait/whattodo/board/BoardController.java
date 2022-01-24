@@ -25,12 +25,10 @@ public class BoardController {
     @Autowired
     private BoardService service;
 
-    @GetMapping("/game")
-    public void game() {}
+
 
     @GetMapping("/youtube")
     public void youtube() {}
-
 
     @GetMapping("/list")
     public String list(BoardEntity entity, Model model) {

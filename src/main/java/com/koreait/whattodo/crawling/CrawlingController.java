@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.koreait.whattodo.board.BoardService;
 import com.koreait.whattodo.crawling.CrawlingService;
 import com.koreait.whattodo.model.MecaRankEntity;
+import com.koreait.whattodo.model.MobileRankEntity;
 import com.koreait.whattodo.model.RatingEntity;
 import com.koreait.whattodo.model.SteamRankEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,18 +41,21 @@ public class CrawlingController {
     }
 
     @GetMapping("/ranking")
-    public String ranking(Model model, MecaRankEntity entity, SteamRankEntity steamRankEntity, RatingEntity ratingEntity) throws IOException {
+    public String ranking(Model model, MecaRankEntity entity, SteamRankEntity steamRankEntity, RatingEntity ratingEntity, MobileRankEntity mobileEntity) throws IOException {
         String mecaUrl = "https://www.gamemeca.com/ranking.php";
         String steamUrl = "https://store.steampowered.com/stats/?l=koreana";
         String ratingUrl = "https://namu.wiki/w/%EB%A9%94%ED%83%80%ED%81%AC%EB%A6%AC%ED%8B%B1/MUST-PLAY%20%EB%AA%A9%EB%A1%9D";
+        String mobileUrl = "https://www.mobileindex.com/mi-chart/top-100/top-games";
 
         crawlingService.insertMeca(mecaUrl);
         crawlingService.insertSteam(steamUrl);
         crawlingService.insertRating(ratingUrl);
+        crawlingService.insertMobile(mobileUrl);
 
         model.addAttribute("mecaRankList", crawlingService.mecaRankList(entity));
         model.addAttribute("steamRankList", crawlingService.steamRankList(steamRankEntity));
         model.addAttribute("ratingList", crawlingService.ratingList(ratingEntity));
+        model.addAttribute("mobileList", crawlingService.mobileRankList(mobileEntity));
 
         return "board/ranking";
     }
@@ -115,6 +119,30 @@ public class CrawlingController {
 
         System.out.println(ratingListJson);
         return ratingListJson;
+    }
+
+    //모바일 게임
+    @GetMapping("/game")
+    public void game() {
+        String mobileUrl = "https://www.mobileindex.com/mi-chart/top-100/top-games";
+
+        crawlingService.insertMobile(mobileUrl);
+    }
+
+    @GetMapping("/mobilerankingjson")
+    @ResponseBody
+    public String mobileRankJson(MobileRankEntity entity, HttpServletResponse res) throws IOException {
+        String mobileUrl = "https://www.mobileindex.com/mi-chart/top-100/top-games";
+
+        crawlingService.insertMobile(mobileUrl);
+
+        // json ajax통신
+        Gson gson = new Gson();
+
+        String mobileListJson = gson.toJson(crawlingService.mobileRankList(entity));
+
+        System.out.println(mobileListJson);
+        return mobileListJson;
     }
 
 }

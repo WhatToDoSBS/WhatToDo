@@ -1,6 +1,7 @@
 package com.koreait.whattodo.crawling;
 
 import com.koreait.whattodo.model.MecaRankEntity;
+import com.koreait.whattodo.model.MobileRankEntity;
 import com.koreait.whattodo.model.RatingEntity;
 import com.koreait.whattodo.model.SteamRankEntity;
 import org.jsoup.Jsoup;
@@ -171,4 +172,58 @@ public class CrawlingService {
     }
 
     public List<RatingEntity> ratingList(RatingEntity entity) { return mapper.ratingList(entity); }
+
+    //모바일 게임
+    public void insertMobile(String url) {
+        Document doc = null;
+        List rankNumList = new ArrayList<>();   // 순위 번호 리스트
+        List gameNmList = new ArrayList<>();    // 게임 리스트
+        List companyList = new ArrayList<>();   // 회사 리스트
+
+        try {
+            doc = Jsoup.connect(url).get();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 크롤링 과정
+        Elements rankNum = doc.select("section.mi-chart.top100>.table>tbody>tr>td:first-child");    // 순위 번호(1,2,3...) 가져오기
+        Elements gameNm = doc.select("section.mi-chart.top100>.table span.app-name>span>span:first-of-type"); // 게임 이름
+        Elements company = doc.select("section.mi-chart.top100>.table span.app-name>span>span:last-of-type"); // 회사 명
+
+        // 크롤링해서 가져온 값의 text만 뽑아서 리스트에 담음.
+        for(Element element : rankNum) {
+            String num = element.text();
+            rankNumList.add(num);
+        }
+        for(Element element : gameNm) {
+            String name = element.text();
+            gameNmList.add(name);
+        }
+        for(Element element : company) {
+            String companyNm = element.text();
+            companyList.add(companyNm);
+        }
+        // 반복해서 들어가지 않도록 테이블 안에 내용이 있으면 비우는 과정.
+        mapper.delMobileRank();
+
+        // 크롤링 담을 MobileRankEntity 객체 생성.
+        MobileRankEntity entity = new MobileRankEntity();
+
+        List<MobileRankEntity> list = new ArrayList<>();
+        // for문이 한 번 돌 때마다 한 행씩 추가.
+        for(int i=0;i<gameNmList.size();i++) {
+            entity.setRankNum((String)rankNumList.get(i));
+            entity.setGameNm((String)gameNmList.get(i));
+            entity.setCompany((String)companyList.get(i));
+            list.add(entity);
+            mapper.insertMobileRankDb(list);
+        }
+    }
+
+    public List<MobileRankEntity> mobileRankList(MobileRankEntity entity) {
+        return mapper.mobileRankList(entity);
+    }
+
 }
+

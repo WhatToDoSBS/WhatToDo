@@ -1,6 +1,7 @@
 package com.koreait.whattodo.crawling;
 
 import com.koreait.whattodo.model.MecaRankEntity;
+import com.koreait.whattodo.model.MobileRankEntity;
 import com.koreait.whattodo.model.RatingEntity;
 import com.koreait.whattodo.model.SteamRankEntity;
 import org.apache.ibatis.annotations.Mapper;
@@ -23,4 +24,10 @@ public interface CrawlingMapper {
     void insertRatingDb(List<RatingEntity> entities);
     void delRating();
     List<RatingEntity> ratingList(RatingEntity entity);
+
+    //모바일 게임
+    void insertMobileRankDb(List<MobileRankEntity> mobileList);
+    void delMobileRank();
+    List<MobileRankEntity> mobileRankList(MobileRankEntity entity);
+
 }
