@@ -1,9 +1,13 @@
 {
-    choiceBtnFrm = document.querySelector('#choiceBtnFrm');
-    displayResultDiv = document.querySelector('.display_result');
-    displayResultSpan = document.querySelector('.result_span');
-    funBtn = choiceBtnFrm.querySelector('.fun-btn');
-    dataList = document.querySelector('.data');
+    let choiceBtnFrm = document.querySelector('#choiceBtnFrm');
+    let displayResultDiv = document.querySelector('.display_result');
+    let displayResultSpan = document.querySelector('.result_span');
+    let funBtn = choiceBtnFrm.querySelector('.fun-btn');
+    let dataList = document.querySelector('.data');
+    let modalLink = document.querySelector('.modalLink');
+    let modal = document.querySelector('#modal');
+    let modalCloseBtn = document.querySelector('.close-area');
+
 
     /* common.js에서 가져온 버튼 클릭 관련 js */
 
@@ -169,8 +173,9 @@
             // min <= number <= max
             // Math.floor(Math.random() * (max - min + 1)) + min;
             let randomNum = Math.floor((Math.random() * data.length));
-            btnSwitch(rtBtnReturnNum,randomNum)
+            btnSwitch(rtBtnReturnNum,randomNum);
             gameRecommandDisplay(data[randomNum].gameNm);
+            modalDisplay(data[randomNum].gameNm, data[randomNum].gameRank);
         }).catch((err) => {
             console.log(err);
         });
@@ -188,6 +193,7 @@
 
             btnSwitch(rtBtnReturnNum,randomNum)
             gameRecommandDisplay(data[randomNum].rankNm);
+            modalDisplay(data[randomNum].rankNm, data[randomNum].rankNum);
         }).catch((err) => {
             console.log(err);
         });
@@ -213,9 +219,48 @@
         }
     }
 
-    // 화면창에 결과값을 띄움
+    // 화면창에 랜덤 게임을 띄움
     function gameRecommandDisplay(whatGame) {
         displayResultSpan.style.display = 'inline-block';
-        displayResultSpan.innerHTML = '오늘 이 게임 어때요? <b>' + whatGame + '</b>';
+        modalLink.textContent =  whatGame;
     }
+
+    // 눌렀을 때 모달창 열리는 함수
+    modalLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        modal.style.display = 'flex';
+    })
+
+
+    function modalDisplay(whatGame, whatGameNum) {
+        modalLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            modal.style.display = 'flex';
+        })
+        let modalWhatGame = document.querySelector('.modalWhatGame');
+        let modalrank = document.querySelector('.modal-rank');
+        modalWhatGame.textContent = whatGame;
+        modalrank.textContent = '게임 순위' + whatGameNum + '위';
+    }
+
+    // 모달 닫아주는 함수
+    modalCloseBtn.addEventListener('click', e => {
+        modal.style.display = 'none';
+    })
+
+    // 모달이 모달창 밖으로 클릭되면 꺼지는 함수
+    modal.addEventListener("click", e => {
+        const evTarget = e.target
+        if(evTarget.classList.contains("modal-overlay")) {
+            modal.style.display = "none"
+        }
+    })
+
+    // 모달창이 켜진 상태에서 ESC를 누르면 모달창이 닫히는 함수
+    // window는 현재 자바스크립트가 실행되고 있는 창을 얘기함.
+    window.addEventListener("keyup", e => {
+        if(modal.style.display === "flex" && e.key === "Escape") {
+            modal.style.display = "none"
+        }
+    })
 }
