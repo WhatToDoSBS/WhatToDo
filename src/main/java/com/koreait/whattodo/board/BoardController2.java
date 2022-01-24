@@ -70,6 +70,9 @@ public class BoardController2 {
         model.addAttribute("randomGame", list.get(randomGameNum-1).getGameNm());
     }
 
+    @GetMapping("/book")
+    public void book() {}
+
     @GetMapping("/rankingjson")
     @ResponseBody
     public String rankingJson(MecaRankEntity mecaRankEntity, SteamRankEntity steamRankEntity, HttpServletResponse res) throws IOException {
