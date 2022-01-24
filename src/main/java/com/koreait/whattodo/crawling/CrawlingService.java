@@ -1,6 +1,7 @@
 package com.koreait.whattodo.crawling;
 
 import com.koreait.whattodo.model.MecaRankEntity;
+import com.koreait.whattodo.model.RatingEntity;
 import com.koreait.whattodo.model.SteamRankEntity;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -112,4 +113,62 @@ public class CrawlingService {
     public List<SteamRankEntity> steamRankList(SteamRankEntity entity) {
         return mapper.steamRankList(entity);
     }
+
+    // ★★★★★ 평점 관련 ★★★★★
+
+    public void insertRating(String url) {
+        Document document = null;
+
+        try {
+            document = Jsoup.connect(url).userAgent("Chrome/5.0").get(); // 403 error 처리(권한 부여)
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 크롤링 과정
+        Elements ratingGameNm = document.select("div.wiki-heading-content:last-child").select("td:nth-child(2)"); // PC게임 전체 이름
+        Elements ratingGameNum = document.select("div.wiki-heading-content:last-child").select("td:first-child");   // PC게임 순위
+        Elements ratingGameRating = document.select("div.wiki-heading-content:last-child").select("td:nth-child(3)");    // PC게임 평점
+        List rateNmList = new ArrayList();
+        List rateNumList = new ArrayList();
+        List rateRatingList = new ArrayList(); // 회사 명
+
+        for(Element element: ratingGameNm) {    // PC게임 이름 크롤링
+            String gameNm = element.text();
+            rateNmList.add(gameNm);
+        }
+        rateNmList.remove(0);   // 앞에 하나(텍스트) 삭제
+
+        for(Element element: ratingGameNum) {    // PC게임 순위 크롤링
+            String gameNum = element.text();
+            rateNumList.add(gameNum);
+        }
+        // 앞에 두개(텍스트) 삭제
+        rateNumList.remove(0);
+        rateNumList.remove(0);
+
+        for(Element element: ratingGameRating) {    // PC게임 이름 크롤링
+            String gameRating = element.text();
+            rateRatingList.add(gameRating);
+        }
+        rateRatingList.remove(0);   // 앞에 하나(텍스트) 삭제
+
+        // 반복해서 들어가지 않도록 테이블 안에 내용이 있으면 비우는 과정.
+        mapper.delRating();
+
+        // 크롤링 담을 객체 생성.
+        RatingEntity entity = new RatingEntity();
+
+        // for문이 한 번 돌 때마다 한 행씩 추가.
+        for(int i=0;i<rateNumList.size();i++) {
+            List<RatingEntity> list = new ArrayList<>();
+            entity.setGameNm((String)rateNmList.get(i));
+            entity.setGameRank((String)rateNumList.get(i));
+            entity.setGameRating((String)rateRatingList.get(i));
+            list.add(entity);
+            mapper.insertRatingDb(list);
+        }
+    }
+
+    public List<RatingEntity> ratingList(RatingEntity entity) { return mapper.ratingList(entity); }
 }

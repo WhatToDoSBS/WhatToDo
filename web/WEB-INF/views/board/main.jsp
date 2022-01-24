@@ -1,11 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="left_section">
-    <h3>오늘 뭐하Gee?</h3>
+        <h3 class="title">오늘 뭐하Gee?</h3>
     <div class="recommend_section">
         <div class="flex-center flex-direction-column ranking">
             <div class="ranking_title">게임</div>
-            <div><img src="/res/img/board/lol.jpg" alt="" class="random_img"></div>
+            <div>이 게임 어때요? ${requestScope.randomGame}</div>
         </div>
         <div class="flex-center flex-direction-column ranking">
             <div class="ranking_title">유튜브</div>

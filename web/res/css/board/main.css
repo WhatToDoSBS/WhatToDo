@@ -1,7 +1,7 @@
 .left_section .recommend_section {
     display: grid;
-    grid-template-columns: repeat(2, 200px);
-    grid-template-rows: repeat(3, minmax(200px, auto));
+    grid-template-columns: repeat(2, 400px);
+    grid-template-rows: repeat(3, minmax(300px, auto));
 }
 
 .left_section .ranking {
@@ -27,14 +27,18 @@
     height: 30vh;
 }
 
-.title {
-    display: block;
-    border-bottom: 1px solid black;
-}
 .right_section .member_list ul {
     padding: 0;
 }
 .right_section .member_list li {
     margin: 10px 0;
     color: black;
+}
+
+.member_title:after {
+    content: "";
+    display: block;
+    width: 80px;
+    border-bottom: 2px solid var(--main-color-dark);
+    margin-top: 5px;
 }

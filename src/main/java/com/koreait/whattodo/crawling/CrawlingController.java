@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.koreait.whattodo.board.BoardService;
 import com.koreait.whattodo.crawling.CrawlingService;
 import com.koreait.whattodo.model.MecaRankEntity;
+import com.koreait.whattodo.model.RatingEntity;
 import com.koreait.whattodo.model.SteamRankEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping(value = "/board", produces = "application/text; charset=UTF-8") // js 한글깨짐 방지
@@ -25,23 +29,47 @@ public class CrawlingController {
     private CrawlingService crawlingService;
 
     @GetMapping("/netflix")
-    public void netflix() {}
-
-    @GetMapping("/ranking")
-    public String ranking(Model model, MecaRankEntity entity, SteamRankEntity steamRankEntity) throws IOException {
+    public void netflix() {
         String mecaUrl = "https://www.gamemeca.com/ranking.php";
         String steamUrl = "https://store.steampowered.com/stats/?l=koreana";
+        String ratingUrl = "https://namu.wiki/w/%EB%A9%94%ED%83%80%ED%81%AC%EB%A6%AC%ED%8B%B1/MUST-PLAY%20%EB%AA%A9%EB%A1%9D";
 
         crawlingService.insertMeca(mecaUrl);
         crawlingService.insertSteam(steamUrl);
+        crawlingService.insertRating(ratingUrl);
+    }
+
+    @GetMapping("/ranking")
+    public String ranking(Model model, MecaRankEntity entity, SteamRankEntity steamRankEntity, RatingEntity ratingEntity) throws IOException {
+        String mecaUrl = "https://www.gamemeca.com/ranking.php";
+        String steamUrl = "https://store.steampowered.com/stats/?l=koreana";
+        String ratingUrl = "https://namu.wiki/w/%EB%A9%94%ED%83%80%ED%81%AC%EB%A6%AC%ED%8B%B1/MUST-PLAY%20%EB%AA%A9%EB%A1%9D";
+
+        crawlingService.insertMeca(mecaUrl);
+        crawlingService.insertSteam(steamUrl);
+        crawlingService.insertRating(ratingUrl);
 
         model.addAttribute("mecaRankList", crawlingService.mecaRankList(entity));
         model.addAttribute("steamRankList", crawlingService.steamRankList(steamRankEntity));
+        model.addAttribute("ratingList", crawlingService.ratingList(ratingEntity));
+
         return "board/ranking";
     }
 
     @GetMapping("/main")
-    public void main() {}
+    public void main(Model model, RatingEntity ratingEntity) {
+        String ratingUrl = "https://namu.wiki/w/%EB%A9%94%ED%83%80%ED%81%AC%EB%A6%AC%ED%8B%B1/MUST-PLAY%20%EB%AA%A9%EB%A1%9D";
+        crawlingService.insertRating(ratingUrl);
+
+        List<RatingEntity> list = crawlingService.ratingList(ratingEntity);
+
+        // 1부터 List갯수만큼의 난수 생성
+        Random random = new Random(); //랜덤 객체 생성(디폴트 시드값 : 현재시간)
+        random.setSeed(System.currentTimeMillis()); //시드값 설정을 따로 할수도 있음
+        int randomGameNum = random.nextInt(list.size())+1;
+        System.out.println("랜덤 [게임] 숫자 : " + (random.nextInt(list.size())+1));
+        model.addAttribute("randomGame", list.get(randomGameNum).getGameNm());
+    }
 
     @GetMapping("/mecarankingjson")
     @ResponseBody
@@ -73,6 +101,20 @@ public class CrawlingController {
 
         System.out.println(steamListJson);
         return steamListJson;
+    }
+
+    @GetMapping("/ratinggamejson")
+    @ResponseBody
+    public String ratinggamejson(RatingEntity entity, HttpServletResponse res) throws IOException {
+        // String ratingUrl = "https://namu.wiki/w/%EB%A9%94%ED%83%80%ED%81%AC%EB%A6%AC%ED%8B%B1/MUST-PLAY%20%EB%AA%A9%EB%A1%9D";
+
+        // json ajax통신
+        Gson gson = new Gson();
+
+        String ratingListJson = gson.toJson(crawlingService.ratingList(entity));
+
+        System.out.println(ratingListJson);
+        return ratingListJson;
     }
 
 }

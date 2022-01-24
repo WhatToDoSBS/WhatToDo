@@ -43,17 +43,32 @@
         }
     }
 
-    for (let i = 0; i < rtBtns.length; i++) {
-        rtBtns[i].addEventListener("click", function (e) {
+    // 평가 버튼 값
+    let rtBtnReturnNum = 0;
+
+    rtBtns.forEach(function (item) {
+        item.addEventListener('click', function (e) {
             e.preventDefault();
+            switch (item.innerText) {
+                case '띵작':
+                    rtBtnReturnNum = 1;
+                    break;
+                case '수작':
+                    rtBtnReturnNum = 2;
+                    break;
+                case '평작':
+                    rtBtnReturnNum = 3;
+                    break;
+            }
+
             if (e.target.classList.contains("clicked")) {
                 rtClickedRmv();
             } else {
                 rtClickedRmv();
-                rtBtns[i].classList.add("clicked");
+                item.classList.add("clicked");
             }
         })
-    }
+    });
 
     // 인기도 버튼 값
     let ppBtnReturnNum = 0;
@@ -117,26 +132,29 @@
         })
     });
 
+    let randomRatingJson = null;
     // 뭐하Gee 버튼 관련
     funBtn = document.querySelector('.fun-btn');
     funBtn.addEventListener('click', function (e) {
         e.preventDefault();
-        let random = Math.floor(Math.random()*2)+1;
-        console.log('random:' + random);
-        switch (random) {
+        // let random = Math.floor(Math.random()*2)+1;
+        // console.log('random:' + random);
+        /*switch (random) {
             case 1:
                 getMecaRandomGame(mecaurl);
                 break;
             case 2:
                 getSteamRandomGame(steamurl);
                 break;
-        }
+        }*/
+        getRatingRandomGame(ratingurl);
     })
 
     /* 랜덤값 도출 */
 
     var mecaurl = '/board/mecarankingjson';
     var steamurl = '/board/steamrankingjson';
+    var ratingurl = '/board/ratinggamejson'
 
     // 랜덤게임 서버에서 불러서(fetch) 출력해주는 함수
     function getMecaRandomGame(url) {   // 게임메카 데이터
@@ -162,13 +180,49 @@
         });
     }
 
+    // 랜덤게임 서버에서 불러서(fetch) 출력해주는 함수
+    function getRatingRandomGame(url) {   // 게임메카 데이터
+        fetch(url).then((res) => {
+            return res.json();
+        }).then((data) => {
+            // 랜덤 숫자 도출 및 게임 도출
+            // min <= number <= max
+            // Math.floor(Math.random() * (max - min + 1)) + min;
+            let randomNum = Math.floor((Math.random() * data.length) + 1);
+            let numArrange = 15;    // 범위, 15개 도출
+            let min = 0;    // 최솟값
+            switch (rtBtnReturnNum) {
+                case 1: // 1위~15위
+                    randomNum = Math.floor(Math.random() * numArrange);
+                    break;
+                case 2: // 16위~45위
+                    min = 15;
+                    numArrange = 30;
+                    randomNum = Math.floor(Math.random() * numArrange) + min;
+                    break;
+                case 3: // 46위~95위
+                    min = 45;
+                    numArrange = 50;
+                    randomNum = Math.floor(Math.random() * numArrange) + min;
+                    break;
+            }
+            gameRecommandDisplay(data[randomNum].gameNm);
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
 
+    // 각 List의 요소들을 담는 randomList 변수 선언
     const randomMecaRankNumArr = [];
     const randomMecaRankNmArr = [];
     const randomMeca = [];
     const randomSteamRankNumArr = [];
     const randomSteamRankNmArr = [];
     const randomSteam = [];
+    const randomRatingRankNumArr = [];
+    const randomRatingRankNmArr = [];
+    const randomRatingScoreArr = [];
+    const randomRating = [];
 
     // mecarank 랜덤함수
     function mecaRandomGame(data) {
@@ -204,7 +258,6 @@
         const randomMecaJson = JSON.stringify(randomMeca);  // Object를 String으로
         return randomMecaJson;  // meca게임 List를 담은 배열 리턴
     }
-
     // steam 랜덤함수
     function steamRandomGame(data) {
         data.forEach(function (item) {
@@ -240,6 +293,18 @@
         const randomSteamJson = JSON.stringify(randomSteam);  // Object를 String으로
         return randomSteamJson;  // steam게임 List를 담은 배열 리턴
     }
+
+    // rating 랜덤함수
+    /*function ratingRandomGame(data) {
+        data.forEach(function (item) {
+            randomRatingRankNumArr.push(item.gameRank);
+            randomRatingRankNmArr.push(item.gameNm);
+            randomRatingScoreArr.push(item.gameRating);
+            randomRating.push(item);
+        });
+    }*/
+
+
 
     // 화면창에 결과값을 띄움
     function gameRecommandDisplay(whatGame) {
