@@ -70,6 +70,33 @@ public class BoardController2 {
         model.addAttribute("randomGame", list.get(randomGameNum-1).getGameNm());
     }
 
+    @GetMapping("/rankingjson")
+    @ResponseBody
+    public String rankingJson(MecaRankEntity mecaRankEntity, SteamRankEntity steamRankEntity, HttpServletResponse res) throws IOException {
+        String mecaUrl = "https://www.gamemeca.com/ranking.php";
+        String steamUrl = "https://store.steampowered.com/stats/?l=koreana";
+
+        crawlingService.insertMeca(mecaUrl);
+        crawlingService.insertSteam(steamUrl);
+
+        // 0부터 1까지
+        Random random = new Random(); //랜덤 객체 생성(디폴트 시드값 : 현재시간)
+        random.setSeed(System.currentTimeMillis()); //시드값 설정을 따로 할수도 있음
+        long randomGameNum = Math.round(Math.random());
+        // json ajax통신
+        Gson gson = new Gson();
+
+        String mecaListJson = gson.toJson(crawlingService.mecaRankList(mecaRankEntity));
+        String steamListJson = gson.toJson(crawlingService.steamRankList(steamRankEntity));
+
+        System.out.println("randomGameNum : " + randomGameNum);
+        if(randomGameNum==0) {
+            return mecaListJson;
+        } else {
+            return steamListJson;
+        }
+    }
+
     @GetMapping("/mecarankingjson")
     @ResponseBody
     public String mecarankingjson(MecaRankEntity entity, HttpServletResponse res) throws IOException {
@@ -112,7 +139,6 @@ public class BoardController2 {
 
         String ratingListJson = gson.toJson(crawlingService.ratingList(entity));
 
-        System.out.println(ratingListJson);
         return ratingListJson;
     }
 

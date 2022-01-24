@@ -42,8 +42,7 @@ a:visited { color: black; }
 
 /* --- header --- */
 
-.header,
-.footer {
+.header{
     width: 100%;
     padding: 5vh 0;
     text-align: center;
@@ -295,4 +294,13 @@ button.pnBtn.clicked {
 .footer {
     font-family: 'Nanum Gothic', sans-serif;
     color: black;
+    padding: 40px 0;
+    text-align: center;
+    background-color: var(--main-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1vh;
+    width: 100%;
+    font-size: 14px;
 }
