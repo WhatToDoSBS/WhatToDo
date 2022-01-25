@@ -3,9 +3,9 @@
 <mapper namespace="com.koreait.whattodo.crawling.CrawlingMapper">
     <!-- 게임메카 관련 -->
     <insert id="insertRankMecaDb">
-        INSERT INTO meca_rankdb(rankNm, rankNum, company) VALUES
+        INSERT INTO meca_rankdb(rankNm, rankNum, company, genre, cash) VALUES
         <foreach collection="list" open="(" close=")" separator="),(" item="rank">
-             #{rank.rankNm}, #{rank.rankNum}, #{rank.company}
+             #{rank.rankNm}, #{rank.rankNum}, #{rank.company}, #{rank.genre}, #{rank.cash}
         </foreach>
     </insert>
 
@@ -14,7 +14,7 @@
     </delete>
     
     <select id="mecaRankList" resultType="MecaRankEntity">
-        SELECT rankNum, rankNm, company FROM meca_rankdb ORDER BY irank LIMIT 50;
+        SELECT rankNum, rankNm, company, genre, cash FROM meca_rankdb ORDER BY irank LIMIT 50;
     </select>
 
     <!-- 스팀 관련 -->

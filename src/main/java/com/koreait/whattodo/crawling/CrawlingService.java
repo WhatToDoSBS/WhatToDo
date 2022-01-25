@@ -25,6 +25,8 @@ public class CrawlingService {
         List rankNumList = new ArrayList<>();   // 순위 번호 리스트
         List rankNmList = new ArrayList<>();    // 게임 리스트
         List companyList = new ArrayList<>();   // 회사 리스트
+        List genreList = new ArrayList<>();   // 장르 리스트
+        List cashList = new ArrayList<>();   // 유료화 정책 리스트
 
         try {
             doc = Jsoup.connect(url).get();
@@ -36,6 +38,8 @@ public class CrawlingService {
         Elements rankNum = doc.select("tr.ranking-table-rows").select("span.rank");    // 순위 번호(1,2,3...) 가져오기
         Elements rankNm = doc.select("div.game-name > a"); // 게임 이름
         Elements company = doc.select("div.game-info > span.company"); // 회사 명
+        Elements genre = doc.select("div.game-info > span:nth-child(2)"); // 장르 명
+        Elements cash = doc.select("div.game-info > span:nth-child(3)"); // 유료화 정책
 
         // 크롤링해서 가져온 값의 text만 뽑아서 리스트에 담음.
         for(Element element : rankNum) {
@@ -50,6 +54,15 @@ public class CrawlingService {
             String companyNm = element.text();
             companyList.add(companyNm);
         }
+        for(Element element : genre) {
+            String genreNm = element.text();
+            genreList.add(genreNm);
+        }
+        for(Element element : cash) {
+            String cashNm = element.text();
+            cashList.add(cashNm);
+        }
+
         // 반복해서 들어가지 않도록 테이블 안에 내용이 있으면 비우는 과정.
         mapper.delMecaRank();
 
@@ -62,6 +75,8 @@ public class CrawlingService {
             entity.setRankNum((String)rankNumList.get(i));
             entity.setRankNm((String)rankNmList.get(i));
             entity.setCompany((String)companyList.get(i));
+            entity.setGenre((String) genreList.get(i));
+            entity.setCash((String) cashList.get(i));
             list.add(entity);
             mapper.insertRankMecaDb(list);
         }
