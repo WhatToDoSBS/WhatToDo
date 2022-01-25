@@ -8,7 +8,14 @@
 <c:set var="lastPath" value="${splitURI[fn:length(splitURI) - 1]}"/>
 <div class="header">
     <a href="/board/main"><span class="main_title">뭐하Gee</span></a>
-    <span class="login"><a href="/user/login">로그인</a></span>
+    <c:choose>
+        <c:when test="${sessionScope.loginUser != null}">
+            <span class="login"><a href="/user/logout">로그아웃</a></span>
+        </c:when>
+        <c:otherwise>
+            <span class="login"><a href="/user/login">로그인</a></span>
+        </c:otherwise>
+    </c:choose>
 </div>
 <div class="header_menu">
     <ul>

@@ -1,9 +1,10 @@
 .container {
     display: block;
+    text-align: center;
 }
 
 .join_container > h1 {
-    padding: 10px 0 15px 0;
+    padding: 30px 0 15px 0;
 }
 
 .join_container > form > div {
@@ -38,7 +39,6 @@
 
 .msg_n {
     display: none;
-
 }
 
 .err_msg_b {

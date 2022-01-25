@@ -9,14 +9,15 @@ CREATE TABLE freeboard(
                           rdt DATETIME DEFAULT CURRENT_TIMESTAMP,
                           mdt DATETIME DEFAULT CURRENT_TIMESTAMP,
                           lastip varchar(15)
-)
+);
 
 CREATE TABLE menu_category(
                               icategory INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
                               nm VARCHAR(10) NOT NULL,
                               nmval VARCHAR(20) NOT NULL,
                               orderby TINYINT NOT NULL DEFAULT 0
-)
+);
+
 INSERT INTO menu_category (nm)
 VALUES
 ('게임'),
@@ -43,4 +44,34 @@ CREATE TABLE t_user
     mdt        DATETIME DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT PRIMARY KEY (iuser),
     CONSTRAINT UNIQUE (uid)
+);
+
+// 게임메카 게임랭크 담는 DB
+CREATE TABLE meca_rankdb (
+                             irank INT AUTO_INCREMENT,
+                             rankNum VARCHAR(10),
+                             rankNm VARCHAR(100),
+                             company VARCHAR(50),
+                             PRIMARY KEY (irank)
+);
+
+// 게임메카 추가
+ALTER TABLE meca_rankdb ADD COLUMN genre VARCHAR(10);
+ALTER TABLE meca_rankdb ADD COLUMN cash VARCHAR(10);
+
+
+// 스팀 크롤링 DB
+CREATE TABLE steam_rankdb (
+                              irank INT AUTO_INCREMENT,
+                              rankNum VARCHAR(10),
+                              rankNm VARCHAR(100),
+                              PRIMARY KEY (irank)
+);
+
+// 게임 평점 크롤링 DB
+CREATE TABLE rating_Game(
+                            rnum INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                            gameNm VARCHAR(100),
+                            gameRating VARCHAR(10),
+                            gameRank VARCHAR(10)
 );
