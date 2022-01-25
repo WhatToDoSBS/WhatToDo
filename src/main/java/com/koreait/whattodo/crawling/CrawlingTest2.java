@@ -23,7 +23,7 @@ public class CrawlingTest2 {
         try {
             Document document = Jsoup.connect(mobileURL).get(); // 403 error 처리(권한 부여)
             Elements rankNum = document.select("td.column-1");    // 순위 번호(1,2,3...) 가져오기
-            Elements gameNm = document.select("td.column-2 > a"); // 게임 이름
+            Elements gameNm = document.select("td.column-2"); // 게임 이름
             Elements company = document.select("td.column-3"); // 회사 명
             List rankNumList = new ArrayList<>();   // 순위 번호 리스트
             List gameNmList = new ArrayList<>();    // 게임 리스트
@@ -70,11 +70,12 @@ public class CrawlingTest2 {
                 System.out.println(name);
                 System.out.println("이미지 태그 가져오기 : " + nmLink);
             } */
-            MobileRankEntity entity = new MobileRankEntity();
+
 
             //모바일 순위
             List<MobileRankEntity> mList = new ArrayList<>();
-            for(int i=0; i<40; i++) {
+            for(int i=0; i< gameNmList.size(); i++) {
+                MobileRankEntity entity = new MobileRankEntity();
                 entity.setRankNum((String)rankNumList.get(i));
                 entity.setGameNm((String)gameNmList.get(i));
                 entity.setCompany((String)companyList.get(i));

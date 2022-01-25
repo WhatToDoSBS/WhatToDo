@@ -64,4 +64,20 @@
     <select id="mobileRankList" resultType="MobileRankEntity">
         SELECT rankNum, gameNm, company FROM mobile_rankdb ORDER BY irank
     </select>
+
+<!--    X-BOX순위-->
+    <insert id="insertXRankDb">
+        INSERT INTO xbox_rankdb(gameNm, rankNum) VALUES
+        <foreach collection="list" open="(" close=")" separator="),(" item="rank">
+            #{rank.gameNm}, #{rank.rankNum}
+        </foreach>
+    </insert>
+
+    <delete id="delXRank">
+        DELETE FROM xbox_rankdb
+    </delete>
+
+    <select id="XRankList" resultType="XRankEntity">
+        SELECT rankNum, gameNm FROM xbox_rankdb ORDER BY irank
+    </select>
 </mapper>

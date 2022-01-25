@@ -46,7 +46,7 @@ public class CrawlingController {
         String mecaUrl = "https://www.gamemeca.com/ranking.php";
         String steamUrl = "https://store.steampowered.com/stats/?l=koreana";
         String ratingUrl = "https://namu.wiki/w/%EB%A9%94%ED%83%80%ED%81%AC%EB%A6%AC%ED%8B%B1/MUST-PLAY%20%EB%AA%A9%EB%A1%9D";
-        String mobileUrl = "https://www.mobileindex.com/mi-chart/top-100/top-games";
+        String mobileUrl = "https://trees.gamemeca.com/gamerank/#1521881342483-b44f2106-9b8d";
 
         crawlingService.insertMeca(mecaUrl);
         crawlingService.insertSteam(steamUrl);

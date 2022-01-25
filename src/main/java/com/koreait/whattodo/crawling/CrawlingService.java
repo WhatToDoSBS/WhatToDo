@@ -188,13 +188,14 @@ public class CrawlingService {
 
         // 크롤링 과정
         Elements rankNum = doc.select("td.column-1");    // 순위 번호(1,2,3...) 가져오기
-        Elements gameNm = doc.select("td.column-2 > a"); // 게임 이름
+        Elements gameNm = doc.select("td.column-2"); // 게임 이름
         Elements company = doc.select("td.column-3"); // 회사 명
 
         // 크롤링해서 가져온 값의 text만 뽑아서 리스트에 담음.
         for(Element element : rankNum) {
             String num = element.text();
-            rankNumList.add(num);
+            String num1 = num.substring(0, num.lastIndexOf(" "));
+            rankNumList.add(num1);
         }
         for(Element element : gameNm) {
             String name = element.text();
@@ -208,18 +209,19 @@ public class CrawlingService {
         mapper.delMobileRank();
 
         // 크롤링 담을 MobileRankEntity 객체 생성.
-        MobileRankEntity entity = new MobileRankEntity();
+
 
         List<MobileRankEntity> list = new ArrayList<>();
         // for문이 한 번 돌 때마다 한 행씩 추가.
         //0~39까지 모바일 , 40~79까지 pc온라인, 80~119까지 스팀
-        for(int i=0;i< rankNumList.size();i++) {
+        for(int i=0;i< 80;i++) {
+            MobileRankEntity entity = new MobileRankEntity();
             entity.setRankNum((String)rankNumList.get(i));
             entity.setGameNm((String)gameNmList.get(i));
             entity.setCompany((String)companyList.get(i));
             list.add(entity);
-            mapper.insertMobileRankDb(list);
         }
+        mapper.insertMobileRankDb(list);
     }
 
     public List<MobileRankEntity> mobileRankList(MobileRankEntity entity) {
