@@ -14,7 +14,7 @@
     </delete>
 
     <select id="webtoonList" resultType="WebtoonEntity">
-        SELECT * FROM webtoon ORDER BY irank LIMIT 50;
+        SELECT * FROM webtoon ORDER BY wnum LIMIT 50;
     </select>
 
 </mapper>

@@ -82,3 +82,14 @@ CREATE TABLE rating_Game(
                             gameRating VARCHAR(10),
                             gameRank VARCHAR(10)
 );
+
+// 웹툰 DB
+CREATE TABLE webtoon (
+                         wnum INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                         nm VARCHAR(50) NOT NULL,
+                         writer VARCHAR(20) NOT NULL,
+                         rating VARCHAR(10),
+                         img VARCHAR(300),
+                         weekend VARCHAR(10),
+                         homepage INT DEFAULT 1
+);

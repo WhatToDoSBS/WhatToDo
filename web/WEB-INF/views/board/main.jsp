@@ -24,8 +24,11 @@
             <div><img src="/res/img/board/activity.jpg" alt="" class="random_img"></div>
         </div>
         <div class="flex-center flex-direction-column ranking">
-            <div class="ranking_title">아무거나</div>
-            <div><img src="/res/img/board/random.jpg" alt="" class="random_img"></div>
+            <div class="ranking_title">웹툰</div>
+            <div>${randomWebtoon.rating}</div>
+            <div>${randomWebtoon.nm}</div>
+            <div>${randomWebtoon.writer}</div>
+            <div><img src="${randomWebtoon.img}" alt="" class="random_img"></div>
         </div>
     </div>
 

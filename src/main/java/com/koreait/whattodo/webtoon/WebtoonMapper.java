@@ -10,5 +10,5 @@ public interface WebtoonMapper {
     // 네이버
     void insertWebtoon(List<WebtoonEntity> webtoonList);
     void delWebtoon();
-    List<WebtoonEntity> webtoonList(WebtoonEntity entity);
+    List<WebtoonEntity> webtoonList();
 }
