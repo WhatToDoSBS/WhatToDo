@@ -27,15 +27,15 @@ public class WebtoonService {
             Elements toonWriter = document.select("ul.img_list").select("dd.desc > a");   // 작가
             Elements toonRating = document.select("ul.img_list").select("dd > div.rating_type").select("strong");    // 별점
             Elements toonImg = document.select("ul.img_list").select("div.thumb > a > img");    // 이미지
-            Elements toonWeekend = document.select("ul.img_list").select("div.thumb > a > img");    // 이미지
-            Elements toonLink = document.select("ul.img_list").select("dt > a"); // 링크
+            Elements toonWeekend = document.select("div.view_type").select("h3.sub_tit");
 
             List toonNmList = new ArrayList();
             List toonWriterList = new ArrayList();
             List toonRatingList = new ArrayList();
             List toonImgList = new ArrayList();
-            List toonWeekendList = new ArrayList();
             List toonLinkList = new ArrayList();
+
+            String weekend = null;
 
             for(Element element: toonNm) {    // 웹툰 이름
                 String name = element.getElementsByAttribute("title").attr("title");
@@ -53,20 +53,23 @@ public class WebtoonService {
                 String name = element.getElementsByAttribute("src").attr("src");
                 toonImgList.add(name);
             }
-            for(Element element: toonImg) {    // PC게임 이름 크롤링
-                String name = element.getElementsByAttribute("src").attr("src");
-                toonImgList.add(name);
+            for(Element element: toonWeekend) {    // 요일
+                String name = element.text();
+                String[] nameArr = name.split("\\s");   // 공백(정규식 : \s)으로 구분
+                String naming = nameArr[0] + "일"; // nameArr에 첫번째에는 월요, 화요 이런 식으로 담기는데 첫번째만 빼주고 '일'을 덧붙임
+                weekend = naming;
+                System.out.println(naming);
             }
-            for(Element element: toonImg) {    // 링크
-                String name = element.getElementsByAttribute("src").attr("src");
-                toonImgList.add(name);
+            for(Element element: toonNm) {    // 링크
+                String link = element.getElementsByAttribute("href").attr("href");
+                toonLinkList.add(link);
             }
 
             System.out.println("toonNmList" + toonNmList);
             System.out.println("toonWriterList" + toonWriterList);
             System.out.println("toonRatingList" + toonRatingList);
             System.out.println("toonImgList" + toonImgList);
-
+            System.out.println("toonLinkList" + toonLinkList);
 
             for(int i=0;i<toonNmList.size();i++) {
                 List<WebtoonEntity> list = new ArrayList<>();
@@ -75,6 +78,8 @@ public class WebtoonService {
                 entity.setWriter((String)toonWriterList.get(i));
                 entity.setRating((String)toonRatingList.get(i));
                 entity.setImg((String)toonImgList.get(i));
+                entity.setWeekend(weekend);
+                entity.setLink((String)toonLinkList.get(i));
                 list.add(entity);
                 mapper.insertWebtoon(list);
             }
@@ -87,4 +92,8 @@ public class WebtoonService {
     public void delWebtoon() { mapper.delWebtoon(); }
 
     public List<WebtoonEntity> listWebtoon() { return mapper.webtoonList(); }
+
+    public void setWeekend(String weekend) {
+        List toonWeekendList = new ArrayList();
+    }
 }

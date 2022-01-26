@@ -63,10 +63,17 @@ public class BoardController2 {
     @GetMapping("/main")
     public void main(Model model, RatingEntity ratingEntity) {
         String ratingUrl = "https://namu.wiki/w/%EB%A9%94%ED%83%80%ED%81%AC%EB%A6%AC%ED%8B%B1/MUST-PLAY%20%EB%AA%A9%EB%A1%9D";
+        String naverWebtoonURL = "https://comic.naver.com/webtoon/weekdayList?week=mon&order=User&view=image";  // 월요일&인기순
+
         crawlingService.insertRating(ratingUrl);
+        List<WebtoonEntity> webtoonList = webtoonService.listWebtoon();
 
         List<RatingEntity> list = crawlingService.ratingList(ratingEntity);
-        List<WebtoonEntity> webtoonList = webtoonService.listWebtoon();
+
+        if(webtoonList.size()==0) { // 웹툰 리스트 없으면 크롤링해주고 값 넣어줌
+            webtoonService.insertWebtoon(naverWebtoonURL);
+            webtoonList = webtoonService.listWebtoon();
+        }
 
         // 1부터 List갯수만큼의 난수 생성
         Random random = new Random(); //랜덤 객체 생성(디폴트 시드값 : 현재시간)

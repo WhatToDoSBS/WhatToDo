@@ -3,9 +3,9 @@
 <mapper namespace="com.koreait.whattodo.webtoon.WebtoonMapper">
     <!-- 네이버웹툰 -->
     <insert id="insertWebtoon">
-        INSERT INTO webtoon(nm, writer, rating, img) VALUES
+        INSERT INTO webtoon(nm, writer, rating, img, weekend, link) VALUES
         <foreach collection="list" open="(" close=")" separator="),(" item="webtoon">
-            #{webtoon.nm}, #{webtoon.writer}, #{webtoon.rating}, #{webtoon.img}
+            #{webtoon.nm}, #{webtoon.writer}, #{webtoon.rating}, #{webtoon.img}, #{webtoon.weekend}, #{webtoon.link}
         </foreach>
     </insert>
 

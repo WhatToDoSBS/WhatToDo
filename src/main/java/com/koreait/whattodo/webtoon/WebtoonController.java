@@ -1,5 +1,6 @@
 package com.koreait.whattodo.webtoon;
 
+import com.koreait.whattodo.Const;
 import com.koreait.whattodo.model.WebtoonEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,9 +22,14 @@ public class WebtoonController {
 
     @GetMapping("/webtooncrawling")
     public String webtoonCrawling(Model model) {
-        String naverWebtoonURL = "https://comic.naver.com/webtoon/weekdayList?week=mon&order=User&view=image";  // 월요일&인기순
+
         service.delWebtoon();
-        service.insertWebtoon(naverWebtoonURL);
+        for(int i=i;i<=7;i++) {
+            String webtoonLink = "NAVER_WEBTOON_" + i;
+            service.insertWebtoon(Const.webtoonLink);
+        }
+        service.insertWebtoon(Const.NAVER_WEBTOON_MON);
+        service.insertWebtoon(Const.NAVER_WEBTOON_THU);
 
         return "redirect:/board/webtoon";
     }
