@@ -7,9 +7,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class MobileRankEntity {
+public class PlatformRankEntity {
     private int irank;
     private String rankNum;
     private String gameNm;
     private String company;
+    private String genre;
 }

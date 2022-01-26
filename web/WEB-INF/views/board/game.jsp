@@ -18,20 +18,20 @@
                 </label>
             </div>
             <div class="choiceBtn_section_line kinds">
-                <label id="kdLb">종류
+                <label id="kdLb">장르
                     <button class="kdBtn">RPG</button>
                     <button class="kdBtn">FPS</button>
-                    <button class="kdBtn">리듬</button>
-                    <button class="kdBtn">생존</button>
                     <button class="kdBtn">스포츠</button>
+                    <button class="kdBtn">액션</button>
+                    <button class="kdBtn">전략</button>
+                    <button class="kdBtn">기타</button>
                 </label>
             </div>
             <div class="choiceBtn_section_line theme">
                 <label id="pfLb">플랫폼
-                    <button class="thmBtn">PC</button>
                     <button class="thmBtn">MOBILE</button>
-                    <button class="thmBtn">PS</button>
-                    <button class="thmBtn">X-BOX</button>
+                    <button class="thmBtn">PC온라인</button>
+                    <button class="thmBtn">스팀</button>
                 </label>
             </div>
         </div>

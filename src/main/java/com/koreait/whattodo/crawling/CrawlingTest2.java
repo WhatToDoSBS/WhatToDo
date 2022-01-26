@@ -1,7 +1,6 @@
 package com.koreait.whattodo.crawling;
 
-import com.koreait.whattodo.model.MecaRankEntity;
-import com.koreait.whattodo.model.MobileRankEntity;
+import com.koreait.whattodo.model.PlatformRankEntity;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -73,9 +72,9 @@ public class CrawlingTest2 {
 
 
             //모바일 순위
-            List<MobileRankEntity> mList = new ArrayList<>();
+            List<PlatformRankEntity> mList = new ArrayList<>();
             for(int i=0; i< gameNmList.size(); i++) {
-                MobileRankEntity entity = new MobileRankEntity();
+                PlatformRankEntity entity = new PlatformRankEntity();
                 entity.setRankNum((String)rankNumList.get(i));
                 entity.setGameNm((String)gameNmList.get(i));
                 entity.setCompany((String)companyList.get(i));

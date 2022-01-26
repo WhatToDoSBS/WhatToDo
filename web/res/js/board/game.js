@@ -118,20 +118,56 @@
                 getSteamRandomGame(steamurl);
                 break;
         }*/
-        getMobileRandomGame(mobileUrl);
+        getMobileRandomGame();
+        getPcRandomGame();
+        getStRandomGame();
     })
 
     /* 랜덤값 도출 */
 
-    var mobileUrl = "https://www.mobileindex.com/mi-chart/top-100/top-games";
+    // var platformUrl = "/board/platformrankingjson";
 
     // 랜덤게임 서버에서 불러서(fetch) 출력해주는 함수
-    function getMobileRandomGame(url) {   // 모바일게임 순위 데이터
-        fetch(url).then((res) => {
+    function getMobileRandomGame() {   // 모바일게임 순위 데이터
+        fetch("/board/platformrankingjson").then((res) => {
             return res.json();
         }).then((data) => {
-            console.log(data);
-            mobileRandomGame(data);
+            let mdata = [];
+                for (let i=0; i<40; i++) {
+                    mdata.push(data[i])
+                }
+                console.log(mdata[Math.floor(Math.random()*40)]);
+            return mdata[Math.floor(Math.random()*40)];
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+    function getPcRandomGame() {   // 모바일게임 순위 데이터
+        fetch("/board/platformrankingjson").then((res) => {
+            return res.json();
+        }).then((data) => {
+            let pdata = [];
+            for (let i=40; i<80; i++) {
+                pdata.push(data[i])
+            }
+            console.log(pdata[Math.floor(Math.random()*40)]);
+            return pdata[Math.floor(Math.random()*40)];
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+    function getStRandomGame() {   // 모바일게임 순위 데이터
+        fetch("/board/platformrankingjson").then((res) => {
+            return res.json();
+        }).then((data) => {
+            let sdata = [];
+            for (let i=80; i<120; i++) {
+                sdata.push(data[i])
+            }
+            console.log(sdata[Math.floor(Math.random()*40)]);
+            return sdata[Math.floor(Math.random()*40)];
         }).catch((err) => {
             console.log(err);
         });
@@ -150,134 +186,134 @@
     // }
 
     // 랜덤게임 서버에서 불러서(fetch) 출력해주는 함수
-    function getRatingRandomGame(url) {   // 게임메카 데이터
-        fetch(url).then((res) => {
-            return res.json();
-        }).then((data) => {
-            // 랜덤 숫자 도출 및 게임 도출
-            // min <= number <= max
-            // Math.floor(Math.random() * (max - min + 1)) + min;
-            let randomNum = Math.floor((Math.random() * data.length) + 1);
-            let numArrange = 15;    // 범위, 15개 도출
-            let min = 0;    // 최솟값
-            switch (rtBtnReturnNum) {
-                case 1: // 1위~15위
-                    randomNum = Math.floor(Math.random() * numArrange);
-                    break;
-                case 2: // 16위~45위
-                    min = 15;
-                    numArrange = 30;
-                    randomNum = Math.floor(Math.random() * numArrange) + min;
-                    break;
-                case 3: // 46위~95위
-                    min = 45;
-                    numArrange = 50;
-                    randomNum = Math.floor(Math.random() * numArrange) + min;
-                    break;
-            }
-            gameRecommandDisplay(data[randomNum].gameNm);
-        }).catch((err) => {
-            console.log(err);
-        });
-    }
-
-    // 각 List의 요소들을 담는 randomList 변수 선언
-    const randomMecaRankNumArr = [];
-    const randomMecaRankNmArr = [];
-    const randomMeca = [];
-    const randomSteamRankNumArr = [];
-    const randomSteamRankNmArr = [];
-    const randomSteam = [];
-    const randomRatingRankNumArr = [];
-    const randomRatingRankNmArr = [];
-    const randomRatingScoreArr = [];
-    const randomRating = [];
-
-    // mobilerank 랜덤함수
-    function mobileRandomGame(data) {
-        data.forEach(function (item) {
-            randomMecaRankNumArr.push(item.rankNum);
-            randomMecaRankNmArr.push(item.gameNm);
-            randomMeca.push(item);
-        });
-        // 랜덤 숫자 도출 및 게임 도출
-        // min <= number <= max
-        // Math.floor(Math.random() * (max - min + 1)) + min;
-        let randomNum = Math.floor((Math.random() * randomMecaRankNumArr.length) + 1);
-        let numArrange = 10;    // 범위 10개 도출
-        let min = 0;    // 최솟값
-        switch (ppBtnReturnNum) {
-            case 1: // 1위~10위
-                randomNum = Math.floor(Math.random() * numArrange);
-                break;
-            case 2: // 11위~20위
-                min = 10;
-                randomNum = Math.floor(Math.random() * numArrange) + min;
-                break;
-            case 3: // 21위~50위
-                min = 20;
-                numArrange = 30;
-                randomNum = Math.floor(Math.random() * numArrange) + min;
-                break;
-        }
-
-        let whatGame = randomMecaRankNmArr[randomNum];
-
-        gameRecommandDisplay(whatGame);
-        const randomMecaJson = JSON.stringify(randomMeca);  // Object를 String으로
-        return randomMecaJson;  // meca게임 List를 담은 배열 리턴
-    }
-    // steam 랜덤함수
-    function steamRandomGame(data) {
-        data.forEach(function (item) {
-            randomSteamRankNumArr.push(item.rankNum);
-            randomSteamRankNmArr.push(item.rankNm);
-            randomSteam.push(item);
-        });
-        // 랜덤 숫자 도출 및 게임 도출
-        // min <= number <= max
-        // Math.floor(Math.random() * (max - min + 1)) + min;
-        let randomNum = Math.floor((Math.random() * randomSteamRankNumArr.length) + 1);
-        let numArrange = 20;    // 범위, 10개 도출
-        let min = 0;    // 최솟값
-        switch (ppBtnReturnNum) {
-            case 1: // 1위~20위
-                randomNum = Math.floor(Math.random() * numArrange);
-                break;
-            case 2: // 21위~50위
-                min = 20;
-                numArrange = 30;
-                randomNum = Math.floor(Math.random() * numArrange) + min;
-                break;
-            case 3: // 51위~100위
-                min = 50;
-                numArrange = 50;
-                randomNum = Math.floor(Math.random() * numArrange) + min;
-                break;
-        }
-
-        let whatGame = randomSteamRankNmArr[randomNum];
-
-        gameRecommandDisplay(whatGame);
-        const randomSteamJson = JSON.stringify(randomSteam);  // Object를 String으로
-        return randomSteamJson;  // steam게임 List를 담은 배열 리턴
-    }
-
-    // rating 랜덤함수
-    /*function ratingRandomGame(data) {
-        data.forEach(function (item) {
-            randomRatingRankNumArr.push(item.gameRank);
-            randomRatingRankNmArr.push(item.gameNm);
-            randomRatingScoreArr.push(item.gameRating);
-            randomRating.push(item);
-        });
-    }*/
-
-
-
-    // 화면창에 결과값을 띄움
-    function gameRecommandDisplay(whatGame) {
-        displayResultSpan.style.display = 'inline-block';
-        displayResultSpan.innerHTML = '오늘 이 게임 어때요? <b>' + whatGame + '</b>';
-    }
+//     function getRatingRandomGame(url) {   // 게임메카 데이터
+//         fetch(url).then((res) => {
+//             return res.json();
+//         }).then((data) => {
+//             // 랜덤 숫자 도출 및 게임 도출
+//             // min <= number <= max
+//             // Math.floor(Math.random() * (max - min + 1)) + min;
+//             let randomNum = Math.floor((Math.random() * data.length) + 1);
+//             let numArrange = 15;    // 범위, 15개 도출
+//             let min = 0;    // 최솟값
+//             switch (rtBtnReturnNum) {
+//                 case 1: // 1위~15위
+//                     randomNum = Math.floor(Math.random() * numArrange);
+//                     break;
+//                 case 2: // 16위~45위
+//                     min = 15;
+//                     numArrange = 30;
+//                     randomNum = Math.floor(Math.random() * numArrange) + min;
+//                     break;
+//                 case 3: // 46위~95위
+//                     min = 45;
+//                     numArrange = 50;
+//                     randomNum = Math.floor(Math.random() * numArrange) + min;
+//                     break;
+//             }
+//             gameRecommandDisplay(data[randomNum].gameNm);
+//         }).catch((err) => {
+//             console.log(err);
+//         });
+//     }
+//
+//     // 각 List의 요소들을 담는 randomList 변수 선언
+//     const randomMecaRankNumArr = [];
+//     const randomMecaRankNmArr = [];
+//     const randomMeca = [];
+//     const randomSteamRankNumArr = [];
+//     const randomSteamRankNmArr = [];
+//     const randomSteam = [];
+//     const randomRatingRankNumArr = [];
+//     const randomRatingRankNmArr = [];
+//     const randomRatingScoreArr = [];
+//     const randomRating = [];
+//
+//     // mobilerank 랜덤함수
+//     function mobileRandomGame(data) {
+//         data.forEach(function (item) {
+//             randomMecaRankNumArr.push(item.rankNum);
+//             randomMecaRankNmArr.push(item.gameNm);
+//             randomMeca.push(item);
+//         });
+//         // 랜덤 숫자 도출 및 게임 도출
+//         // min <= number <= max
+//         // Math.floor(Math.random() * (max - min + 1)) + min;
+//         let randomNum = Math.floor((Math.random() * randomMecaRankNumArr.length) + 1);
+//         let numArrange = 10;    // 범위 10개 도출
+//         let min = 0;    // 최솟값
+//         switch (ppBtnReturnNum) {
+//             case 1: // 1위~10위
+//                 randomNum = Math.floor(Math.random() * numArrange);
+//                 break;
+//             case 2: // 11위~20위
+//                 min = 10;
+//                 randomNum = Math.floor(Math.random() * numArrange) + min;
+//                 break;
+//             case 3: // 21위~50위
+//                 min = 20;
+//                 numArrange = 30;
+//                 randomNum = Math.floor(Math.random() * numArrange) + min;
+//                 break;
+//         }
+//
+//         let whatGame = randomMecaRankNmArr[randomNum];
+//
+//         gameRecommandDisplay(whatGame);
+//         const randomMecaJson = JSON.stringify(randomMeca);  // Object를 String으로
+//         return randomMecaJson;  // meca게임 List를 담은 배열 리턴
+//     }
+//     // steam 랜덤함수
+//     function steamRandomGame(data) {
+//         data.forEach(function (item) {
+//             randomSteamRankNumArr.push(item.rankNum);
+//             randomSteamRankNmArr.push(item.rankNm);
+//             randomSteam.push(item);
+//         });
+//         // 랜덤 숫자 도출 및 게임 도출
+//         // min <= number <= max
+//         // Math.floor(Math.random() * (max - min + 1)) + min;
+//         let randomNum = Math.floor((Math.random() * randomSteamRankNumArr.length) + 1);
+//         let numArrange = 20;    // 범위, 10개 도출
+//         let min = 0;    // 최솟값
+//         switch (ppBtnReturnNum) {
+//             case 1: // 1위~20위
+//                 randomNum = Math.floor(Math.random() * numArrange);
+//                 break;
+//             case 2: // 21위~50위
+//                 min = 20;
+//                 numArrange = 30;
+//                 randomNum = Math.floor(Math.random() * numArrange) + min;
+//                 break;
+//             case 3: // 51위~100위
+//                 min = 50;
+//                 numArrange = 50;
+//                 randomNum = Math.floor(Math.random() * numArrange) + min;
+//                 break;
+//         }
+//
+//         let whatGame = randomSteamRankNmArr[randomNum];
+//
+//         gameRecommandDisplay(whatGame);
+//         const randomSteamJson = JSON.stringify(randomSteam);  // Object를 String으로
+//         return randomSteamJson;  // steam게임 List를 담은 배열 리턴
+//     }
+//
+//     // rating 랜덤함수
+//     /*function ratingRandomGame(data) {
+//         data.forEach(function (item) {
+//             randomRatingRankNumArr.push(item.gameRank);
+//             randomRatingRankNmArr.push(item.gameNm);
+//             randomRatingScoreArr.push(item.gameRating);
+//             randomRating.push(item);
+//         });
+//     }*/
+//
+//
+//
+//     // 화면창에 결과값을 띄움
+//     function gameRecommandDisplay(whatGame) {
+//         displayResultSpan.style.display = 'inline-block';
+//         displayResultSpan.innerHTML = '오늘 이 게임 어때요? <b>' + whatGame + '</b>';
+//     }
 }

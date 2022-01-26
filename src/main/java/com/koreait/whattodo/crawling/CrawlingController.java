@@ -2,9 +2,8 @@ package com.koreait.whattodo.crawling;
 
 import com.google.gson.Gson;
 import com.koreait.whattodo.board.BoardService;
-import com.koreait.whattodo.crawling.CrawlingService;
 import com.koreait.whattodo.model.MecaRankEntity;
-import com.koreait.whattodo.model.MobileRankEntity;
+import com.koreait.whattodo.model.PlatformRankEntity;
 import com.koreait.whattodo.model.RatingEntity;
 import com.koreait.whattodo.model.SteamRankEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.w3c.dom.Document;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -42,21 +39,18 @@ public class CrawlingController {
     }
 
     @GetMapping("/ranking")
-    public String ranking(Model model, MecaRankEntity entity, SteamRankEntity steamRankEntity, RatingEntity ratingEntity, MobileRankEntity mobileEntity) throws IOException {
+    public String ranking(Model model, MecaRankEntity entity, SteamRankEntity steamRankEntity, RatingEntity ratingEntity, PlatformRankEntity platEntity) throws IOException {
         String mecaUrl = "https://www.gamemeca.com/ranking.php";
         String steamUrl = "https://store.steampowered.com/stats/?l=koreana";
         String ratingUrl = "https://namu.wiki/w/%EB%A9%94%ED%83%80%ED%81%AC%EB%A6%AC%ED%8B%B1/MUST-PLAY%20%EB%AA%A9%EB%A1%9D";
-        String mobileUrl = "https://trees.gamemeca.com/gamerank/#1521881342483-b44f2106-9b8d";
 
         crawlingService.insertMeca(mecaUrl);
         crawlingService.insertSteam(steamUrl);
         crawlingService.insertRating(ratingUrl);
-        crawlingService.insertMobile(mobileUrl);
 
         model.addAttribute("mecaRankList", crawlingService.mecaRankList(entity));
         model.addAttribute("steamRankList", crawlingService.steamRankList(steamRankEntity));
         model.addAttribute("ratingList", crawlingService.ratingList(ratingEntity));
-        model.addAttribute("mobileList", crawlingService.mobileRankList(mobileEntity));
 
         return "board/ranking";
     }
@@ -122,28 +116,26 @@ public class CrawlingController {
         return ratingListJson;
     }
 
-    //모바일 게임
+    //모바일, pc온라인, 스팀
     @GetMapping("/game")
     public void game() {
-        String mobileUrl = "https://trees.gamemeca.com/gamerank/#1521881342483-b44f2106-9b8d";
+        String platformUrl = "https://trees.gamemeca.com/gamerank/#1521881342483-b44f2106-9b8d";
 
-        crawlingService.insertMobile(mobileUrl);
+        crawlingService.insertPlatform(platformUrl);
     }
 
-    @GetMapping("/mobilerankingjson")
+    @GetMapping("/platformrankingjson")
     @ResponseBody
-    public String mobileRankJson(MobileRankEntity entity, HttpServletResponse res) throws IOException {
-        String mobileUrl = "https://trees.gamemeca.com/gamerank/#1521881342483-b44f2106-9b8d";
-
-        crawlingService.insertMobile(mobileUrl);
+    public String platformRankJson(PlatformRankEntity entity, HttpServletResponse res) throws IOException {
+        String platformUrl = "https://trees.gamemeca.com/gamerank/#1521881342483-b44f2106-9b8d";
 
         // json ajax통신
         Gson gson = new Gson();
 
-        String mobileListJson = gson.toJson(crawlingService.mobileRankList(entity));
+        String platformListJson = gson.toJson(crawlingService.platformList(entity));
 
-        System.out.println(mobileListJson);
-        return mobileListJson;
+        System.out.println(platformListJson);
+        return platformListJson;
     }
 
 }

@@ -45,7 +45,7 @@ public class CrawlingTest {
                 rateNmList.add(gameNm);
             }
             rateNmList.remove(0);   // 앞에 하나(텍스트) 삭제
-            System.out.println(rateNmList);
+//            System.out.println(rateNmList);
 
             for(Element element: ratingGameNum) {    // PC게임 순위 크롤링
                 String gameNum = element.text();
@@ -60,7 +60,7 @@ public class CrawlingTest {
                 rateRatingList.add(gameRating);
             }
             rateRatingList.remove(0);   // 앞에 하나(텍스트) 삭제
-            System.out.println(rateRatingList);
+//            System.out.println(rateRatingList);
 
 
             /* for(Element element : rankNm) {
@@ -79,6 +79,7 @@ public class CrawlingTest {
                 list.add(entity);
                 System.out.println(list);
             }
+
 
         } catch (IOException e) {
             e.printStackTrace();

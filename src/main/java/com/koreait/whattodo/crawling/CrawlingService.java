@@ -1,7 +1,7 @@
 package com.koreait.whattodo.crawling;
 
 import com.koreait.whattodo.model.MecaRankEntity;
-import com.koreait.whattodo.model.MobileRankEntity;
+import com.koreait.whattodo.model.PlatformRankEntity;
 import com.koreait.whattodo.model.RatingEntity;
 import com.koreait.whattodo.model.SteamRankEntity;
 import org.jsoup.Jsoup;
@@ -173,12 +173,13 @@ public class CrawlingService {
 
     public List<RatingEntity> ratingList(RatingEntity entity) { return mapper.ratingList(entity); }
 
-    //모바일 게임
-    public void insertMobile(String url) {
+    //모바일, pc온라인, 스팀
+    public void insertPlatform(String url) {
         Document doc = null;
         List rankNumList = new ArrayList<>();   // 순위 번호 리스트
         List gameNmList = new ArrayList<>();    // 게임 리스트
         List companyList = new ArrayList<>();   // 회사 리스트
+        List genreList = new ArrayList<>(); //장르 리스트
 
         try {
             doc = Jsoup.connect(url).get();
@@ -190,6 +191,7 @@ public class CrawlingService {
         Elements rankNum = doc.select("td.column-1");    // 순위 번호(1,2,3...) 가져오기
         Elements gameNm = doc.select("td.column-2"); // 게임 이름
         Elements company = doc.select("td.column-3"); // 회사 명
+        Elements genre = doc.select("td.column-4"); // 회사 명
 
         // 크롤링해서 가져온 값의 text만 뽑아서 리스트에 담음.
         for(Element element : rankNum) {
@@ -205,27 +207,63 @@ public class CrawlingService {
             String companyNm = element.text();
             companyList.add(companyNm);
         }
+        for(Element element : genre) {
+            String genreNm = element.text();
+            genreList.add(genreNm);
+        }
         // 반복해서 들어가지 않도록 테이블 안에 내용이 있으면 비우는 과정.
-        mapper.delMobileRank();
-
-        // 크롤링 담을 MobileRankEntity 객체 생성.
+        mapper.delPlatformRank();
 
 
-        List<MobileRankEntity> list = new ArrayList<>();
+
+        List<PlatformRankEntity> list = new ArrayList<>();
         // for문이 한 번 돌 때마다 한 행씩 추가.
         //0~39까지 모바일 , 40~79까지 pc온라인, 80~119까지 스팀
-        for(int i=0;i< 80;i++) {
-            MobileRankEntity entity = new MobileRankEntity();
+        for(int i=0;i<gameNmList.size();i++) {
+            PlatformRankEntity entity = new PlatformRankEntity();
             entity.setRankNum((String)rankNumList.get(i));
             entity.setGameNm((String)gameNmList.get(i));
             entity.setCompany((String)companyList.get(i));
+            entity.setGenre((String)genreList.get(i));
             list.add(entity);
         }
-        mapper.insertMobileRankDb(list);
+        mapper.insertPlatformRankDb(list);
     }
 
-    public List<MobileRankEntity> mobileRankList(MobileRankEntity entity) {
-        return mapper.mobileRankList(entity);
+    public List<PlatformRankEntity> platformList(PlatformRankEntity entity) {
+        List platformList = mapper.platformRankList(entity);
+        List<PlatformRankEntity> platList = new ArrayList<>();
+        for(int i=0;i<120;i++) {
+            platList.add((PlatformRankEntity) platformList.get(i));
+        }
+        return platList;
+    }
+
+    public List<PlatformRankEntity> mobileList(PlatformRankEntity entity) {
+        List platformList = mapper.platformRankList(entity);
+        List<PlatformRankEntity> mList = new ArrayList<>();
+        for(int i=0;i<40;i++) {
+            mList.add((PlatformRankEntity) platformList.get(i));
+        }
+        return mList;
+    }
+
+    public List<PlatformRankEntity> pconlineList(PlatformRankEntity entity) {
+        List platformList = mapper.platformRankList(entity);
+        List<PlatformRankEntity> pcList = new ArrayList<>();
+        for(int i=40;i<80;i++) {
+            pcList.add((PlatformRankEntity) platformList.get(i));
+        }
+        return pcList;
+    }
+
+    public List<PlatformRankEntity> steamList(PlatformRankEntity entity) {
+        List platformList = mapper.platformRankList(entity);
+        List<PlatformRankEntity> stList = new ArrayList<>();
+        for(int i=80;i<120;i++) {
+            stList.add((PlatformRankEntity) platformList.get(i));
+        }
+        return stList;
     }
 
 }
