@@ -26,7 +26,7 @@ public class WebtoonController {
         service.delWebtoon();
         for(int i=i;i<=7;i++) {
             String webtoonLink = "NAVER_WEBTOON_" + i;
-            service.insertWebtoon(Const.webtoonLink);
+            service.insertWebtoon(Const.NAVER_WEBTOON_1);
         }
         service.insertWebtoon(Const.NAVER_WEBTOON_MON);
         service.insertWebtoon(Const.NAVER_WEBTOON_THU);
