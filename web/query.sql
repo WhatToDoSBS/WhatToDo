@@ -46,6 +46,13 @@ CREATE TABLE t_user
     CONSTRAINT UNIQUE (uid)
 );
 
+CREATE TABLE rating_Game(
+                            rnum INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                            gameNm VARCHAR(100),
+                            gameRating VARCHAR(10),
+                            gameRank VARCHAR(10)
+);
+
 // 게임메카 게임랭크 담는 DB
 CREATE TABLE meca_rankdb (
                              irank INT AUTO_INCREMENT,

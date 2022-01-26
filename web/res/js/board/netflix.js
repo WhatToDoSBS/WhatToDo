@@ -152,7 +152,7 @@
         }*/
         if(btnNumSum>=4 && btnNumSum <=6) {
             return getRatingRandomGame(ratingurl);
-        } else if(btnNumSum <=3 && btnNumSum>=1) {
+        } else if(btnNumSum <=3 && btnNumSum>=0) {
             return getRankRandomGame(rankingurl);
         }
     })

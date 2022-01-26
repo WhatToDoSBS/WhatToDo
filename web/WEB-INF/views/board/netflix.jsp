@@ -58,6 +58,7 @@
 <div class="display_result">
     <span class="result_span">오늘 이 게임 어때요? <a class="modalLink"></a></span>
 </div>
+<!-- Modal 창 -->
 <div id="modal" class="modal-overlay">
     <div class="modal-window">
         <div class="title">
