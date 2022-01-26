@@ -118,17 +118,85 @@
                 getSteamRandomGame(steamurl);
                 break;
         }*/
-        getMobileRandomGame();
-        getPcRandomGame();
-        getStRandomGame();
+        // getMobileRandomGame();
+        // getPcRandomGame();
+        // getStRandomGame();
+        getRpgRandomGame();
     })
 
     /* 랜덤값 도출 */
 
-    // var platformUrl = "/board/platformrankingjson";
+    //메카 1~10위
+    function getMrTopRandomGame() {   // 게임순위 데이터
+        fetch("/board/mecarankingjson").then((res) => {
+            return res.json();
+        }).then((data) => {
+            let mrdata = [];
+            for (let i=0; i<10; i++) {
+                mrdata.push(data[i])
+            }
+            console.log(mrdata[Math.floor(Math.random()*10)]);
+            return mrdata[Math.floor(Math.random()*10)];
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+    //메카 11~30위
+    function getMrGreatRandomGame() {   // 게임순위 데이터
+        fetch("/board/mecarankingjson").then((res) => {
+            return res.json();
+        }).then((data) => {
+            let mrdata = [];
+            for (let i=10; i<30; i++) {
+                mrdata.push(data[i])
+            }
+            console.log(mrdata[Math.floor(Math.random()*20)+10]);
+            return mrdata[Math.floor(Math.random()*20)+10];
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+    //메카 31~50위
+    function getMrGoodRandomGame() {   // 게임순위 데이터
+        fetch("/board/mecarankingjson").then((res) => {
+            return res.json();
+        }).then((data) => {
+            let mrdata = [];
+            for (let i=30; i<50; i++) {
+                mrdata.push(data[i])
+            }
+            console.log(mrdata[Math.floor(Math.random()*20)+30]);
+            return mrdata[Math.floor(Math.random()*20)+30];
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+    //rpg 랜덤
+    function getRpgRandomGame() {
+        fetch("/board/platformrankingjson").then((res) => {
+            return res.json();
+        }).then((data) => {
+            let mdata = [];
+            for (let i=0; i<Object.keys(data).length; i++) {
+                mdata.push(data[i])
+            }
+            let rpgdata = [];
+            mdata.forEach((item)=>{
+                if(item.genre.includes("롤플레잉") || item.genre.includes("MMORPG")) {
+                    rpgdata.push(item)
+                }
+            })
+            let randomNm = Math.floor(Math.random()* rpgdata.length)
+            console.log(rpgdata[randomNm]);
+            return rpgdata[randomNm];
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
 
-    // 랜덤게임 서버에서 불러서(fetch) 출력해주는 함수
-    function getMobileRandomGame() {   // 모바일게임 순위 데이터
+
+    // 모바일게임 랜덤
+    function getMobileRandomGame() {
         fetch("/board/platformrankingjson").then((res) => {
             return res.json();
         }).then((data) => {
@@ -142,8 +210,8 @@
             console.log(err);
         });
     }
-
-    function getPcRandomGame() {   // 모바일게임 순위 데이터
+// pc온라인 랜덤
+    function getPcRandomGame() {
         fetch("/board/platformrankingjson").then((res) => {
             return res.json();
         }).then((data) => {
@@ -157,8 +225,8 @@
             console.log(err);
         });
     }
-
-    function getStRandomGame() {   // 모바일게임 순위 데이터
+// 스팀게임 랜덤
+    function getStRandomGame() {
         fetch("/board/platformrankingjson").then((res) => {
             return res.json();
         }).then((data) => {

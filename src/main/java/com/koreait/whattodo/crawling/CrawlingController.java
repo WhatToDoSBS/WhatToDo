@@ -29,31 +29,31 @@ public class CrawlingController {
 
     @GetMapping("/netflix")
     public void netflix() {
-        String mecaUrl = "https://www.gamemeca.com/ranking.php";
-        String steamUrl = "https://store.steampowered.com/stats/?l=koreana";
-        String ratingUrl = "https://namu.wiki/w/%EB%A9%94%ED%83%80%ED%81%AC%EB%A6%AC%ED%8B%B1/MUST-PLAY%20%EB%AA%A9%EB%A1%9D";
-
-        crawlingService.insertMeca(mecaUrl);
-        crawlingService.insertSteam(steamUrl);
-        crawlingService.insertRating(ratingUrl);
+//        String mecaUrl = "https://www.gamemeca.com/ranking.php";
+//        String steamUrl = "https://store.steampowered.com/stats/?l=koreana";
+//        String ratingUrl = "https://namu.wiki/w/%EB%A9%94%ED%83%80%ED%81%AC%EB%A6%AC%ED%8B%B1/MUST-PLAY%20%EB%AA%A9%EB%A1%9D";
+//
+//        crawlingService.insertMeca(mecaUrl);
+//        crawlingService.insertSteam(steamUrl);
+//        crawlingService.insertRating(ratingUrl);
     }
 
-    @GetMapping("/ranking")
-    public String ranking(Model model, MecaRankEntity entity, SteamRankEntity steamRankEntity, RatingEntity ratingEntity, PlatformRankEntity platEntity) throws IOException {
-        String mecaUrl = "https://www.gamemeca.com/ranking.php";
-        String steamUrl = "https://store.steampowered.com/stats/?l=koreana";
-        String ratingUrl = "https://namu.wiki/w/%EB%A9%94%ED%83%80%ED%81%AC%EB%A6%AC%ED%8B%B1/MUST-PLAY%20%EB%AA%A9%EB%A1%9D";
-
-        crawlingService.insertMeca(mecaUrl);
-        crawlingService.insertSteam(steamUrl);
-        crawlingService.insertRating(ratingUrl);
-
-        model.addAttribute("mecaRankList", crawlingService.mecaRankList(entity));
-        model.addAttribute("steamRankList", crawlingService.steamRankList(steamRankEntity));
-        model.addAttribute("ratingList", crawlingService.ratingList(ratingEntity));
-
-        return "board/ranking";
-    }
+//    @GetMapping("/ranking")
+//    public String ranking(Model model, MecaRankEntity entity, SteamRankEntity steamRankEntity, RatingEntity ratingEntity, PlatformRankEntity platEntity) throws IOException {
+////        String mecaUrl = "https://www.gamemeca.com/ranking.php";
+////        String steamUrl = "https://store.steampowered.com/stats/?l=koreana";
+////        String ratingUrl = "https://namu.wiki/w/%EB%A9%94%ED%83%80%ED%81%AC%EB%A6%AC%ED%8B%B1/MUST-PLAY%20%EB%AA%A9%EB%A1%9D";
+////
+////        crawlingService.insertMeca(mecaUrl);
+////        crawlingService.insertSteam(steamUrl);
+////        crawlingService.insertRating(ratingUrl);
+////
+////        model.addAttribute("mecaRankList", crawlingService.mecaRankList(entity));
+////        model.addAttribute("steamRankList", crawlingService.steamRankList(steamRankEntity));
+////        model.addAttribute("ratingList", crawlingService.ratingList(ratingEntity));
+////
+////        return "board/ranking";
+//    }
 
     @GetMapping("/main")
     public void main(Model model, RatingEntity ratingEntity) {
@@ -68,22 +68,6 @@ public class CrawlingController {
         int randomGameNum = random.nextInt(list.size())+1;
         System.out.println("랜덤 [게임] 숫자 : " + (random.nextInt(list.size())+1));
         model.addAttribute("randomGame", list.get(randomGameNum).getGameNm());
-    }
-
-    @GetMapping("/mecarankingjson")
-    @ResponseBody
-    public String mecarankingjson(MecaRankEntity entity, HttpServletResponse res) throws IOException {
-        String mecaUrl = "https://www.gamemeca.com/ranking.php";
-
-        crawlingService.insertMeca(mecaUrl);
-
-        // json ajax통신
-        Gson gson = new Gson();
-
-        String mecaListJson = gson.toJson(crawlingService.mecaRankList(entity));
-
-        System.out.println(mecaListJson);
-        return mecaListJson;
     }
 
     @GetMapping("/steamrankingjson")
@@ -116,18 +100,31 @@ public class CrawlingController {
         return ratingListJson;
     }
 
+    @GetMapping("/mecarankingjson")
+    @ResponseBody
+    public String mecarankingjson(MecaRankEntity entity, HttpServletResponse res) throws IOException {
+
+        // json ajax통신
+        Gson gson = new Gson();
+
+        String mecaListJson = gson.toJson(crawlingService.mecaRankList(entity));
+
+        System.out.println(mecaListJson);
+        return mecaListJson;
+    }
+
     //모바일, pc온라인, 스팀
     @GetMapping("/game")
     public void game() {
-        String platformUrl = "https://trees.gamemeca.com/gamerank/#1521881342483-b44f2106-9b8d";
-
+        String platformUrl = "https://trees.gamemeca.com/gamerank/";
+        String mecaUrl = "https://www.gamemeca.com/ranking.php";
+        crawlingService.insertMeca(mecaUrl);
         crawlingService.insertPlatform(platformUrl);
     }
 
     @GetMapping("/platformrankingjson")
     @ResponseBody
     public String platformRankJson(PlatformRankEntity entity, HttpServletResponse res) throws IOException {
-        String platformUrl = "https://trees.gamemeca.com/gamerank/#1521881342483-b44f2106-9b8d";
 
         // json ajax통신
         Gson gson = new Gson();

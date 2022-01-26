@@ -39,15 +39,15 @@ public class CrawlingService {
         Elements company = doc.select("div.game-info > span.company"); // 회사 명
 
         // 크롤링해서 가져온 값의 text만 뽑아서 리스트에 담음.
-        for(Element element : rankNum) {
+        for (Element element : rankNum) {
             String num = element.text();
             rankNumList.add(num);
         }
-        for(Element element : rankNm) {
+        for (Element element : rankNm) {
             String name = element.text();
             rankNmList.add(name);
         }
-        for(Element element : company) {
+        for (Element element : company) {
             String companyNm = element.text();
             companyList.add(companyNm);
         }
@@ -55,21 +55,21 @@ public class CrawlingService {
         mapper.delMecaRank();
 
         // 크롤링 담을 CrawlingMecaRankEntity 객체 생성.
-        MecaRankEntity entity = new MecaRankEntity();
 
+        List<MecaRankEntity> list = new ArrayList<>();
         // for문이 한 번 돌 때마다 한 행씩 추가.
-        for(int i=0;i<rankNmList.size();i++) {
-            List<MecaRankEntity> list = new ArrayList<>();
-            entity.setRankNum((String)rankNumList.get(i));
-            entity.setRankNm((String)rankNmList.get(i));
-            entity.setCompany((String)companyList.get(i));
+        for (int i = 0; i < rankNmList.size(); i++) {
+            MecaRankEntity entity = new MecaRankEntity();
+            entity.setRankNum((String) rankNumList.get(i));
+            entity.setRankNm((String) rankNmList.get(i));
+            entity.setCompany((String) companyList.get(i));
             list.add(entity);
-            mapper.insertRankMecaDb(list);
         }
+        mapper.insertRankMecaDb(list);
     }
 
     public List<MecaRankEntity> mecaRankList(MecaRankEntity entity) {
-       return mapper.mecaRankList(entity);
+        return mapper.mecaRankList(entity);
     }
 
     // ★★★★★ 스팀 관련 ★★★★★
@@ -92,7 +92,7 @@ public class CrawlingService {
         SteamRankEntity entity = new SteamRankEntity();
 
         // 크롤링해서 가져온 값의 text만 뽑아서 리스트에 담음.
-        for(Element element : rankNm) {
+        for (Element element : rankNm) {
             String name = element.text();
             rankNmList.add(name);
         }
@@ -101,10 +101,10 @@ public class CrawlingService {
         mapper.delSteamRank();
 
         // for문이 한 번 돌 때마다 한 행씩 추가.
-        for(int i=1;i<=rankNmList.size();i++) {
+        for (int i = 1; i <= rankNmList.size(); i++) {
             List<SteamRankEntity> list = new ArrayList<>();
             String num = Integer.toString(i);   // 순위
-            entity.setRankNm((String)rankNmList.get(i-1));
+            entity.setRankNm((String) rankNmList.get(i - 1));
             entity.setRankNum(num);
             list.add(entity);
             mapper.insertRankSteamDb(list);
@@ -134,13 +134,13 @@ public class CrawlingService {
         List rateNumList = new ArrayList();
         List rateRatingList = new ArrayList(); // 회사 명
 
-        for(Element element: ratingGameNm) {    // PC게임 이름 크롤링
+        for (Element element : ratingGameNm) {    // PC게임 이름 크롤링
             String gameNm = element.text();
             rateNmList.add(gameNm);
         }
         rateNmList.remove(0);   // 앞에 하나(텍스트) 삭제
 
-        for(Element element: ratingGameNum) {    // PC게임 순위 크롤링
+        for (Element element : ratingGameNum) {    // PC게임 순위 크롤링
             String gameNum = element.text();
             rateNumList.add(gameNum);
         }
@@ -148,7 +148,7 @@ public class CrawlingService {
         rateNumList.remove(0);
         rateNumList.remove(0);
 
-        for(Element element: ratingGameRating) {    // PC게임 이름 크롤링
+        for (Element element : ratingGameRating) {    // PC게임 이름 크롤링
             String gameRating = element.text();
             rateRatingList.add(gameRating);
         }
@@ -161,17 +161,19 @@ public class CrawlingService {
         RatingEntity entity = new RatingEntity();
 
         // for문이 한 번 돌 때마다 한 행씩 추가.
-        for(int i=0;i<rateNumList.size();i++) {
+        for (int i = 0; i < rateNumList.size(); i++) {
             List<RatingEntity> list = new ArrayList<>();
-            entity.setGameNm((String)rateNmList.get(i));
-            entity.setGameRank((String)rateNumList.get(i));
-            entity.setGameRating((String)rateRatingList.get(i));
+            entity.setGameNm((String) rateNmList.get(i));
+            entity.setGameRank((String) rateNumList.get(i));
+            entity.setGameRating((String) rateRatingList.get(i));
             list.add(entity);
             mapper.insertRatingDb(list);
         }
     }
 
-    public List<RatingEntity> ratingList(RatingEntity entity) { return mapper.ratingList(entity); }
+    public List<RatingEntity> ratingList(RatingEntity entity) {
+        return mapper.ratingList(entity);
+    }
 
     //모바일, pc온라인, 스팀
     public void insertPlatform(String url) {
@@ -194,20 +196,20 @@ public class CrawlingService {
         Elements genre = doc.select("td.column-4"); // 회사 명
 
         // 크롤링해서 가져온 값의 text만 뽑아서 리스트에 담음.
-        for(Element element : rankNum) {
+        for (Element element : rankNum) {
             String num = element.text();
             String num1 = num.substring(0, num.lastIndexOf(" "));
             rankNumList.add(num1);
         }
-        for(Element element : gameNm) {
+        for (Element element : gameNm) {
             String name = element.text();
             gameNmList.add(name);
         }
-        for(Element element : company) {
+        for (Element element : company) {
             String companyNm = element.text();
             companyList.add(companyNm);
         }
-        for(Element element : genre) {
+        for (Element element : genre) {
             String genreNm = element.text();
             genreList.add(genreNm);
         }
@@ -215,16 +217,15 @@ public class CrawlingService {
         mapper.delPlatformRank();
 
 
-
         List<PlatformRankEntity> list = new ArrayList<>();
         // for문이 한 번 돌 때마다 한 행씩 추가.
         //0~39까지 모바일 , 40~79까지 pc온라인, 80~119까지 스팀
-        for(int i=0;i<gameNmList.size();i++) {
+        for (int i = 0; i < gameNmList.size(); i++) {
             PlatformRankEntity entity = new PlatformRankEntity();
-            entity.setRankNum((String)rankNumList.get(i));
-            entity.setGameNm((String)gameNmList.get(i));
-            entity.setCompany((String)companyList.get(i));
-            entity.setGenre((String)genreList.get(i));
+            entity.setRankNum((String) rankNumList.get(i));
+            entity.setGameNm((String) gameNmList.get(i));
+            entity.setCompany((String) companyList.get(i));
+            entity.setGenre((String) genreList.get(i));
             list.add(entity);
         }
         mapper.insertPlatformRankDb(list);
@@ -233,38 +234,10 @@ public class CrawlingService {
     public List<PlatformRankEntity> platformList(PlatformRankEntity entity) {
         List platformList = mapper.platformRankList(entity);
         List<PlatformRankEntity> platList = new ArrayList<>();
-        for(int i=0;i<120;i++) {
+        for (int i = 0; i < 120; i++) {
             platList.add((PlatformRankEntity) platformList.get(i));
         }
         return platList;
     }
-
-    public List<PlatformRankEntity> mobileList(PlatformRankEntity entity) {
-        List platformList = mapper.platformRankList(entity);
-        List<PlatformRankEntity> mList = new ArrayList<>();
-        for(int i=0;i<40;i++) {
-            mList.add((PlatformRankEntity) platformList.get(i));
-        }
-        return mList;
-    }
-
-    public List<PlatformRankEntity> pconlineList(PlatformRankEntity entity) {
-        List platformList = mapper.platformRankList(entity);
-        List<PlatformRankEntity> pcList = new ArrayList<>();
-        for(int i=40;i<80;i++) {
-            pcList.add((PlatformRankEntity) platformList.get(i));
-        }
-        return pcList;
-    }
-
-    public List<PlatformRankEntity> steamList(PlatformRankEntity entity) {
-        List platformList = mapper.platformRankList(entity);
-        List<PlatformRankEntity> stList = new ArrayList<>();
-        for(int i=80;i<120;i++) {
-            stList.add((PlatformRankEntity) platformList.get(i));
-        }
-        return stList;
-    }
-
 }
 

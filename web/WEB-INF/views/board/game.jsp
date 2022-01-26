@@ -4,17 +4,16 @@
         <div class="choiceBtn_section">
             <div class="choiceBtn_section_line rating">
                 <label id="rtLb">평가
+                    <button class="rtBtn">GOAT</button>
                     <button class="rtBtn">띵작</button>
                     <button class="rtBtn">수작</button>
-                    <button class="rtBtn">중간 이상</button>
-                    <button class="rtBtn">망작</button>
                 </label>
             </div>
-            <div class="choiceBtn_section_line popular ">
+            <div class="choiceBtn_section_line popular">
                 <label id="ppLb">인기
-                    <button class="ppBtn">많은</button>
-                    <button class="ppBtn">보통</button>
-                    <button class="ppBtn">적은</button>
+                    <button class="ppBtn">TOP</button>
+                    <button class="ppBtn">GREAT</button>
+                    <button class="ppBtn">GOOD</button>
                 </label>
             </div>
             <div class="choiceBtn_section_line kinds">

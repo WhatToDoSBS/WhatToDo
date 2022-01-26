@@ -69,18 +69,11 @@ CREATE TABLE rating_Game(
                             gameRating VARCHAR(10),
                             gameRank VARCHAR(10)
 );
-//모바일(0~39idx)PC(40~79idx)
-CREATE TABLE mobile_rankdb (
+//모바일(0~39idx)PC(40~79idx)스팀(80~119idx)
+CREATE TABLE platform_rankdb (
                                irank INT AUTO_INCREMENT,
                                rankNum VARCHAR(10),
                                gameNm VARCHAR(100),
                                company VARCHAR(50),
                                PRIMARY KEY (irank)
-);
-xbox
-CREATE TABLE xbox_rankdb (
-                             irank INT AUTO_INCREMENT,
-                             rankNum VARCHAR(10),
-                             gameNm VARCHAR(100),
-                             PRIMARY KEY (irank)
 );
