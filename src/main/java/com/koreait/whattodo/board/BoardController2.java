@@ -5,6 +5,8 @@ import com.koreait.whattodo.crawling.CrawlingService;
 import com.koreait.whattodo.model.MecaRankEntity;
 import com.koreait.whattodo.model.RatingEntity;
 import com.koreait.whattodo.model.SteamRankEntity;
+import com.koreait.whattodo.model.WebtoonEntity;
+import com.koreait.whattodo.webtoon.WebtoonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +28,9 @@ public class BoardController2 {
 
     @Autowired
     private CrawlingService crawlingService;
+
+    @Autowired
+    private WebtoonService webtoonService;
 
     @GetMapping("/netflix")
     public void netflix() {
@@ -61,13 +66,17 @@ public class BoardController2 {
         crawlingService.insertRating(ratingUrl);
 
         List<RatingEntity> list = crawlingService.ratingList(ratingEntity);
+        List<WebtoonEntity> webtoonList = webtoonService.listWebtoon();
 
         // 1부터 List갯수만큼의 난수 생성
         Random random = new Random(); //랜덤 객체 생성(디폴트 시드값 : 현재시간)
         random.setSeed(System.currentTimeMillis()); //시드값 설정을 따로 할수도 있음
         int randomGameNum = random.nextInt(list.size())+1;
+        int randomWebtoon = random.nextInt(webtoonList.size())+1;
         System.out.println("랜덤 [게임] 숫자 : " + (random.nextInt(list.size())+1));
+        System.out.println("랜덤 [웹툰] 숫자 : " + (random.nextInt(list.size())+1));
         model.addAttribute("randomGame", list.get(randomGameNum-1).getGameNm());
+        model.addAttribute("randomWebtoon", webtoonList.get(randomWebtoon-1));
     }
 
     @GetMapping("/book")

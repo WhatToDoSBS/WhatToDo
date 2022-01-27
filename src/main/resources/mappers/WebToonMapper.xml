@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.whattodo.webtoon.WebtoonMapper">
+    <!-- 네이버웹툰 -->
+    <insert id="insertWebtoon">
+        INSERT INTO webtoon(nm, writer, rating, img) VALUES
+        <foreach collection="list" open="(" close=")" separator="),(" item="webtoon">
+            #{webtoon.nm}, #{webtoon.writer}, #{webtoon.rating}, #{webtoon.img}
+        </foreach>
+    </insert>
+
+    <delete id="delWebtoon">
+        DELETE FROM webtoon
+    </delete>
+
+    <select id="webtoonList" resultType="WebtoonEntity">
+        SELECT * FROM webtoon ORDER BY wnum LIMIT 50;
+    </select>
+
+</mapper>

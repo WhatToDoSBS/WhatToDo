@@ -46,6 +46,13 @@ CREATE TABLE t_user
     CONSTRAINT UNIQUE (uid)
 );
 
+CREATE TABLE rating_Game(
+                            rnum INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                            gameNm VARCHAR(100),
+                            gameRating VARCHAR(10),
+                            gameRank VARCHAR(10)
+);
+
 // 게임메카 게임랭크 담는 DB
 CREATE TABLE meca_rankdb (
                              irank INT AUTO_INCREMENT,
@@ -74,4 +81,15 @@ CREATE TABLE rating_Game(
                             gameNm VARCHAR(100),
                             gameRating VARCHAR(10),
                             gameRank VARCHAR(10)
+);
+
+// 웹툰 DB
+CREATE TABLE webtoon (
+                         wnum INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                         nm VARCHAR(50) NOT NULL,
+                         writer VARCHAR(20) NOT NULL,
+                         rating VARCHAR(10),
+                         img VARCHAR(300),
+                         weekend VARCHAR(10),
+                         homepage INT DEFAULT 1
 );
