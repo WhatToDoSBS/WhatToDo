@@ -32,4 +32,11 @@
         SELECT * FROM webtoon_recommand ORDER BY wrnum
     </select>
 
+    <select id="webtoonListRandom" resultType="WebtoonEntity">
+        SELECT * FROM webtoon ORDER BY RAND() LIMIT 12
+    </select>
+
+    <select id="webtoonRecommandListRandom" resultType="WebtoonRecommandEntity">
+        SELECT * FROM webtoon_recommand ORDER BY RAND() LIMIT 3
+    </select>
 </mapper>

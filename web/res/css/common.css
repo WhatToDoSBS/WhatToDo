@@ -24,6 +24,11 @@
     flex-direction: column;
 }
 
+/* -----Font 관련----------*/
+.font-14px {
+    font-size: 14px;
+}
+
 * {
     margin: 0;
     list-style: none;
@@ -37,6 +42,8 @@ body {
 }
 
 table { border-collapse: collapse; }
+
+ul { padding: 0; }
 
 a:visited { color: black; }
 

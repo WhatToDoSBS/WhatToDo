@@ -14,5 +14,7 @@ public interface WebtoonMapper {
     void delWebtoon();
     void delRecommandWebtoon();
     List<WebtoonEntity> webtoonList();
+    List<WebtoonEntity> webtoonListRandom();
     List<WebtoonRecommandEntity> webtoonRecommandList();
+    List<WebtoonRecommandEntity> webtoonRecommandListRandom();
 }

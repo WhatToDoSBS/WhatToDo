@@ -1,10 +1,37 @@
+h1 {
+    text-align: center;
+}
+
 #recommand_box ul {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    border: 1px solid black;
-    padding: 0;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    margin: 10px 0;
 }
 
 #recommand_box ul li {
     margin: 10px;
+}
+
+.recommend_section span {
+    text-align: center;
+    display: block;
+}
+
+.webtoon_box {
+    display: flex;
+    text-align: center;
+}
+
+.webtoon_box .naver_section {
+    flex: 0 1 auto;
+}
+
+.webtoon_box .naver_section #webtoon_databox {
+    border: 1px solid var(--main-color);
+}
+
+.webtoon_box .kakao_section {
+    flex: 3 1 auto;
 }

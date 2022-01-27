@@ -153,6 +153,8 @@ public class WebtoonService {
     public void delRecommandWebtoon() { mapper.delRecommandWebtoon(); }
 
     public List<WebtoonEntity> listWebtoon() { return mapper.webtoonList(); }
+    public List<WebtoonEntity> listWebtoonRandom() { return mapper.webtoonListRandom(); }
     public List<WebtoonRecommandEntity> listRecommandWebtoon() { return mapper.webtoonRecommandList(); }
+    public List<WebtoonRecommandEntity> listRecommandWebtoonRandom() { return mapper.webtoonRecommandListRandom(); }
 
 }

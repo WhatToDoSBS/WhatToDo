@@ -3,21 +3,30 @@
 <div>
     <h1>웹툰</h1>
     <div id="recommand_box">
-        <ul class="slides">
-            <c:set var="randomNum" value="${randomNum}"/>
-<%--            <img src="${webtoonRecommandList[randomNum].img}" alt="">--%>
-            <c:forEach items="${webtoonRecommandList}" var="item" begin="0" end="2">
-                <li><img src="${item.img}" alt=""></li>
+        <h3>추천 웹툰</h3>
+        <ul class="recommend_section">
+            <c:forEach var="item" items="${webtoonRecommandListRandom}">
+                <li><img src="${item.img}" alt="">
+                    <span><b>${item.nm}</b></span>
+                    <span>${item.rating}</span></li>
             </c:forEach>
         </ul>
     </div>
-    <div>
-        <c:forEach items="${webtoonRecommandList}" var="item">
-            <div>${item.nm}</div>
-            <img src="${item.img}" alt="${item.nm}">
-            <div><b>${item.rating}</b></div>
-            <span>연재요일 : ${item.weekend}</span>
-        </c:forEach>
+    <div class="webtoon_box">
+        <div class="naver_section">
+            <h3>네이버</h3>
+            <ul>
+                    <c:forEach var="item" items="${webtoonListRandom}">
+                        <div id="webtoon_databox">
+                        <li><img src="${item.img}" alt=""></li>
+                        <li class="font-14px">${item.nm}</li>
+                        </div>
+                    </c:forEach>
+            </ul>
+        </div>
+        <div class="kakao_section">
+            <h3>카카오</h3>
+        </div>
     </div>
     <button class="crawlingBtn">크롤링</button>
 </div>

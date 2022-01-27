@@ -26,15 +26,17 @@ public class WebtoonController {
     private Utils utils;
 
     @GetMapping("/webtoon")
-    public void webtoon(Model model, RedirectAttributes rttr) {
+    public void webtoon(Model model) {
         List<WebtoonRecommandEntity> webtoonRecommandEntityList = webtoonService.listRecommandWebtoon();
         if(webtoonRecommandEntityList.size()==0) { // 웹툰 리스트 없으면 크롤링해주고 값 넣어줌
-            utils.insertWebtoon(webtoonService);
+            utils.insertWebtoon(webtoonService);    // 네이버 웹툰 전체 크롤링
             webtoonRecommandEntityList = webtoonService.listRecommandWebtoon(); // 추천웹툰 리스트 전체
         }
-        int randomNum = utils.randomNumOutput(webtoonRecommandEntityList.size());
+
         model.addAttribute("webtoonRecommandList", webtoonRecommandEntityList);
-        model.addAttribute("randomNum", randomNum);
+        model.addAttribute("webtoonListRandom", webtoonService.listWebtoonRandom());
+        model.addAttribute("webtoonRecommandListRandom", webtoonService.listRecommandWebtoonRandom());
+
     }
 
     @GetMapping("/webtooncrawling")
