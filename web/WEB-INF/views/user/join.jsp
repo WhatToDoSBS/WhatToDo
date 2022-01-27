@@ -46,7 +46,7 @@
                 약관 확인하기
             </button>
             <div class="prevText">
-                (필수) 개인정보 수집 및 이용 동의 <input type="checkbox" value="prevChk" class="prevChk">
+                (필수) 개인정보 수집 및 이용 동의 <input type="checkbox" name="prevChk" class="prevChk" id="prevChk">
             </div>
         </div>
         <!-- Modal -->

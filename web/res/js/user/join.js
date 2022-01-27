@@ -15,6 +15,9 @@
             const upwChk = joinFrmElem.querySelector('#upw-chk').value;
             const nm = joinFrmElem.nm.value;
             const gender = joinFrmElem.gender.value;
+            const prevChk = joinFrmElem.prevChk;
+
+
 
             if(!idRegex.test(uid)) {
                 alert('아이디를 바르게 적어주세요');
@@ -31,6 +34,9 @@
                 e.preventDefault();
             } else if(gender === '0') {
                 alert('성별을 선택해주세요');
+                e.preventDefault();
+            } else if (prevChk.checked !== true) {
+                alert('약관동의에 체크해주세요.');
                 e.preventDefault();
             }
 
