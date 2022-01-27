@@ -2,8 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div>
     <h1>웹툰</h1>
-    <div>
-
+    <div id="recommand_box">
+        <ul class="slides">
+            <c:set var="randomNum" value="${randomNum}"/>
+            ${randomNum}
+<%--            <img src="${webtoonRecommandList[randomNum].img}" alt="">--%>
+            <c:forEach items="${webtoonRecommandList}" var="item" begin="0" end="2">
+                <li><img src="${item.img}" alt=""></li>
+            </c:forEach>
+        </ul>
     </div>
     <div>
         <c:forEach items="${webtoonRecommandList}" var="item">

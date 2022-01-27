@@ -1,0 +1,10 @@
+#recommand_box ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid black;
+    padding: 0;
+}
+
+#recommand_box ul li {
+    margin: 10px;
+}

@@ -31,6 +31,8 @@ public class BoardController2 {
     @Autowired
     private WebtoonService webtoonService;
 
+    private Utils utils;
+
     @GetMapping("/netflix")
     public void netflix() {
         String mecaUrl = "https://www.gamemeca.com/ranking.php";
@@ -75,15 +77,13 @@ public class BoardController2 {
         crawlingService.insertRating(ratingUrl);
         List<RatingEntity> list = crawlingService.ratingList(ratingEntity);
 
-        // 1부터 List갯수만큼의 난수 생성
-        Random random = new Random(); //랜덤 객체 생성(디폴트 시드값 : 현재시간)
-        random.setSeed(System.currentTimeMillis()); //시드값 설정을 따로 할수도 있음
-        int randomGameNum = random.nextInt(list.size())+1;
-        int randomWebtoon = random.nextInt(webtoonList.size())+1;
-        System.out.println("랜덤 [게임] 숫자 : " + (random.nextInt(list.size())+1));
-        System.out.println("랜덤 [웹툰] 숫자 : " + (random.nextInt(list.size())+1));
-        model.addAttribute("randomGame", list.get(randomGameNum-1).getGameNm());
-        model.addAttribute("randomWebtoon", webtoonList.get(randomWebtoon-1));
+        // 랜덤번째 리스트를 전달해줌
+        int randomGameNum = utils.randomNumOutput(list.size());
+        int randomWebtoon = utils.randomNumOutput(webtoonList.size());
+        System.out.println("랜덤 [게임] 숫자 : " + randomGameNum);
+        System.out.println("랜덤 [웹툰] 숫자 : " + randomWebtoon);
+        model.addAttribute("randomGame", list.get(randomGameNum).getGameNm());
+        model.addAttribute("randomWebtoon", webtoonList.get(randomWebtoon));
     }
 
     @GetMapping("/book")
