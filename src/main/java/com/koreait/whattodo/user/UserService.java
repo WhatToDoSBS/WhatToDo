@@ -45,7 +45,7 @@ public class UserService {
         }
 
         if (dbUser == null) {
-            return 2; // 계정없음
+            return 2; // 계정없음(아이디 오류)
         } else if (BCrypt.checkpw(entity.getUpw(), dbUser.getUpw())) {
             userUtils.setLoginUser(dbUser);
             return 1; // 성공

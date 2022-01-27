@@ -48,15 +48,16 @@
         uidInput.addEventListener('blur', (e) => {
            const uid = joinFrmElem.uid.value;
            if (!idRegex.test(uid)) {
-                joinFrmElem.querySelector('#err-idMsg').classList.remove('msg_n')
-                joinFrmElem.querySelector('#duplication-uid').classList.remove('err_msg_b')
-                joinFrmElem.querySelector('#available-uid').classList.remove('successMsg')
-                joinFrmElem.querySelector('#err-idMsg').classList.add('err_msg_b');
-                joinFrmElem.querySelector('#duplication-uid').classList.add('msg_n');
-                joinFrmElem.querySelector('#available-uid').classList.add('msg_n');
-                e.preventDefault();
+               joinFrmElem.querySelector('#err-idMsg').classList.remove('msg_n')
+               joinFrmElem.querySelector('#duplication-uid').classList.remove('err_msg_b')
+               joinFrmElem.querySelector('#available-uid').classList.remove('successMsg')
+               joinFrmElem.querySelector('#err-idMsg').classList.add('err_msg_b');
+               joinFrmElem.querySelector('#duplication-uid').classList.add('msg_n');
+               joinFrmElem.querySelector('#available-uid').classList.add('msg_n');
+               e.preventDefault();
            }
-            fetch(`/user/idChk/${uid}`)
+
+           fetch(`/user/idChk/${uid}`)
                 .then(res => res.json())
                 .then((data) => {
                     setIdChkMsg(data);
@@ -68,7 +69,7 @@
         // 아이디 중복체크 #2
         const setIdChkMsg = (data) => {
             idChkState = data.result; //0 or 1
-            switch(data.result) {
+            switch(idChkState) {
                 case 0:
                     joinFrmElem.querySelector('#err-idMsg').classList.remove('err_msg_b')
                     joinFrmElem.querySelector('#duplication-uid').classList.remove('msg_n')
