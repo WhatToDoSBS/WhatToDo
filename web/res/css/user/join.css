@@ -16,6 +16,7 @@
 }
 
 .textBox {
+    width: 25%;
     border-radius: 4px;
     border: solid 1px #dddddd;
     padding: 10px 110px 10px 8px;
@@ -27,6 +28,7 @@
 }
 
 .selBox {
+    width: 25%;
     border-radius: 4px;
     padding: 10px 205px 10px 8px;
     border: solid 1px #dddddd;
@@ -45,6 +47,7 @@
     font-weight: normal;
     color: red;
     display: block;
+    font-size: 1rem;
 }
 
 .successMsg {
@@ -53,6 +56,36 @@
     display: block;
 }
 
+.prevText {
+    display: flex;
+    justify-content: center;
+}
+
+.prevChk {
+    zoom: 2;
+    width: 1rem;
+}
+
+
+
+
+
+
+
+
+
+.back_btn {
+    padding: 10px 60px;
+    background-color: #D3D3D3;;
+    color: #696969;
+    border: none;
+    border-radius: 4px;
+}
+
+.back_btn:hover {
+    background-color: #808080;
+    color: #ffffff;
+}
 
 .submit_btn {
     padding: 10px 60px;

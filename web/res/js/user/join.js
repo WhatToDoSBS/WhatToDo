@@ -119,5 +119,10 @@
             }
         });
 
+
+        const backBtnElem = document.querySelector(".back_btn");
+        backBtnElem.addEventListener('click', (e) => {
+           location.href = "/user/login";
+        });
     }
 }
