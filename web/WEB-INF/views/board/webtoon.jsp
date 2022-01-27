@@ -5,7 +5,6 @@
     <div id="recommand_box">
         <ul class="slides">
             <c:set var="randomNum" value="${randomNum}"/>
-            ${randomNum}
 <%--            <img src="${webtoonRecommandList[randomNum].img}" alt="">--%>
             <c:forEach items="${webtoonRecommandList}" var="item" begin="0" end="2">
                 <li><img src="${item.img}" alt=""></li>
