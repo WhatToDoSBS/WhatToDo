@@ -109,7 +109,7 @@ public class CrawlingController {
 
         String mecaListJson = gson.toJson(crawlingService.mecaRankList(entity));
 
-        System.out.println(mecaListJson);
+//        System.out.println(mecaListJson);
         return mecaListJson;
     }
 
@@ -131,7 +131,7 @@ public class CrawlingController {
 
         String platformListJson = gson.toJson(crawlingService.platformList(entity));
 
-        System.out.println(platformListJson);
+//        System.out.println(platformListJson);
         return platformListJson;
     }
 

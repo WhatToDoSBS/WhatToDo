@@ -245,13 +245,10 @@ button.kdBtn.clicked {
     background-color: lightpink;
 }
 
-button.thmBtn.clicked {
+button.pfBtn.clicked {
     background-color: lightseagreen;
 }
 
-button.pnBtn.clicked {
-    background-color: lightslategray;
-}
 
 #dtCtnt {
     font-size: x-large;
@@ -277,11 +274,6 @@ button.pnBtn.clicked {
     margin-bottom: 20px;
     padding-top: 20px;
     font-size: x-large;
-}
-
-#pnBtns {
-    display: flex;
-    justify-content: space-between;
 }
 
 #mdBtns {

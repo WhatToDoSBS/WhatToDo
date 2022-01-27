@@ -2,8 +2,10 @@
     let rtBtns = document.querySelectorAll(".rtBtn");
     let ppBtns = document.querySelectorAll(".ppBtn");
     let kdBtns = document.querySelectorAll(".kdBtn");
-    let thmBtns = document.querySelectorAll(".thmBtn");
-    let pnBtns = document.querySelectorAll(".pnBtn");
+    let pfBtns = document.querySelectorAll(".pfBtn");
+
+
+
 
     function rtClickedRmv() {
         for (let i = 0; i < rtBtns.length; i++) {
@@ -23,15 +25,9 @@
         }
     }
 
-    function thmClickedRmv() {
-        for (let i = 0; i < thmBtns.length; i++) {
-            thmBtns[i].classList.remove("clicked");
-        }
-    }
-
-    function pnClickedRmv() {
-        for (let i = 0; i < pnBtns.length; i++) {
-            pnBtns[i].classList.remove("clicked");
+    function pfClickedRmv() {
+        for (let i = 0; i < pfBtns.length; i++) {
+            pfBtns[i].classList.remove("clicked");
         }
     }
 
@@ -69,30 +65,19 @@
             }
         })
     });
-    thmBtns.forEach(function (item) {
+    pfBtns.forEach(function (item) {
         item.addEventListener('click', function (e) {
             e.preventDefault();
             if (e.target.classList.contains("clicked")) {
-                thmClickedRmv();
+                pfClickedRmv();
             } else {
-                thmClickedRmv();
+                pfClickedRmv();
                 item.classList.add("clicked");
             }
 
         })
     });
-    pnBtns.forEach(function (item) {
-        item.addEventListener('click', function (e) {
-            e.preventDefault();
-            if (e.target.classList.contains("clicked")) {
-                pnClickedRmv();
-            } else {
-                pnClickedRmv();
-                item.classList.add("clicked");
-            }
 
-        })
-    });
 
     // gameBtnFrm = document.querySelector('#gameBtnFrm');
     // if (gameBtnFrm) {
@@ -108,20 +93,15 @@
     funBtn = document.querySelector('.fun-btn');
     funBtn.addEventListener('click', function (e) {
         e.preventDefault();
-        // let random = Math.floor(Math.random()*2)+1;
-        // console.log('random:' + random);
-        /*switch (random) {
-            case 1:
-                getMecaRandomGame(mecaurl);
-                break;
-            case 2:
-                getSteamRandomGame(steamurl);
-                break;
-        }*/
+        if(ppBtns[0].classList.contains("clicked")) {
+            getMrTopRandomGame();
+        }
+
         // getMobileRandomGame();
         // getPcRandomGame();
         // getStRandomGame();
-        getRpgRandomGame();
+        // getRpgRandomGame();
+        getOthersRandomGame();
     })
 
     /* 랜덤값 도출 */
@@ -182,7 +162,7 @@
             }
             let rpgdata = [];
             mdata.forEach((item)=>{
-                if(item.genre.includes("롤플레잉") || item.genre.includes("MMORPG")) {
+                if(item.genre.includes("롤플레잉") || item.genre.includes("RPG")) {
                     rpgdata.push(item)
                 }
             })
@@ -194,6 +174,119 @@
         });
     }
 
+    //FPS랜덤
+    function getFpsRandomGame() {
+        fetch("/board/platformrankingjson").then((res) => {
+            return res.json();
+        }).then((data) => {
+            let mdata = [];
+            for (let i=0; i<Object.keys(data).length; i++) {
+                mdata.push(data[i])
+            }
+            let fpsdata = [];
+            mdata.forEach((item)=>{
+                if(item.genre.includes("FPS") || item.genre.includes("슈팅")) {
+                    fpsdata.push(item)
+                }
+            })
+            let randomNm = Math.floor(Math.random()* fpsdata.length)
+            console.log(fpsdata[randomNm]);
+            return fpsdata[randomNm];
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+    //액션랜덤
+    function getActionRandomGame() {
+        fetch("/board/platformrankingjson").then((res) => {
+            return res.json();
+        }).then((data) => {
+            let mdata = [];
+            for (let i=0; i<Object.keys(data).length; i++) {
+                mdata.push(data[i])
+            }
+            let actiondata = [];
+            mdata.forEach((item)=>{
+                if(item.genre.includes("액션")) {
+                    actiondata.push(item)
+                }
+            })
+            let randomNm = Math.floor(Math.random()* actiondata.length)
+            console.log(actiondata[randomNm]);
+            return actiondata[randomNm];
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+    //전략 랜덤
+    function getStrRandomGame() {
+        fetch("/board/platformrankingjson").then((res) => {
+            return res.json();
+        }).then((data) => {
+            let mdata = [];
+            for (let i=0; i<Object.keys(data).length; i++) {
+                mdata.push(data[i])
+            }
+            let strdata = [];
+            mdata.forEach((item)=>{
+                if(item.genre.includes("전략") || item.genre.includes("RTS")) {
+                    strdata.push(item)
+                }
+            })
+            let randomNm = Math.floor(Math.random()* strdata.length)
+            console.log(strdata[randomNm]);
+            return strdata[randomNm];
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+    //스포츠,레이싱 랜덤
+    function getSportsRandomGame() {
+        fetch("/board/platformrankingjson").then((res) => {
+            return res.json();
+        }).then((data) => {
+            let mdata = [];
+            for (let i=0; i<Object.keys(data).length; i++) {
+                mdata.push(data[i])
+            }
+            let sportsdata = [];
+            mdata.forEach((item)=>{
+                if(item.genre.includes("스포츠") || item.genre.includes("자동차") || item.genre.includes("레이싱")) {
+                    sportsdata.push(item)
+                }
+            })
+            let randomNm = Math.floor(Math.random()* sportsdata.length)
+            console.log(sportsdata[randomNm]);
+            return sportsdata[randomNm];
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+    //기타 랜덤
+    function getOthersRandomGame() {
+        fetch("/board/platformrankingjson").then((res) => {
+            return res.json();
+        }).then((data) => {
+            let mdata = [];
+            for (let i=0; i<Object.keys(data).length; i++) {
+                mdata.push(data[i])
+            }
+
+            let othsData = mdata.filter((item)=>!(item.genre.includes("전략") || item.genre.includes("RTS") || item.genre.includes("스포츠")
+            || item.genre.includes("자동차") || item.genre.includes("레이싱") || item.genre.includes("액션")
+            || item.genre.includes("FPS") || item.genre.includes("슈팅") || item.genre.includes("롤플레잉") || item.genre.includes("RPG")
+            ))
+            let randomNm = Math.floor(Math.random()* othsData.length)
+            console.log(othsData[randomNm]);
+            return othsData[randomNm];
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
 
     // 모바일게임 랜덤
     function getMobileRandomGame() {
@@ -240,6 +333,8 @@
             console.log(err);
         });
     }
+
+
 
     // 랜덤게임 서버에서 불러서(fetch) 출력해주는 함수
     // function getRandomGame(url) {   // 게임메카 데이터

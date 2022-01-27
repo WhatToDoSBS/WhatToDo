@@ -20,7 +20,7 @@
                 <label id="kdLb">장르
                     <button class="kdBtn">RPG</button>
                     <button class="kdBtn">FPS</button>
-                    <button class="kdBtn">스포츠</button>
+                    <button class="kdBtn">스포츠 / 레이싱</button>
                     <button class="kdBtn">액션</button>
                     <button class="kdBtn">전략</button>
                     <button class="kdBtn">기타</button>
@@ -28,9 +28,9 @@
             </div>
             <div class="choiceBtn_section_line theme">
                 <label id="pfLb">플랫폼
-                    <button class="thmBtn">MOBILE</button>
-                    <button class="thmBtn">PC온라인</button>
-                    <button class="thmBtn">스팀</button>
+                    <button class="pfBtn">MOBILE</button>
+                    <button class="pfBtn">PC온라인</button>
+                    <button class="pfBtn">스팀</button>
                 </label>
             </div>
         </div>
