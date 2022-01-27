@@ -1,17 +1,17 @@
 {
-    let rtBtns = document.querySelectorAll(".rtBtn");
+    // let rtBtns = document.querySelectorAll(".rtBtn");
     let ppBtns = document.querySelectorAll(".ppBtn");
     let kdBtns = document.querySelectorAll(".kdBtn");
     let pfBtns = document.querySelectorAll(".pfBtn");
 
 
 
-
-    function rtClickedRmv() {
-        for (let i = 0; i < rtBtns.length; i++) {
-            rtBtns[i].classList.remove("clicked");
-        }
-    }
+    //
+    // function rtClickedRmv() {
+    //     for (let i = 0; i < rtBtns.length; i++) {
+    //         rtBtns[i].classList.remove("clicked");
+    //     }
+    // }
 
     function ppClickedRmv() {
         for (let i = 0; i < ppBtns.length; i++) {
@@ -31,17 +31,17 @@
         }
     }
 
-    for (let i = 0; i < rtBtns.length; i++) {
-        rtBtns[i].addEventListener("click", function (e) {
-            e.preventDefault();
-            if (e.target.classList.contains("clicked")) {
-                rtClickedRmv();
-            } else {
-                rtClickedRmv();
-                rtBtns[i].classList.add("clicked");
-            }
-        })
-    }
+    // for (let i = 0; i < rtBtns.length; i++) {
+    //     rtBtns[i].addEventListener("click", function (e) {
+    //         e.preventDefault();
+    //         if (e.target.classList.contains("clicked")) {
+    //             rtClickedRmv();
+    //         } else {
+    //             rtClickedRmv();
+    //             rtBtns[i].classList.add("clicked");
+    //         }
+    //     })
+    // }
 
     ppBtns.forEach(function (item) {
         item.addEventListener('click', function (e) {
@@ -90,18 +90,27 @@
 
     let randomMobileJson = null;
     // 뭐하Gee 버튼 관련
+    let modalElem = document.querySelector("#modal");
+    let modalXBtn = document.querySelector(".close-area");
+
     funBtn = document.querySelector('.fun-btn');
     funBtn.addEventListener('click', function (e) {
         e.preventDefault();
         if(ppBtns[0].classList.contains("clicked")) {
             getMrTopRandomGame();
         }
-
         // getMobileRandomGame();
         // getPcRandomGame();
         // getStRandomGame();
         // getRpgRandomGame();
         getOthersRandomGame();
+        modalElem.addEventListener('click', (target) => {
+            target.style.display = 'flex';
+            modalXBtn.addEventListener('click', () => {
+                modalElem.style.display = 'none';
+            })
+        })
+
     })
 
     /* 랜덤값 도출 */
@@ -333,6 +342,7 @@
             console.log(err);
         });
     }
+
 
 
 
