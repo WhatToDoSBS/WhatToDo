@@ -1,9 +1,13 @@
 package com.koreait.whattodo.webtoon;
 
 import com.koreait.whattodo.Const;
+import com.koreait.whattodo.UserUtils;
+import com.koreait.whattodo.Utils;
 import com.koreait.whattodo.model.WebtoonEntity;
+import com.koreait.whattodo.model.WebtoonRecommandEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,22 +19,26 @@ import java.util.Random;
 @RequestMapping(value = "/board", produces = "application/text; charset=UTF-8") // js 한글깨짐 방지
 public class WebtoonController {
     @Autowired
-    private WebtoonService service;
+    private WebtoonService webtoonService;
+
+    private Utils utils;
 
     @GetMapping("/webtoon")
-    public void webtoon() {}
+    public void webtoon(Model model) {
+        List<WebtoonRecommandEntity> webtoonRecommandEntityList = webtoonService.listRecommandWebtoon();
+        if(webtoonRecommandEntityList.size()==0) { // 웹툰 리스트 없으면 크롤링해주고 값 넣어줌
+            utils.insertWebtoon(webtoonService);
+            webtoonRecommandEntityList = webtoonService.listRecommandWebtoon();
+        }
+
+        model.addAttribute("webtoonRecommandList", webtoonRecommandEntityList);
+    }
 
     @GetMapping("/webtooncrawling")
     public String webtoonCrawling(Model model) {
-
-        service.delWebtoon();
-        for(int i=i;i<=7;i++) {
-            String webtoonLink = "NAVER_WEBTOON_" + i;
-            service.insertWebtoon(Const.NAVER_WEBTOON_1);
-        }
-        service.insertWebtoon(Const.NAVER_WEBTOON_MON);
-        service.insertWebtoon(Const.NAVER_WEBTOON_THU);
+        utils.insertWebtoon(webtoonService);
 
         return "redirect:/board/webtoon";
     }
+
 }
