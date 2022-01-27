@@ -1,7 +1,8 @@
 .container {
     display: block;
     text-align: center;
-    padding: 50px 0 20px 0;
+    padding: 50px 0;
+    overflow: auto;
 }
 
 .login_form > h1:first-child {
@@ -57,6 +58,7 @@ a:hover { color: #C0C0C0 }
     color: red;
     display: block;
 }
+
 
 
 

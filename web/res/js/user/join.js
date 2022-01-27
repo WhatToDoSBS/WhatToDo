@@ -43,14 +43,13 @@
         });
 
 
-
         // 아이디 중복체크 #1
         uidInput.addEventListener('blur', (e) => {
            const uid = joinFrmElem.uid.value;
-           if (!idRegex.test(uid)) {
-               joinFrmElem.querySelector('#err-idMsg').classList.remove('msg_n')
-               joinFrmElem.querySelector('#duplication-uid').classList.remove('err_msg_b')
-               joinFrmElem.querySelector('#available-uid').classList.remove('successMsg')
+           if (!idRegex.test(uid) || uid.length < 4) {
+               joinFrmElem.querySelector('#err-idMsg').classList.remove('msg_n');
+               joinFrmElem.querySelector('#duplication-uid').classList.remove('err_msg_b');
+               joinFrmElem.querySelector('#available-uid').classList.remove('successMsg');
                joinFrmElem.querySelector('#err-idMsg').classList.add('err_msg_b');
                joinFrmElem.querySelector('#duplication-uid').classList.add('msg_n');
                joinFrmElem.querySelector('#available-uid').classList.add('msg_n');
@@ -62,26 +61,28 @@
                 .then((data) => {
                     setIdChkMsg(data);
                 }).catch((e)=> {
-                e.preventDefault();
+                console.log(e);
             });
+           e.preventDefault();
         });
 
         // 아이디 중복체크 #2
         const setIdChkMsg = (data) => {
             idChkState = data.result; //0 or 1
+            console.log(idChkState);
             switch(idChkState) {
                 case 0:
-                    joinFrmElem.querySelector('#err-idMsg').classList.remove('err_msg_b')
-                    joinFrmElem.querySelector('#duplication-uid').classList.remove('msg_n')
-                    joinFrmElem.querySelector('#available-uid').classList.remove('successMsg')
+                    joinFrmElem.querySelector('#err-idMsg').classList.remove('err_msg_b');
+                    joinFrmElem.querySelector('#duplication-uid').classList.remove('msg_n');
+                    joinFrmElem.querySelector('#available-uid').classList.remove('successMsg');
                     joinFrmElem.querySelector('#err-idMsg').classList.add('msg_n');
                     joinFrmElem.querySelector('#duplication-uid').classList.add('err_msg_b');
                     joinFrmElem.querySelector('#available-uid').classList.add('msg_n');
                     break;
                 case 1:
-                    joinFrmElem.querySelector('#err-idMsg').classList.remove('err_msg_b')
-                    joinFrmElem.querySelector('#duplication-uid').classList.remove('err_msg_b')
-                    joinFrmElem.querySelector('#available-uid').classList.remove('msg_n')
+                    joinFrmElem.querySelector('#err-idMsg').classList.remove('err_msg_b');
+                    joinFrmElem.querySelector('#duplication-uid').classList.remove('err_msg_b');
+                    joinFrmElem.querySelector('#available-uid').classList.remove('msg_n');
                     joinFrmElem.querySelector('#err-idMsg').classList.add('msg_n');
                     joinFrmElem.querySelector('#duplication-uid').classList.add('msg_n');
                     joinFrmElem.querySelector('#available-uid').classList.add('successMsg');
