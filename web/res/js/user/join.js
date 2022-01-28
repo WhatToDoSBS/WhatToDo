@@ -68,7 +68,7 @@
 
         // 아이디 중복체크 #2
         const setIdChkMsg = (data) => {
-            idChkState = data.result; //0 or 1
+            idChkState = data.result;
             console.log(idChkState);
             switch(idChkState) {
                 case 0:

@@ -1,5 +1,7 @@
 package com.koreait.whattodo.user;
 
+import com.koreait.whattodo.UserUtils;
+import com.koreait.whattodo.Utils;
 import com.koreait.whattodo.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,8 @@ public class UserController {
 
     @Autowired
     private UserService service;
+    @Autowired
+    private UserUtils userUtils;
 
     @GetMapping("/idChk/{uid}")
     @ResponseBody
@@ -26,55 +30,47 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String login(UserEntity entity, HttpSession session) {
-        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+    public String login() {
+        UserEntity loginUser = userUtils.getLoginUser();
         // 로그인한 유저의 경우 로그인창으로 접근 막음
         if (loginUser != null) {
-            return "redirect:/board/list";
+            return "redirect:/board/main";
         }
 
         return "user/login";
     }
 
     @PostMapping("/login")
-    public String loginPost(UserEntity entity, HttpSession session, Model model) {
-        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+    public String loginPost(UserEntity entity, Model model) {
+        UserEntity loginUser = userUtils.getLoginUser();
         // 로그인한 유저의 경우 로그인창으로 접근 막음
         if (loginUser != null) {
-            return "redirect:/board/list";
+            return "redirect:/board/main";
         }
-
         int result = service.login(entity);
-        switch (result) {
-            case 0:
-                model.addAttribute("msg", "알 수 없는 이유로 오류가 생겼습니다 <br>잠시후 다시 시도해주세요.");
-                return "redirect:/user/login";
-            case 1:
-                return "redirect:/board/list";
-            case 2:
-                model.addAttribute("msg", "로그인 실패.");
-                return "redirect:/user/login";
+        System.out.println(result);
+        if (result != 1) {
+            model.addAttribute("result", result);
         }
-        model.addAttribute("msg", "계정이 존재하지 않습니다.");
-        return "redirect:/user/login";
+        return "redirect:/board/main";
     }
 
     @GetMapping("/join")
-    public String join(UserEntity entity, HttpSession session) {
-        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+    public String join() {
+        UserEntity loginUser = userUtils.getLoginUser();
         // 로그인 세션을 가져와서 로그인한 유저일경우 회원가입접근 막음
         if (loginUser != null) {
-            return "redirect:/board/list";
+            return "redirect:/board/main";
         }
         return "user/join";
     }
 
     @PostMapping("/join")
-    public String joinPost(UserEntity entity, HttpSession session, Model model) {
-        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+    public String joinPost(UserEntity entity, Model model) {
+        UserEntity loginUser = userUtils.getLoginUser();
         // 로그인 세션을 가져와서 로그인한 유저일경우 회원가입접근 막음
         if (loginUser != null) {
-            return "redirect:/board/list";
+            return "redirect:/board/main";
         }
 
         int result = service.join(entity);

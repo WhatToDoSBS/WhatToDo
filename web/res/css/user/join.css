@@ -141,5 +141,6 @@
 
 
 .footer {
-    height: inherit;
+    position: fixed;
+    bottom: 0;
 }
