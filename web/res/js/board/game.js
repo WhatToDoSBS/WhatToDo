@@ -90,76 +90,102 @@
 
     let randomMobileJson = null;
     // 뭐하Gee 버튼 관련
-    let modalElem = document.querySelector("#modal");
-    let modalXBtn = document.querySelector(".close-area");
+    const modalWindow = document.getElementById("modal")
+    const modalXBtn = document.querySelector(".close-area")
 
+    //뭐하지 버튼
     funBtn = document.querySelector('.fun-btn');
-    funBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        if(ppBtns[0].classList.contains("clicked")) {
-            getMrTopRandomGame();
-        }
-        // getMobileRandomGame();
-        // getPcRandomGame();
-        // getStRandomGame();
-        // getRpgRandomGame();
-        getOthersRandomGame();
-        modalElem.addEventListener('click', (target) => {
-            target.style.display = 'flex';
-            modalXBtn.addEventListener('click', () => {
-                modalElem.style.display = 'none';
-            })
-        })
+    let mrRecommandGames = [];
+    let genreRecommandGames = [];
+    let pfRecommandGames = [];
+    funBtn.addEventListener('click', function () {
 
+        // let mrRanNum = Math.floor(Math.random()*ppBtns.length)
+
+        // if (ppBtns[0].classList.contains("clicked")) {
+        //     mrData[0]();
+        // } else if (ppBtns[1].classList.contains("clicked")) {
+        //     mrData[1]();
+        // } else if (ppBtns[2].classList.contains("clicked")) {
+        //     mrData[2]();
+        // } else
+            getMrTopRandomGame();
+            getMrGreatRandomGame();
+        getMrGoodRandomGame();
+
+        modalWindow.style.display = 'flex';
+        modalWindow.querySelector(".modalContent").innerText = JSON.stringify(getMrGoodRandomGame()) + "는 어때요?"
+        modalXBtn.addEventListener('click', () => {
+            modalWindow.style.display = 'none';
+        })
+        window.addEventListener("keyup", (e) => {
+            if(modalWindow.style.display === "flex" && e.key === "Escape") {
+                modalWindow.style.display = "none"
+            }
+        })
     })
 
+
     /* 랜덤값 도출 */
+    //메카 순위별 랜덤함수 배열
 
     //메카 1~10위
-    function getMrTopRandomGame() {   // 게임순위 데이터
+    function getMrTopRandomGame() {
         fetch("/board/mecarankingjson").then((res) => {
-            return res.json();
-        }).then((data) => {
-            let mrdata = [];
-            for (let i=0; i<10; i++) {
-                mrdata.push(data[i])
-            }
-            console.log(mrdata[Math.floor(Math.random()*10)]);
-            return mrdata[Math.floor(Math.random()*10)];
-        }).catch((err) => {
-            console.log(err);
-        });
-    }
+        return res.json();
+    }).then((data) => {
+        let mrdata = [];
+        for (let i = 0; i < 10; i++) {
+            mrdata.push(data[i])
+        }
+        let mrRN = Math.floor(Math.random() * 10)
+            console.log(mrRN);
+            console.log(mrdata[mrRN][2]);
+        return mrdata[mrRN];
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
     //메카 11~30위
     function getMrGreatRandomGame() {   // 게임순위 데이터
         fetch("/board/mecarankingjson").then((res) => {
             return res.json();
         }).then((data) => {
             let mrdata = [];
-            for (let i=10; i<30; i++) {
+            for (let i = 10; i < 30; i++) {
                 mrdata.push(data[i])
             }
-            console.log(mrdata[Math.floor(Math.random()*20)+10]);
-            return mrdata[Math.floor(Math.random()*20)+10];
+            let mrRN = Math.floor(Math.random() * 20)
+            console.log(mrRN);
+            console.log(mrdata[mrRN][2]);
+            return mrdata[mrRN];
         }).catch((err) => {
             console.log(err);
         });
     }
+
     //메카 31~50위
     function getMrGoodRandomGame() {   // 게임순위 데이터
         fetch("/board/mecarankingjson").then((res) => {
             return res.json();
         }).then((data) => {
             let mrdata = [];
-            for (let i=30; i<50; i++) {
+            for (let i = 30; i < 50; i++) {
                 mrdata.push(data[i])
             }
-            console.log(mrdata[Math.floor(Math.random()*20)+30]);
-            return mrdata[Math.floor(Math.random()*20)+30];
+            let mrRN = Math.floor(Math.random() * 20)
+            console.log(mrRN);
+            console.log(mrdata[mrRN][2]);
+            return mrdata[mrRN];
         }).catch((err) => {
             console.log(err);
         });
     }
+
+
+    //장르별 랜덤 함수 배열
+let genreData = [
     //rpg 랜덤
     function getRpgRandomGame() {
         fetch("/board/platformrankingjson").then((res) => {
@@ -181,7 +207,7 @@
         }).catch((err) => {
             console.log(err);
         });
-    }
+    },
 
     //FPS랜덤
     function getFpsRandomGame() {
@@ -204,7 +230,7 @@
         }).catch((err) => {
             console.log(err);
         });
-    }
+    },
 
     //액션랜덤
     function getActionRandomGame() {
@@ -227,7 +253,7 @@
         }).catch((err) => {
             console.log(err);
         });
-    }
+    },
 
     //전략 랜덤
     function getStrRandomGame() {
@@ -250,7 +276,7 @@
         }).catch((err) => {
             console.log(err);
         });
-    }
+    },
 
     //스포츠,레이싱 랜덤
     function getSportsRandomGame() {
@@ -273,7 +299,7 @@
         }).catch((err) => {
             console.log(err);
         });
-    }
+    },
 
     //기타 랜덤
     function getOthersRandomGame() {
@@ -296,7 +322,10 @@
             console.log(err);
         });
     }
+    ]
 
+    //플랫폼 랜덤 함수 배열
+let pfData = [
     // 모바일게임 랜덤
     function getMobileRandomGame() {
         fetch("/board/platformrankingjson").then((res) => {
@@ -311,7 +340,7 @@
         }).catch((err) => {
             console.log(err);
         });
-    }
+    },
 // pc온라인 랜덤
     function getPcRandomGame() {
         fetch("/board/platformrankingjson").then((res) => {
@@ -326,7 +355,7 @@
         }).catch((err) => {
             console.log(err);
         });
-    }
+    },
 // 스팀게임 랜덤
     function getStRandomGame() {
         fetch("/board/platformrankingjson").then((res) => {
@@ -342,6 +371,7 @@
             console.log(err);
         });
     }
+    ]
 
 
 

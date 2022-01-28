@@ -123,13 +123,13 @@ a:visited { color: black; }
 .container {
     display: flex;
     justify-content: space-evenly;
-    flex-direction: row;
+    flex-direction: column;
     padding: 20px 0;
     min-height: 700px;
 }
 
 .container .choiceBtn_section {
-    margin-bottom: 3vh;
+    margin-bottom: 0;
 }
 
 .choiceBtn_section_line {
@@ -238,15 +238,15 @@ button.rtBtn.clicked {
 }
 
 button.ppBtn.clicked {
-    background-color: lightblue;
+    background-color: lightblue; color: greenyellow;
 }
 
 button.kdBtn.clicked {
-    background-color: lightpink;
+    background-color: lightpink; color: aquamarine;
 }
 
 button.pfBtn.clicked {
-    background-color: lightseagreen;
+    background-color: lightseagreen; color: fuchsia;
 }
 
 

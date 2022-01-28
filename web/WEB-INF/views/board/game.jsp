@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class="container">
-    <form action="">
         <div class="choiceBtn_section">
 <%--            <div class="choiceBtn_section_line rating">--%>
 <%--                <label id="rtLb">평가--%>
@@ -38,19 +37,13 @@
         <div class="search_section">
             <button class="fun-btn">뭐하Gee?</button>
         </div>
-    </form>
-    <div id="modal" class="modal-overlay">
+    <div id="modal" class="modal-overlay" style="display: none">
         <div class="modal-window">
-            <div class="title">
-                <h2>오늘은 이 게임 어때요?</h2>
+            <div class="modalTitle">
+                <h2>오늘의 게임</h2>
             </div>
             <div class="close-area">X</div>
-            <div class="content">
-                <p>가나다라마바사 아자차카타파하</p>
-                <p>가나다라마바사 아자차카타파하</p>
-                <p>가나다라마바사 아자차카타파하</p>
-                <p>가나다라마바사 아자차카타파하</p>
-
+            <div class="modalContent">
             </div>
         </div>
     </div>
