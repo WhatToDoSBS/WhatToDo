@@ -6,6 +6,10 @@ public class Const {
     public static final String NAVER_SECRET = "29LoNGyHf2";
     public static final String NAVER_CLIENT_ID = "hFpuwARjo0tOJCRMoKeo";
 
+    public static final String REQUEST_DAILYMOVIE_URL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json";
+    public static final String REQUEST_WEEKMOVIE_URL = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json";
+    public static final String AUTH_KEY = "446ae4859b661a930105e6293785fbfc";   // 영화진흥위원회 사용자 키
+
     // 월(1)~일(7) 네이버 웹툰 주소
     public static final String NAVER_WEBTOON_1 = "https://comic.naver.com/webtoon/weekdayList?week=mon&order=User&view=image";
     public static final String NAVER_WEBTOON_2 = "https://comic.naver.com/webtoon/weekdayList?week=tue&order=User&view=image";

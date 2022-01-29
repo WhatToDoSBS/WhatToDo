@@ -8,4 +8,8 @@ import java.util.List;
 @Mapper
 public interface VideoMapper {
     void insertBoxOffice(List<VideoMovieEntity> entity);
+    void updateImgBoxOffice(VideoMovieEntity entity);
+    void delBoxOffice();
+    List<VideoMovieEntity> selBoxOffice();
+    List<VideoMovieEntity> selBoxOfficeRandom();
 }

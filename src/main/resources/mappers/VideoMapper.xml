@@ -7,4 +7,20 @@
             #{movie.boxofficeType}, #{movie.showRange},#{movie.rank},#{movie.movieNm},#{movie.movieCd}
         </foreach>
     </insert>
+
+    <update id="updateImgBoxOffice">
+        UPDATE video_movie SET img = #{img} WHERE movieNm=#{movieNm};
+    </update>
+
+    <delete id="delBoxOffice">
+        DELETE FROM video_movie
+    </delete>
+
+    <select id="selBoxOffice" resultType="VideoMovieEntity">
+        SELECT * FROM video_movie WHERE boxofficeType='주간 박스오피스'
+    </select>
+
+    <select id="selBoxOfficeRandom" resultType="VideoMovieEntity">
+        SELECT * FROM video_movie WHERE boxofficeType='주간 박스오피스' ORDER BY RAND() LIMIT 3
+    </select>
 </mapper>

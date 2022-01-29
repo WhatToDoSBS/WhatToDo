@@ -12,4 +12,5 @@ public class VideoMovieEntity {
     private String rank;
     private String movieNm;
     private String movieCd;
+    private String img;
 }
