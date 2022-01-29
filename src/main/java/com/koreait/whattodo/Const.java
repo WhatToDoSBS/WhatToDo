@@ -4,7 +4,7 @@ public class Const {
     public static final String MENU_LIST = "menuList";
     public static final String BOOK_KEY = "tttbwhiteme061607001";
     public static final String NAVER_SECRET = "29LoNGyHf2";
-    public static final String CLIENT_ID = "hFpuwARjo0tOJCRMoKeo";
+    public static final String NAVER_CLIENT_ID = "hFpuwARjo0tOJCRMoKeo";
 
     // 월(1)~일(7) 네이버 웹툰 주소
     public static final String NAVER_WEBTOON_1 = "https://comic.naver.com/webtoon/weekdayList?week=mon&order=User&view=image";
