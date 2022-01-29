@@ -110,11 +110,10 @@
         //     mrData[2]();
         // } else
             getMrTopRandomGame();
-            getMrGreatRandomGame();
-        getMrGoodRandomGame();
+        //     getMrGreatRandomGame();
+        // getMrGoodRandomGame();
 
         modalWindow.style.display = 'flex';
-        modalWindow.querySelector(".modalContent").innerText = JSON.stringify(getMrGoodRandomGame()) + "는 어때요?"
         modalXBtn.addEventListener('click', () => {
             modalWindow.style.display = 'none';
         })
@@ -139,9 +138,12 @@
             mrdata.push(data[i])
         }
         let mrRN = Math.floor(Math.random() * 10)
-            console.log(mrRN);
-            console.log(mrdata[mrRN][2]);
-        return mrdata[mrRN];
+            // console.log(mrRN);
+            console.log(JSON.stringify(mrdata[mrRN].rankNm));
+        // let rGame = JSON.stringify(mrdata[mrRN])
+        //     console.log(rGame);
+            document.querySelector(".modalContent").innerText = JSON.stringify(mrdata[mrRN].rankNm) + "는 어때요?"
+            document.querySelector(".selected-img").innerHTML = `<img src=${mrdata[mrRN].imgsrc}>`
     }).catch((err) => {
         console.log(err);
     });
@@ -158,7 +160,7 @@
             }
             let mrRN = Math.floor(Math.random() * 20)
             console.log(mrRN);
-            console.log(mrdata[mrRN][2]);
+            console.log(mrdata[mrRN]);
             return mrdata[mrRN];
         }).catch((err) => {
             console.log(err);
@@ -176,7 +178,7 @@
             }
             let mrRN = Math.floor(Math.random() * 20)
             console.log(mrRN);
-            console.log(mrdata[mrRN][2]);
+            console.log(mrdata[mrRN]);
             return mrdata[mrRN];
         }).catch((err) => {
             console.log(err);

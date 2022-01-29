@@ -26,6 +26,7 @@ public class CrawlingService {
         List rankNumList = new ArrayList<>();   // 순위 번호 리스트
         List rankNmList = new ArrayList<>();    // 게임 리스트
         List companyList = new ArrayList<>();   // 회사 리스트
+        List imgList = new ArrayList<>(); //이미지 리스트
 
         try {
             doc = Jsoup.connect(url).get();
@@ -37,6 +38,7 @@ public class CrawlingService {
         Elements rankNum = doc.select("tr.ranking-table-rows").select("span.rank");    // 순위 번호(1,2,3...) 가져오기
         Elements rankNm = doc.select("div.game-name > a"); // 게임 이름
         Elements company = doc.select("div.game-info > span.company"); // 회사 명
+        Elements img = doc.select("img.game-icon"); // 이미지
 
         // 크롤링해서 가져온 값의 text만 뽑아서 리스트에 담음.
         for (Element element : rankNum) {
@@ -51,6 +53,11 @@ public class CrawlingService {
             String companyNm = element.text();
             companyList.add(companyNm);
         }
+        for (Element element : img) {
+            String imgSrc = element.attributes().get("src");
+            imgList.add(imgSrc);
+        }
+
         // 반복해서 들어가지 않도록 테이블 안에 내용이 있으면 비우는 과정.
         mapper.delMecaRank();
 
@@ -63,6 +70,7 @@ public class CrawlingService {
             entity.setRankNum((String) rankNumList.get(i));
             entity.setRankNm((String) rankNmList.get(i));
             entity.setCompany((String) companyList.get(i));
+            entity.setImgsrc((String) imgList.get(i));
             list.add(entity);
         }
         mapper.insertRankMecaDb(list);

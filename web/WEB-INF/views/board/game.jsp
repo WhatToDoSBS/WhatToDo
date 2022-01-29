@@ -45,6 +45,8 @@
             <div class="close-area">X</div>
             <div class="modalContent">
             </div>
+            <div class="selected-img">
+            </div>
         </div>
     </div>
 </div>
