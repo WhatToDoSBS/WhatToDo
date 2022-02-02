@@ -1,9 +1,7 @@
 package com.koreait.whattodo.crawling;
 
-import com.koreait.whattodo.model.MecaRankEntity;
-import com.koreait.whattodo.model.PlatformRankEntity;
-import com.koreait.whattodo.model.RatingEntity;
-import com.koreait.whattodo.model.SteamRankEntity;
+import com.koreait.whattodo.model.*;
+import org.apache.ibatis.annotations.Param;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -13,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CrawlingService {
@@ -27,6 +27,7 @@ public class CrawlingService {
         List rankNmList = new ArrayList<>();    // 게임 리스트
         List companyList = new ArrayList<>();   // 회사 리스트
         List imgList = new ArrayList<>(); //이미지 리스트
+        List linkList = new ArrayList<>(); //링크 리스트
 
         try {
             doc = Jsoup.connect(url).get();
@@ -57,6 +58,10 @@ public class CrawlingService {
             String imgSrc = element.attributes().get("src");
             imgList.add(imgSrc);
         }
+        for (Element element : rankNm) {
+            String link = "https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=" + element.text();
+            linkList.add(link);
+        }
 
         // 반복해서 들어가지 않도록 테이블 안에 내용이 있으면 비우는 과정.
         mapper.delMecaRank();
@@ -71,6 +76,7 @@ public class CrawlingService {
             entity.setRankNm((String) rankNmList.get(i));
             entity.setCompany((String) companyList.get(i));
             entity.setImgsrc((String) imgList.get(i));
+            entity.setSelLink((String) linkList.get(i));
             list.add(entity);
         }
         mapper.insertRankMecaDb(list);
@@ -190,7 +196,7 @@ public class CrawlingService {
         List gameNmList = new ArrayList<>();    // 게임 리스트
         List companyList = new ArrayList<>();   // 회사 리스트
         List genreList = new ArrayList<>(); //장르 리스트
-
+        List linkList = new ArrayList<>(); // 링크 리스트
         try {
             doc = Jsoup.connect(url).get();
         } catch (IOException e) {
@@ -201,7 +207,7 @@ public class CrawlingService {
         Elements rankNum = doc.select("td.column-1");    // 순위 번호(1,2,3...) 가져오기
         Elements gameNm = doc.select("td.column-2"); // 게임 이름
         Elements company = doc.select("td.column-3"); // 회사 명
-        Elements genre = doc.select("td.column-4"); // 회사 명
+        Elements genre = doc.select("td.column-4"); // 장르 명
 
         // 크롤링해서 가져온 값의 text만 뽑아서 리스트에 담음.
         for (Element element : rankNum) {
@@ -221,6 +227,10 @@ public class CrawlingService {
             String genreNm = element.text();
             genreList.add(genreNm);
         }
+        for (Element element : gameNm) {
+            String linkNm = "https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=" + element.text();
+            linkList.add(linkNm);
+        }
         // 반복해서 들어가지 않도록 테이블 안에 내용이 있으면 비우는 과정.
         mapper.delPlatformRank();
 
@@ -234,6 +244,7 @@ public class CrawlingService {
             entity.setGameNm((String) gameNmList.get(i));
             entity.setCompany((String) companyList.get(i));
             entity.setGenre((String) genreList.get(i));
+            entity.setSelLink((String) linkList.get(i));
             list.add(entity);
         }
         mapper.insertPlatformRankDb(list);
@@ -247,5 +258,55 @@ public class CrawlingService {
         }
         return platList;
     }
+
+    public void insertPlatformImgList(PlatformRankEntity entity) {
+
+        List platformList = mapper.platformRankList(entity);
+
+        List gameNmList = new ArrayList<>();
+        for (int i = 0; i < 120; i++) {
+            gameNmList.add(((platformList.get(i).toString().split(","))[2]).split("=")[1]);
+//            System.out.println(((platformList.get(i).toString().split(","))[2]).split("=")[1]);
+        }
+
+        List list = new ArrayList<>();
+        for (int i = 0; i < 120; i++) {
+            Document doc = null;
+//            List imgList = new ArrayList<>();
+            try {
+                doc = Jsoup.connect("https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=" + gameNmList.get(i)).get();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            // 크롤링 과정
+            Elements imgs = doc.select("div.detail_info > a > img");    // 순위 번호(1,2,3...) 가져오기
+
+            // 크롤링해서 가져온 값의 src만 뽑아서 리스트에 담음.
+            for (Element element : imgs) {
+                String imgScr = element.attributes().get("src");
+                list.add(imgScr);
+            }
+        }
+        System.out.println(list);
+        System.out.println(gameNmList);
+
+        List<PlatformImgEntity> imgSrcList = new ArrayList<>();
+            for(Object imgsrc : list) {
+                PlatformImgEntity imgEntity = new PlatformImgEntity();
+                imgEntity.setImgsrc((String) imgsrc);
+                imgSrcList.add(imgEntity);
+            }
+            for(Object gameNm : gameNmList) {
+                PlatformImgEntity imgEntity = new PlatformImgEntity();
+                imgEntity.setGameNm((String) gameNm);
+                imgSrcList.add(imgEntity);
+            }
+        System.out.println(imgSrcList);
+            mapper.insPlatformImg(Collections.singletonList(imgSrcList));
+
+    }
 }
+
+
 

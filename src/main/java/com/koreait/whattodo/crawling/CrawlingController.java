@@ -2,15 +2,13 @@ package com.koreait.whattodo.crawling;
 
 import com.google.gson.Gson;
 import com.koreait.whattodo.board.BoardService;
-import com.koreait.whattodo.model.MecaRankEntity;
-import com.koreait.whattodo.model.PlatformRankEntity;
-import com.koreait.whattodo.model.RatingEntity;
-import com.koreait.whattodo.model.SteamRankEntity;
+import com.koreait.whattodo.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
@@ -120,6 +118,9 @@ public class CrawlingController {
         String mecaUrl = "https://www.gamemeca.com/ranking.php";
         crawlingService.insertMeca(mecaUrl);
         crawlingService.insertPlatform(platformUrl);
+        PlatformRankEntity entity = new PlatformRankEntity();
+        PlatformImgEntity imgEntity = new PlatformImgEntity();
+//        crawlingService.insertPlatformImgList(entity);
     }
 
     @GetMapping("/platformrankingjson")

@@ -95,23 +95,97 @@
 
     //뭐하지 버튼
     funBtn = document.querySelector('.fun-btn');
-    let mrRecommandGames = [];
-    let genreRecommandGames = [];
-    let pfRecommandGames = [];
+    ppBtn = document.querySelector('#ppRanBtn');
+    kdBtn = document.querySelector('#kdRanBtn');
+    pfBtn = document.querySelector('#pfRanBtn');
+
+    ppBtn.addEventListener("click", function () {
+        if (ppBtns[0].classList.contains("clicked")) {
+            mecaData.getMrTopRandomGame();
+        } else if (ppBtns[1].classList.contains("clicked")) {
+            mecaData.getMrGreatRandomGame();
+        } else if (ppBtns[2].classList.contains("clicked")) {
+            mecaData.getMrGoodRandomGame();
+        } else mecaData.getMrAllRandomGame();
+
+        modalWindow.style.display = 'flex';
+        modalXBtn.addEventListener('click', () => {
+            modalWindow.style.display = 'none';
+        })
+        window.addEventListener("keyup", (e) => {
+            if(modalWindow.style.display === "flex" && e.key === "Escape") {
+                modalWindow.style.display = "none"
+            }
+        })
+    })
+
+    kdBtn.addEventListener("click", function () {
+        if(kdBtns[0].classList.contains("clicked")) {
+            genreData.getRpgRandomGame();
+        } else if (kdBtns[1].classList.contains("clicked")) {
+            genreData.getFpsRandomGame();
+        } else if (kdBtns[2].classList.contains("clicked")) {
+            genreData.getSportsRandomGame();
+        } else if (kdBtns[3].classList.contains("clicked")) {
+            genreData.getActionRandomGame();
+        } else if (kdBtns[4].classList.contains("clicked")) {
+            genreData.getStrRandomGame();
+        } else if (kdBtns[5].classList.contains("clicked")) {
+            genreData.getOthersRandomGame();
+        } else pfData.getAllPfRandomGame();
+
+        modalWindow.style.display = 'flex';
+        modalXBtn.addEventListener('click', () => {
+            modalWindow.style.display = 'none';
+        })
+        window.addEventListener("keyup", (e) => {
+            if(modalWindow.style.display === "flex" && e.key === "Escape") {
+                modalWindow.style.display = "none"
+            }
+        })
+    })
+
+    pfBtn.addEventListener("click", function () {
+        if(pfBtns[0].classList.contains("clicked")) {
+            pfData.getMobileRandomGame();
+        } else if(pfBtns[1].classList.contains("clicked")) {
+            pfData.getPcRandomGame();
+        } else if(pfBtns[2].classList.contains("clicked")) {
+            pfData.getStRandomGame();
+        } else pfData.getAllPfRandomGame();
+
+        modalWindow.style.display = 'flex';
+        modalXBtn.addEventListener('click', () => {
+            modalWindow.style.display = 'none';
+        })
+        window.addEventListener("keyup", (e) => {
+            if(modalWindow.style.display === "flex" && e.key === "Escape") {
+                modalWindow.style.display = "none"
+            }
+        })
+    })
+
     funBtn.addEventListener('click', function () {
 
-        // let mrRanNum = Math.floor(Math.random()*ppBtns.length)
-
+        // if (pfBtns[0].classList.contains("clicked")) {
+        //     if (kdBtns[0].classList.contains("clicked")) {
+        //
+        //     }
+        // }
+        //
         // if (ppBtns[0].classList.contains("clicked")) {
-        //     mrData[0]();
+        //     mecaData.getMrTopRandomGame();
         // } else if (ppBtns[1].classList.contains("clicked")) {
-        //     mrData[1]();
+        //     mecaData.getMrGreatRandomGame();
         // } else if (ppBtns[2].classList.contains("clicked")) {
-        //     mrData[2]();
-        // } else
-            getMrTopRandomGame();
-        //     getMrGreatRandomGame();
-        // getMrGoodRandomGame();
+        //     mecaData.getMrGoodRandomGame();
+        // } else mecaData.getMrAllRandomGame();
+
+        let randomNum = Math.floor(Math.random()*2)
+        console.log(randomNum)
+        if(randomNum === 1) {
+            mecaData.getMrAllRandomGame();
+        } else pfData.getAllPfRandomGame();
 
         modalWindow.style.display = 'flex';
         modalXBtn.addEventListener('click', () => {
@@ -126,31 +200,56 @@
 
 
     /* 랜덤값 도출 */
-    //메카 순위별 랜덤함수 배열
-
-    //메카 1~10위
-    function getMrTopRandomGame() {
-        fetch("/board/mecarankingjson").then((res) => {
+    //메카 순위별 랜덤함수 객체
+let mecaData = {
+    //메카순위 1~50
+    getMrAllRandomGame : function () {
+        fetch("/board/mecarankingjson"
+).
+    then((res) => {
         return res.json();
     }).then((data) => {
         let mrdata = [];
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 50; i++) {
             mrdata.push(data[i])
         }
-        let mrRN = Math.floor(Math.random() * 10)
-            // console.log(mrRN);
-            console.log(JSON.stringify(mrdata[mrRN].rankNm));
+        let mrRN = Math.floor(Math.random() * 50)
+        // console.log(mrRN);
+        console.log(JSON.stringify(mrdata[mrRN].rankNm));
         // let rGame = JSON.stringify(mrdata[mrRN])
         //     console.log(rGame);
-            document.querySelector(".modalContent").innerText = JSON.stringify(mrdata[mrRN].rankNm) + "는 어때요?"
-            document.querySelector(".selected-img").innerHTML = `<img src=${mrdata[mrRN].imgsrc}>`
+        let selectedGameNm = JSON.stringify(mrdata[mrRN].rankNm).replace("\"", "").replace("\"", "")
+        document.querySelector(".modalContent").innerHTML = `<a href="${mrdata[mrRN].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
+        document.querySelector(".selected-img").innerHTML = `<img src=${mrdata[mrRN].imgsrc}>`
     }).catch((err) => {
         console.log(err);
     });
-}
+},
+
+    //메카 1~10위
+    getMrTopRandomGame : function() {
+        fetch("/board/mecarankingjson").then((res) => {
+            return res.json();
+        }).then((data) => {
+            let mrdata = [];
+            for (let i = 0; i < 10; i++) {
+                mrdata.push(data[i])
+            }
+            let mrRN = Math.floor(Math.random() * 10)
+            // console.log(mrRN);
+            console.log(JSON.stringify(mrdata[mrRN].rankNm));
+            // let rGame = JSON.stringify(mrdata[mrRN])
+            //     console.log(rGame);
+            let selectedGameNm = JSON.stringify(mrdata[mrRN].rankNm).replace("\"", "").replace("\"", "")
+            document.querySelector(".modalContent").innerHTML = `<a href="${mrdata[mrRN].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
+            document.querySelector(".selected-img").innerHTML = `<img src=${mrdata[mrRN].imgsrc}>`
+        }).catch((err) => {
+            console.log(err);
+        });
+    },
 
     //메카 11~30위
-    function getMrGreatRandomGame() {   // 게임순위 데이터
+    getMrGreatRandomGame : function () {   // 게임순위 데이터
         fetch("/board/mecarankingjson").then((res) => {
             return res.json();
         }).then((data) => {
@@ -159,16 +258,17 @@
                 mrdata.push(data[i])
             }
             let mrRN = Math.floor(Math.random() * 20)
-            console.log(mrRN);
-            console.log(mrdata[mrRN]);
-            return mrdata[mrRN];
+
+            let selectedGameNm = JSON.stringify(mrdata[mrRN].rankNm).replace("\"", "").replace("\"", "")
+            document.querySelector(".modalContent").innerHTML = `<a href="${mrdata[mrRN].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
+            document.querySelector(".selected-img").innerHTML = `<img src=${mrdata[mrRN].imgsrc}>`
         }).catch((err) => {
             console.log(err);
         });
-    }
+    },
 
     //메카 31~50위
-    function getMrGoodRandomGame() {   // 게임순위 데이터
+    getMrGoodRandomGame : function () {   // 게임순위 데이터
         fetch("/board/mecarankingjson").then((res) => {
             return res.json();
         }).then((data) => {
@@ -177,203 +277,260 @@
                 mrdata.push(data[i])
             }
             let mrRN = Math.floor(Math.random() * 20)
-            console.log(mrRN);
-            console.log(mrdata[mrRN]);
-            return mrdata[mrRN];
+
+            let selectedGameNm = JSON.stringify(mrdata[mrRN].rankNm).replace("\"", "").replace("\"", "")
+            document.querySelector(".modalContent").innerHTML = `<a href="${mrdata[mrRN].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
+            document.querySelector(".selected-img").innerHTML = `<img src=${mrdata[mrRN].imgsrc}>`
         }).catch((err) => {
             console.log(err);
         });
     }
-
+}
 
     //장르별 랜덤 함수 배열
-let genreData = [
+let genreData = {
     //rpg 랜덤
-    function getRpgRandomGame() {
-        fetch("/board/platformrankingjson").then((res) => {
-            return res.json();
-        }).then((data) => {
-            let mdata = [];
-            for (let i=0; i<Object.keys(data).length; i++) {
-                mdata.push(data[i])
+    getRpgRandomGame : function () {
+        fetch("/board/platformrankingjson"
+).
+    then((res) => {
+        return res.json();
+    }).then((data) => {
+        let mdata = [];
+        for (let i = 0; i < Object.keys(data).length; i++) {
+            mdata.push(data[i])
+        }
+        let rpgdata = [];
+        mdata.forEach((item) => {
+            if (item.genre.includes("롤플레잉") || item.genre.includes("RPG")) {
+                rpgdata.push(item)
             }
-            let rpgdata = [];
-            mdata.forEach((item)=>{
-                if(item.genre.includes("롤플레잉") || item.genre.includes("RPG")) {
-                    rpgdata.push(item)
-                }
-            })
-            let randomNm = Math.floor(Math.random()* rpgdata.length)
-            console.log(rpgdata[randomNm]);
-            return rpgdata[randomNm];
-        }).catch((err) => {
-            console.log(err);
-        });
-    },
+        })
+        let randomNm = Math.floor(Math.random() * rpgdata.length)
+
+        let selectedGameNm = JSON.stringify(rpgdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
+        document.querySelector(".modalContent").innerHTML = `<a href="${rpgdata[randomNm].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
+        document.querySelector(".selected-img").innerHTML = `<img src=${rpgdata[randomNm].imgsrc}>`
+    }).catch((err) => {
+        console.log(err);
+    });
+},
 
     //FPS랜덤
-    function getFpsRandomGame() {
+    getFpsRandomGame : function () {
         fetch("/board/platformrankingjson").then((res) => {
             return res.json();
         }).then((data) => {
             let mdata = [];
-            for (let i=0; i<Object.keys(data).length; i++) {
+            for (let i = 0; i < Object.keys(data).length; i++) {
                 mdata.push(data[i])
             }
             let fpsdata = [];
-            mdata.forEach((item)=>{
-                if(item.genre.includes("FPS") || item.genre.includes("슈팅")) {
+            mdata.forEach((item) => {
+                if (item.genre.includes("FPS") || item.genre.includes("슈팅")) {
                     fpsdata.push(item)
                 }
             })
-            let randomNm = Math.floor(Math.random()* fpsdata.length)
-            console.log(fpsdata[randomNm]);
-            return fpsdata[randomNm];
-        }).catch((err) => {
-            console.log(err);
-        });
-    },
+            let randomNm = Math.floor(Math.random() * fpsdata.length)
 
-    //액션랜덤
-    function getActionRandomGame() {
-        fetch("/board/platformrankingjson").then((res) => {
-            return res.json();
-        }).then((data) => {
-            let mdata = [];
-            for (let i=0; i<Object.keys(data).length; i++) {
-                mdata.push(data[i])
-            }
-            let actiondata = [];
-            mdata.forEach((item)=>{
-                if(item.genre.includes("액션")) {
-                    actiondata.push(item)
-                }
-            })
-            let randomNm = Math.floor(Math.random()* actiondata.length)
-            console.log(actiondata[randomNm]);
-            return actiondata[randomNm];
-        }).catch((err) => {
-            console.log(err);
-        });
-    },
-
-    //전략 랜덤
-    function getStrRandomGame() {
-        fetch("/board/platformrankingjson").then((res) => {
-            return res.json();
-        }).then((data) => {
-            let mdata = [];
-            for (let i=0; i<Object.keys(data).length; i++) {
-                mdata.push(data[i])
-            }
-            let strdata = [];
-            mdata.forEach((item)=>{
-                if(item.genre.includes("전략") || item.genre.includes("RTS")) {
-                    strdata.push(item)
-                }
-            })
-            let randomNm = Math.floor(Math.random()* strdata.length)
-            console.log(strdata[randomNm]);
-            return strdata[randomNm];
-        }).catch((err) => {
-            console.log(err);
-        });
-    },
-
-    //스포츠,레이싱 랜덤
-    function getSportsRandomGame() {
-        fetch("/board/platformrankingjson").then((res) => {
-            return res.json();
-        }).then((data) => {
-            let mdata = [];
-            for (let i=0; i<Object.keys(data).length; i++) {
-                mdata.push(data[i])
-            }
-            let sportsdata = [];
-            mdata.forEach((item)=>{
-                if(item.genre.includes("스포츠") || item.genre.includes("자동차") || item.genre.includes("레이싱")) {
-                    sportsdata.push(item)
-                }
-            })
-            let randomNm = Math.floor(Math.random()* sportsdata.length)
-            console.log(sportsdata[randomNm]);
-            return sportsdata[randomNm];
-        }).catch((err) => {
-            console.log(err);
-        });
-    },
-
-    //기타 랜덤
-    function getOthersRandomGame() {
-        fetch("/board/platformrankingjson").then((res) => {
-            return res.json();
-        }).then((data) => {
-            let mdata = [];
-            for (let i=0; i<Object.keys(data).length; i++) {
-                mdata.push(data[i])
-            }
-
-            let othsData = mdata.filter((item)=>!(item.genre.includes("전략") || item.genre.includes("RTS") || item.genre.includes("스포츠")
-            || item.genre.includes("자동차") || item.genre.includes("레이싱") || item.genre.includes("액션")
-            || item.genre.includes("FPS") || item.genre.includes("슈팅") || item.genre.includes("롤플레잉") || item.genre.includes("RPG")
-            ))
-            let randomNm = Math.floor(Math.random()* othsData.length)
-            console.log(othsData[randomNm]);
-            return othsData[randomNm];
+            let selectedGameNm = JSON.stringify(fpsdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
+            document.querySelector(".modalContent").innerHTML = `<a href="${fpsdata[randomNm].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
+            document.querySelector(".selected-img").innerHTML = `<img src=${fpsdata[randomNm].imgsrc}>`
         }).catch((err) => {
             console.log(err);
         });
     }
-    ]
 
-    //플랫폼 랜덤 함수 배열
-let pfData = [
-    // 모바일게임 랜덤
-    function getMobileRandomGame() {
+,
+
+    //액션랜덤
+    getActionRandomGame : function () {
         fetch("/board/platformrankingjson").then((res) => {
             return res.json();
         }).then((data) => {
             let mdata = [];
-                for (let i=0; i<40; i++) {
-                    mdata.push(data[i])
+            for (let i = 0; i < Object.keys(data).length; i++) {
+                mdata.push(data[i])
+            }
+            let actiondata = [];
+            mdata.forEach((item) => {
+                if (item.genre.includes("액션")) {
+                    actiondata.push(item)
                 }
-                console.log(mdata[Math.floor(Math.random()*40)]);
-            return mdata[Math.floor(Math.random()*40)];
+            })
+            let randomNm = Math.floor(Math.random() * actiondata.length)
+
+            let selectedGameNm = JSON.stringify(actiondata[randomNm].gameNm).replace("\"", "").replace("\"", "")
+            document.querySelector(".modalContent").innerHTML = `<a href="${actiondata[randomNm].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
+            document.querySelector(".selected-img").innerHTML = `<img src=${actiondata[randomNm].imgsrc}>`
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+,
+
+    //전략 랜덤
+    getStrRandomGame : function () {
+        fetch("/board/platformrankingjson").then((res) => {
+            return res.json();
+        }).then((data) => {
+            let mdata = [];
+            for (let i = 0; i < Object.keys(data).length; i++) {
+                mdata.push(data[i])
+            }
+            let strdata = [];
+            mdata.forEach((item) => {
+                if (item.genre.includes("전략") || item.genre.includes("RTS")) {
+                    strdata.push(item)
+                }
+            })
+            let randomNm = Math.floor(Math.random() * strdata.length)
+
+            let selectedGameNm = JSON.stringify(strdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
+            document.querySelector(".modalContent").innerHTML = `<a href="${strdata[randomNm].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
+            document.querySelector(".selected-img").innerHTML = `<img src=${strdata[randomNm].imgsrc}>`
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+,
+
+    //스포츠,레이싱 랜덤
+    getSportsRandomGame : function () {
+        fetch("/board/platformrankingjson").then((res) => {
+            return res.json();
+        }).then((data) => {
+            let mdata = [];
+            for (let i = 0; i < Object.keys(data).length; i++) {
+                mdata.push(data[i])
+            }
+            let sportsdata = [];
+            mdata.forEach((item) => {
+                if (item.genre.includes("스포츠") || item.genre.includes("자동차") || item.genre.includes("레이싱")) {
+                    sportsdata.push(item)
+                }
+            })
+            let randomNm = Math.floor(Math.random() * sportsdata.length)
+
+            let selectedGameNm = JSON.stringify(sportsdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
+            document.querySelector(".modalContent").innerHTML = `<a href="${sportsdata[randomNm].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
+            document.querySelector(".selected-img").innerHTML = `<img src=${sportsdata[randomNm].imgsrc}>`
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+,
+
+    //기타 랜덤
+    getOthersRandomGame : function () {
+        fetch("/board/platformrankingjson").then((res) => {
+            return res.json();
+        }).then((data) => {
+            let mdata = [];
+            for (let i = 0; i < Object.keys(data).length; i++) {
+                mdata.push(data[i])
+            }
+
+            let othsData = mdata.filter((item) => !(item.genre.includes("전략") || item.genre.includes("RTS") || item.genre.includes("스포츠")
+                || item.genre.includes("자동차") || item.genre.includes("레이싱") || item.genre.includes("액션")
+                || item.genre.includes("FPS") || item.genre.includes("슈팅") || item.genre.includes("롤플레잉") || item.genre.includes("RPG")
+            ))
+            let randomNm = Math.floor(Math.random() * othsData.length)
+
+            let selectedGameNm = JSON.stringify(mdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
+            document.querySelector(".modalContent").innerHTML = `<a href="${mdata[randomNm].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
+            document.querySelector(".selected-img").innerHTML = `<img src=${mdata[randomNm].imgsrc}>`
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+}
+
+    //플랫폼 랜덤 함수 배열
+let pfData = {
+    getAllPfRandomGame : function () {
+        fetch("/board/platformrankingjson"
+            ).
+        then((res) => {
+            return res.json();
+        }).then((data) => {
+            let mdata = [];
+            for (let i = 0; i < 120; i++) {
+                mdata.push(data[i])
+            }
+            let randomNm = Math.floor(Math.random() * 120);
+
+            let selectedGameNm = JSON.stringify(mdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
+            document.querySelector(".modalContent").innerHTML = `<a href="${mdata[randomNm].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
+            document.querySelector(".selected-img").innerHTML = `<img src=${mdata[randomNm].imgsrc}>`
         }).catch((err) => {
             console.log(err);
         });
     },
+    // 모바일게임 랜덤
+    getMobileRandomGame : function () {
+        fetch("/board/platformrankingjson"
+).
+    then((res) => {
+        return res.json();
+    }).then((data) => {
+        let mdata = [];
+        for (let i = 0; i < 40; i++) {
+            mdata.push(data[i])
+        }
+        let randomNm = Math.floor(Math.random() * 40);
+
+            let selectedGameNm = JSON.stringify(mdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
+            document.querySelector(".modalContent").innerHTML = `<a href="${mdata[randomNm].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
+            document.querySelector(".selected-img").innerHTML = `<img src=${mdata[randomNm].imgsrc}>`
+    }).catch((err) => {
+        console.log(err);
+    });
+},
+
 // pc온라인 랜덤
-    function getPcRandomGame() {
+    getPcRandomGame : function () {
         fetch("/board/platformrankingjson").then((res) => {
             return res.json();
         }).then((data) => {
             let pdata = [];
-            for (let i=40; i<80; i++) {
+            for (let i = 40; i < 80; i++) {
                 pdata.push(data[i])
             }
-            console.log(pdata[Math.floor(Math.random()*40)]);
-            return pdata[Math.floor(Math.random()*40)];
-        }).catch((err) => {
-            console.log(err);
-        });
-    },
-// 스팀게임 랜덤
-    function getStRandomGame() {
-        fetch("/board/platformrankingjson").then((res) => {
-            return res.json();
-        }).then((data) => {
-            let sdata = [];
-            for (let i=80; i<120; i++) {
-                sdata.push(data[i])
-            }
-            console.log(sdata[Math.floor(Math.random()*40)]);
-            return sdata[Math.floor(Math.random()*40)];
+            let randomNm = Math.floor(Math.random() * 40);
+
+            let selectedGameNm = JSON.stringify(pdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
+            document.querySelector(".modalContent").innerHTML = `<a href="${pdata[randomNm].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
+            document.querySelector(".selected-img").innerHTML = `<img src=${pdata[randomNm].imgsrc}>`
         }).catch((err) => {
             console.log(err);
         });
     }
-    ]
+
+,
+
+// 스팀게임 랜덤
+    getStRandomGame : function () {
+        fetch("/board/platformrankingjson").then((res) => {
+            return res.json();
+        }).then((data) => {
+            let sdata = [];
+            for (let i = 80; i < 120; i++) {
+                sdata.push(data[i])
+            }
+            let randomNm = Math.floor(Math.random() * 40);
+
+            let selectedGameNm = JSON.stringify(sdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
+            document.querySelector(".modalContent").innerHTML = `<a href="${sdata[randomNm].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
+            document.querySelector(".selected-img").innerHTML = `<img src=${sdata[randomNm].imgsrc}>`
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+}
 
 
 

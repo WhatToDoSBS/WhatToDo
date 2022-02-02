@@ -15,6 +15,7 @@
                     <button class="ppBtn">GREAT</button>
                     <button class="ppBtn">GOOD</button>
                 </label>
+                    <button id="ppRanBtn">RANDOM PICK</button>
             </div>
             <div class="choiceBtn_section_line kinds">
                 <label id="kdLb">장르
@@ -25,6 +26,7 @@
                     <button class="kdBtn">전략</button>
                     <button class="kdBtn">기타</button>
                 </label>
+                <button id="kdRanBtn">RANDOM PICK</button>
             </div>
             <div class="choiceBtn_section_line theme">
                 <label id="pfLb">플랫폼
@@ -32,6 +34,7 @@
                     <button class="pfBtn">PC온라인</button>
                     <button class="pfBtn">스팀</button>
                 </label>
+                <button id="pfRanBtn">RANDOM PICK</button>
             </div>
         </div>
         <div class="search_section">
@@ -40,12 +43,14 @@
     <div id="modal" class="modal-overlay" style="display: none">
         <div class="modal-window">
             <div class="modalTitle">
-                <h2>오늘의 게임</h2>
+                오늘의 게임
             </div>
             <div class="close-area">X</div>
+            <div class="selected-img">
+            </div>
             <div class="modalContent">
             </div>
-            <div class="selected-img">
+            <div class="gameLink">
             </div>
         </div>
     </div>

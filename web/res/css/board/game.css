@@ -44,16 +44,16 @@ label { font-size: larger; font-weight: bolder; color: mediumslateblue}
     top: -100px;
     padding: 10px;
 }
-#modal .title {
+.modalTitle {
     padding-left: 10px;
-    display: inline;
+    display: block;
     text-shadow: 1px 1px 2px gray;
     color: white;
+    font-size: xx-large;
+    font-weight: bolder;
+    text-align: center;
+}
 
-}
-#modal .title h2 {
-    display: inline;
-}
 #modal .close-area {
     display: inline;
     float: right;
@@ -63,9 +63,89 @@ label { font-size: larger; font-weight: bolder; color: mediumslateblue}
     color: white;
 }
 
-#modal .content {
+.modalContent {
     margin-top: 20px;
     padding: 0px 10px;
     text-shadow: 1px 1px 2px gray;
     color: white;
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.modalContent a:link {
+    color: whitesmoke;
+}
+
+.modalContent a:hover {
+    color: lightgreen;
+}
+
+.selected-img {
+    text-align: center;
+}
+.selected-img > img {
+    width: 380px;
+    margin: 20px 0px;
+}
+
+#ppRanBtn {
+    /* change bg color to get different hues    */
+    background-color: #03c75a;
+    color: white;
+    padding: 1em 2em;
+    border: none;
+    transition: all .3s ease;
+    border-radius: 5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    outline: none;
+    align-self: center;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 30px;
+}
+
+#ppRanBtn:hover {
+    animation: random-bg .5s linear infinite, grow 1300ms ease infinite;
+}
+#kdRanBtn {
+    /* change bg color to get different hues    */
+    background-color: #03c75a;
+    color: white;
+    padding: 1em 2em;
+    border: none;
+    transition: all .3s ease;
+    border-radius: 5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    outline: none;
+    align-self: center;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 30px;
+}
+
+#kdRanBtn:hover {
+    animation: random-bg .5s linear infinite, grow 1300ms ease infinite;
+}
+#pfRanBtn {
+    /* change bg color to get different hues    */
+    background-color: #03c75a;
+    color: white;
+    padding: 1em 2em;
+    border: none;
+    transition: all .3s ease;
+    border-radius: 5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    outline: none;
+    align-self: center;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 30px;
+}
+
+#pfRanBtn:hover {
+    animation: random-bg .5s linear infinite, grow 1300ms ease infinite;
 }

@@ -13,4 +13,5 @@ public class MecaRankEntity {
     private String rankNm;
     private String company;
     private String imgsrc;
+    private String selLink;
 }

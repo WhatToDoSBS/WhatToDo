@@ -7,12 +7,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class PlatformRankEntity {
-    private int irank;
-    private String rankNum;
+public class PlatformImgEntity {
+    private int isrc;
     private String gameNm;
-    private String company;
-    private String genre;
     private String imgsrc;
-    private String selLink;
 }
