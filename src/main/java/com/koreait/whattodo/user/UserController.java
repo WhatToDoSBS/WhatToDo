@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -41,18 +42,28 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginPost(UserEntity entity, Model model) {
+    public String loginPost(UserEntity entity, Model model, RedirectAttributes reAttr) {
         UserEntity loginUser = userUtils.getLoginUser();
         // 로그인한 유저의 경우 로그인창으로 접근 막음
         if (loginUser != null) {
             return "redirect:/board/main";
         }
+
         int result = service.login(entity);
         System.out.println(result);
-        if (result != 1) {
-            model.addAttribute("result", result);
+        switch (result) {
+            default:
+                reAttr.addFlashAttribute("nmsg", "알 수 없는 이유로 로그인에 실패하였습니다.");
+                reAttr.addFlashAttribute("keymsg", "");
+                return "redirect:/user/login";
+            case 1:
+                return "redirect:/board/main";
+            case 2:
+            case 3:
+                reAttr.addFlashAttribute("nmsg", "");
+                reAttr.addFlashAttribute("keymsg", "아이디 또는 비밀번호가 일치하지 않습니다. <br>다시 시도해 주세요.");
+                return "redirect:/user/login";
         }
-        return "redirect:/board/main";
     }
 
     @GetMapping("/join")
