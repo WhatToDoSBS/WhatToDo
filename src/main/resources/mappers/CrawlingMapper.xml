@@ -59,11 +59,13 @@
 
 <!--    플랫폼 이미지-->
     <insert id="insPlatformImg">
-        insert into platform_imgsrc(imgsrc, gameNm) values
-        <foreach collection="list" open="(" close=")" separator="),(" item="img">
-        imgsrc = #{img.imgsrc} where gameNm = #{img.gameNm}
-        </foreach>
+        insert into platform_img (imgsrc, gameNm) values
+        (#{imgsrc}, #{gameNm})
     </insert>
+
+    <delete id="delPlatformImg">
+        delete from platform_img
+    </delete>
 
     <delete id="delPlatformRank">
         DELETE FROM platform_rankdb

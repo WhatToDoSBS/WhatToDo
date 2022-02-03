@@ -9,6 +9,6 @@ import lombok.ToString;
 @ToString
 public class PlatformImgEntity {
     private int isrc;
-    private String gameNm;
     private String imgsrc;
+    private String gameNm;
 }

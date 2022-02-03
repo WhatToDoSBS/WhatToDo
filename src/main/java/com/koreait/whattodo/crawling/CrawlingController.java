@@ -120,7 +120,7 @@ public class CrawlingController {
         crawlingService.insertPlatform(platformUrl);
         PlatformRankEntity entity = new PlatformRankEntity();
         PlatformImgEntity imgEntity = new PlatformImgEntity();
-//        crawlingService.insertPlatformImgList(entity);
+        crawlingService.insertPlatformImgList(entity);
     }
 
     @GetMapping("/platformrankingjson")

@@ -261,26 +261,31 @@ public class CrawlingService {
 
     public void insertPlatformImgList(PlatformRankEntity entity) {
 
+        mapper.delPlatformImg();
         List platformList = mapper.platformRankList(entity);
 
-        List gameNmList = new ArrayList<>();
+        List<String> gameNmList = new ArrayList<>();
         for (int i = 0; i < 120; i++) {
             gameNmList.add(((platformList.get(i).toString().split(","))[2]).split("=")[1]);
 //            System.out.println(((platformList.get(i).toString().split(","))[2]).split("=")[1]);
         }
 
-        List list = new ArrayList<>();
+        List<String> list = new ArrayList<>();
         for (int i = 0; i < 120; i++) {
             Document doc = null;
 //            List imgList = new ArrayList<>();
             try {
                 doc = Jsoup.connect("https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=" + gameNmList.get(i)).get();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
             // 크롤링 과정
             Elements imgs = doc.select("div.detail_info > a > img");    // 순위 번호(1,2,3...) 가져오기
+            Elements name = doc.select("div.title._title_ellipsis > a > strong");
+
+
 
             // 크롤링해서 가져온 값의 src만 뽑아서 리스트에 담음.
             for (Element element : imgs) {
@@ -289,21 +294,25 @@ public class CrawlingService {
             }
         }
         System.out.println(list);
-        System.out.println(gameNmList);
+        List<PlatformImgEntity> imgList = new ArrayList<>();
+        for(String item : list) {
+            System.out.println("item : " + item);
+            PlatformImgEntity imgEntity = new PlatformImgEntity();
+            imgEntity.setImgsrc(item);
+            mapper.insPlatformImg(imgEntity);
+        }
+//        System.out.println(gameNmList);
 
-        List<PlatformImgEntity> imgSrcList = new ArrayList<>();
-            for(Object imgsrc : list) {
-                PlatformImgEntity imgEntity = new PlatformImgEntity();
-                imgEntity.setImgsrc((String) imgsrc);
-                imgSrcList.add(imgEntity);
-            }
-            for(Object gameNm : gameNmList) {
-                PlatformImgEntity imgEntity = new PlatformImgEntity();
-                imgEntity.setGameNm((String) gameNm);
-                imgSrcList.add(imgEntity);
-            }
-        System.out.println(imgSrcList);
-            mapper.insPlatformImg(Collections.singletonList(imgSrcList));
+//        List<PlatformImgEntity> imgSrcList = new ArrayList<>();
+//
+//            for(int i=0;i<120;i++) {
+//                PlatformImgEntity imgEntity = new PlatformImgEntity();
+//                imgEntity.setImgsrc((String) list.get(i));
+//                imgEntity.setGameNm((String) gameNmList.get(i));
+//                imgSrcList.add(imgEntity);
+//            }
+//
+//        System.out.println(imgSrcList);
 
     }
 }
