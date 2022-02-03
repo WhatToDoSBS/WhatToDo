@@ -1,6 +1,7 @@
 package com.koreait.whattodo.webtoon;
 
 import com.koreait.whattodo.model.WebtoonEntity;
+import com.koreait.whattodo.model.WebtoonGenreEntity;
 import com.koreait.whattodo.model.WebtoonRecommandEntity;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -57,7 +58,6 @@ public class WebtoonService {
                 String[] nameArr = name.split("\\s");   // 공백(정규식 : \s)으로 구분
                 String naming = nameArr[0] + "일"; // nameArr에 첫번째에는 월요, 화요 이런 식으로 담기는데 첫번째만 빼주고 '일'을 덧붙임
                 weekend = naming;
-                System.out.println(naming);
             }
             for(Element element: toonNm) {    // 링크
                 String link = element.getElementsByAttribute("href").attr("href");
@@ -77,12 +77,6 @@ public class WebtoonService {
                 list.add(entity);
                 mapper.insertWebtoon(list);
             }
-
-            System.out.println("toonNmList" + toonNmList);
-            System.out.println("toonWriterList" + toonWriterList);
-            System.out.println("toonRatingList" + toonRatingList);
-            System.out.println("toonImgList" + toonImgList);
-            System.out.println("toonLinkList" + toonLinkList);
 
             // 요일 추천 웹툰 크롤링
             Elements toonRecommandNm = document.select("div.webtoon_spot").select("li > dl > dt > a > strong"); // 웹툰 이름
@@ -109,7 +103,8 @@ public class WebtoonService {
             }
             for(Element element: toonRecommandLink) {    // 평점
                 String name = element.getElementsByAttribute("href").attr("href");
-                toonRecommandLinkList.add(name);
+                String fullLink = "https://comic.naver.com" + name;
+                toonRecommandLinkList.add(fullLink);
             }
             for(Element element: toonRecommandRating) {    // 평점
                 String name = element.text();
@@ -125,13 +120,6 @@ public class WebtoonService {
                 String link = element.getElementsByAttribute("src").attr("src");
                 toonRecommandImgList.add(link);
             }
-
-            System.out.println("toonRecommandNmList : " + toonRecommandNmList);
-            System.out.println("toonRecommandWriterList : " + toonRecommandWriterList);
-            System.out.println("toonRecommandLinkList : " + toonRecommandLinkList);
-            System.out.println("toonRecommandRatingList : " + toonRecommandRatingList);
-            System.out.println("toonRecommandImgList : " + toonRecommandImgList);
-            System.out.println("toonRecommandWhatWeekend : " + toonRecommandWhatWeekend);
 
             for(int i=0;i<toonRecommandNmList.size();i++) {
                 List<WebtoonRecommandEntity> list = new ArrayList<>();
@@ -179,7 +167,6 @@ public class WebtoonService {
                 String name =element.getElementsByAttribute("href").attr("href");
                 String fullLink = "https://comic.naver.com" + name;
                 toonLinkList.add(fullLink);
-                System.out.println("링크 : " + fullLink);
             }
             for(int i=0; i<toonNmList.size();i++) {
                 List<WebtoonRecommandEntity> webtoonList = new ArrayList<>();
@@ -195,14 +182,116 @@ public class WebtoonService {
             e.printStackTrace();
         }
     }
+    public void insertGenreWebtoon(String url) {
+        // 액세스 처리
+        try {
+            Document document = Jsoup.connect(url).userAgent("Chrome/5.0").get(); // 403 error 처리(권한 부여)
+
+            Elements toonNm = document.select("div.thumb").select("a");
+            Elements toonImg = document.select("div.thumb").select("a").select("img");  // 이미지, 완결 구분
+            Elements toonWriter = document.select("ul.img_list").select("dd.desc").select("a");
+            Elements toonLink = document.select("div.thumb").select("a");
+            Elements genre = document.select("h3.sub_tit");
+            List<String> toonNmList = new ArrayList<>();
+            List<String> toonImgList = new ArrayList<>();
+            List<String> toonWriterList = new ArrayList<>();
+            List<String> toonLinkList = new ArrayList<>();
+
+            for(Element element: toonNm) {    // 웹툰 이름
+                String name =element.getElementsByAttribute("title").attr("title");
+                toonNmList.add(name);
+            }
+            for(Element element: toonImg) {    // 웹툰 이미지
+                String name =element.getElementsByAttribute("src").attr("src");
+                if(!name.contains("https://ssl.pstatic.net/static/comic/images/migration/webtoon/ico_finish.gif")) { // jpg 있는 것만 빼내오기(아니면 완결 이미지도 포함됨)
+                    toonImgList.add(name);
+                }
+            }
+            for(Element element: toonWriter) {    // 웹툰 작가
+                String name =element.text();
+                toonWriterList.add(name);
+            }
+            for(Element element: toonLink) {    // 웹툰 링크
+                String name =element.getElementsByAttribute("href").attr("href");
+                String fullLink = "https://comic.naver.com" + name;
+                toonLinkList.add(fullLink);
+            }
+
+            for(int i=0; i<toonNmList.size();i++) {
+                List<WebtoonGenreEntity> list = new ArrayList<>();
+                WebtoonGenreEntity entity = new WebtoonGenreEntity();
+                entity.setNm(toonNmList.get(i));
+                entity.setImg(toonImgList.get(i));
+                entity.setWriter(toonWriterList.get(i));
+                entity.setLink(toonLinkList.get(i));
+                entity.setGenre(genre.text().substring(0,3));   // 0번째부터 3번째 전까지(2번째 인덱스까지) 자르기
+                list.add(entity);
+                mapper.insertGenredWebtoon(list);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void insertGenreStateWebtoon(String url) {
+        // 액세스 처리
+        try {
+            Document document = Jsoup.connect(url).userAgent("Chrome/5.0").get(); // 403 error 처리(권한 부여)
+
+            Elements toonNm = document.select("div.thumb").select("a");
+            Elements toonImg = document.select("div.thumb").select("a").select("img");  // 이미지, 완결 구분
+            Elements toonWriter = document.select("ul.img_list").select("dd.desc").select("a");
+            Elements toonLink = document.select("div.thumb").select("a");
+            Elements genre = document.select("h3.sub_tit");
+            List<String> toonNmList = new ArrayList<>();
+            List<String> toonImgList = new ArrayList<>();
+            List<String> toonWriterList = new ArrayList<>();
+            List<String> toonLinkList = new ArrayList<>();
+
+            for(Element element: toonNm) {    // 웹툰 이름
+                String name =element.getElementsByAttribute("title").attr("title");
+                toonNmList.add(name);
+            }
+            for(Element element: toonImg) {    // 웹툰 이미지
+                String name =element.getElementsByAttribute("src").attr("src");
+                if(!name.contains("https://ssl.pstatic.net/static/comic/images/migration/webtoon/ico_finish.gif")) { // jpg 있는 것만 빼내오기(아니면 완결 이미지도 포함됨)
+                    toonImgList.add(name);
+                }
+            }
+            for(Element element: toonWriter) {    // 웹툰 작가
+                String name =element.text();
+                toonWriterList.add(name);
+            }
+            for(Element element: toonLink) {    // 웹툰 링크
+                String name =element.getElementsByAttribute("href").attr("href");
+                String fullLink = "https://comic.naver.com" + name;
+                toonLinkList.add(fullLink);
+            }
+
+            for(int i=0; i<toonNmList.size();i++) {
+                List<WebtoonGenreEntity> list = new ArrayList<>();
+                WebtoonGenreEntity entity = new WebtoonGenreEntity();
+                entity.setNm(toonNmList.get(i));
+                entity.setImg(toonImgList.get(i));
+                entity.setWriter(toonWriterList.get(i));
+                entity.setLink(toonLinkList.get(i));
+                entity.setState(genre.text().substring(0,3));   // 0번째부터 3번째 전까지(2번째 인덱스까지) 자르기, 완결 부분만 state 부분에 들어감
+                list.add(entity);
+                mapper.insertGenredWebtoon(list);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void delWebtoon() { mapper.delWebtoon(); }
     public void delRecommandWebtoon() { mapper.delRecommandWebtoon(); }
-
+    public void delGenreWebtoon() { mapper.delGenreWebtoon(); }
 
     public List<WebtoonEntity> listWebtoon() { return mapper.webtoonList(); }
     public List<WebtoonEntity> listWebtoonRandom() { return mapper.webtoonListRandom(); }
     public List<WebtoonRecommandEntity> listRecommandWebtoon() { return mapper.webtoonRecommandList(); }
     public List<WebtoonRecommandEntity> listRecommandWebtoonRandom() { return mapper.webtoonRecommandListRandom(); }
+    public List<WebtoonGenreEntity> listGenreAll() { return mapper.webtoonGenreListAll(); }
+    public List<WebtoonGenreEntity> listGenreBtnRandom(WebtoonGenreEntity entity) { return mapper.webtoonGenreListBtnRandom(entity); }
 
 }

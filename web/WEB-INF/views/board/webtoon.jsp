@@ -25,7 +25,7 @@
         </ul>
     </div>
     <div class="webtoon_box">
-        <div class="button_box">
+        <div class="choiceBtn_section">
             <label for="">장르</label>
             <button>일상</button>
             <button>개그</button>
@@ -37,6 +37,10 @@
             <button>스릴러</button>
             <button>시대극</button>
             <button>스포츠</button>
+            <button id="randomSubmitBtn" class="fun-btn">RANDOM</button>
+        </div>
+        <div class="result_box">
+
         </div>
         <div class="naver_section">
             <ul>

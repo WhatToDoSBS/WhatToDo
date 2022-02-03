@@ -12,6 +12,7 @@ public class Utils {
     public static void insertWebtoon(WebtoonService service) {
         service.delWebtoon();
         service.delRecommandWebtoon();
+        service.delGenreWebtoon();
         service.insertWebtoon(Const.NAVER_WEBTOON_1);
         service.insertWebtoon(Const.NAVER_WEBTOON_2);
         service.insertWebtoon(Const.NAVER_WEBTOON_3);
@@ -19,7 +20,21 @@ public class Utils {
         service.insertWebtoon(Const.NAVER_WEBTOON_5);
         service.insertWebtoon(Const.NAVER_WEBTOON_6);
         service.insertWebtoon(Const.NAVER_WEBTOON_7);
+
         service.insertMainWebtoon(Const.NAVER_WEBTOON_MAIN);
+        // 장르별 구분
+        service.insertGenreWebtoon(Const.NAVER_WEBTOON_DAILY);
+        service.insertGenreWebtoon(Const.NAVER_WEBTOON_COMIC);
+        service.insertGenreWebtoon(Const.NAVER_WEBTOON_FANTASY);
+        service.insertGenreWebtoon(Const.NAVER_WEBTOON_ACTION);
+        service.insertGenreWebtoon(Const.NAVER_WEBTOON_DRAMA);
+        service.insertGenreWebtoon(Const.NAVER_WEBTOON_PURE);
+        service.insertGenreWebtoon(Const.NAVER_WEBTOON_SENSIBILITY);
+        service.insertGenreWebtoon(Const.NAVER_WEBTOON_THRILL);
+        service.insertGenreWebtoon(Const.NAVER_WEBTOON_HISTORICAL);
+        service.insertGenreWebtoon(Const.NAVER_WEBTOON_SPORTS);
+        // 완결 웹툰 (state에 들어감)
+        service.insertGenreStateWebtoon(Const.NAVER_WEBTOON_FINISH);
     }
 
     // 0부터 사이즈만큼의 랜덤 정수값을 반환환
