@@ -33,7 +33,7 @@
     </select>
 
     <select id="webtoonListRandom" resultType="WebtoonEntity">
-        SELECT * FROM webtoon ORDER BY RAND() LIMIT 12
+        SELECT * FROM webtoon ORDER BY RAND() LIMIT 10
     </select>
 
     <select id="webtoonRecommandListRandom" resultType="WebtoonRecommandEntity">

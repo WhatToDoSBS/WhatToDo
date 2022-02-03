@@ -6,6 +6,8 @@
     --main-color-dark:#b1bfca;
     --main-color-darker:rgb(145 145 146);
     --menu-radius:10px;
+    --surface-color: #fff;
+    --curve: 40;
 }
 
 /* -----색상------- */
@@ -33,6 +35,7 @@
     margin: 0;
     list-style: none;
     text-decoration: none;
+    box-sizing: border-box;
 }
 
 html,
@@ -45,7 +48,7 @@ table { border-collapse: collapse; }
 
 ul { padding: 0; }
 
-a:visited { color: black; }
+a:visited, a { color: black; }
 
 /* --- header --- */
 

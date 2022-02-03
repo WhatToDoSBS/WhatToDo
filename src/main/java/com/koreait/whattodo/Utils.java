@@ -19,6 +19,7 @@ public class Utils {
         service.insertWebtoon(Const.NAVER_WEBTOON_5);
         service.insertWebtoon(Const.NAVER_WEBTOON_6);
         service.insertWebtoon(Const.NAVER_WEBTOON_7);
+        service.insertMainWebtoon(Const.NAVER_WEBTOON_MAIN);
     }
 
     // 0부터 사이즈만큼의 랜덤 정수값을 반환환

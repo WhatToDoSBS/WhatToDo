@@ -18,4 +18,5 @@ public class Const {
     public static final String NAVER_WEBTOON_5 = "https://comic.naver.com/webtoon/weekdayList?week=fri&order=User&view=image";
     public static final String NAVER_WEBTOON_6 = "https://comic.naver.com/webtoon/weekdayList?week=sat&order=User&view=image";
     public static final String NAVER_WEBTOON_7 = "https://comic.naver.com/webtoon/weekdayList?week=sun&order=User&view=image";
+    public static final String NAVER_WEBTOON_MAIN = "https://comic.naver.com/index";
 }

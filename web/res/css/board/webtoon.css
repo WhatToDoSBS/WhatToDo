@@ -22,6 +22,7 @@ h1 {
 .webtoon_box {
     display: flex;
     text-align: center;
+    flex-direction: column;
 }
 
 .webtoon_box .webtoon_nm {
@@ -35,16 +36,19 @@ h1 {
     justify-content: center;
 }
 
-.webtoon_box .naver_section #webtoon_databox li {
+.webtoon_box .naver_section ul {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.webtoon_box .naver_section ul li {
+    margin: 0 10px;
+}
+
+.webtoon_box .naver_section #webtoon_databox span {
     display: block;
     width: 83px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-
-
-.webtoon_box .kakao_section {
-    flex: 3 1 auto;
-}
-

@@ -61,7 +61,8 @@ public class WebtoonService {
             }
             for(Element element: toonNm) {    // 링크
                 String link = element.getElementsByAttribute("href").attr("href");
-                toonLinkList.add(link);
+                String fullLink = "https://comic.naver.com" + link;
+                toonLinkList.add(fullLink);
             }
 
             for(int i=0;i<toonNmList.size();i++) {
@@ -148,32 +149,24 @@ public class WebtoonService {
             e.printStackTrace();
         }
     }
-
-    public void delWebtoon() { mapper.delWebtoon(); }
-    public void delRecommandWebtoon() { mapper.delRecommandWebtoon(); }
-
-    public List<WebtoonEntity> listNodatabaseWebtoon(String url) {
-        List<WebtoonEntity> webtoonList = new ArrayList<>();
+    public void insertMainWebtoon(String url) {
         // 액세스 처리
         try {
             Document document = Jsoup.connect(url).userAgent("Chrome/5.0").get(); // 403 error 처리(권한 부여)
 
-            // 월~일 웹툰 정보 크롤링
-            List toonLinkList = new ArrayList();
-            String weekend = null;
-
             Elements toonNm = document.select("ul#genreRecommand").select("div.genreRecomInfo2").select("h6 > a").select("span");
             Elements toonImg = document.select("ul#genreRecommand").select("div.genreRecomImg2").select("a").select("img");
             Elements toonWriter = document.select("ul#genreRecommand").select("div.genreRecomInfo2").select("span.user").select("a");
+            Elements toonLink = document.select("ul#genreRecommand").select("div.genreRecomImg2 > a");
             List<String> toonNmList = new ArrayList<>();
             List<String> toonImgList = new ArrayList<>();
             List<String> toonWriterList = new ArrayList<>();
+            List<String> toonLinkList = new ArrayList<>();
 
             for(Element element: toonImg) {    // 웹툰 이미지
                 String name =element.getElementsByAttribute("src").attr("src");
                 toonImgList.add(name);
             }
-
             for(Element element: toonNm) {    // 웹툰 이름
                 String name =element.text();
                 toonNmList.add(name);
@@ -182,18 +175,31 @@ public class WebtoonService {
                 String name =element.text();
                 toonWriterList.add(name);
             }
+            for(Element element: toonLink) {    // 웹툰 링크
+                String name =element.getElementsByAttribute("href").attr("href");
+                String fullLink = "https://comic.naver.com" + name;
+                toonLinkList.add(fullLink);
+                System.out.println("링크 : " + fullLink);
+            }
             for(int i=0; i<toonNmList.size();i++) {
-                WebtoonEntity entity = new WebtoonEntity();
+                List<WebtoonRecommandEntity> webtoonList = new ArrayList<>();
+                WebtoonRecommandEntity entity = new WebtoonRecommandEntity();
                 entity.setImg(toonImgList.get(i));
                 entity.setWriter(toonWriterList.get(i));
                 entity.setNm(toonNmList.get(i));
+                entity.setLink(toonLinkList.get(i));
                 webtoonList.add(entity);
+                mapper.insertRecommandWebtoon(webtoonList);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return webtoonList;
     }
+
+    public void delWebtoon() { mapper.delWebtoon(); }
+    public void delRecommandWebtoon() { mapper.delRecommandWebtoon(); }
+
+
     public List<WebtoonEntity> listWebtoon() { return mapper.webtoonList(); }
     public List<WebtoonEntity> listWebtoonRandom() { return mapper.webtoonListRandom(); }
     public List<WebtoonRecommandEntity> listRecommandWebtoon() { return mapper.webtoonRecommandList(); }
