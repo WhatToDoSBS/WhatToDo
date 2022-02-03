@@ -1,11 +1,10 @@
 package com.koreait.whattodo.board;
 
 import com.google.gson.Gson;
+import com.koreait.whattodo.Utils;
 import com.koreait.whattodo.crawling.CrawlingService;
-import com.koreait.whattodo.model.MecaRankEntity;
-import com.koreait.whattodo.model.RatingEntity;
-import com.koreait.whattodo.model.SteamRankEntity;
-import com.koreait.whattodo.model.WebtoonEntity;
+import com.koreait.whattodo.model.*;
+import com.koreait.whattodo.webtoon.WebtoonController;
 import com.koreait.whattodo.webtoon.WebtoonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +30,8 @@ public class BoardController2 {
 
     @Autowired
     private WebtoonService webtoonService;
+
+    private Utils utils;
 
     @GetMapping("/netflix")
     public void netflix() {
@@ -63,20 +64,26 @@ public class BoardController2 {
     @GetMapping("/main")
     public void main(Model model, RatingEntity ratingEntity) {
         String ratingUrl = "https://namu.wiki/w/%EB%A9%94%ED%83%80%ED%81%AC%EB%A6%AC%ED%8B%B1/MUST-PLAY%20%EB%AA%A9%EB%A1%9D";
-        crawlingService.insertRating(ratingUrl);
+        String naverWebtoonURL = "https://comic.naver.com/webtoon/weekdayList?week=mon&order=User&view=image";  // 월요일&인기순
 
-        List<RatingEntity> list = crawlingService.ratingList(ratingEntity);
+        // 웹툰
         List<WebtoonEntity> webtoonList = webtoonService.listWebtoon();
+        if(webtoonList.size()==0) { // 웹툰 리스트 없으면 크롤링해주고 값 넣어줌
+            webtoonService.insertWebtoon(naverWebtoonURL);
+            webtoonList = webtoonService.listWebtoon();
+        }
 
-        // 1부터 List갯수만큼의 난수 생성
-        Random random = new Random(); //랜덤 객체 생성(디폴트 시드값 : 현재시간)
-        random.setSeed(System.currentTimeMillis()); //시드값 설정을 따로 할수도 있음
-        int randomGameNum = random.nextInt(list.size())+1;
-        int randomWebtoon = random.nextInt(webtoonList.size())+1;
-        System.out.println("랜덤 [게임] 숫자 : " + (random.nextInt(list.size())+1));
-        System.out.println("랜덤 [웹툰] 숫자 : " + (random.nextInt(list.size())+1));
-        model.addAttribute("randomGame", list.get(randomGameNum-1).getGameNm());
-        model.addAttribute("randomWebtoon", webtoonList.get(randomWebtoon-1));
+        // 게임
+        crawlingService.insertRating(ratingUrl);
+        List<RatingEntity> list = crawlingService.ratingList(ratingEntity);
+
+        // 랜덤번째 리스트를 전달해줌
+        int randomGameNum = utils.randomNumOutput(list.size());
+        int randomWebtoon = utils.randomNumOutput(webtoonList.size());
+        System.out.println("랜덤 [게임] 숫자 : " + randomGameNum);
+        System.out.println("랜덤 [웹툰] 숫자 : " + randomWebtoon);
+        model.addAttribute("randomGame", list.get(randomGameNum).getGameNm());
+        model.addAttribute("randomWebtoon", webtoonList.get(randomWebtoon));
     }
 
     @GetMapping("/book")

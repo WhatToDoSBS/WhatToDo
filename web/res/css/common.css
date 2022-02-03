@@ -6,6 +6,8 @@
     --main-color-dark:#b1bfca;
     --main-color-darker:rgb(145 145 146);
     --menu-radius:10px;
+    --surface-color: #fff;
+    --curve: 40;
 }
 
 /* -----색상------- */
@@ -24,10 +26,16 @@
     flex-direction: column;
 }
 
+/* -----Font 관련----------*/
+.font-14px {
+    font-size: 14px;
+}
+
 * {
     margin: 0;
     list-style: none;
     text-decoration: none;
+    box-sizing: border-box;
 }
 
 html,
@@ -38,7 +46,9 @@ body {
 
 table { border-collapse: collapse; }
 
-a:visited { color: black; }
+ul { padding: 0; }
+
+a:visited, a { color: black; }
 
 /* --- header --- */
 

@@ -5,8 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class WebtoonEntity {
-    private int wnum;
+public class WebtoonRecommandEntity {
+    private int rnum;
     private String nm;
     private String writer;
     private String rating;

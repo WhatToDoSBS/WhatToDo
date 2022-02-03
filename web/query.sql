@@ -93,3 +93,15 @@ CREATE TABLE webtoon (
                          weekend VARCHAR(10),
                          homepage INT DEFAULT 1
 );
+
+// 추천 웹툰 DB
+CREATE TABLE webtoon_recommand (
+                                   wrnum INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                                   nm VARCHAR(50) NOT NULL,
+                                   writer VARCHAR(20) NOT NULL,
+                                   rating VARCHAR(10),
+                                   img VARCHAR(300),
+                                   weekend VARCHAR(10),
+                                   link VARCHAR(100),
+                                   homepage INT DEFAULT 1
+);
