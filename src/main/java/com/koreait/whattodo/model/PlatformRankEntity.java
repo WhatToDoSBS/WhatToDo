@@ -14,5 +14,5 @@ public class PlatformRankEntity {
     private String company;
     private String genre;
     private String imgsrc;
-    private String selLink;
+    private String selLink;//이거
 }

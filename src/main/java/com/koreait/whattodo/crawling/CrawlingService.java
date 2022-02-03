@@ -261,16 +261,18 @@ public class CrawlingService {
 
     public void insertPlatformImgList(PlatformRankEntity entity) {
 
+
         mapper.delPlatformImg();
         List platformList = mapper.platformRankList(entity);
 
-        List<String> gameNmList = new ArrayList<>();
+        List<String> gameNmList = new ArrayList<>(); //여기서 게임 이름은 가져왔거든? 저기 db에 있는거
         for (int i = 0; i < 120; i++) {
             gameNmList.add(((platformList.get(i).toString().split(","))[2]).split("=")[1]);
 //            System.out.println(((platformList.get(i).toString().split(","))[2]).split("=")[1]);
         }
 
-        List<String> list = new ArrayList<>();
+        List<PlatformImgEntity> list = new ArrayList<>();
+//        List<String > nameList = new ArrayList<>();
         for (int i = 0; i < 120; i++) {
             Document doc = null;
 //            List imgList = new ArrayList<>();
@@ -283,25 +285,45 @@ public class CrawlingService {
 
             // 크롤링 과정
             Elements imgs = doc.select("div.detail_info > a > img");    // 순위 번호(1,2,3...) 가져오기
-            Elements name = doc.select("div.title._title_ellipsis > a > strong");
+//            Elements name = doc.select("div.title_area.type_keep._title_area > h2 > a > strong");//<-얘임 얘 필요 없제?? 그렇네요 필요 없을듯 하네요
 
 
-
-            // 크롤링해서 가져온 값의 src만 뽑아서 리스트에 담음.
-            for (Element element : imgs) {
-                String imgScr = element.attributes().get("src");
-                list.add(imgScr);
+// 31어?>??? 31 없네?? 네 왜 없지..?저렇게해서 널값 잡아낼 수 있으면 거기 디비에 굳이 업데이트 안하고 원래하던대로 이 테이블에 그대로 인서ㅏ트해도 ㄱㅊㄱㅊ 어 그러네요 ? ㅋㅋㅋㅋ
+            // 크롤링해서 가져온 값의 src만 뽑아서 리스트에 담음. 그럼 지금와 지금 120개 된거 같은데 근데 2번임ㅋㅋㅋㅋㅋ ㅋㅋㅋㅋㅋ뭐지....
+            //<- 이거 엔티티 포문 안에서 해야되는거 아니야? 아닌가 아
+            if(imgs.size() != 0) {
+                for (Element element : imgs) {
+                    System.out.println(i);
+                    PlatformImgEntity platformImgEntity = new PlatformImgEntity();
+                    String imgSrc = element.attributes().get("src");
+                    platformImgEntity.setGameNm(gameNmList.get(i));
+                    platformImgEntity.setImgsrc(imgSrc);
+                    list.add(platformImgEntity);
+                }
+            } else {
+                PlatformImgEntity platformImgEntity = new PlatformImgEntity();
+                platformImgEntity.setGameNm(gameNmList.get(i));
+                System.out.println(platformImgEntity);
+                list.add(platformImgEntity);
             }
+            // 근데 그럴려면 그 저기에 있는 애들 크롤링 하는거 같이 반복문에 넣어야 되는데 그걸 어떻게 해야할지....
+//            for (Element element : name) {
+//                String gameNm = element.text();
+//                System.out.println(gameNm);
+//                nameList.add(gameNm); 아마 저거 검색해서 크롤링하는데 태그가 없는듯 아니면 혹시 null으로 처리할 수 있나? 없으면
+//            }언수야 이거보면 120번 돌거든? element는 120개인데 크롤링하면서이게 이걸로 아까 했었는데
         }
+        System.out.println("list size : " + list.size());
         System.out.println(list);
         List<PlatformImgEntity> imgList = new ArrayList<>();
-        for(String item : list) {
-            System.out.println("item : " + item);
+        for(int i=0;i<120;i++) {
             PlatformImgEntity imgEntity = new PlatformImgEntity();
-            imgEntity.setImgsrc(item);
+            imgEntity.setImgsrc(list.get(i).getImgsrc());
+            imgEntity.setGameNm(list.get(i).getGameNm());
             mapper.insPlatformImg(imgEntity);
         }
-//        System.out.println(gameNmList);
+
+//        System.out.println(gameNmList); 뭔가 순서도 좀 이상한거 같지 않음??
 
 //        List<PlatformImgEntity> imgSrcList = new ArrayList<>();
 //
