@@ -37,6 +37,8 @@ public class WebtoonController {
         model.addAttribute("webtoonListRandom", webtoonService.listWebtoonRandom());
         model.addAttribute("webtoonRecommandListRandom", webtoonService.listRecommandWebtoonRandom());
 
+        model.addAttribute("nodatabaseWebtoonList", webtoonService.listNodatabaseWebtoon("https://comic.naver.com/index"));
+
     }
 
     @GetMapping("/webtooncrawling")

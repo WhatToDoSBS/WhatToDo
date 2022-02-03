@@ -14,18 +14,24 @@
     </div>
     <div class="webtoon_box">
         <div class="naver_section">
-            <h3>네이버</h3>
             <ul>
-                    <c:forEach var="item" items="${webtoonListRandom}">
-                        <div id="webtoon_databox">
+                <c:forEach var="item" items="${webtoonListRandom}">
+                    <div id="webtoon_databox">
                         <li><img src="${item.img}" alt=""></li>
-                        <li class="font-14px">${item.nm}</li>
-                        </div>
-                    </c:forEach>
+                        <li class="font-14px webtoon_nm">${item.nm}</li>
+                    </div>
+                </c:forEach>
             </ul>
         </div>
         <div class="kakao_section">
-            <h3>카카오</h3>
+            <ul>
+                <c:forEach var="item" items="${nodatabaseWebtoonList}">
+                    <div id="webtoon_databox">
+                        <li><img src="${item.img}" alt=""></li>
+                        <li class="font-14px webtoon_nm">${item.nm}</li>
+                    </div>
+                </c:forEach>
+            </ul>
         </div>
     </div>
     <button class="crawlingBtn">크롤링</button>

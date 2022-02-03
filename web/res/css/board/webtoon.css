@@ -24,14 +24,27 @@ h1 {
     text-align: center;
 }
 
-.webtoon_box .naver_section {
-    flex: 0 1 auto;
+.webtoon_box .webtoon_nm {
+    margin: 5px 0;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
-.webtoon_box .naver_section #webtoon_databox {
-    border: 1px solid var(--main-color);
+.webtoon_box .naver_section {
+    flex: 2 1 auto;
+    display: flex;
+    justify-content: center;
 }
+
+.webtoon_box .naver_section #webtoon_databox li {
+    display: block;
+    width: 83px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 
 .webtoon_box .kakao_section {
     flex: 3 1 auto;
 }
+

@@ -152,6 +152,48 @@ public class WebtoonService {
     public void delWebtoon() { mapper.delWebtoon(); }
     public void delRecommandWebtoon() { mapper.delRecommandWebtoon(); }
 
+    public List<WebtoonEntity> listNodatabaseWebtoon(String url) {
+        List<WebtoonEntity> webtoonList = new ArrayList<>();
+        // 액세스 처리
+        try {
+            Document document = Jsoup.connect(url).userAgent("Chrome/5.0").get(); // 403 error 처리(권한 부여)
+
+            // 월~일 웹툰 정보 크롤링
+            List toonLinkList = new ArrayList();
+            String weekend = null;
+
+            Elements toonNm = document.select("ul#genreRecommand").select("div.genreRecomInfo2").select("h6 > a").select("span");
+            Elements toonImg = document.select("ul#genreRecommand").select("div.genreRecomImg2").select("a").select("img");
+            Elements toonWriter = document.select("ul#genreRecommand").select("div.genreRecomInfo2").select("span.user").select("a");
+            List<String> toonNmList = new ArrayList<>();
+            List<String> toonImgList = new ArrayList<>();
+            List<String> toonWriterList = new ArrayList<>();
+
+            for(Element element: toonImg) {    // 웹툰 이미지
+                String name =element.getElementsByAttribute("src").attr("src");
+                toonImgList.add(name);
+            }
+
+            for(Element element: toonNm) {    // 웹툰 이름
+                String name =element.text();
+                toonNmList.add(name);
+            }
+            for(Element element: toonWriter) {    // 웹툰 작가
+                String name =element.text();
+                toonWriterList.add(name);
+            }
+            for(int i=0; i<toonNmList.size();i++) {
+                WebtoonEntity entity = new WebtoonEntity();
+                entity.setImg(toonImgList.get(i));
+                entity.setWriter(toonWriterList.get(i));
+                entity.setNm(toonNmList.get(i));
+                webtoonList.add(entity);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return webtoonList;
+    }
     public List<WebtoonEntity> listWebtoon() { return mapper.webtoonList(); }
     public List<WebtoonEntity> listWebtoonRandom() { return mapper.webtoonListRandom(); }
     public List<WebtoonRecommandEntity> listRecommandWebtoon() { return mapper.webtoonRecommandList(); }
