@@ -1,6 +1,7 @@
 .container {
     display: block;
     text-align: center;
+    overflow: auto;
 }
 
 .join_container > h1 {
@@ -45,6 +46,7 @@
     font-weight: normal;
     color: red;
     display: block;
+    font-size: 1rem;
 }
 
 .successMsg {
@@ -53,6 +55,43 @@
     display: block;
 }
 
+.prevText {
+    display: flex;
+    justify-content: center;
+}
+
+.prevChk {
+    zoom: 2;
+    width: 1rem;
+}
+
+
+
+
+
+
+.footer {
+    height: inherit;
+}
+
+
+
+
+
+
+
+.back_btn {
+    padding: 10px 60px;
+    background-color: #D3D3D3;;
+    color: #696969;
+    border: none;
+    border-radius: 4px;
+}
+
+.back_btn:hover {
+    background-color: #808080;
+    color: #ffffff;
+}
 
 .submit_btn {
     padding: 10px 60px;
@@ -66,4 +105,42 @@
     background-color: #008d62;
 }
 
+.prevText {
+    display: flex;
+    justify-content: center;
+}
 
+.prevChk {
+    zoom: 2;
+    width: 1rem;
+}
+
+
+
+
+
+
+
+
+
+.back_btn {
+    padding: 10px 60px;
+    background-color: #D3D3D3;;
+    color: #696969;
+    border: none;
+    border-radius: 4px;
+}
+
+.back_btn:hover {
+    background-color: #808080;
+    color: #ffffff;
+}
+
+
+
+
+
+.footer {
+    position: fixed;
+    bottom: 0;
+}

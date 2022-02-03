@@ -30,6 +30,9 @@ public class UserService {
     public int idChk(String uid) {
         UserEntity entity = new UserEntity();
         entity.setUid(uid);
+        if (uid.length() < 4) {
+            return 2;
+        }
         UserEntity result = mapper.selUser(entity);
         return result == null ? 1 : 0;
     }
@@ -45,7 +48,7 @@ public class UserService {
         }
 
         if (dbUser == null) {
-            return 2; // 계정없음
+            return 2; // 계정없음(아이디 오류)
         } else if (BCrypt.checkpw(entity.getUpw(), dbUser.getUpw())) {
             userUtils.setLoginUser(dbUser);
             return 1; // 성공
