@@ -18,6 +18,19 @@ public class UserService {
     @Autowired
     private UserUtils userUtils;
 
+    private static class Regex { // 정규식
+        private static final String ID = "^([a-zA-Z0-9]{4,15})$";
+        private static final String PASSWORD = "^([a-zA-Z0-9!@_]{4,20})$";
+    }
+
+    public static boolean checkUid (String uid) { // uid 정규식 체크
+        return uid.matches(Regex.ID);
+    }
+
+    public static boolean checkUpw (String upw) { // uid 정규식 체크
+        return upw.matches(Regex.PASSWORD);
+    }
+
     public int join(UserEntity entity) {
         UserEntity copyEntity = new UserEntity();
         BeanUtils.copyProperties(entity, copyEntity);
@@ -39,6 +52,13 @@ public class UserService {
 
     public int login(UserEntity entity) {
         UserEntity dbUser = null;
+        System.out.println(entity.getUid());
+        System.out.println(entity.getUpw());
+
+
+        if (!UserService.checkUid(entity.getUid()) || !UserService.checkUpw(entity.getUpw())) {
+            return 4; // 정규식 오류
+        }
 
         try {
             dbUser = mapper.selUser(entity);
