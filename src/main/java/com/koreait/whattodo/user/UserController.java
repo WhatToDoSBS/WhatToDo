@@ -49,23 +49,23 @@ public class UserController {
             return "redirect:/board/main";
         }
 
-        int result = service.login(entity);
+        int result = service.login(entity); // 로그인 결과
         System.out.println(result);
         switch (result) {
-            default:
+            default: // 그 외
                 reAttr.addFlashAttribute("nmsg", "알 수 없는 이유로 로그인에 실패하였습니다.");
                 reAttr.addFlashAttribute("keymsg", "");
                 reAttr.addFlashAttribute("rmsg", "");
                 return "redirect:/user/login";
-            case 1:
+            case 1: // 로그인 성공
                 return "redirect:/board/main";
             case 2:
-            case 3:
+            case 3: // 2 아이디 3 비밀번호 오류
                 reAttr.addFlashAttribute("nmsg", "");
                 reAttr.addFlashAttribute("keymsg", "아이디 또는 비밀번호가 일치하지 않습니다. <br>다시 시도해 주세요.");
                 reAttr.addFlashAttribute("rmsg", "");
                 return "redirect:/user/login";
-            case 4:
+            case 4: // 정규식 오류
                 reAttr.addFlashAttribute("nmsg", "");
                 reAttr.addFlashAttribute("keymsg", "");
                 reAttr.addFlashAttribute("rmsg", "아이디와 비밀번호를 바르게 작성해주세요.");

@@ -27,35 +27,31 @@ public class UserService {
         return uid.matches(Regex.ID);
     }
 
-    public static boolean checkUpw (String upw) { // uid 정규식 체크
+    public static boolean checkUpw (String upw) { // upw 정규식 체크
         return upw.matches(Regex.PASSWORD);
     }
 
-    public int join(UserEntity entity) {
+    public int join(UserEntity entity) { // 회원가입
         UserEntity copyEntity = new UserEntity();
         BeanUtils.copyProperties(entity, copyEntity);
 
         String hashPw = BCrypt.hashpw(copyEntity.getUpw(), BCrypt.gensalt());
-        copyEntity.setUpw(hashPw);
+        copyEntity.setUpw(hashPw); // 비밀번호 해시화 해서 넣음
         return mapper.insUser(copyEntity);
     }
 
-    public int idChk(String uid) {
+    public int idChk(String uid) { // 아이디 중복검사
         UserEntity entity = new UserEntity();
         entity.setUid(uid);
-        if (uid.length() < 4) {
+        if (uid.length() < 4) { // 글자수 4자리 이상이여야 함
             return 2;
         }
         UserEntity result = mapper.selUser(entity);
-        return result == null ? 1 : 0;
+        return result == null ? 1 : 0; // 계정이 없을시 사용가능
     }
 
     public int login(UserEntity entity) {
         UserEntity dbUser = null;
-        System.out.println(entity.getUid());
-        System.out.println(entity.getUpw());
-
-
         if (!UserService.checkUid(entity.getUid()) || !UserService.checkUpw(entity.getUpw())) {
             return 4; // 정규식 오류
         }

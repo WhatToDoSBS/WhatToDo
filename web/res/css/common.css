@@ -71,6 +71,11 @@ a:visited { color: black; }
     align-items: center;
 }
 
+.header > a { /* 회원가입 부트스크랩때문에 따로 적용함 */
+    text-decoration: none;
+    color: black;
+}
+
 .header span { color: black; font-family: 'Black Han Sans', sans-serif; font-weight: normal;}
 
 .header .main_title {
