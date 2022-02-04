@@ -8,7 +8,7 @@
     <div>
         <h5 class="err_msg_b">${requestScope.keymsg}</h5>
         <h5 class="err_msg_b">${requestScope.nmsg}</h5>
-        <h5 class="msg_n" id="RegexLogin">아이디와 비밀번호를 바르게 작성해주세요.</h5>
+        <h5 class="err_msg_b">${requestScope.rmsg}</h5>
     </div>
     <div>
         <input type="checkbox" name="uidChk"> 아이디 저장 <input type="checkbox" name="loginChk"> 자동 로그인
