@@ -3,9 +3,9 @@
 <mapper namespace="com.koreait.whattodo.board.BoardMapper">
     <insert id="insBoard">
         INSERT INTO freeboard
-            (icategory, title, ctnt, iuser)
+            (title, ctnt, iuser)
         VALUES
-            (${icategory}, #{title}, #{ctnt}, ${iuser})
+            (#{title}, #{ctnt}, ${iuser})
     </insert>
 
     <select id="selBoardList" resultType="BoardVo">
@@ -52,7 +52,7 @@
             (SELECT iboard FROM freeboard
             WHERE isdel = 0
             AND iboard < ${iboard}
-            ORDER BY iboard
+            ORDER BY iboard desc
             LIMIT 1) AS previboard,
             (SELECT iboard FROM freeboard
             WHERE isdel = 0
@@ -61,4 +61,6 @@
             LIMIT 1) AS nextiboard
 ]]>
     </select>
+
+
 </mapper>

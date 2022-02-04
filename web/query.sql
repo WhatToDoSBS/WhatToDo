@@ -62,9 +62,6 @@ CREATE TABLE meca_rankdb (
                              PRIMARY KEY (irank)
 );
 
-// 게임메카 추가
-ALTER TABLE meca_rankdb ADD COLUMN genre VARCHAR(10);
-ALTER TABLE meca_rankdb ADD COLUMN cash VARCHAR(10);
 
 
 // 스팀 크롤링 DB

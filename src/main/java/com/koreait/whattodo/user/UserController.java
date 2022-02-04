@@ -55,6 +55,7 @@ public class UserController {
             default:
                 reAttr.addFlashAttribute("nmsg", "알 수 없는 이유로 로그인에 실패하였습니다.");
                 reAttr.addFlashAttribute("keymsg", "");
+                reAttr.addFlashAttribute("rmsg", "");
                 return "redirect:/user/login";
             case 1:
                 return "redirect:/board/main";
@@ -62,8 +63,21 @@ public class UserController {
             case 3:
                 reAttr.addFlashAttribute("nmsg", "");
                 reAttr.addFlashAttribute("keymsg", "아이디 또는 비밀번호가 일치하지 않습니다. <br>다시 시도해 주세요.");
+                reAttr.addFlashAttribute("rmsg", "");
+                return "redirect:/user/login";
+            case 4:
+                reAttr.addFlashAttribute("nmsg", "");
+                reAttr.addFlashAttribute("keymsg", "");
+                reAttr.addFlashAttribute("rmsg", "아이디와 비밀번호를 바르게 작성해주세요.");
                 return "redirect:/user/login";
         }
+
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession hs) {
+        hs.invalidate();
+        return "redirect:/user/login";
     }
 
     @GetMapping("/join")
@@ -92,10 +106,5 @@ public class UserController {
         return "redirect:/user/join";
     }
 
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:/user/login";
-    }
 
 }
