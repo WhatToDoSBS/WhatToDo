@@ -1,8 +1,10 @@
 package com.koreait.whattodo.crawling;
 
 import com.google.gson.Gson;
+import com.koreait.whattodo.Utils;
 import com.koreait.whattodo.board.BoardService;
 import com.koreait.whattodo.model.*;
+import com.koreait.whattodo.webtoon.WebtoonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -130,48 +132,19 @@ public class CrawlingController {
         return mecaListJson;
     }
 
-    @GetMapping("/steamrankingjson")
-    @ResponseBody
-    public String steamrankingjson(SteamRankEntity entity, HttpServletResponse res) throws IOException {
-        String steamUrl = "https://store.steampowered.com/stats/?l=koreana";
 
-        crawlingService.insertSteam(steamUrl);
-
-        // json ajax통신
-        Gson gson = new Gson();
-
-        String steamListJson = gson.toJson(crawlingService.steamRankList(entity));
-
-        System.out.println(steamListJson);
-        return steamListJson;
-    }
-
-    @GetMapping("/ratinggamejson")
-    @ResponseBody
-    public String ratinggamejson(RatingEntity entity, HttpServletResponse res) throws IOException {
-        // String ratingUrl = "https://namu.wiki/w/%EB%A9%94%ED%83%80%ED%81%AC%EB%A6%AC%ED%8B%B1/MUST-PLAY%20%EB%AA%A9%EB%A1%9D";
-
-        // json ajax통신
-        Gson gson = new Gson();
-
-        String ratingListJson = gson.toJson(crawlingService.ratingList(entity));
-
-        System.out.println(ratingListJson);
-        return ratingListJson;
-    }
-
-    @GetMapping("/mecarankingjson")
-    @ResponseBody
-    public String mecarankingjson(MecaRankEntity entity, HttpServletResponse res) throws IOException {
-
-        // json ajax통신
-        Gson gson = new Gson();
-
-        String mecaListJson = gson.toJson(crawlingService.mecaRankList(entity));
-
-//        System.out.println(mecaListJson);
-        return mecaListJson;
-    }
+//    @GetMapping("/mecarankingjson")
+//    @ResponseBody
+//    public String mecarankingjson(MecaRankEntity entity, HttpServletResponse res) throws IOException {
+//
+//        // json ajax통신
+//        Gson gson = new Gson();
+//
+//        String mecaListJson = gson.toJson(crawlingService.mecaRankList(entity));
+//
+////        System.out.println(mecaListJson);
+//        return mecaListJson;
+//    }
 
     //모바일, pc온라인, 스팀
     @GetMapping("/game")
