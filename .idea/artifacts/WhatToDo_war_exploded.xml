@@ -49,6 +49,7 @@
           <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.9" />
           <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.9.13" />
           <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-core-asl:1.9.13" />
+          <element id="library" level="project" name="Maven: org.json:json:20200518" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="WhatToDo-seongwan/web/Web" />

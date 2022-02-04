@@ -12,4 +12,6 @@ public class MecaRankEntity {
     private String rankNum;
     private String rankNm;
     private String company;
+    private String genre;
+    private String cash;
 }

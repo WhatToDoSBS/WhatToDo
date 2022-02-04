@@ -2,6 +2,10 @@
     --gold:#FFDF00;
     --sliver:#C0C0C0;
     --bronze:#c49c48;
+    --main-color:#e3f2fd;
+    --main-color-dark:#b1bfca;
+    --main-color-darker:rgb(145 145 146);
+    --menu-radius:10px;
 }
 
 /* -----색상------- */
@@ -9,11 +13,27 @@
 .sliver { color: var(--sliver); }
 .bronze { color: var(--bronze); }
 
+/* -----display 관련------- */
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.flex-direction-column {
+    flex-direction: column;
+}
+
+/* -----Font 관련----------*/
+.font-14px {
+    font-size: 14px;
+}
 
 * {
     margin: 0;
     list-style: none;
     text-decoration: none;
+    box-sizing: border-box;
 }
 
 html,
@@ -24,6 +44,9 @@ body {
 
 table { border-collapse: collapse; }
 
+a:visited { color: black; }
+
+/* --- header --- */
 
 .header,
 .footer {
@@ -44,6 +67,16 @@ table { border-collapse: collapse; }
     position: absolute;
     right: 20px;
     top:10px;
+    padding: 5px 10px;
+}
+
+.header .login a {
+    color:var(--main-color-dark);
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: bolder;
+}
+.header .login a:hover {
+    color:var(--main-color-darker);
 }
 
 .header_menu {
@@ -55,6 +88,7 @@ table { border-collapse: collapse; }
 }
 
 .header_menu ul {
+    color: white;
     padding-left: 0;
     margin: 0;
 }
@@ -254,4 +288,13 @@ button.pnBtn.clicked {
 .footer {
     font-family: 'Nanum Gothic', sans-serif;
     color: black;
+    padding: 40px 0;
+    text-align: center;
+    background-color: var(--main-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1vh;
+    width: 100%;
+    font-size: 14px;
 }

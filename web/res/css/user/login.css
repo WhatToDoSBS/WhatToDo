@@ -1,14 +1,12 @@
 .container {
-    flex-direction: column;
+    display: block;
+    text-align: center;
+    padding: 50px 0;
+    overflow: auto;
 }
 
-.login_font {
-    height: 5rem;
-    position: center;
-}
-
-.login_container {
-    position: center;
+.login_form > h1:first-child {
+    padding-bottom: 1.5rem;
 }
 
 .login_container > div {
@@ -33,9 +31,10 @@
 
 .login_btn {
     font-size: 15px;
-    border: 1px solid black;
     padding:1rem 8rem;
+    border-radius: 4px;
     background-color: #03c75a;
+    border: solid 1px #03c75a;
     color: white;
     font-weight: bold;
 }
@@ -48,3 +47,23 @@
 a:link, a:visited, a:active { color: black; }
 
 a:hover { color: #C0C0C0 }
+
+
+.msg_n {
+    display: none;
+}
+
+.err_msg_b {
+    font-weight: normal;
+    color: red;
+    display: block;
+}
+
+
+
+
+
+.footer {
+    position: fixed;
+    bottom: 0;
+}

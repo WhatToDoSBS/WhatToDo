@@ -14,9 +14,9 @@
             <label id="rtLb">평가 :
                 <button class="rtBtn">띵작</button>
                 <button class="rtBtn">수작</button>
-                <button class="rtBtn">중간 이상</button>
-                <button class="rtBtn">망작</button>
+                <button class="rtBtn">평작</button>
             </label>
+
         </div>
         <div class="choiceBtn_section_line popular ">
             <label id="ppLb">인기 :
@@ -56,5 +56,17 @@
     </div>
 </form>
 <div class="display_result">
-    <span class="result_span"></span>
+    <span class="result_span">오늘 이 게임 어때요? <a class="modalLink"></a></span>
+</div>
+<!-- Modal 창 -->
+<div id="modal" class="modal-overlay">
+    <div class="modal-window">
+        <div class="title">
+            <h2 class="modalWhatGame"></h2>
+        </div>
+        <div class="close-area">X</div>
+        <div class="content">
+            <div class="modal-rank"></div>
+        </div>
+    </div>
 </div>

@@ -3,9 +3,9 @@
 <mapper namespace="com.koreait.whattodo.crawling.CrawlingMapper">
     <!-- 게임메카 관련 -->
     <insert id="insertRankMecaDb">
-        INSERT INTO meca_rankdb(rankNm, rankNum, company) VALUES
+        INSERT INTO meca_rankdb(rankNm, rankNum, company, genre, cash) VALUES
         <foreach collection="list" open="(" close=")" separator="),(" item="rank">
-             #{rank.rankNm}, #{rank.rankNum}, #{rank.company}
+             #{rank.rankNm}, #{rank.rankNum}, #{rank.company}, #{rank.genre}, #{rank.cash}
         </foreach>
     </insert>
 
@@ -14,7 +14,7 @@
     </delete>
     
     <select id="mecaRankList" resultType="MecaRankEntity">
-        SELECT rankNum, rankNm, company FROM meca_rankdb ORDER BY irank
+        SELECT rankNum, rankNm, company, genre, cash FROM meca_rankdb ORDER BY irank LIMIT 50;
     </select>
 
     <!-- 스팀 관련 -->
@@ -30,6 +30,22 @@
     </delete>
 
     <select id="steamRankList" resultType="SteamRankEntity">
-        SELECT rankNum, rankNm FROM steam_rankdb ORDER BY irank
+        SELECT rankNum, rankNm FROM steam_rankdb ORDER BY irank LIMIT 50;
+    </select>
+
+    <!-- 게임 rating 관련 -->
+    <insert id="insertRatingDb">
+        INSERT INTO rating_Game(gameNm, gameRating, gameRank) VALUES
+        <foreach collection="list" open="(" close=")" separator="),(" item="rating">
+            #{rating.gameNm}, #{rating.gameRating}, #{rating.gameRank}
+        </foreach>
+    </insert>
+
+    <delete id="delRating">
+        DELETE FROM rating_Game
+    </delete>
+
+    <select id="ratingList" resultType="RatingEntity">
+        SELECT gameRank, gameNm, gameRating FROM rating_Game ORDER BY rnum LIMIT 50;
     </select>
 </mapper>

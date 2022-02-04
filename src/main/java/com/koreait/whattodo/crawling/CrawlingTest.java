@@ -14,14 +14,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CrawlingTest {
-    public static void main(String[] args) {
-        // 게임메카에서 크롤링해서 가져오는 과정
+    public static void main(String[] args) throws IOException {
+        // 크롤링해서 가져오는 과정
 
-        final String RankURL = "https://www.gamemeca.com/ranking.php";
-        Connection con = Jsoup.connect(RankURL);
+        final String ratingURL = "https://namu.wiki/w/%EB%A9%94%ED%83%80%ED%81%AC%EB%A6%AC%ED%8B%B1/MUST-PLAY%20%EB%AA%A9%EB%A1%9D";
+
+        // 액세스 처리
+        // Connection con = (Connection) Jsoup.connect(ratingURL).userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36").get();
 
         try {
-            Document document = con.get();
+            Document document = Jsoup.connect(ratingURL).userAgent("Chrome/5.0").get(); // 403 error 처리(권한 부여)
             Elements rankNum = document.select("tr.ranking-table-rows").select("span.rank");    // 순위 번호(1,2,3...) 가져오기
             Elements rankNm = document.select("div.game-name > a"); // 게임 이름
             Elements company = document.select("div.game-info > span.company"); // 회사 명
@@ -31,21 +33,44 @@ public class CrawlingTest {
 
             MecaRankEntity entity = new MecaRankEntity();
 
-            for(Element element : rankNum) {
-                String num = element.text();
-                rankNumList.add(num);
+            Elements ratingGameNm = document.select("div.wiki-heading-content:last-child").select("td:nth-child(2)"); // PC게임 전체 이름
+            Elements ratingGameNum = document.select("div.wiki-heading-content:last-child").select("td:first-child");   // PC게임 순위
+            Elements ratingGameRating = document.select("div.wiki-heading-content:last-child").select("td:nth-child(3)");    // PC게임 평점
+            List rateNmList = new ArrayList();
+            List rateNumList = new ArrayList();
+            List rateRatingList = new ArrayList();
+
+            for(Element element: ratingGameNm) {    // PC게임 이름 크롤링
+                String gameNm = element.text();
+                rateNmList.add(gameNm);
             }
-            for(Element element : rankNm) {
+            rateNmList.remove(0);   // 앞에 하나(텍스트) 삭제
+            System.out.println(rateNmList);
+
+            for(Element element: ratingGameNum) {    // PC게임 순위 크롤링
+                String gameNum = element.text();
+                rateNumList.add(gameNum);
+            }
+            // 앞에 두개(텍스트) 삭제
+            rateNumList.remove(0);
+            rateNumList.remove(0);
+
+            for(Element element: ratingGameRating) {    // PC게임 이름 크롤링
+                String gameRating = element.text();
+                rateRatingList.add(gameRating);
+            }
+            rateRatingList.remove(0);   // 앞에 하나(텍스트) 삭제
+            System.out.println(rateRatingList);
+
+
+            /* for(Element element : rankNm) {
                 String name = element.text();
                 String nmLink = element.getElementsByAttribute("href").attr("href");
                 rankNmList.add(name);
+                System.out.println(name);
                 System.out.println("이미지 태그 가져오기 : " + nmLink);
-            }
-            for(Element element : company) {
-                String companyNm = element.text();
+            } */
 
-                companyList.add(companyNm);
-            }
             List<MecaRankEntity> list = new ArrayList<>();
             for(int i=0;i<rankNmList.size();i++) {
                 entity.setRankNum((String)rankNumList.get(i));

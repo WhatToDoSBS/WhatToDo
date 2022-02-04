@@ -1,5 +1,6 @@
 package com.koreait.whattodo;
 
+
 import com.koreait.whattodo.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
