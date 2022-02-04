@@ -48,7 +48,7 @@
     </select>
 
     <select id="webtoonRecommandListRandom" resultType="WebtoonRecommandEntity">
-        SELECT * FROM webtoon_recommand ORDER BY RAND() LIMIT 3
+        SELECT DISTINCT * FROM webtoon_recommand ORDER BY RAND() LIMIT 3
     </select>
 
     <select id="webtoonGenreListAll" resultType="WebtoonGenreEntity">
