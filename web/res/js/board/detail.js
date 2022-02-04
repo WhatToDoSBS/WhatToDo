@@ -268,7 +268,7 @@ const onLike = () => {
 
     likeBtnElem.addEventListener('click', (e) => {
         if(e.target.classList.contains('far')) {
-            const param = {iboard}
+            const param = ${iboard}
 
             fetch('/board/like', {
                 'method': 'post',

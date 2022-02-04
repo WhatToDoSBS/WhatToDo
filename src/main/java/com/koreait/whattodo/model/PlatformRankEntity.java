@@ -7,13 +7,12 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class MecaRankEntity {
+public class PlatformRankEntity {
     private int irank;
     private String rankNum;
-    private String rankNm;
-    private String company;//아니다 이거는저거고 지금하는건
-    private String imgsrc;
-    private String selLink;
+    private String gameNm;
+    private String company;
     private String genre;
-    private String cash;
+    private String selLink;
+    private String imgsrc;
 }

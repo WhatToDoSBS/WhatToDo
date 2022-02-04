@@ -3,9 +3,9 @@
 <mapper namespace="com.koreait.whattodo.crawling.CrawlingMapper">
     <!-- 게임메카 관련 -->
     <insert id="insertRankMecaDb">
-        INSERT INTO meca_rankdb(rankNm, rankNum, company, genre, cash) VALUES
+        INSERT INTO meca_rankdb(rankNm, rankNum, company, imgsrc, selLink) VALUES
         <foreach collection="list" open="(" close=")" separator="),(" item="rank">
-             #{rank.rankNm}, #{rank.rankNum}, #{rank.company}, #{rank.genre}, #{rank.cash}
+             #{rank.rankNm}, #{rank.rankNum}, #{rank.company}, #{rank.imgsrc}, #{rank.selLink}
         </foreach>
     </insert>
 
@@ -14,7 +14,7 @@
     </delete>
     
     <select id="mecaRankList" resultType="MecaRankEntity">
-        SELECT rankNum, rankNm, company, genre, cash FROM meca_rankdb ORDER BY irank LIMIT 50;
+        SELECT rankNum, rankNm, company, imgsrc, selLink FROM meca_rankdb ORDER BY irank
     </select>
 
     <!-- 스팀 관련 -->
@@ -48,4 +48,42 @@
     <select id="ratingList" resultType="RatingEntity">
         SELECT gameRank, gameNm, gameRating FROM rating_Game ORDER BY rnum LIMIT 50;
     </select>
+
+<!--  모바일게임 순위(0~39idx) pc온라인(40~79idx) 스팀(80~119idx)  /-->
+    <insert id="insertPlatformRankDb">
+        INSERT INTO platform_rankdb(gameNm, rankNum, company, genre, selLink) VALUES
+        <foreach collection="list" open="(" close=")" separator="),(" item="rank">
+            #{rank.gameNm}, #{rank.rankNum}, #{rank.company}, #{rank.genre}, #{rank.selLink}
+        </foreach>
+    </insert>
+
+<!--    플랫폼 이미지-->
+    <insert id="insPlatformImg">
+        insert into platform_img (imgsrc, gameNm) values
+        (#{imgsrc}, #{gameNm})
+    </insert>
+
+    <delete id="delPlatformImg">
+        delete from platform_img
+    </delete>
+
+    <delete id="delPlatformRank">
+        DELETE FROM platform_rankdb
+    </delete>
+
+    <select id="platformRankList" resultType="PlatformRankEntity">
+        SELECT rankNum, gameNm, company, genre, selLink
+        FROM platform_rankdb
+        ORDER BY irank
+    </select>
+
+    <select id="platformRankListWithImg" resultType="PlatformRankEntity">
+        SELECT A.rankNum, A.gameNm, A.company, A.genre, A.selLink, B.imgsrc
+        FROM platform_rankdb A
+        INNER JOIN platform_img B
+        ON A.gameNm = B.gameNm
+        ORDER BY irank
+    </select>
+
+
 </mapper>

@@ -6,7 +6,7 @@
      data-iuser="${sessionScope.loginUser.iuser}"></div>
 <div>
     <div>조회수: ${data.hits} | 등록일시: ${data.rdt} | 글쓴이: ${data.iuser}</div>
-    <div id="dTitle">제목: <c:out value="${data.title}" /></div>
+    <div id="dTitle"><c:out value="${data.title}" /></div>
     <div id="pnBtns">
         <a href="/board/detail?iboard=${requestScope.prevNext.previboard}" class="${requestScope.prevNext.previboard == 0 ? 'lastPBtn' : ''}"><button class="boardBtn">이전 글</button></a>
         <a href="/board/list"><button class="boardBtn">글 목록</button> </a>
@@ -14,7 +14,9 @@
     </div>
     <div id="dtCtnt"><pre><c:out value="${data.ctnt}" /></pre></div>
     <c:if test="${sessionScope.loginUser != null}">
+        <div id="likeBtnDv">
     <i id="likeBtn" class="far fa-heart"></i>
+        </div>
     </c:if>
 
 

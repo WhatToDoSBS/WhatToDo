@@ -6,9 +6,17 @@ tr, th, td {
     border: 1px solid lightsteelblue;
 }
 
-table { width: 100%}
+td { padding: 0px 7px}
+
+table { width: 100%; text-align: center}
 
 #cmtTxt {
     width: 75%;
     border-color: lightgrey;
 }
+.boardBtn { padding: 5px; color: #444444; font-weight: bolder; background-color: lightgreen}
+
+#likeBtnDv { display: flex; justify-content: center}
+
+#dTitle {  text-align: center}
+
