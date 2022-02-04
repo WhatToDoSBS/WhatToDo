@@ -1,5 +1,5 @@
 #writeBtn {
-    padding:1rem 8rem;
+    padding:1rem 5rem;
     font-size: 20px;
     font-weight: bold;
     background-color: greenyellow;
@@ -19,3 +19,21 @@
     background-color: antiquewhite;
     cursor: pointer;
 }
+
+td, th { border-color: lightseagreen}
+
+table { margin-top: 10px; text-align: center; width: 100%}
+
+#paging { margin-top: 10px; display: flex; justify-content: right}
+
+#pageIdx { display: flex; justify-content: center}
+
+.pageNum { font-size: large; padding: 7px 3px;}
+
+.pageNum:hover {cursor: pointer}
+
+#listTitle {text-align: center}
+
+#lTitle { width: 60%;}
+
+.listContainer { width: 60%}

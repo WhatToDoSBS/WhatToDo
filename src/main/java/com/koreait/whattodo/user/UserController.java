@@ -74,6 +74,12 @@ public class UserController {
 
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpSession hs) {
+        hs.invalidate();
+        return "redirect:/user/login";
+    }
+
     @GetMapping("/join")
     public String join() {
         UserEntity loginUser = userUtils.getLoginUser();
@@ -100,10 +106,5 @@ public class UserController {
         return "redirect:/user/join";
     }
 
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:/user/login";
-    }
 
 }
