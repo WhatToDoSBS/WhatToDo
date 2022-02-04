@@ -38,11 +38,13 @@ label { font-size: larger; font-weight: bolder; color: mediumslateblue}
     -webkit-backdrop-filter: blur( 13.5px );
     border-radius: 10px;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
-    width: 400px;
-    height: 500px;
+    width: 480px;
+    height: 650px;
     position: relative;
     top: -100px;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 .modalTitle {
     padding-left: 10px;
@@ -52,15 +54,16 @@ label { font-size: larger; font-weight: bolder; color: mediumslateblue}
     font-size: xx-large;
     font-weight: bolder;
     text-align: center;
+    margin: 20px 0px;
 }
 
 #modal .close-area {
-    display: inline;
-    float: right;
+    text-align: right;
     padding-right: 10px;
     cursor: pointer;
     text-shadow: 1px 1px 2px gray;
     color: white;
+    font-size: larger;
 }
 
 .modalContent {
@@ -83,9 +86,11 @@ label { font-size: larger; font-weight: bolder; color: mediumslateblue}
 
 .selected-img {
     text-align: center;
+    margin: 20px 0px;
 }
 .selected-img > img {
-    width: 380px;
+    width: 400px;
+    height: 300px;
     margin: 20px 0px;
 }
 

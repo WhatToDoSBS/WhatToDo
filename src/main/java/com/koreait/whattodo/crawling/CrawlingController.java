@@ -120,7 +120,7 @@ public class CrawlingController {
         crawlingService.insertPlatform(platformUrl);
         PlatformRankEntity entity = new PlatformRankEntity();
         PlatformImgEntity imgEntity = new PlatformImgEntity();
-        crawlingService.insertPlatformImgList(entity);//여기서 다 실행하게 해놨어
+        crawlingService.insertPlatformImgList(entity);
     }
 
     @GetMapping("/platformrankingjson")
@@ -130,8 +130,7 @@ public class CrawlingController {
         // json ajax통신
         Gson gson = new Gson();
 
-        String platformListJson = gson.toJson(crawlingService.platformList(entity));
-
+        String platformListJson = gson.toJson(crawlingService.platformListWithImg(entity));
 //        System.out.println(platformListJson);
         return platformListJson;
     }

@@ -28,4 +28,5 @@ public interface CrawlingMapper {
     List<PlatformRankEntity> platformRankList(PlatformRankEntity entity);
     void insPlatformImg(PlatformImgEntity platformList);
     void delPlatformImg();
+    List<PlatformRankEntity> platformRankListWithImg(PlatformRankEntity entity);
 }

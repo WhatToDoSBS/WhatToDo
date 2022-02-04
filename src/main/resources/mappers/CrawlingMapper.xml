@@ -72,7 +72,17 @@
     </delete>
 
     <select id="platformRankList" resultType="PlatformRankEntity">
-        SELECT rankNum, gameNm, company, genre, selLink, imgsrc FROM platform_rankdb ORDER BY irank
+        SELECT rankNum, gameNm, company, genre, selLink
+        FROM platform_rankdb
+        ORDER BY irank
+    </select>
+
+    <select id="platformRankListWithImg" resultType="PlatformRankEntity">
+        SELECT A.rankNum, A.gameNm, A.company, A.genre, A.selLink, B.imgsrc
+        FROM platform_rankdb A
+        INNER JOIN platform_img B
+        ON A.gameNm = B.gameNm
+        ORDER BY irank
     </select>
 
 
