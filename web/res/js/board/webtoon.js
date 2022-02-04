@@ -11,21 +11,68 @@ crawlingBtn.addEventListener('click', function () {
 
 var webtoonGenreRandomUrl = '/board/webtoonGenreRandom'
 
+
+choiceBtn.forEach(function (item) {
+    item.addEventListener('click', function (e) {
+        let btnName = null;
+        console.log('실행');
+        if (e.target.innerText == '일상') {
+            btnName = '일상 ';
+        } else if (e.target.innerText == '개그') {
+            btnName = '개그 ';
+        } else if (e.target.innerText == '판타지') {
+            btnName = '판타지';
+        } else if (e.target.innerText == '액션') {
+            btnName = '액션 ';
+        } else if (e.target.innerText == '드라마') {
+            btnName = '드라마';
+        } else if (e.target.innerText == '순정') {
+            btnName = '순정 ';
+        } else if (e.target.innerText == '감성') {
+            btnName = '감성 ';
+        } else if (e.target.innerText == '스릴러') {
+            btnName = '스릴러';
+        } else if (e.target.innerText == '시대극') {
+            btnName = '시대극';
+        } else if (e.target.innerText == '스포츠') {
+            btnName = '스포츠';
+        }
+
+        console.log('선택 버튼 : ' + btnName);
+        webtoonGenreBtnClickRandom(webtoonGenreRandomUrl, btnName);
+    })
+});
+
+
 function webtoonGenreRandom(url) {
     fetch(url).then((res) => {
         return res.json();
     }).then((data) => {// 사이즈 구하는 법 : Object.keys(data).length
         let randomNum = Math.floor((Math.random() * data.length));  // 랜덤 숫자
-        let record2 = filterFunction(data, '스릴러');
-        console.log(record2);
-        resultDisplay(data[randomNum].img,data[randomNum].link,data[randomNum].nm,data[randomNum].writer);
+        let record = filterFunction(data, '스릴러');
+        resultDisplay(data[randomNum].img, data[randomNum].link, data[randomNum].nm, data[randomNum].writer);
     }).catch((err) => {
         console.log(err);
     });
 }
 
+function webtoonGenreBtnClickRandom(url, btnGenre) {
+    fetch(url).then((res) => {
+        return res.json();
+    }).then((data) => {
+        let record = filterFunction(data, btnGenre);
+        let randomNum = Math.floor((Math.random() * record.length));  // 랜덤 숫자
+        resultDisplay(record[randomNum].img, record[randomNum].link, record[randomNum].nm, record[randomNum].writer);
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
+
 function filterFunction(data, genre) {
-    return data.filter(function(item, index, arr){ return item.genre == genre });
+    return data.filter(function (item, index, arr) {
+        return item.genre == genre
+    });
 }
 
 function resultDisplay(webtoonimg, webtoonLink, webtoonNm, webtoonWriter) {
@@ -34,47 +81,10 @@ function resultDisplay(webtoonimg, webtoonLink, webtoonNm, webtoonWriter) {
     <div><span class="font-14px">${webtoonWriter}</span></div>
 `;
 }
-randomSubmitBtn.addEventListener('click',function () {  // 랜덤버튼 누르면 무작위 랜덤웹툰 출력
+
+randomSubmitBtn.addEventListener('click', function () {  // 랜덤버튼 누르면 무작위 랜덤웹툰 출력
     webtoonGenreRandom(webtoonGenreRandomUrl);
 })
 
-let btnName = null;
-choiceBtn.forEach(function (item) {
-    item.addEventListener('click', function (e) {
-        let btnName1 = item.innerText;
-        btnName = btnName1;
-        switch (item.innerText) {
-            case '일상':
-                btnName = '일상 ';
-                break;
-            case '개그':
-                bntName = '개그 ';
-                break;
-            case '판타지':
-                bntName = '판타지';
-                break;
-            case '액션':
-                bntName = '액션 ';
-                break;
-            case '드라마':
-                bntName = '드라마';
-                break;
-            case '순정':
-                bntName = '순정 ';
-                break;
-            case '감성':
-                bntName = '감성 ';
-                break;
-            case '스릴러':
-                bntName = '스릴러';
-                break;
-            case '시대극':
-                bntName = '시대극';
-                break;
-            case '스포츠':
-                bntName = '스포츠';
-                break;
-        }
-    })
-});
+
 
