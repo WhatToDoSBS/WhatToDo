@@ -1,8 +1,9 @@
 package com.koreait.whattodo.user;
 
 import com.koreait.whattodo.UserUtils;
-import com.koreait.whattodo.Utils;
-import com.koreait.whattodo.model.UserEntity;
+import com.koreait.whattodo.model.user.UserDto;
+import com.koreait.whattodo.model.user.UserEntity;
+import com.koreait.whattodo.model.user.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,14 +43,14 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginPost(UserEntity entity, Model model, RedirectAttributes reAttr) {
+    public String loginPost(UserDto dto, Model model, RedirectAttributes reAttr) {
         UserEntity loginUser = userUtils.getLoginUser();
         // 로그인한 유저의 경우 로그인창으로 접근 막음
         if (loginUser != null) {
             return "redirect:/board/main";
         }
 
-        int result = service.login(entity); // 로그인 결과
+        UserEntity result = service.login(dto); // 로그인 결과
         System.out.println(result);
         switch (result) {
             default: // 그 외

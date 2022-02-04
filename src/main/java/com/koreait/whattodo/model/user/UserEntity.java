@@ -1,4 +1,4 @@
-package com.koreait.whattodo.model;
+package com.koreait.whattodo.model.user;
 
 import lombok.Getter;
 import lombok.Setter;
