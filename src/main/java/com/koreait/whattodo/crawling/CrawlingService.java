@@ -302,7 +302,7 @@ public class CrawlingService {
             } else {
                 PlatformImgEntity platformImgEntity = new PlatformImgEntity();
                 platformImgEntity.setGameNm(gameNmList.get(i));
-                System.out.println(platformImgEntity);
+//                System.out.println(platformImgEntity);
                 list.add(platformImgEntity);
             }
 //            for (Element element : name) {
@@ -311,8 +311,8 @@ public class CrawlingService {
 //                nameList.add(gameNm);
 //            }
         }
-        System.out.println("list size : " + list.size());
-        System.out.println(list);
+//        System.out.println("list size : " + list.size());
+//        System.out.println(list);
         List<PlatformImgEntity> imgList = new ArrayList<>();
         for(int i=0;i<120;i++) {
             PlatformImgEntity imgEntity = new PlatformImgEntity();

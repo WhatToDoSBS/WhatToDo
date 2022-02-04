@@ -37,3 +37,7 @@ table { margin-top: 10px; text-align: center; width: 100%}
 #lTitle { width: 60%;}
 
 .listContainer { width: 60%}
+
+div.container {align-items: center;}
+
+div.footer { position: absolute; bottom: 0}

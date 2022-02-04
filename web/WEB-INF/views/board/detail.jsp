@@ -28,10 +28,12 @@
     </c:if>
 
     <div id="cmt_list"></div>
+    <c:if test="${sessionScope.loginUser != null}">
     <div>
         <form id="cmtFrm">
             <input id="cmtTxt" type="text" name="ctnt">
             <input class="boardBtn" type="button" id="cmt_submit" value="댓글 달기">
         </form>
     </div>
+    </c:if>
 </div>

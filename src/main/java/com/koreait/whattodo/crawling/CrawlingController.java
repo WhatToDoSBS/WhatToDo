@@ -151,11 +151,11 @@ public class CrawlingController {
     public void game() {
         String platformUrl = "https://trees.gamemeca.com/gamerank/";
         String mecaUrl = "https://www.gamemeca.com/ranking.php";
-        crawlingService.insertMeca(mecaUrl);
-        crawlingService.insertPlatform(platformUrl);
-        PlatformRankEntity entity = new PlatformRankEntity();
-        PlatformImgEntity imgEntity = new PlatformImgEntity();
-        crawlingService.insertPlatformImgList(entity);
+//        crawlingService.insertMeca(mecaUrl);
+//        crawlingService.insertPlatform(platformUrl);
+//        PlatformRankEntity entity = new PlatformRankEntity();
+//        PlatformImgEntity imgEntity = new PlatformImgEntity();
+//        crawlingService.insertPlatformImgList(entity);
     }
 
     @GetMapping("/platformrankingjson")
