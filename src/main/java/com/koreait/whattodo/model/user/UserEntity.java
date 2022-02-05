@@ -17,5 +17,5 @@ public class UserEntity {
     private String rdt;
     private String mdt;
     private Boolean uidChk;
-    private Boolean loginChk;
+    private Boolean isAutoLogin;
 }

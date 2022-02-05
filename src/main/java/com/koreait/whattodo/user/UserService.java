@@ -80,4 +80,8 @@ public class UserService {
         vo.setLoginEnum(LoginEnum.UPW_ERR);
         return vo; // 비번 오류
     }
+
+    public void insAutoLoginKey() {
+
+    }
 }

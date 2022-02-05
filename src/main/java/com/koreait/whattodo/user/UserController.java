@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,7 +46,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginPost(UserDto dto, RedirectAttributes reAttr) {
+    public String loginPost(UserDto dto, RedirectAttributes reAttr, HttpServletResponse response) {
         UserEntity loginUser = userUtils.getLoginUser();
         // 로그인한 유저의 경우 로그인창으로 접근 막음
         if (loginUser != null) {
@@ -63,6 +65,9 @@ public class UserController {
             reAttr.addFlashAttribute("rmsg", "");
             return "redirect:/user/login";
         } else if (result.getLoginEnum().equals(LoginEnum.SUCCESS)) { // 성공
+            if (result.getIsAutoLogin()) {
+
+            }
             return "redirect:/board/main";
         }
 
