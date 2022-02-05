@@ -6,7 +6,7 @@
         VALUES (#{uid}, #{upw}, #{nm}, ${gender}, #{profileimg})
     </insert>
 
-    <select id="selUser" resultType="UserEntity">
+    <select id="selUser" resultType="UserVo">
         SELECT * FROM t_user
         WHERE uid = #{uid}
     </select>

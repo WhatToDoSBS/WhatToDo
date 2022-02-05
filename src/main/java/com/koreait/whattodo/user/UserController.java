@@ -1,8 +1,10 @@
 package com.koreait.whattodo.user;
 
 import com.koreait.whattodo.UserUtils;
-import com.koreait.whattodo.Utils;
-import com.koreait.whattodo.model.UserEntity;
+import com.koreait.whattodo.enums.user.LoginEnum;
+import com.koreait.whattodo.model.user.UserDto;
+import com.koreait.whattodo.model.user.UserEntity;
+import com.koreait.whattodo.model.user.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,36 +44,32 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginPost(UserEntity entity, Model model, RedirectAttributes reAttr) {
+    public String loginPost(UserDto dto, RedirectAttributes reAttr) {
         UserEntity loginUser = userUtils.getLoginUser();
         // 로그인한 유저의 경우 로그인창으로 접근 막음
         if (loginUser != null) {
             return "redirect:/board/main";
         }
 
-        int result = service.login(entity); // 로그인 결과
-        System.out.println(result);
-        switch (result) {
-            default: // 그 외
-                reAttr.addFlashAttribute("nmsg", "알 수 없는 이유로 로그인에 실패하였습니다.");
-                reAttr.addFlashAttribute("keymsg", "");
-                reAttr.addFlashAttribute("rmsg", "");
-                return "redirect:/user/login";
-            case 1: // 로그인 성공
-                return "redirect:/board/main";
-            case 2:
-            case 3: // 2 아이디 3 비밀번호 오류
-                reAttr.addFlashAttribute("nmsg", "");
-                reAttr.addFlashAttribute("keymsg", "아이디 또는 비밀번호가 일치하지 않습니다. <br>다시 시도해 주세요.");
-                reAttr.addFlashAttribute("rmsg", "");
-                return "redirect:/user/login";
-            case 4: // 정규식 오류
-                reAttr.addFlashAttribute("nmsg", "");
-                reAttr.addFlashAttribute("keymsg", "");
-                reAttr.addFlashAttribute("rmsg", "아이디와 비밀번호를 바르게 작성해주세요.");
-                return "redirect:/user/login";
+        UserVo result = service.login(dto); // 로그인 결과
+        if (result.getLoginEnum().equals(LoginEnum.UID_REGEX_ERR) || result.getLoginEnum().equals(LoginEnum.UPW_REGEX_ERR)) { // 정규식 오류
+            reAttr.addFlashAttribute("nmsg", "");
+            reAttr.addFlashAttribute("keymsg", "");
+            reAttr.addFlashAttribute("rmsg", "아이디와 비밀번호를 바르게 작성해주세요.");
+            return "redirect:/user/login";
+        } else if (result.getLoginEnum().equals(LoginEnum.UID_ERR) || result.getLoginEnum().equals(LoginEnum.UPW_ERR)) { // 아이디, 비번 오류
+            reAttr.addFlashAttribute("nmsg", "");
+            reAttr.addFlashAttribute("keymsg", "아이디 또는 비밀번호가 일치하지 않습니다. <br>다시 시도해 주세요.");
+            reAttr.addFlashAttribute("rmsg", "");
+            return "redirect:/user/login";
+        } else if (result.getLoginEnum().equals(LoginEnum.SUCCESS)) { // 성공
+            return "redirect:/board/main";
         }
 
+        reAttr.addFlashAttribute("nmsg", "알 수 없는 이유로 로그인에 실패하였습니다.");
+        reAttr.addFlashAttribute("keymsg", "");
+        reAttr.addFlashAttribute("rmsg", "");
+        return "redirect:/user/login";
     }
 
     @GetMapping("/logout")

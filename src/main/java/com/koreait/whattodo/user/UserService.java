@@ -1,13 +1,14 @@
 package com.koreait.whattodo.user;
 
 import com.koreait.whattodo.UserUtils;
-import com.koreait.whattodo.model.UserEntity;
+import com.koreait.whattodo.enums.user.LoginEnum;
+import com.koreait.whattodo.model.user.UserDto;
+import com.koreait.whattodo.model.user.UserEntity;
+import com.koreait.whattodo.model.user.UserVo;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpSession;
 
 @Service
 public class UserService {
@@ -31,8 +32,8 @@ public class UserService {
         return upw.matches(Regex.PASSWORD);
     }
 
-    public int join(UserEntity entity) { // 회원가입
-        UserEntity copyEntity = new UserEntity();
+    public int join(UserEntity entity) { // 회원가입 로직
+        UserDto copyEntity = new UserDto();
         BeanUtils.copyProperties(entity, copyEntity);
 
         String hashPw = BCrypt.hashpw(copyEntity.getUpw(), BCrypt.gensalt());
@@ -41,34 +42,42 @@ public class UserService {
     }
 
     public int idChk(String uid) { // 아이디 중복검사
-        UserEntity entity = new UserEntity();
-        entity.setUid(uid);
         if (uid.length() < 4) { // 글자수 4자리 이상이여야 함
             return 2;
         }
-        UserEntity result = mapper.selUser(entity);
+        UserDto dto = new UserDto();
+        dto.setUid(uid);
+        UserVo result = mapper.selUser(dto);
         return result == null ? 1 : 0; // 계정이 없을시 사용가능
     }
 
-    public int login(UserEntity entity) {
-        UserEntity dbUser = null;
-        if (!UserService.checkUid(entity.getUid()) || !UserService.checkUpw(entity.getUpw())) {
-            return 4; // 정규식 오류
+    public UserVo login(UserDto dto) { // 로그인 로직
+        UserVo vo = new UserVo();
+        if (!UserService.checkUid(dto.getUid())) { // 정규식 검사
+            vo.setLoginEnum(LoginEnum.UID_REGEX_ERR);
+            return vo; // 정규식 id 오류
+        } else if (!UserService.checkUpw(dto.getUpw())) {
+            vo.setLoginEnum(LoginEnum.UPW_REGEX_ERR);
+            return vo; // 정규식 pw 오류
         }
 
         try {
-            dbUser = mapper.selUser(entity);
+            vo = mapper.selUser(dto);
         } catch (Exception e) {
             e.printStackTrace();
-            return 0; // 알 수 없는 에러
+            vo.setLoginEnum(LoginEnum.FAILURE);
+            return vo; // 알 수 없는 에러
         }
 
-        if (dbUser == null) {
-            return 2; // 계정없음(아이디 오류)
-        } else if (BCrypt.checkpw(entity.getUpw(), dbUser.getUpw())) {
-            userUtils.setLoginUser(dbUser);
-            return 1; // 성공
+        if (vo.getUid() == null) {
+            vo.setLoginEnum(LoginEnum.UID_ERR);
+            return vo; // 계정없음(아이디 오류)
+        } else if (BCrypt.checkpw(dto.getUpw(), vo.getUpw())) {
+            vo.setLoginEnum(LoginEnum.SUCCESS);
+            userUtils.setLoginUser(vo);
+            return vo; // 성공
         }
-        return 3; // 비번 오류
+        vo.setLoginEnum(LoginEnum.UPW_ERR);
+        return vo; // 비번 오류
     }
 }
