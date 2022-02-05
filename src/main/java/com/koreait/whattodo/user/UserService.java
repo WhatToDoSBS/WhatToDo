@@ -55,22 +55,29 @@ public class UserService {
         UserVo vo = new UserVo();
         if (!UserService.checkUid(dto.getUid())) { // 정규식 검사
             vo.setLoginEnum(LoginEnum.UID_REGEX_ERR);
-            return vo; // 정규식 오류
+            return vo; // 정규식 id 오류
+        } else if (!UserService.checkUpw(dto.getUpw())) {
+            vo.setLoginEnum(LoginEnum.UPW_REGEX_ERR);
+            return vo; // 정규식 pw 오류
         }
 
         try {
-            vo = mapper.selUser(dto); //
+            vo = mapper.selUser(dto);
         } catch (Exception e) {
             e.printStackTrace();
-            return 0; // 알 수 없는 에러
+            vo.setLoginEnum(LoginEnum.FAILURE);
+            return vo; // 알 수 없는 에러
         }
 
-        if (vo == null) {
-            return 2; // 계정없음(아이디 오류)
+        if (vo.getUid() == null) {
+            vo.setLoginEnum(LoginEnum.UID_ERR);
+            return vo; // 계정없음(아이디 오류)
         } else if (BCrypt.checkpw(dto.getUpw(), vo.getUpw())) {
+            vo.setLoginEnum(LoginEnum.SUCCESS);
             userUtils.setLoginUser(vo);
-            return 1; // 성공
+            return vo; // 성공
         }
-        return 3; // 비번 오류
+        vo.setLoginEnum(LoginEnum.UPW_ERR);
+        return vo; // 비번 오류
     }
 }
