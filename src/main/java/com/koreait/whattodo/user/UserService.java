@@ -10,6 +10,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Service
 public class UserService {
 
@@ -81,7 +84,14 @@ public class UserService {
         return vo; // 비번 오류
     }
 
-    public void insAutoLoginKey() {
+    public void insAutoLoginKey(UserVo vo) {
+        String key = String.format("%s%s%s%f",
+                vo.getUid(),
+                vo.getUpw(),
+                new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date()),
+                Math.random());
+
+        key = BCrypt.hashpw(key, BCrypt.gensalt());
 
     }
 }

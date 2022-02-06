@@ -102,3 +102,13 @@ CREATE TABLE webtoon_recommand (
                                    link VARCHAR(100),
                                    homepage INT DEFAULT 1
 );
+
+// 자동로그인
+CREATE TABLE auto_login
+(
+    ikey INT UNSIGNED AUTO_INCREMENT,
+    auto_key VARCHAR(100) NOT NULL ,
+    iuser INT UNSIGNED NOT NULL ,
+    CONSTRAINT PRIMARY KEY (ikey),
+    CONSTRAINT FOREIGN KEY (iuser) REFERENCES t_user (iuser)
+);
