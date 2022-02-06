@@ -15,13 +15,13 @@ public class WebtoonCrawlingTest {
     public static void main(String[] args) throws IOException {
 
         // 크롤링해서 가져오는 과정
-        String naverWebtoonURL = "https://comic.naver.com/webtoon/finish";
+        String naverWebtoonURL = "https://some.co.kr/media/home";
 
         // 액세스 처리
         try {
             Document document = Jsoup.connect(naverWebtoonURL).userAgent("Chrome/5.0").get(); // 403 error 처리(권한 부여)
 
-            Elements toonNm = document.select("div.thumb").select("a");
+            Elements toonNm = document.select("ul.list_area > li");
             Elements toonImg = document.select("div.thumb").select("a").select("img");  // 이미지, 완결 구분
             Elements toonWriter = document.select("ul.img_list").select("dd.desc").select("a");
             Elements toonLink = document.select("div.thumb").select("a");
@@ -31,11 +31,10 @@ public class WebtoonCrawlingTest {
             List<String> toonWriterList = new ArrayList<>();
             List<String> toonLinkList = new ArrayList<>();
 
-            System.out.println(genre.text().substring(0,3));
             for(Element element: toonNm) {    // 웹툰 이름
-                String name =element.getElementsByAttribute("title").attr("title");
+                String name =element.text();
                 toonNmList.add(name);
-
+                System.out.println(toonNm);
             }
             for(Element element: toonImg) {    // 웹툰 이미지
                 String name =element.getElementsByAttribute("src").attr("src");
