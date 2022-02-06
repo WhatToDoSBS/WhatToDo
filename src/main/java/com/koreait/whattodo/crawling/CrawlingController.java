@@ -76,14 +76,16 @@ public class CrawlingController {
         // 게임
         crawlingService.insertRating(ratingUrl);
         List<RatingEntity> list = crawlingService.ratingList(ratingEntity);
+        List<WebtoonRecommandEntity> webtoonRecommandEntityList = webtoonService.listRecommandWebtoon();
 
         // 랜덤번째 리스트를 전달해줌
         int randomGameNum = utils.randomNumOutput(list.size());
-        int randomWebtoon = utils.randomNumOutput(webtoonList.size());
+        int randomWebtoon = utils.randomNumOutput(webtoonRecommandEntityList.size());
         System.out.println("랜덤 [게임] 숫자 : " + randomGameNum);
         System.out.println("랜덤 [웹툰] 숫자 : " + randomWebtoon);
+
         model.addAttribute("randomGame", list.get(randomGameNum).getGameNm());
-        model.addAttribute("randomWebtoon", webtoonList.get(randomWebtoon));
+        model.addAttribute("randomWebtoon", webtoonRecommandEntityList.get(randomWebtoon));
     }
 
     @GetMapping("/book")
@@ -151,11 +153,11 @@ public class CrawlingController {
     public void game() {
         String platformUrl = "https://trees.gamemeca.com/gamerank/";
         String mecaUrl = "https://www.gamemeca.com/ranking.php";
-        crawlingService.insertMeca(mecaUrl);
-        crawlingService.insertPlatform(platformUrl);
-        PlatformRankEntity entity = new PlatformRankEntity();
-        PlatformImgEntity imgEntity = new PlatformImgEntity();
-        crawlingService.insertPlatformImgList(entity);
+//        crawlingService.insertMeca(mecaUrl);
+//        crawlingService.insertPlatform(platformUrl);
+//        PlatformRankEntity entity = new PlatformRankEntity();
+//        PlatformImgEntity imgEntity = new PlatformImgEntity();
+//        crawlingService.insertPlatformImgList(entity);
     }
 
     @GetMapping("/platformrankingjson")
