@@ -25,9 +25,9 @@
         </h3>
         <ul class="recommend_section">
             <c:forEach var="item" items="${webtoonRecommandListRandom}">
-                <div class="webtoonModalElement">
+                <div class="webtoonModalElement" data-nm="${item.nm}">
                     <li>
-                        <img src="${item.img}" alt="" >
+                        <img src="${item.img}" alt="">
                         <span>${item.nm}</span>
                         <span class="webtoonLink">작가 : ${item.writer}</span>
                         <span class="webtoonLink"><a href="${item.link}">>> 보러가기 <<</a></span>
@@ -39,16 +39,18 @@
     <div class="naver_section">
         <ul>
             <c:forEach var="item" items="${webtoonListRandom}">
-            <div class="webtoonModalElement">
+            <div class="webtoonModalElement" data-nm="${item.nm}">
                 <li>
                     <div id="webtoon_img">
-                        <img src="${item.img}" class="webtoonModalElement">
+                        <img src="${item.img}">
                     </div>
                     <div id="webtoon_databox">
-                        <span class="font-14px webtoonModalElement">${item.nm}</span>
+                        <span class="font-14px">${item.nm}</span>
                     </div>
-                    <span class="webtoonLink">작가 : ${item.writer}</span>
+                    <span class="webtoonLink webtoonWriter">작가 : ${item.writer}</span>
                     <span class="webtoonLink"><a href="${item.link}">>> 보러가기 <<</a></span>
+                    <span class="webtoonInfoHidden webtoonWeekend">${item.weekend}</span>
+                    <span class="webtoonInfoHidden webtoonIuser">${item.iuser}</span>
                 </li>
             </div>
             </c:forEach>
@@ -64,6 +66,13 @@
             </div>
             <div class="gameLink">
             </div>
+            <div>
+                <form id="reviewFrm">
+                    <input type="text" name="ctnt">
+                    <input type="button" id="btn_submit" value="작성">
+                </form>
+            </div>
+            <div id="review_list"></div>
         </div>
     </div>
 </div>

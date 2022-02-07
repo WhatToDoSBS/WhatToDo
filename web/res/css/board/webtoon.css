@@ -14,6 +14,11 @@ button:hover {
     display: none;
 }
 
+.webtoonInfoHidden {
+    display: none;
+}
+
+
 #recommand_box ul {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.whattodo.review.ReviewMapper">
+    <insert id="insReviewWebtoon">
+        INSERT INTO review_webtoon (ctnt, nm, iuser)
+        VALUES (#{ctnt}, #{nm}, ${iuser})
+    </insert>
+
+    <select id="selReviewWebtoon" resultType="ReviewEntity">
+        SELECT A.*
+        FROM review_webtoon A
+                 LEFT JOIN t_user B
+                           ON A.iuser = B.iuser
+        LEFT JOIN webtoon C ON A.nm = C.nm
+        WHERE A.nm = #{nm}
+        ORDER BY A.rnum
+    </select>
+
+    <delete id="delReviewWebtoon">
+        DELETE FROM review_webtoon
+        WHERE rnum = ${rnum}
+          AND iuser = ${iuser}
+    </delete>
+</mapper>

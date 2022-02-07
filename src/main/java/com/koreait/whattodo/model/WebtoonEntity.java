@@ -14,4 +14,5 @@ public class WebtoonEntity {
     private int homepage;   // 홈페이지값 1이면 Naver
     private String weekend;
     private String link;
+    private int iuser;
 }
