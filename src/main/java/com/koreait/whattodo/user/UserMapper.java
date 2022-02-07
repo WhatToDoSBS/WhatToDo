@@ -14,5 +14,7 @@ public interface UserMapper {
                          @Param("uid") String uid,
                          @Param("day") int day); // 자동로그인 키 생성
 
+    void delAutoLoginKey(@Param("key") String key); // 자동로그인 키 만료
+
     UserVo selUser(UserEntity entity); // 로그인
 }

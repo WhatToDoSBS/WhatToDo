@@ -55,7 +55,6 @@ public class UserController {
         }
 
         UserVo result = service.login(entity); // 로그인 결과
-        System.out.println(result.getLoginResult());
         if (result.getLoginResult().equals(LoginEnum.UID_REGEX_ERR) || result.getLoginResult().equals(LoginEnum.UPW_REGEX_ERR)) { // 정규식 오류
             reAttr.addFlashAttribute("nmsg", "");
             reAttr.addFlashAttribute("keymsg", "");
@@ -68,7 +67,6 @@ public class UserController {
             return "redirect:/user/login";
         } else if (result.getLoginResult() == LoginEnum.SUCCESS) { // 성공
             userUtils.setLoginUser(result);
-            System.out.println(dto.isAutoLogin());
             if (dto.isAutoLogin()) {
                 service.insAutoLoginKey(result);
                 Cookie cookie = new Cookie("loginKey", result.getAutoLoginKey());
@@ -88,12 +86,21 @@ public class UserController {
 
     @GetMapping("/logout")
     public String logout(HttpSession hs, HttpServletRequest request, HttpServletResponse response) {
+        Cookie cookies [] = request.getCookies();
+        if (cookies != null) {
+            for (Cookie c : cookies) {
+                String name = c.getName();
+                String value = c.getValue();
+                if (name.equals("loginKey")) {
+                    service.delAutoLoginKey(value);
+                }
+            }
+            for (int i = 0; i < cookies.length; i++) {
+                cookies[i].setMaxAge(0);
+                response.addCookie(cookies[i]);
+            }
+        }
         hs.invalidate();
-
-        Cookie cookie = new Cookie("loginKey", null);
-        cookie.setValue(null);
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
         return "redirect:/user/login";
     }
 

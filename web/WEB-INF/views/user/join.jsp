@@ -23,7 +23,7 @@
             <h4 class="join_title" style="padding-right: 10rem;">패스워드 확인</h4>
             <input type="password" name="upw-check" id="upw-chk" class="textBox" required>
             <h5 class="msg_n" id="err-pwChkMsg">비밀번호와 체크 비밀번호를 확인해 주세요.</h5>
-            <h5 class="msg_n" id="good-pwChkMsg">비밀번호와 체크 비밀번호가 같습니다.</h5>
+            <h5 class="msg_n" id="good-pwChkMsg">비밀번호가 같습니다.</h5>
         </div>
         <div>
             <h4 class="join_title" style="padding-right: 16rem;">이름</h4>
