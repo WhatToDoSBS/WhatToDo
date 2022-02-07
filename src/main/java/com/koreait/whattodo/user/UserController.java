@@ -54,19 +54,23 @@ public class UserController {
         }
 
         UserVo result = service.login(dto); // 로그인 결과
-        if (result.getLoginEnum().equals(LoginEnum.UID_REGEX_ERR) || result.getLoginEnum().equals(LoginEnum.UPW_REGEX_ERR)) { // 정규식 오류
+        if (result.getLoginResult().equals(LoginEnum.UID_REGEX_ERR) || result.getLoginResult().equals(LoginEnum.UPW_REGEX_ERR)) { // 정규식 오류
             reAttr.addFlashAttribute("nmsg", "");
             reAttr.addFlashAttribute("keymsg", "");
             reAttr.addFlashAttribute("rmsg", "아이디와 비밀번호를 바르게 작성해주세요.");
             return "redirect:/user/login";
-        } else if (result.getLoginEnum().equals(LoginEnum.UID_ERR) || result.getLoginEnum().equals(LoginEnum.UPW_ERR)) { // 아이디, 비번 오류
+        } else if (result.getLoginResult().equals(LoginEnum.UID_ERR) || result.getLoginResult().equals(LoginEnum.UPW_ERR)) { // 아이디, 비번 오류
             reAttr.addFlashAttribute("nmsg", "");
             reAttr.addFlashAttribute("keymsg", "아이디 또는 비밀번호가 일치하지 않습니다. <br>다시 시도해 주세요.");
             reAttr.addFlashAttribute("rmsg", "");
             return "redirect:/user/login";
-        } else if (result.getLoginEnum().equals(LoginEnum.SUCCESS)) { // 성공
+        } else if (result.getLoginResult().equals(LoginEnum.SUCCESS)) { // 성공
             if (result.getIsAutoLogin()) {
-
+                service.insAutoLoginKey(result);
+                Cookie cookie = new Cookie("loginKey", result.getAutoLoginKey());
+                cookie.setMaxAge(60*60*24*UserService.Config.AUTO_LOGIN_KEY_EXPIRY_DATE);
+                cookie.setPath("/");
+                response.addCookie(cookie);
             }
             return "redirect:/board/main";
         }

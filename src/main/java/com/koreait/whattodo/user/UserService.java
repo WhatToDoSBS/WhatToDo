@@ -22,6 +22,10 @@ public class UserService {
     @Autowired
     private UserUtils userUtils;
 
+    public static class Config{
+        public static final int AUTO_LOGIN_KEY_EXPIRY_DATE = 7;
+    }
+
     private static class Regex { // 정규식
         private static final String ID = "^([a-zA-Z0-9]{4,15})$";
         private static final String PASSWORD = "^([a-zA-Z0-9!@_]{4,20})$";
@@ -57,10 +61,10 @@ public class UserService {
     public UserVo login(UserDto dto) { // 로그인 로직
         UserVo vo = new UserVo();
         if (!UserService.checkUid(dto.getUid())) { // 정규식 검사
-            vo.setLoginEnum(LoginEnum.UID_REGEX_ERR);
+            vo.setLoginResult(LoginEnum.UID_REGEX_ERR);
             return vo; // 정규식 id 오류
         } else if (!UserService.checkUpw(dto.getUpw())) {
-            vo.setLoginEnum(LoginEnum.UPW_REGEX_ERR);
+            vo.setLoginResult(LoginEnum.UPW_REGEX_ERR);
             return vo; // 정규식 pw 오류
         }
 
@@ -68,19 +72,19 @@ public class UserService {
             vo = mapper.selUser(dto);
         } catch (Exception e) {
             e.printStackTrace();
-            vo.setLoginEnum(LoginEnum.FAILURE);
+            vo.setLoginResult(LoginEnum.FAILURE);
             return vo; // 알 수 없는 에러
         }
 
         if (vo.getUid() == null) {
-            vo.setLoginEnum(LoginEnum.UID_ERR);
+            vo.setLoginResult(LoginEnum.UID_ERR);
             return vo; // 계정없음(아이디 오류)
         } else if (BCrypt.checkpw(dto.getUpw(), vo.getUpw())) {
-            vo.setLoginEnum(LoginEnum.SUCCESS);
+            vo.setLoginResult(LoginEnum.SUCCESS);
             userUtils.setLoginUser(vo);
             return vo; // 성공
         }
-        vo.setLoginEnum(LoginEnum.UPW_ERR);
+        vo.setLoginResult(LoginEnum.UPW_ERR);
         return vo; // 비번 오류
     }
 
@@ -89,9 +93,10 @@ public class UserService {
                 vo.getUid(),
                 vo.getUpw(),
                 new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date()),
-                Math.random());
+                Math.random()); // String.format(uid+upw+생성날짜+0~9랜덤숫자1개)
 
-        key = BCrypt.hashpw(key, BCrypt.gensalt());
-
+        key = BCrypt.hashpw(key, BCrypt.gensalt()); // 암호화로 키생성
+        mapper.insAutoLoginKey(key, vo.getUid(), Config.AUTO_LOGIN_KEY_EXPIRY_DATE);
+        vo.setAutoLoginKey(key);
     }
 }

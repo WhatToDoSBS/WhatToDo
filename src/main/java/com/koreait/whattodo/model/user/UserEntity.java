@@ -16,6 +16,5 @@ public class UserEntity {
     private String profileimg;
     private String rdt;
     private String mdt;
-    private Boolean uidChk;
     private Boolean isAutoLogin;
 }
