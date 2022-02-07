@@ -11,7 +11,13 @@
         VALUES (#{key}, #{uid}, DATE_ADD(NOW(), INTERVAL #{day} DAY))
     </insert>
 
-
+    <update id="delAutoLoginKey"><!--  자동로그인 키 만료  -->
+        UPDATE auto_login
+        SET expiration_flag = TRUE
+        WHERE auto_key = #{key}
+          AND expiration_at > NOW()
+          AND expiration_flag = FALSE
+    </update>
 
     <select id="selUser" resultType="UserVo"> <!--  로그인  -->
         SELECT * FROM whattodo_user

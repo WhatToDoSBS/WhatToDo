@@ -104,6 +104,6 @@ public class UserService {
     }
 
     public void delAutoLoginKey(String cookie) {
-
+        mapper.delAutoLoginKey(cookie);
     }
 }
