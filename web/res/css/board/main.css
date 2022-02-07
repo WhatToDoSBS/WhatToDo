@@ -1,4 +1,3 @@
-
 .container_box {
     justify-content: normal;
     padding: 0;
@@ -33,10 +32,8 @@
     align-items: center;
 }
 
-.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
-    box-shadow: none; !important;
-    outline: 0; !important;
-    border:none; !important;
+.btn a:hover {
+    color: black;
 }
 
 .left_section .ranking {

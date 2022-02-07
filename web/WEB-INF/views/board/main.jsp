@@ -42,19 +42,19 @@
             <div class="button-group">
                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                     <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-                    <label class="btn btn-light" for="btnradio1"><a href="/board/list">자유게시판</a></label>
+                    <label class="btn btn-light shadow-none" for="btnradio1"><a href="/board/list">자유게시판</a></label>
 
                     <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-                    <label class="btn btn-light" for="btnradio2">ALL RANK</label>
+                    <label class="btn btn-light shadow-none" for="btnradio2">ALL RANK</label>
 
                     <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-                    <label class="btn btn-light" for="btnradio3">RANDOM</label>
+                    <label class="btn btn-light shadow-none" for="btnradio3">RANDOM</label>
 
                     <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
-                    <label class="btn btn-light" for="btnradio4">WEBTOON</label>
+                    <label class="btn btn-light shadow-none" for="btnradio4">WEBTOON</label>
 
                     <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off">
-                    <label class="btn btn-light" for="btnradio5">GAME</label>
+                    <label class="btn btn-light shadow-none" for="btnradio5">GAME</label>
                 </div>
             </div>
 
