@@ -32,7 +32,7 @@ VALUES
     ('youtube'),
     ('list');
 
-CREATE TABLE t_user
+CREATE TABLE wtd_user
 (
     iuser      INT UNSIGNED AUTO_INCREMENT,
     uid        VARCHAR(15)  NOT NULL,
@@ -101,4 +101,18 @@ CREATE TABLE webtoon_recommand (
                                    weekend VARCHAR(10),
                                    link VARCHAR(100),
                                    homepage INT DEFAULT 1
+);
+
+// 자동로그인
+CREATE TABLE auto_login
+(
+    `index`         INT UNSIGNED AUTO_INCREMENT,         # primary 값
+    auto_key        VARCHAR(100) NOT NULL,               # 자동로그인 key
+    user_id         VARCHAR(15)  NOT NULL,               # 유저 id
+    create_at       DATETIME     NOT NULL DEFAULT NOW(), # 키 생성일
+    expiration_at   DATETIME     NOT NULL,               # 키 만료일
+    expiration_flag BOOLEAN      NOT NULL DEFAULT FALSE, # 키 만료여부
+    CONSTRAINT PRIMARY KEY (`index`),
+    CONSTRAINT UNIQUE (auto_key),
+    CONSTRAINT FOREIGN KEY (user_id) REFERENCES t_user (uid)
 );
