@@ -7,5 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserVo extends UserEntity{
-    private LoginEnum loginEnum;
+    private LoginEnum loginResult;
+    private String autoLoginKey;
 }
