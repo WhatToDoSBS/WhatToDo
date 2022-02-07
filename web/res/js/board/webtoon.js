@@ -91,45 +91,49 @@ randomSubmitBtn.addEventListener('click', function () {  // 랜덤버튼 누르�
     webtoonGenreRandom(webtoonGenreRandomUrl);
 })
 
+/* --- MODAL 관련 --- */
+
 const modalWindow = document.getElementById("modal");
 const modalXBtn = document.querySelector(".close-area");
 const webtoonModalElem = document.querySelectorAll('.webtoonModalElement');
 const modalContent = document.querySelector('.modalContent');
 const webtoonInfoHidden = modalContent.querySelector('.webtoonInfoHidden');
+let dataNm, dataWeekend, iuser;
 
 webtoonModalElem.forEach(function (item) {
-
     item.addEventListener('click', function (e) {
-        //e.stopPropagation();
 
-        console.log(item);
         console.log(item.dataset.nm);
+        console.log(item.dataset.weekend);
+        console.log(item.dataset.iuser);
 
+        // 데이터 담기
+        dataNm = item.dataset.nm;
+        dataWeekend = item.dataset.weekend;
+        iuser = item.dataset.iuser;
 
         modalWindow.style.display = 'flex';
 
         modalContent.innerHTML = item.innerHTML;
-
-        /*
-        modalXBtn.addEventListener('click', () => {
-            modalWindow.style.display = 'none';
-        })
-        window.addEventListener("keyup", (e) => {
-            if (modalWindow.style.display === "flex" && e.key === "Escape") {
-                modalWindow.style.display = 'none';
-            }
-        });
-        // 모달창 밖으로 마우스 클릭하면 닫힘
-        window.addEventListener("mouseup", (e) => {
-            if (modalWindow.style.display === "flex" && e.target === modalWindow) {
-                modalWindow.style.display = 'none';
-            }
-        });
-
-         */
     })
 })
 
+modalXBtn.addEventListener('click', () => {
+    modalWindow.style.display = 'none';
+})
+window.addEventListener("keyup", (e) => {
+    if (modalWindow.style.display === "flex" && e.key === "Escape") {
+        modalWindow.style.display = 'none';
+    }
+});
+// 모달창 밖으로 마우스 클릭하면 닫힘
+window.addEventListener("mouseup", (e) => {
+    if (modalWindow.style.display === "flex" && e.target === modalWindow) {
+        modalWindow.style.display = 'none';
+    }
+});
+
+/* -------- MODAL REVIEW 관련 -------- */
 const reviewFrm = document.querySelector('#reviewFrm');
 const modalIuser = modalContent.querySelector('.webtoonIuser');
 const modalWeekend = modalContent.querySelector('.weebtoonWeekend');
@@ -138,6 +142,7 @@ reviewFrm.addEventListener('submit', (e)=> {
     e.preventDefault();
 });
 
+// 리뷰 작성 버튼 분기문
 reviewFrm.btn_submit.addEventListener('click', () => {
     const reviewVal = reviewFrm.ctnt.value;
     if(reviewVal.length === 0) {
@@ -149,11 +154,12 @@ reviewFrm.btn_submit.addEventListener('click', () => {
     }
 });
 
+// 리뷰 Insert
 const insReviewWebtoonAjax = (val) => {
-    console.log(modalWeekend.innerText);
     const param = {
-        'weekend': modalWeekend.innerText,
-        'iuser': modalIuser.innerText,
+        'nm': dataNm,
+        'weekend': dataWeekend,
+        'iuser': iuser,
         'ctnt': val
     };
     myFetch.post('/board/review', (data) => {
@@ -172,8 +178,7 @@ const insReviewWebtoonAjax = (val) => {
                     reviewListElem.appendChild(table);
                 }
                 const item = {
-                    icmt: data.result,
-                    iuser: parseInt(dataElem.dataset.iuser),
+                    iuser: iuser,
                     writernm: dataElem.dataset.nm,
                     ctnt: cmtFrmElem.ctnt.value,
                 }

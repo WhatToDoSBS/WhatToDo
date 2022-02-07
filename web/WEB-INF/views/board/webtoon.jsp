@@ -25,7 +25,9 @@
         </h3>
         <ul class="recommend_section">
             <c:forEach var="item" items="${webtoonRecommandListRandom}">
-                <div class="webtoonModalElement" data-nm="${item.nm}">
+                <div class="webtoonModalElement" data-nm="${item.nm}"
+                     data-weekend="${item.weekend}"
+                     data-iuser="${sessionScope.loginUser.iuser}">
                     <li>
                         <img src="${item.img}" alt="">
                         <span>${item.nm}</span>
@@ -39,7 +41,11 @@
     <div class="naver_section">
         <ul>
             <c:forEach var="item" items="${webtoonListRandom}">
-            <div class="webtoonModalElement" data-nm="${item.nm}">
+            <div class="webtoonModalElement"
+                 data-nm="${item.nm}"
+                 data-weekend="${item.weekend}"
+                 data-iuser="${sessionScope.loginUser.iuser}"
+            data-writernm="${sessionScope.loginUser.nm}">
                 <li>
                     <div id="webtoon_img">
                         <img src="${item.img}">
@@ -60,7 +66,7 @@
         <div class="modal-window">
             <div class="close-area">X</div>
             <div class="modalTitle">
-                    웹툰 정보
+                웹툰 정보
             </div>
             <div class="modalContent">
             </div>

@@ -2,6 +2,7 @@ package com.koreait.whattodo.review;
 
 import com.koreait.whattodo.UserUtils;
 import com.koreait.whattodo.model.ReviewEntity;
+import com.koreait.whattodo.model.user.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ public class ReviewService {
 
     public int insReviewWebtoon(ReviewEntity entity) {
         entity.setIuser(userUtils.getLoginUserPk());
+        entity.setNickname(userUtils.getLoginUserNm());
         return reviewMapper.insReviewWebtoon(entity);
     }
 
