@@ -291,9 +291,7 @@ button.pfBtn.clicked {
 }
 
 .boardBtn {
-    border: none;
     margin: 5px;
-    background-color: lightsteelblue;
 }
 
 #dTitle {

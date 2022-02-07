@@ -1,11 +1,11 @@
 .container .container { align-items: center}
 
-.choiceBtn_section button {padding: 10px 20px; border-radius: 15px; font-size: large; color: midnightblue}
+.choiceBtn_section button {padding: 10px 20px; border-radius: 15px; font-size: large; color: midnightblue; margin-left: 5px}
 
 .container .choiceBtn_section {
     margin-bottom: 0;
 }
-label { font-size: larger; font-weight: bolder; color: mediumslateblue}
+.btLb { font-size: xx-large; font-weight: bolder; color: darkslateblue}
 
 .choiceBtn_section_line { margin: 50px 0;}
 

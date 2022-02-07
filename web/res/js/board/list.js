@@ -42,7 +42,7 @@ let makeIdx = () => {
     for(let i=1; i<=pageCount; i++) {
         pageIdxElem.innerHTML +=
         `
-        <span class="pageNum" data-idx="${i}">${i}</span>
+        <li class="pageNum page-item" data-idx="${i}">${i}</li>
         `
     }
 }
@@ -89,7 +89,7 @@ dataPerPageElem.addEventListener('change', ()=> {
         for(let i=1; i<=Math.floor(Number(totalDataNum / pageSelectVal())) + 1; i++) {
             pageIdxElem.innerHTML +=
                 `
-        <span class="pageNum" data-idx="${i}">${i}</span>
+        <span class="pageNum page-item" data-idx="${i}">${i}</span>
         `
         }
         let pageNumElem = document.querySelectorAll('.pageNum');
@@ -122,7 +122,7 @@ dataPerPageElem.addEventListener('change', ()=> {
         for(let i=1; i<=Math.floor(Number(totalDataNum / pageSelectVal())) + 1; i++) {
             pageIdxElem.innerHTML +=
                 `
-        <span class="pageNum" data-idx="${i}">${i}</span>
+        <span class="pageNum page-item" data-idx="${i}">${i}</span>
         `
         }
         let pageNumElem = document.querySelectorAll('.pageNum');
@@ -156,7 +156,7 @@ dataPerPageElem.addEventListener('change', ()=> {
         for(let i=1; i<=Math.floor(Number(totalDataNum / pageSelectVal())) + 1; i++) {
             pageIdxElem.innerHTML +=
                 `
-        <span class="pageNum" data-idx="${i}">${i}</span>
+        <span class="pageNum page-item" data-idx="${i}">${i}</span>
         `
         }
         let pageNumElem = document.querySelectorAll('.pageNum');

@@ -16,11 +16,18 @@
         <input type="hidden" name="iboard" value="${iboardVal}">
 <%--        <input type="hidden" name="icategory" value="${icategoryVal}">--%>
         <div id="writeElem1">
-            <input type="text" name="title" placeholder="제목을 입력하세요." value="<c:out value='${requestScope.data.title}'/>">
+            <input type="text" class="form-control form-control" name="title" placeholder="제목을 입력하세요." value="<c:out value='${requestScope.data.title}'/>">
         </div>
         <div id="writeElem2">
-            <textarea name="ctnt" placeholder="내용을 입력하세요."><c:out value="${requestScope.data.ctnt}" /></textarea>
+            <textarea id="summernote" name="ctnt" placeholder="내용을 입력하세요."><c:out value="${requestScope.data.ctnt}" /></textarea>
         </div>
-        <div id="writeElem3"><input class="writeBtn" type="submit" value="${submitVal}"></div>
+        <div id="writeElem3"><input class="writeBtn btn btn-outline-success" type="submit" value="${submitVal}"></div>
     </form>
 </div>
+<script>
+    $('#summernote').summernote({
+        placeholder: '내용을 입력하세요.',
+        tabsize: 3,
+        height: 300
+    });
+</script>

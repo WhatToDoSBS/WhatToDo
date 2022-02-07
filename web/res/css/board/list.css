@@ -2,7 +2,7 @@
     padding:1rem 5rem;
     font-size: 20px;
     font-weight: bold;
-    background-color: greenyellow;
+    /*background-color: greenyellow;*/
     border: none;
     display: inline-block;
 }
@@ -20,9 +20,9 @@
     cursor: pointer;
 }
 
-td, th { border-color: lightseagreen}
+table { margin-top: 10px; text-align: center; width: 100%; border: none;}
 
-table { margin-top: 10px; text-align: center; width: 100%}
+td, th { border : none; border-bottom: dimgrey}
 
 #paging { margin-top: 10px; display: flex; justify-content: right}
 
@@ -32,7 +32,7 @@ table { margin-top: 10px; text-align: center; width: 100%}
 
 .pageNum:hover {cursor: pointer}
 
-#listTitle {text-align: center}
+#listTitle {text-align: center; margin-top: 20px}
 
 #lTitle { width: 60%;}
 

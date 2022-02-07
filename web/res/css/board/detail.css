@@ -15,7 +15,7 @@ table { width: 100%; text-align: center}
     width: 75%;
     border-color: lightgrey;
 }
-.boardBtn { padding: 5px; color: #444444; font-weight: bolder; background-color: lightgreen}
+.boardBtn { padding: 5px; color: #444444; font-weight: bolder;}
 
 #likeBtnDv { display: flex; justify-content: center}
 
