@@ -11,7 +11,9 @@
         <h5 class="err_msg_b">${requestScope.rmsg}</h5><%--   아이디와 비밀번호를 바르게 작성해주세요.     --%>
     </div>
     <div>
-        <input type="checkbox" name="uidChk"> 아이디 저장 <input type="checkbox" name="loginChk"> 자동 로그인
+        <label>
+            <input type="checkbox" name="autoLogin"> 자동 로그인
+        </label>
     </div>
     <div>
         <input class="login_btn" type="submit" value="Login">

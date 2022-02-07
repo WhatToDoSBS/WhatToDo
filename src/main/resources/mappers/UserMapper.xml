@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.koreait.whattodo.user.UserMapper">
     <insert id="insUser"><!--  회원가입  -->
-        INSERT INTO t_user (uid, upw, nm, gender, profileimg)
+        INSERT INTO whattodo_user (uid, upw, nm, gender, profileimg)
         VALUES (#{uid}, #{upw}, #{nm}, ${gender}, #{profileimg})
     </insert>
 
@@ -11,8 +11,10 @@
         VALUES (#{key}, #{uid}, DATE_ADD(NOW(), INTERVAL #{day} DAY))
     </insert>
 
+
+
     <select id="selUser" resultType="UserVo"> <!--  로그인  -->
-        SELECT * FROM t_user
+        SELECT * FROM whattodo_user
         WHERE uid = #{uid}
     </select>
 

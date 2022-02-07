@@ -10,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.Cookie;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -19,8 +20,6 @@ public class UserService {
     @Autowired
     private UserMapper mapper;
 
-    @Autowired
-    private UserUtils userUtils;
 
     public static class Config{
         public static final int AUTO_LOGIN_KEY_EXPIRY_DATE = 7;
@@ -58,37 +57,41 @@ public class UserService {
         return result == null ? 1 : 0; // 계정이 없을시 사용가능
     }
 
-    public UserVo login(UserDto dto) { // 로그인 로직
+    public UserVo login(UserEntity entity) { // 로그인 로직
         UserVo vo = new UserVo();
-        if (!UserService.checkUid(dto.getUid())) { // 정규식 검사
+
+        if (!UserService.checkUid(entity.getUid())) { // 정규식 검사
             vo.setLoginResult(LoginEnum.UID_REGEX_ERR);
             return vo; // 정규식 id 오류
-        } else if (!UserService.checkUpw(dto.getUpw())) {
+        } else if (!UserService.checkUpw(entity.getUpw())) {
             vo.setLoginResult(LoginEnum.UPW_REGEX_ERR);
             return vo; // 정규식 pw 오류
         }
 
         try {
-            vo = mapper.selUser(dto);
+            if (mapper.selUser(entity) == null) {
+                vo.setLoginResult(LoginEnum.UID_ERR);
+                return vo; // 계정없음(아이디 오류)
+            }
+            vo = mapper.selUser(entity);
         } catch (Exception e) {
             e.printStackTrace();
             vo.setLoginResult(LoginEnum.FAILURE);
             return vo; // 알 수 없는 에러
         }
 
-        if (vo.getUid() == null) {
-            vo.setLoginResult(LoginEnum.UID_ERR);
-            return vo; // 계정없음(아이디 오류)
-        } else if (BCrypt.checkpw(dto.getUpw(), vo.getUpw())) {
+
+        if (BCrypt.checkpw(entity.getUpw(), vo.getUpw())) {
             vo.setLoginResult(LoginEnum.SUCCESS);
-            userUtils.setLoginUser(vo);
             return vo; // 성공
         }
         vo.setLoginResult(LoginEnum.UPW_ERR);
         return vo; // 비번 오류
     }
 
-    public void insAutoLoginKey(UserVo vo) {
+
+
+    public void insAutoLoginKey(UserVo vo) { // Ch1.자동로그인  쿠키 생성
         String key = String.format("%s%s%s%f",
                 vo.getUid(),
                 vo.getUpw(),
@@ -96,7 +99,11 @@ public class UserService {
                 Math.random()); // String.format(uid+upw+생성날짜+0~9랜덤숫자1개)
 
         key = BCrypt.hashpw(key, BCrypt.gensalt()); // 암호화로 키생성
-        mapper.insAutoLoginKey(key, vo.getUid(), Config.AUTO_LOGIN_KEY_EXPIRY_DATE);
+        mapper.insAutoLoginKey(key, vo.getUid(), Config.AUTO_LOGIN_KEY_EXPIRY_DATE); //
         vo.setAutoLoginKey(key);
+    }
+
+    public void delAutoLoginKey(String cookie) {
+
     }
 }

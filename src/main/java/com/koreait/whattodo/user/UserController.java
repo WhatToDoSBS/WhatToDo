@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -46,14 +47,15 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginPost(UserDto dto, RedirectAttributes reAttr, HttpServletResponse response) {
+    public String loginPost(UserEntity entity, RedirectAttributes reAttr, HttpServletResponse response, UserDto dto) {
         UserEntity loginUser = userUtils.getLoginUser();
         // 로그인한 유저의 경우 로그인창으로 접근 막음
         if (loginUser != null) {
             return "redirect:/board/main";
         }
 
-        UserVo result = service.login(dto); // 로그인 결과
+        UserVo result = service.login(entity); // 로그인 결과
+        System.out.println(result.getLoginResult());
         if (result.getLoginResult().equals(LoginEnum.UID_REGEX_ERR) || result.getLoginResult().equals(LoginEnum.UPW_REGEX_ERR)) { // 정규식 오류
             reAttr.addFlashAttribute("nmsg", "");
             reAttr.addFlashAttribute("keymsg", "");
@@ -64,13 +66,16 @@ public class UserController {
             reAttr.addFlashAttribute("keymsg", "아이디 또는 비밀번호가 일치하지 않습니다. <br>다시 시도해 주세요.");
             reAttr.addFlashAttribute("rmsg", "");
             return "redirect:/user/login";
-        } else if (result.getLoginResult().equals(LoginEnum.SUCCESS)) { // 성공
-            if (result.getIsAutoLogin()) {
+        } else if (result.getLoginResult() == LoginEnum.SUCCESS) { // 성공
+            userUtils.setLoginUser(result);
+            System.out.println(dto.isAutoLogin());
+            if (dto.isAutoLogin()) {
                 service.insAutoLoginKey(result);
                 Cookie cookie = new Cookie("loginKey", result.getAutoLoginKey());
                 cookie.setMaxAge(60*60*24*UserService.Config.AUTO_LOGIN_KEY_EXPIRY_DATE);
                 cookie.setPath("/");
                 response.addCookie(cookie);
+                return "redirect:/board/main";
             }
             return "redirect:/board/main";
         }
@@ -82,8 +87,13 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpSession hs) {
+    public String logout(HttpSession hs, HttpServletRequest request, HttpServletResponse response) {
         hs.invalidate();
+
+        Cookie cookie = new Cookie("loginKey", null);
+        cookie.setValue(null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
         return "redirect:/user/login";
     }
 

@@ -14,5 +14,5 @@ public interface UserMapper {
                          @Param("uid") String uid,
                          @Param("day") int day); // 자동로그인 키 생성
 
-    UserVo selUser(UserDto dto); // 로그인
+    UserVo selUser(UserEntity entity); // 로그인
 }
