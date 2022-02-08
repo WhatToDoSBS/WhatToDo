@@ -2,6 +2,12 @@ h1 {
     text-align: center;
 }
 
+a, a:link ,a:visited, a:hover, a:active { color: white; text-decoration: none; }
+
+span {
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
 button:hover {
     cursor: pointer;
 }
@@ -121,6 +127,7 @@ button:hover {
     flex-direction: column;
 }
 #modal .modal-window span {
+    font-family: 'Nanum Gothic', sans-serif;
     font-size: 16px;
 }
 .modalTitle {
@@ -128,10 +135,10 @@ button:hover {
     display: block;
     text-shadow: 1px 1px 2px gray;
     color: white;
-    font-size: xx-large;
-    font-weight: bolder;
+    font-size: 40px;
     text-align: center;
     margin: 20px 0px;
+    font-family: 'Black Han Sans', sans-serif;
 }
 
 #modal .close-area {
@@ -149,8 +156,6 @@ button:hover {
     text-shadow: 1px 1px 2px gray;
     color: white;
     text-align: center;
-    font-size: x-large;
-    font-weight: bold;
 }
 
 .modalContent li {
@@ -175,10 +180,36 @@ button:hover {
     color: lightgreen;
 }
 
+.modalContent img {
+    border-radius: 10px;
+}
+
 #reviewFrm {
     margin-bottom: 20px;
 }
 
+#review_list {
+    display: flex;
+    justify-content: center;
+}
+
 #review_list table, td, th {
     border: none;
+}
+
+.reviewTextInput {
+    border-radius: 30px;
+    height: 23px;
+    border: 0;
+    width: 220px;
+    margin-left: 20px;
+    padding: 10px;
+}
+
+#btn_submit {
+    margin-left: 5px;
+    border-radius: 30px;
+    border: 0;
+    height: 23px;
+    width: 45px;
 }

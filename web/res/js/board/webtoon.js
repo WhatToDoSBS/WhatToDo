@@ -219,7 +219,7 @@ const setCmtList = (list) => {
 
     // 평가 없을 때
     if(list.length === 0) {
-        reviewListElem.innerText = '평가를 적어주세요.';
+        reviewListElem.innerHTML = '<span>평가를 적어주세요</span>';
         return;
     }
 
@@ -236,7 +236,6 @@ const makeTable = () => {
     const table = document.createElement('table');
     table.innerHTML = `
             <tr>
-                <th>rnum</th>
                 <th>리뷰내용</th>
                 <th>닉네임</th>
                 <th></th>
@@ -248,7 +247,6 @@ const makeTr = item => {
     const tr = document.createElement('tr');
 
     tr.innerHTML = `
-                <td>${item.rnum}</td>
                 <td>${item.ctnt}</td>
                 <td>
                     <span>${item.nickname}</span>
@@ -259,7 +257,7 @@ const makeTr = item => {
 
     console.log('게시글에 적힌 iuser :' + item.iuser);
     console.log('내 iuser : ' + iuser);
-    if(item.iuser === iuser) {
+    if(parseInt(iuser) === parseInt(item.iuser)) {
         const modBtn = document.createElement('input');
         modBtn.type = 'button';
         modBtn.value = '수정';
