@@ -6,7 +6,8 @@
 
     <h1 id="listTitle">자유게시판</h1>
     <div class="form-group" id="paging">
-    <select class="form-control" style="width: 25%">
+    <select class="form-control" style="width: 25%; font-size: small">
+        <option value="5">5개씩 보기</option>
         <option value=10>10개씩 보기</option>
         <option value=15>15개씩 보기</option>
         <option value=20>20개씩 보기</option>
