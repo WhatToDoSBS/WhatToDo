@@ -7,4 +7,5 @@ import lombok.Setter;
 @Setter
 public class UserDto extends UserEntity{
     private boolean autoLogin;
+    private String autoLoginKey;
 }
