@@ -119,5 +119,5 @@ CREATE TABLE auto_login
     expiration_flag BOOLEAN      NOT NULL DEFAULT FALSE, # 키 만료여부
     CONSTRAINT PRIMARY KEY (`index`),
     CONSTRAINT UNIQUE (auto_key),
-    CONSTRAINT FOREIGN KEY (user_id) REFERENCES t_user (uid)
+    CONSTRAINT FOREIGN KEY (user_id) REFERENCES whattodo_user (uid)
 );
