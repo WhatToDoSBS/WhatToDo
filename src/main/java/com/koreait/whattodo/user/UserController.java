@@ -54,8 +54,8 @@ public class UserController {
             return "redirect:/board/main";
         }
 
-       service.login(dto); // 로그인 결과
-
+        vo = service.login(dto); // 로그인 결과
+        System.out.println(vo.getLoginResult());
         if (vo.getLoginResult().equals(LoginEnum.UID_REGEX_ERR) || vo.getLoginResult().equals(LoginEnum.UPW_REGEX_ERR)) { // 정규식 오류
             reAttr.addFlashAttribute("nmsg", "");
             reAttr.addFlashAttribute("keymsg", "");
