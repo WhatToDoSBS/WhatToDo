@@ -47,29 +47,30 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginPost(UserEntity entity, RedirectAttributes reAttr, HttpServletResponse response, UserDto dto) {
+    public String loginPost(UserVo vo, RedirectAttributes reAttr, HttpServletResponse response, UserDto dto) {
         UserEntity loginUser = userUtils.getLoginUser();
         // 로그인한 유저의 경우 로그인창으로 접근 막음
         if (loginUser != null) {
             return "redirect:/board/main";
         }
 
-        UserVo result = service.login(entity); // 로그인 결과
-        if (result.getLoginResult().equals(LoginEnum.UID_REGEX_ERR) || result.getLoginResult().equals(LoginEnum.UPW_REGEX_ERR)) { // 정규식 오류
+       service.login(dto); // 로그인 결과
+
+        if (vo.getLoginResult().equals(LoginEnum.UID_REGEX_ERR) || vo.getLoginResult().equals(LoginEnum.UPW_REGEX_ERR)) { // 정규식 오류
             reAttr.addFlashAttribute("nmsg", "");
             reAttr.addFlashAttribute("keymsg", "");
             reAttr.addFlashAttribute("rmsg", "아이디와 비밀번호를 바르게 작성해주세요.");
             return "redirect:/user/login";
-        } else if (result.getLoginResult().equals(LoginEnum.UID_ERR) || result.getLoginResult().equals(LoginEnum.UPW_ERR)) { // 아이디, 비번 오류
+        } else if (vo.getLoginResult().equals(LoginEnum.UID_ERR) || vo.getLoginResult().equals(LoginEnum.UPW_ERR)) { // 아이디, 비번 오류
             reAttr.addFlashAttribute("nmsg", "");
             reAttr.addFlashAttribute("keymsg", "아이디 또는 비밀번호가 일치하지 않습니다. <br>다시 시도해 주세요.");
             reAttr.addFlashAttribute("rmsg", "");
             return "redirect:/user/login";
-        } else if (result.getLoginResult() == LoginEnum.SUCCESS) { // 성공
-            userUtils.setLoginUser(result);
+        } else if (vo.getLoginResult() == LoginEnum.SUCCESS) { // 성공
+            userUtils.setLoginUser(vo);
             if (dto.isAutoLogin()) {
-                service.insAutoLoginKey(result);
-                Cookie cookie = new Cookie("loginKey", result.getAutoLoginKey());
+                service.insAutoLoginKey(vo);
+                Cookie cookie = new Cookie("loginKey", vo.getAutoLoginKey());
                 cookie.setMaxAge(60*60*24*UserService.Config.AUTO_LOGIN_KEY_EXPIRY_DATE);
                 cookie.setPath("/");
                 response.addCookie(cookie);
@@ -93,11 +94,10 @@ public class UserController {
                 String value = c.getValue();
                 if (name.equals("loginKey")) {
                     service.delAutoLoginKey(value);
+                    c.setValue(null);
+                    c.setMaxAge(0);
+                    response.addCookie(c);
                 }
-            }
-            for (int i = 0; i < cookies.length; i++) {
-                cookies[i].setMaxAge(0);
-                response.addCookie(cookies[i]);
             }
         }
         hs.invalidate();

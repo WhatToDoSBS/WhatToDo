@@ -48,7 +48,7 @@ public class UserService {
     }
 
     public int idChk(String uid) { // 아이디 중복검사
-        if (uid.length() < 4) { // 글자수 4자리 이상이여야 함
+        if (!checkUid(uid)) { // id 정규식검사
             return 2;
         }
         UserDto dto = new UserDto();
@@ -57,36 +57,30 @@ public class UserService {
         return result == null ? 1 : 0; // 계정이 없을시 사용가능
     }
 
-    public UserVo login(UserEntity entity) { // 로그인 로직
+    public void login(UserEntity entity) { // 로그인 로직
         UserVo vo = new UserVo();
 
         if (!UserService.checkUid(entity.getUid())) { // 정규식 검사
-            vo.setLoginResult(LoginEnum.UID_REGEX_ERR);
-            return vo; // 정규식 id 오류
+            vo.setLoginResult(LoginEnum.UID_REGEX_ERR); // 정규식 id 오류
         } else if (!UserService.checkUpw(entity.getUpw())) {
-            vo.setLoginResult(LoginEnum.UPW_REGEX_ERR);
-            return vo; // 정규식 pw 오류
+            vo.setLoginResult(LoginEnum.UPW_REGEX_ERR); // 정규식 pw 오류
         }
 
         try {
             if (mapper.selUser(entity) == null) {
-                vo.setLoginResult(LoginEnum.UID_ERR);
-                return vo; // 계정없음(아이디 오류)
+                vo.setLoginResult(LoginEnum.UID_ERR); // 계정없음(아이디 오류)
             }
             vo = mapper.selUser(entity);
         } catch (Exception e) {
             e.printStackTrace();
-            vo.setLoginResult(LoginEnum.FAILURE);
-            return vo; // 알 수 없는 에러
+            vo.setLoginResult(LoginEnum.FAILURE); // 알 수 없는 에러
         }
 
 
         if (BCrypt.checkpw(entity.getUpw(), vo.getUpw())) {
-            vo.setLoginResult(LoginEnum.SUCCESS);
-            return vo; // 성공
+            vo.setLoginResult(LoginEnum.SUCCESS); // 성공
         }
-        vo.setLoginResult(LoginEnum.UPW_ERR);
-        return vo; // 비번 오류
+        vo.setLoginResult(LoginEnum.UPW_ERR); // 비번 오류
     }
 
 
@@ -103,7 +97,12 @@ public class UserService {
         vo.setAutoLoginKey(key);
     }
 
-    public void delAutoLoginKey(String cookie) {
+    public UserDto login(UserDto dto) {
+        System.out.println(dto.getAutoLoginKey());
+        return null;
+    }
+
+    public void delAutoLoginKey(String cookie) { // Ch3.자동로그인 쿠키 만료
         mapper.delAutoLoginKey(cookie);
     }
 }

@@ -17,10 +17,11 @@
             const gender = joinFrmElem.gender.value;
             const prevChk = joinFrmElem.prevChk;
 
-
-
-            if(!idRegex.test(uid)) {
+            if (!idRegex.test(uid)) {
                 alert('아이디를 바르게 적어주세요');
+                e.preventDefault();
+            } else if (joinFrmElem.querySelector('#duplication-uid').classList.value === 'err_msg_b') {
+                alert('이미 존재하는 계정입니다.');
                 e.preventDefault();
             } else if (!pwRegex.test(upw)) {
                 alert('비밀번호를 올바르게 작성해주세요.');
@@ -46,7 +47,7 @@
         // 아이디 중복체크 #1
         uidInput.addEventListener('blur', (e) => {
            const uid = joinFrmElem.uid.value;
-           if (!idRegex.test(uid) || uid.length < 4) {
+           if (!idRegex.test(uid)) {
                joinFrmElem.querySelector('#err-idMsg').classList.remove('msg_n');
                joinFrmElem.querySelector('#duplication-uid').classList.remove('err_msg_b');
                joinFrmElem.querySelector('#available-uid').classList.remove('successMsg');

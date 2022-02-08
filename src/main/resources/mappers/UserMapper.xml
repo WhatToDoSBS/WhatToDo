@@ -13,13 +13,13 @@
 
     <update id="delAutoLoginKey"><!--  자동로그인 키 만료  -->
         UPDATE auto_login
-        SET expiration_flag = TRUE
+        SET expiration_flag = TRUE, expiration_at = NOW()
         WHERE auto_key = #{key}
           AND expiration_at > NOW()
           AND expiration_flag = FALSE
     </update>
 
-    <select id="selUser" resultType="UserVo"> <!--  로그인  -->
+    <select id="selUser" resultType="UserVo"><!--  로그인  -->
         SELECT * FROM whattodo_user
         WHERE uid = #{uid}
     </select>
