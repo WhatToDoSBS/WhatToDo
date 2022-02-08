@@ -27,7 +27,8 @@
             <c:forEach var="item" items="${webtoonRecommandListRandom}">
                 <div class="webtoonModalElement" data-nm="${item.nm}"
                      data-weekend="${item.weekend}"
-                     data-iuser="${sessionScope.loginUser.iuser}">
+                     data-iuser="${sessionScope.loginUser.iuser}"
+                data-writernm="${sessionScope.loginUser.nm}">
                     <li>
                         <img src="${item.img}" alt="">
                         <span>${item.nm}</span>
@@ -77,8 +78,9 @@
                     <input type="text" name="ctnt">
                     <input type="button" id="btn_submit" value="작성">
                 </form>
+                <div id="review_list"></div>
             </div>
-            <div id="review_list"></div>
+
         </div>
     </div>
 </div>

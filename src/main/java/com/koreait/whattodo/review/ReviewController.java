@@ -19,12 +19,13 @@ public class ReviewController {
         System.out.println(entity);
         Map<String, Integer> result = new HashMap<>();
         result.put("result", reviewService.insReviewWebtoon(entity));
+        System.out.println("result : " + result);
         return result;
     }
 
     @GetMapping("/{nm}")
-    public List<ReviewEntity> selReviewWebtoonList(@PathVariable ReviewEntity entity) {
-        System.out.println("nm : " + entity.getNm());
-        return reviewService.selReviewWebtoon(entity);
+    public List<ReviewEntity> selReviewWebtoonList(@PathVariable String nm) {
+        System.out.println("nm : " + nm);
+        return reviewService.selReviewWebtoon(nm);
     }
 }

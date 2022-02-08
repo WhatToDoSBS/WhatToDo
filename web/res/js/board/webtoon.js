@@ -97,8 +97,7 @@ const modalWindow = document.getElementById("modal");
 const modalXBtn = document.querySelector(".close-area");
 const webtoonModalElem = document.querySelectorAll('.webtoonModalElement');
 const modalContent = document.querySelector('.modalContent');
-const webtoonInfoHidden = modalContent.querySelector('.webtoonInfoHidden');
-let dataNm, dataWeekend, iuser;
+let dataNm, dataWeekend, iuser, writerName;
 
 webtoonModalElem.forEach(function (item) {
     item.addEventListener('click', function (e) {
@@ -106,15 +105,19 @@ webtoonModalElem.forEach(function (item) {
         console.log(item.dataset.nm);
         console.log(item.dataset.weekend);
         console.log(item.dataset.iuser);
+        console.log(item.dataset.writernm);
 
         // 데이터 담기
         dataNm = item.dataset.nm;
         dataWeekend = item.dataset.weekend;
         iuser = item.dataset.iuser;
+        writerName = item.dataset.writernm;
 
         modalWindow.style.display = 'flex';
 
         modalContent.innerHTML = item.innerHTML;
+
+        getCmtList();
     })
 })
 
@@ -126,8 +129,7 @@ window.addEventListener("keyup", (e) => {
         modalWindow.style.display = 'none';
     }
 });
-// 모달창 밖으로 마우스 클릭하면 닫힘
-window.addEventListener("mouseup", (e) => {
+window.addEventListener("mouseup", (e) => { // 모달창 밖으로 마우스 클릭하면 닫힘
     if (modalWindow.style.display === "flex" && e.target === modalWindow) {
         modalWindow.style.display = 'none';
     }
@@ -135,10 +137,8 @@ window.addEventListener("mouseup", (e) => {
 
 /* -------- MODAL REVIEW 관련 -------- */
 const reviewFrm = document.querySelector('#reviewFrm');
-const modalIuser = modalContent.querySelector('.webtoonIuser');
-const modalWeekend = modalContent.querySelector('.weebtoonWeekend');
-//input-text ctnt에서 엔터치면 submit날아가기 때문에 막는다.
-reviewFrm.addEventListener('submit', (e)=> {
+
+reviewFrm.addEventListener('submit', (e)=> {    //input-text ctnt에서 엔터치면 submit날아가기 때문에 막는다.
     e.preventDefault();
 });
 
@@ -178,9 +178,11 @@ const insReviewWebtoonAjax = (val) => {
                     reviewListElem.appendChild(table);
                 }
                 const item = {
+                    rnum:data.result,
+                    nm: dataNm,
                     iuser: iuser,
-                    writernm: dataElem.dataset.nm,
-                    ctnt: cmtFrmElem.ctnt.value,
+                    writernm: writerName,
+                    ctnt: val,
                 }
                 const tr = makeTr(item);
                 table.appendChild(tr);
@@ -191,94 +193,87 @@ const insReviewWebtoonAjax = (val) => {
     }, param);
 }
 
-// //통신 시작!!!
-// const getCmtList = () => {
-//     const iboard = dataElem.dataset.iboard;
-//     myFetch.get(`/board/cmt/${nm}`, setCmtList);
-// }
-//
-// //통신 결과물 세팅
-// const setCmtList = (list) => {
-//     const reviewListElem = document.querySelector('#review_list');
-//
-//     //댓글이 없으면 "댓글 없음"
-//     if(list.length === 0) {
-//         reviewListElem.innerText = '댓글 없음!';
-//         return;
-//     }
-//
-//     const table = makeTable();
-//     reviewListElem.appendChild(table);
-//
-//     list.forEach(item => {
-//         const tr = makeTr(item);
-//         table.appendChild(tr);
-//     });
-// }
-//
-// const makeTable = () => {
-//     const table = document.createElement('table');
-//     table.innerHTML = `
-//             <tr>
-//                 <th>no</th>
-//                 <th>content</th>
-//                 <th>writer</th>
-//                 <th></th>
-//             </tr>`;
-//     return table;
-// }
-//
-// const makeTr = item => {
-//     const tr = document.createElement('tr');
-//
-//     const imgSrc = item.profileimg === null
-//         ? '/res/img/defaultProfile.png'
-//         : `/images/user/${item.iuser}/${item.profileimg}`;
-//
-//     tr.innerHTML = `
-//                 <td>${item.icmt}</td>
-//                 <td>${item.ctnt}</td>
-//                 <td>
-//                     <span>${item.writernm}</span>
-//                     <div class="circular--img wh-30">
-//                         <img src="${imgSrc}" onerror="this.style.display='none';">
-//                     </div>
-//                 </td>
-//             `;
-//     const td = document.createElement('td');
-//     tr.appendChild(td);
-//
-//     if(parseInt(dataElem.dataset.iuser) === item.iuser) {
-//         const modBtn = document.createElement('input');
-//         modBtn.type = 'button';
-//         modBtn.value = '수정';
-//
-//         const delBtn = document.createElement('input');
-//         delBtn.type = 'button';
-//         delBtn.value = '삭제';
-//
-//         delBtn.addEventListener('click', () => {
-//             if(confirm('삭제하시겠습니까?')) {
-//                 delCmt(item.icmt, tr);
-//             }
-//         });
-//
-//         td.appendChild(modBtn);
-//         td.appendChild(delBtn);
-//     }
-//     return tr;
-// }
-//
-// const delCmt = (icmt, tr) => {
-//     myFetch.delete(`/board/cmt/${icmt}`, data => {
-//         if(data.result) {
-//             tr.remove();
-//         } else {
-//             alert('댓글을 삭제할 수 없습니다.');
-//         }
-//     });
-// }
-//
-// getCmtList();
-//
-// }
+//통신 시작!!!
+const getCmtList = (e) => {
+    let nm = dataNm;
+    console.log('데이터 통신 Nm : ' + nm);
+    myFetch.get(`/board/review/${nm}`, setCmtList);
+}
+
+//통신 결과물 세팅
+const setCmtList = (list) => {
+    const reviewListElem = document.querySelector('#review_list');
+
+    //댓글이 없으면 "댓글 없음"
+    if(list.length === 0) {
+        reviewListElem.innerText = '댓글 없음!';
+        return;
+    }
+
+    const table = makeTable();
+    reviewListElem.appendChild(table);
+
+    list.forEach(item => {
+        const tr = makeTr(item);
+        table.appendChild(tr);
+    });
+}
+
+const makeTable = () => {
+    const table = document.createElement('table');
+    table.innerHTML = `
+            <tr>
+                <th>rnum</th>
+                <th>리뷰내용</th>
+                <th>닉네임</th>
+                <th>작성웹툰</th>
+                <th></th>
+            </tr>`;
+    return table;
+}
+
+const makeTr = item => {
+    const tr = document.createElement('tr');
+
+    tr.innerHTML = `
+                <td>${item.rnum}</td>
+                <td>${item.ctnt}</td>
+                <td>
+                    <span>${item.writernm}</span>
+                </td>
+                <td>${item.nm}</td>
+            `;
+    const td = document.createElement('td');
+    tr.appendChild(td);
+
+    if(iuser === item.iuser) {
+        const modBtn = document.createElement('input');
+        modBtn.type = 'button';
+        modBtn.value = '수정';
+
+        const delBtn = document.createElement('input');
+        delBtn.type = 'button';
+        delBtn.value = '삭제';
+
+        delBtn.addEventListener('click', () => {
+            if(confirm('삭제하시겠습니까?')) {
+                delCmt(item.runm, tr);
+            }
+        });
+
+        td.appendChild(modBtn);
+        td.appendChild(delBtn);
+    }
+    return tr;
+}
+
+const delCmt = (rnum, tr) => {
+    myFetch.delete(`/board/cmt/${rnum}`, data => {
+        if(data.result) {
+            tr.remove();
+        } else {
+            alert('댓글을 삭제할 수 없습니다.');
+        }
+    });
+}
+

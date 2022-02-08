@@ -16,10 +16,13 @@ public class ReviewService {
     public int insReviewWebtoon(ReviewEntity entity) {
         entity.setIuser(userUtils.getLoginUserPk());
         entity.setNickname(userUtils.getLoginUserNm());
-        return reviewMapper.insReviewWebtoon(entity);
+        reviewMapper.insReviewWebtoon(entity);
+        return entity.getRnum();
     }
 
-    public List<ReviewEntity> selReviewWebtoon(ReviewEntity entity) {
+    public List<ReviewEntity> selReviewWebtoon(String nm) {
+        ReviewEntity entity = new ReviewEntity();
+        entity.setNm(nm);
         return reviewMapper.selReviewWebtoon(entity);
     }
 
