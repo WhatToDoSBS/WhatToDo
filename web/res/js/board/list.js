@@ -25,7 +25,7 @@ function pageSelectVal() { // 갯수별로 보기 값 담는 함수
 }
 
 let pageCount = Math.floor(Number(totalDataNum / pageSelectVal())) + 1;
-let pageIdxElem = document.querySelector("#pageIdx");
+let pageIdxElem = document.querySelector(".pagination");
 let firstPageNum = 1;
 let firstPageData = totalDataArr.slice(((firstPageNum-1) * pageSelectVal()) + 1, firstPageNum * pageSelectVal() + 1);
 
@@ -33,6 +33,8 @@ let firstPageData = totalDataArr.slice(((firstPageNum-1) * pageSelectVal()) + 1,
 
 
 //페이징 표시
+
+let pagingCount = 3;
 
 if(Number(totalDataNum % pageSelectVal()) === 0) {
     pageCount = pageCount - 1;
@@ -42,7 +44,7 @@ let makeIdx = () => {
     for(let i=1; i<=pageCount; i++) {
         pageIdxElem.innerHTML +=
         `
-        <span class="pageNum" data-idx="${i}">${i}</span>
+        <li class="pageNum page-item" data-idx="${i}"><a class="page-link">${i}</a></li>
         `
     }
 }
@@ -85,78 +87,10 @@ dataPerPageElem.addEventListener('change', ()=> {
         item.remove();
     });
 
-    if(pageSelectVal() == 15) {
         for(let i=1; i<=Math.floor(Number(totalDataNum / pageSelectVal())) + 1; i++) {
             pageIdxElem.innerHTML +=
                 `
-        <span class="pageNum" data-idx="${i}">${i}</span>
-        `
-        }
-        let pageNumElem = document.querySelectorAll('.pageNum');
-        totalDataArr.forEach(function(element) {
-            element.style.display='none'});
-        totalDataArr[0].style.display='';
-        let selData = totalDataArr.slice(((firstPageNum-1) * pageSelectVal()) + 1, firstPageNum * pageSelectVal() + 1)
-            selData.forEach(function (element) {
-            element.style.display=''});
-
-        let pageNumVal = (item) => {
-            item.addEventListener('click', ()=> {
-                totalDataArr.forEach(function(element) {
-                    element.style.display='none'});
-                let val = Number(item.dataset.idx);
-                console.log(val);
-                let currentPageNum = val;
-                let currentPageData = totalDataArr.slice(((currentPageNum - 1) * pageSelectVal()) + 1, currentPageNum * pageSelectVal() + 1);
-                let showCurrentPage = () => {
-                    totalDataArr[0].style.display = '';
-                    currentPageData.forEach(function (element) {
-                        element.style.display = ''
-                    });
-                }
-                showCurrentPage();
-            })
-        }
-        pageNumElem.forEach(pageNumVal);
-    } else if(pageSelectVal() == 20) {
-        for(let i=1; i<=Math.floor(Number(totalDataNum / pageSelectVal())) + 1; i++) {
-            pageIdxElem.innerHTML +=
-                `
-        <span class="pageNum" data-idx="${i}">${i}</span>
-        `
-        }
-        let pageNumElem = document.querySelectorAll('.pageNum');
-        totalDataArr.forEach(function(element) {
-            element.style.display='none'});
-        totalDataArr[0].style.display='';
-        let selData = totalDataArr.slice(((firstPageNum-1) * pageSelectVal()) + 1, firstPageNum * pageSelectVal() + 1)
-        selData.forEach(function (element) {
-            element.style.display=''});
-
-
-        let pageNumVal = (item) => {
-            item.addEventListener('click', ()=> {
-                totalDataArr.forEach(function(element) {
-                    element.style.display='none'});
-                let val = Number(item.dataset.idx);
-                console.log(val);
-                let currentPageNum = val;
-                let currentPageData = totalDataArr.slice(((currentPageNum - 1) * pageSelectVal()) + 1, currentPageNum * pageSelectVal() + 1);
-                let showCurrentPage = () => {
-                    totalDataArr[0].style.display = '';
-                    currentPageData.forEach(function (element) {
-                        element.style.display = ''
-                    });
-                }
-                showCurrentPage();
-            })
-        }
-        pageNumElem.forEach(pageNumVal);
-    } else {
-        for(let i=1; i<=Math.floor(Number(totalDataNum / pageSelectVal())) + 1; i++) {
-            pageIdxElem.innerHTML +=
-                `
-        <span class="pageNum" data-idx="${i}">${i}</span>
+        <span class="pageNum page-item" data-idx="${i}">${i}</span>
         `
         }
         let pageNumElem = document.querySelectorAll('.pageNum');
@@ -185,5 +119,75 @@ dataPerPageElem.addEventListener('change', ()=> {
             })
         }
         pageNumElem.forEach(pageNumVal);
-    }
+
 })
+
+
+// if(pageSelectVal() == 15) {
+//     for(let i=1; i<=Math.floor(Number(totalDataNum / pageSelectVal())) + 1; i++) {
+//         pageIdxElem.innerHTML +=
+//             `
+//     <span class="pageNum page-item" data-idx="${i}">${i}</span>
+//     `
+//     }
+//     let pageNumElem = document.querySelectorAll('.pageNum');
+//     totalDataArr.forEach(function(element) {
+//         element.style.display='none'});
+//     totalDataArr[0].style.display='';
+//     let selData = totalDataArr.slice(((firstPageNum-1) * pageSelectVal()) + 1, firstPageNum * pageSelectVal() + 1)
+//         selData.forEach(function (element) {
+//         element.style.display=''});
+//
+//     let pageNumVal = (item) => {
+//         item.addEventListener('click', ()=> {
+//             totalDataArr.forEach(function(element) {
+//                 element.style.display='none'});
+//             let val = Number(item.dataset.idx);
+//             console.log(val);
+//             let currentPageNum = val;
+//             let currentPageData = totalDataArr.slice(((currentPageNum - 1) * pageSelectVal()) + 1, currentPageNum * pageSelectVal() + 1);
+//             let showCurrentPage = () => {
+//                 totalDataArr[0].style.display = '';
+//                 currentPageData.forEach(function (element) {
+//                     element.style.display = ''
+//                 });
+//             }
+//             showCurrentPage();
+//         })
+//     }
+//     pageNumElem.forEach(pageNumVal);
+// } else if(pageSelectVal() == 20) {
+//     for(let i=1; i<=Math.floor(Number(totalDataNum / pageSelectVal())) + 1; i++) {
+//         pageIdxElem.innerHTML +=
+//             `
+//     <span class="pageNum page-item" data-idx="${i}">${i}</span>
+//     `
+//     }
+//     let pageNumElem = document.querySelectorAll('.pageNum');
+//     totalDataArr.forEach(function(element) {
+//         element.style.display='none'});
+//     totalDataArr[0].style.display='';
+//     let selData = totalDataArr.slice(((firstPageNum-1) * pageSelectVal()) + 1, firstPageNum * pageSelectVal() + 1)
+//     selData.forEach(function (element) {
+//         element.style.display=''});
+//
+//
+//     let pageNumVal = (item) => {
+//         item.addEventListener('click', ()=> {
+//             totalDataArr.forEach(function(element) {
+//                 element.style.display='none'});
+//             let val = Number(item.dataset.idx);
+//             console.log(val);
+//             let currentPageNum = val;
+//             let currentPageData = totalDataArr.slice(((currentPageNum - 1) * pageSelectVal()) + 1, currentPageNum * pageSelectVal() + 1);
+//             let showCurrentPage = () => {
+//                 totalDataArr[0].style.display = '';
+//                 currentPageData.forEach(function (element) {
+//                     element.style.display = ''
+//                 });
+//             }
+//             showCurrentPage();
+//         })
+//     }
+//     pageNumElem.forEach(pageNumVal);
+// }

@@ -17,7 +17,11 @@ if(cmtFrmElem) {
             // location.href="/board/detail?iboard="+ iboard;
         }
     });
-
+    const item = {
+        icmt: data.result,
+        iuser: parseInt(dataElem.dataset.iuser),
+        ctnt: cmtFrmElem.ctnt.value,
+    }
     let insBoardCmtAjax = (val) => {
         let param = {
             'iboard' : dataElem.dataset.iboard,
@@ -45,11 +49,6 @@ if(cmtFrmElem) {
     }
 }
 
-const item = {
-    icmt: data.result,
-    iuser: parseInt(dataElem.dataset.iuser),
-    ctnt: cmtFrmElem.ctnt.value,
-}
 
 let cmtListElem = document.querySelector("#cmt_list");
 
@@ -98,7 +97,7 @@ let cmtListElem = document.querySelector("#cmt_list");
         const td = document.createElement('td');
         tr.appendChild(td);
 
-        // if(parseInt(dataElem.dataset.iuser)===item.iuser) {
+        if(parseInt(dataElem.dataset.iuser)===item.iuser) {
         const modBtn = document.createElement("input");
         modBtn.type = 'button';
         modBtn.value = '수정';
@@ -173,7 +172,7 @@ let cmtListElem = document.querySelector("#cmt_list");
 
         td.appendChild(modBtn);
         td.appendChild(delBtn);
-        // }
+        }
         table.appendChild(tr);
     }
     getCmtList();
@@ -268,7 +267,7 @@ const onLike = () => {
 
     likeBtnElem.addEventListener('click', (e) => {
         if(e.target.classList.contains('far')) {
-            const param = {iboard}
+            const param = {iboard : iboard};
 
             fetch('/board/like', {
                 'method': 'post',
