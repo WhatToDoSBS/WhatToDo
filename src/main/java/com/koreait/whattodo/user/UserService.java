@@ -1,6 +1,5 @@
 package com.koreait.whattodo.user;
 
-import com.koreait.whattodo.UserUtils;
 import com.koreait.whattodo.enums.user.LoginEnum;
 import com.koreait.whattodo.model.user.UserDto;
 import com.koreait.whattodo.model.user.UserEntity;
@@ -57,30 +56,34 @@ public class UserService {
         return result == null ? 1 : 0; // 계정이 없을시 사용가능
     }
 
-    public void login(UserEntity entity) { // 로그인 로직
+    public UserVo login(UserDto dto) { // 로그인 로직
         UserVo vo = new UserVo();
 
-        if (!UserService.checkUid(entity.getUid())) { // 정규식 검사
+        if (!UserService.checkUid(dto.getUid())) { // 정규식 검사
             vo.setLoginResult(LoginEnum.UID_REGEX_ERR); // 정규식 id 오류
-        } else if (!UserService.checkUpw(entity.getUpw())) {
+            return vo;
+        } else if (!UserService.checkUpw(dto.getUpw())) {
             vo.setLoginResult(LoginEnum.UPW_REGEX_ERR); // 정규식 pw 오류
+            return vo;
         }
 
         try {
-            if (mapper.selUser(entity) == null) {
+            if (mapper.selUser(dto) == null) {
                 vo.setLoginResult(LoginEnum.UID_ERR); // 계정없음(아이디 오류)
+                return vo;
             }
-            vo = mapper.selUser(entity);
+            vo = mapper.selUser(dto);
+            if (!BCrypt.checkpw(dto.getUpw(), vo.getUpw())) {
+                vo.setLoginResult(LoginEnum.UPW_ERR); // 비번 오류
+                return vo;
+            }
+            vo.setLoginResult(LoginEnum.SUCCESS); // 성공
+            return vo;
         } catch (Exception e) {
             e.printStackTrace();
             vo.setLoginResult(LoginEnum.FAILURE); // 알 수 없는 에러
+            return vo;
         }
-
-
-        if (BCrypt.checkpw(entity.getUpw(), vo.getUpw())) {
-            vo.setLoginResult(LoginEnum.SUCCESS); // 성공
-        }
-        vo.setLoginResult(LoginEnum.UPW_ERR); // 비번 오류
     }
 
 
@@ -97,9 +100,15 @@ public class UserService {
         vo.setAutoLoginKey(key);
     }
 
-    public UserDto login(UserDto dto) {
-        System.out.println(dto.getAutoLoginKey());
-        return null;
+    public UserVo login(Cookie loginKey) { // Ch2.자동로그인 쿠키값으로 로그인
+        UserVo dbuser = mapper.selUserWithAutoLogin(loginKey);
+        if (dbuser != null) {
+            dbuser.setLoginResult(LoginEnum.SUCCESS);
+            return dbuser;
+        }
+        dbuser = new UserVo();
+        dbuser.setLoginResult(LoginEnum.COOKIE_ERR);
+        return dbuser;
     }
 
     public void delAutoLoginKey(String cookie) { // Ch3.자동로그인 쿠키 만료
