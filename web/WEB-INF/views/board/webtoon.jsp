@@ -22,9 +22,9 @@
         </div>
     </div>
     <div id="recommand_box">
-        <h3>이런 웹툰 어때요?
+        <span>이런 웹툰 어때요?</span>
             <button class="crawlingBtn">크롤링</button>
-        </h3>
+
         <ul class="recommend_section">
             <c:forEach var="item" items="${webtoonRecommandListRandom}">
 <%--                <div class="webtoonModalElement" data-nm="${item.nm}"--%>
@@ -38,13 +38,11 @@
 <%--                        <span class="webtoonLink"><a href="${item.link}">>> 보러가기 <<</a></span>--%>
 <%--                    </li>--%>
 <%--                </div>--%>
-                <div class="card">
+                <div class="card webtoonModalElement" id="card">
                     <img src="${item.img}" class="card-img-top">
-
-                    <div class="card-body">
-                        <h5 class="card-title">${item.nm}</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <div class="card-body" id="card-body">
+                        <span class="card-title" id="card-title">${item.nm}</span>
+                        <span class="card-text">${item.writer}</span>
                     </div>
                 </div>
             </c:forEach>

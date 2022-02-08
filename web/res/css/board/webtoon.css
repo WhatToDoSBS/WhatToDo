@@ -2,8 +2,6 @@ h1 {
     text-align: center;
 }
 
-a, a:link ,a:visited, a:hover, a:active { color: white; text-decoration: none; }
-
 span {
     font-family: 'Nanum Gothic', sans-serif;
 }
@@ -24,17 +22,36 @@ button:hover {
     display: none;
 }
 
-
 #recommand_box ul {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    /*border-top: 1px solid black;*/
+    /*border-bottom: 1px solid black;*/
     margin: 10px 0;
 }
 
 #recommand_box ul li {
     margin: 10px;
+}
+
+.recommend_section {
+    width: 800px;
+}
+
+.recommend_section #card {
+    margin: 10px;
+}
+
+.recommend_section #card #card-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 200px;
+}
+
+#card-body {
+    display: flex;
+    flex-direction: column;
 }
 
 .recommend_section span {
@@ -86,13 +103,17 @@ button:hover {
     margin: 0 10px;
 }
 
+.naver_section img {
+    border-radius: 4px;
+}
+
 .naver_section #webtoon_databox span {
     display: block;
     width: 83px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin-bottom: 5px;
+    margin: 10px 0;
 }
 
 /* MODAL CSS */
@@ -158,6 +179,10 @@ button:hover {
     text-align: center;
 }
 
+.modalContent #webtoon_databox {
+    margin-top: 10px;
+}
+
 .modalContent li {
     display: flex;
     flex-direction: column;
@@ -213,3 +238,4 @@ button:hover {
     height: 23px;
     width: 45px;
 }
+
