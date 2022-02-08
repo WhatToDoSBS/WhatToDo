@@ -13,11 +13,11 @@ public class ReviewService {
     @Autowired private ReviewMapper reviewMapper;
     @Autowired private UserUtils userUtils;
 
-    public int insReviewWebtoon(ReviewEntity entity) {
+    public ReviewEntity insReviewWebtoon(ReviewEntity entity) {
         entity.setIuser(userUtils.getLoginUserPk());
         entity.setNickname(userUtils.getLoginUserNm());
         reviewMapper.insReviewWebtoon(entity);
-        return entity.getRnum();
+        return entity;
     }
 
     public List<ReviewEntity> selReviewWebtoon(String nm) {
@@ -26,7 +26,10 @@ public class ReviewService {
         return reviewMapper.selReviewWebtoon(entity);
     }
 
-    public int delReviewWebtoon(ReviewEntity entity) {
+    public int delReviewWebtoon(int rnum) {
+        ReviewEntity entity = new ReviewEntity();
+        entity.setRnum(rnum);
+        entity.setIuser(userUtils.getLoginUserPk());
         return reviewMapper.delReviewWebtoon(entity);
     }
 }

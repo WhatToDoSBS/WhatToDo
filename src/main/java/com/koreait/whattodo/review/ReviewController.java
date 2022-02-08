@@ -15,17 +15,24 @@ public class ReviewController {
     @Autowired private ReviewService reviewService;
 
     @PostMapping
-    public Map<String, Integer> insReviewWebtoon(@RequestBody ReviewEntity entity) {
-        System.out.println(entity);
-        Map<String, Integer> result = new HashMap<>();
-        result.put("result", reviewService.insReviewWebtoon(entity));
-        System.out.println("result : " + result);
+    public Map<String, String> insReviewWebtoon(@RequestBody ReviewEntity entity) {
+        Map<String, String> result = new HashMap<>();
+        ReviewEntity reviewEntity = reviewService.insReviewWebtoon(entity);
+        result.put("result", Integer.toString(reviewEntity.getRnum()));
+        result.put("resultNickname", reviewEntity.getNickname());
         return result;
     }
 
     @GetMapping("/{nm}")
     public List<ReviewEntity> selReviewWebtoonList(@PathVariable String nm) {
-        System.out.println("nm : " + nm);
         return reviewService.selReviewWebtoon(nm);
+    }
+
+    @DeleteMapping("/{rnum}")
+    public Map<String, Integer> delBoardCmt(@PathVariable int rnum) {
+        Map<String, Integer> result = new HashMap<>();
+        result.put("result", reviewService.delReviewWebtoon(rnum));
+        System.out.println("delResult : " + result);
+        return result;
     }
 }

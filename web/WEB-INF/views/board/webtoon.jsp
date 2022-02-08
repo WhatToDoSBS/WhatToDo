@@ -78,7 +78,9 @@
                     <input type="text" name="ctnt">
                     <input type="button" id="btn_submit" value="작성">
                 </form>
-                <div id="review_list"></div>
+                <div id="review_list">
+
+                </div>
             </div>
 
         </div>

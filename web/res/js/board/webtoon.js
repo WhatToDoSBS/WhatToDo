@@ -97,6 +97,7 @@ const modalWindow = document.getElementById("modal");
 const modalXBtn = document.querySelector(".close-area");
 const webtoonModalElem = document.querySelectorAll('.webtoonModalElement');
 const modalContent = document.querySelector('.modalContent');
+const reviewListElem = document.querySelector('#review_list');
 let dataNm, dataWeekend, iuser, writerName;
 
 webtoonModalElem.forEach(function (item) {
@@ -118,20 +119,25 @@ webtoonModalElem.forEach(function (item) {
         modalContent.innerHTML = item.innerHTML;
 
         getCmtList();
+        delCmtList();
     })
 })
 
 modalXBtn.addEventListener('click', () => {
     modalWindow.style.display = 'none';
+    reviewFrm.ctnt.value = null;
 })
 window.addEventListener("keyup", (e) => {
     if (modalWindow.style.display === "flex" && e.key === "Escape") {
         modalWindow.style.display = 'none';
+        reviewFrm.ctnt.value = null;
     }
+
 });
 window.addEventListener("mouseup", (e) => { // 모달창 밖으로 마우스 클릭하면 닫힘
     if (modalWindow.style.display === "flex" && e.target === modalWindow) {
         modalWindow.style.display = 'none';
+        reviewFrm.ctnt.value = null;
     }
 });
 
@@ -149,6 +155,8 @@ reviewFrm.btn_submit.addEventListener('click', () => {
         alert('리뷰 내용을 작성해 주세요.');
     } else if(isWrongWith('ctnt', reviewVal)) {
         alert(msg.ctnt);
+    } else if(iuser=='') {
+        alert('로그인 해주세요.');
     } else { //리뷰 insert 시도
         insReviewWebtoonAjax(reviewVal);
     }
@@ -170,7 +178,7 @@ const insReviewWebtoonAjax = (val) => {
                 break;
             default:
                 //기존 table태그가 있는지 확인
-                const reviewListElem = document.querySelector('#review_list');
+
                 let table = reviewListElem.querySelector('table');
                 if(!table) {
                     reviewListElem.innerHTML = null;
@@ -181,7 +189,7 @@ const insReviewWebtoonAjax = (val) => {
                     rnum:data.result,
                     nm: dataNm,
                     iuser: iuser,
-                    writernm: writerName,
+                    nickname: data.resultNickname,
                     ctnt: val,
                 }
                 const tr = makeTr(item);
@@ -194,19 +202,24 @@ const insReviewWebtoonAjax = (val) => {
 }
 
 //통신 시작!!!
-const getCmtList = (e) => {
+const getCmtList = () => {
     let nm = dataNm;
     console.log('데이터 통신 Nm : ' + nm);
     myFetch.get(`/board/review/${nm}`, setCmtList);
+}
+
+const delCmtList = () => {
+    const reviewListElem = document.querySelector('#review_list');
+    reviewListElem.innerHTML = '';
 }
 
 //통신 결과물 세팅
 const setCmtList = (list) => {
     const reviewListElem = document.querySelector('#review_list');
 
-    //댓글이 없으면 "댓글 없음"
+    // 평가 없을 때
     if(list.length === 0) {
-        reviewListElem.innerText = '댓글 없음!';
+        reviewListElem.innerText = '평가를 적어주세요.';
         return;
     }
 
@@ -226,7 +239,6 @@ const makeTable = () => {
                 <th>rnum</th>
                 <th>리뷰내용</th>
                 <th>닉네임</th>
-                <th>작성웹툰</th>
                 <th></th>
             </tr>`;
     return table;
@@ -239,14 +251,15 @@ const makeTr = item => {
                 <td>${item.rnum}</td>
                 <td>${item.ctnt}</td>
                 <td>
-                    <span>${item.writernm}</span>
+                    <span>${item.nickname}</span>
                 </td>
-                <td>${item.nm}</td>
             `;
     const td = document.createElement('td');
     tr.appendChild(td);
 
-    if(iuser === item.iuser) {
+    console.log('게시글에 적힌 iuser :' + item.iuser);
+    console.log('내 iuser : ' + iuser);
+    if(item.iuser === iuser) {
         const modBtn = document.createElement('input');
         modBtn.type = 'button';
         modBtn.value = '수정';
@@ -268,7 +281,7 @@ const makeTr = item => {
 }
 
 const delCmt = (rnum, tr) => {
-    myFetch.delete(`/board/cmt/${rnum}`, data => {
+    myFetch.delete(`/board/review/${rnum}`, data => {
         if(data.result) {
             tr.remove();
         } else {

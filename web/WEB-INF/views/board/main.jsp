@@ -51,10 +51,10 @@
                     <label class="btn btn-light shadow-none" for="btnradio3">RANDOM</label>
 
                     <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
-                    <label class="btn btn-light shadow-none" for="btnradio4">WEBTOON</label>
+                    <label class="btn btn-light shadow-none" for="btnradio4"><a href="/board/webtoon">WEBTOON</a></label>
 
                     <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off">
-                    <label class="btn btn-light shadow-none" for="btnradio5">GAME</label>
+                    <label class="btn btn-light shadow-none" for="btnradio5"><a href="/board/game">GAME</a></label>
                 </div>
             </div>
 
