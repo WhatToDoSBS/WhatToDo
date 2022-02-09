@@ -11,7 +11,7 @@
         VALUES (#{key}, #{uid}, DATE_ADD(NOW(), INTERVAL #{day} DAY))
     </insert>
 
-    <select id="selUserWithAutoLogin" resultType="UserVo">
+    <select id="selUserWithAutoLogin" resultType="UserVo"><!--  자동로그인 키 확인  -->
         SELECT iuser, uid, upw, nm, gender, profileimg, rdt, mdt
         FROM whattodo_user
                  LEFT JOIN auto_login
@@ -20,6 +20,15 @@
           AND expiration_at > NOW()
           AND expiration_flag = FALSE
     </select>
+
+    <update id="updLoginKeyRenewal"><!--  자동로그인 키 갱신  -->
+        UPDATE auto_login
+        SET expiration_at = DATE_ADD(NOW(), INTERVAL #{day} DAY)
+        WHERE auto_key = #{key}
+          AND expiration_at > NOW()
+          AND expiration_flag = FALSE
+            LIMIT 1;
+    </update>
 
     <update id="delAutoLoginKey"><!--  자동로그인 키 만료  -->
         UPDATE auto_login
