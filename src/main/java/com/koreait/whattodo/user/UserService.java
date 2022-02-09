@@ -100,8 +100,9 @@ public class UserService {
         vo.setAutoLoginKey(key);
     }
 
-    public UserVo login(Cookie loginKey) { // Ch2.자동로그인 쿠키값으로 로그인
+    public UserVo login(String loginKey) { // Ch2.자동로그인 쿠키값으로 로그인
         UserVo dbuser = mapper.selUserWithAutoLogin(loginKey);
+        System.out.println(loginKey);
         if (dbuser != null) {
             dbuser.setLoginResult(LoginEnum.SUCCESS);
             return dbuser;
@@ -111,7 +112,11 @@ public class UserService {
         return dbuser;
     }
 
-    public void delAutoLoginKey(String cookie) { // Ch3.자동로그인 쿠키 만료
+    public void updAutoLoginKey(String loginKey) { // Ch3.자동로그인 쿠키 만료기한 갱신
+        mapper.updLoginKeyRenewal(loginKey, Config.AUTO_LOGIN_KEY_EXPIRY_DATE);
+    }
+
+    public void delAutoLoginKey(String cookie) { // Ch4.자동로그인 쿠키 만료
         mapper.delAutoLoginKey(cookie);
     }
 }
