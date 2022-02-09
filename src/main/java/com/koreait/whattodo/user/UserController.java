@@ -66,18 +66,17 @@ public class UserController {
             reAttr.addFlashAttribute("rmsg", "");
             return "redirect:/user/login";
         } else if (vo.getLoginResult() == LoginEnum.SUCCESS) { // 성공
-            userUtils.setLoginUser(vo);
-            if (dto.isAutoLogin()) {
-                service.insAutoLoginKey(vo);
-                Cookie cookie = new Cookie("loginKey", vo.getAutoLoginKey());
-                cookie.setMaxAge(60*60*24*UserService.Config.AUTO_LOGIN_KEY_EXPIRY_DATE);
-                cookie.setPath("/");
-                response.addCookie(cookie);
+            userUtils.setLoginUser(vo); // 세션에 로그인정보 담음
+            if (dto.isAutoLogin()) { // 자동로그인 여부를 확인
+                service.insAutoLoginKey(vo); // 쿠키로 보낼 키 생성해서 db에 넣어둠
+                Cookie cookie = new Cookie("loginKey", vo.getAutoLoginKey()); // cookie 만듬
+                cookie.setMaxAge(60*60*24*UserService.Config.AUTO_LOGIN_KEY_EXPIRY_DATE); // cookie 사용기간 (60*60*24) = (하루 * 7) = 일주일
+                cookie.setPath("/"); // 모든 경로에서 cookie 접근 가능
+                response.addCookie(cookie); // cookie 보내줌
                 return "redirect:/board/main";
             }
             return "redirect:/board/main";
         }
-
         reAttr.addFlashAttribute("nmsg", "알 수 없는 이유로 로그인에 실패하였습니다.");
         reAttr.addFlashAttribute("keymsg", "");
         reAttr.addFlashAttribute("rmsg", "");
@@ -86,20 +85,22 @@ public class UserController {
 
     @GetMapping("/logout")
     public String logout(HttpSession hs, HttpServletRequest request, HttpServletResponse response) {
-        Cookie cookies [] = request.getCookies();
-        if (cookies != null) {
-            for (Cookie c : cookies) {
-                String name = c.getName();
-                String value = c.getValue();
-                if (name.equals("loginKey")) {
-                    service.delAutoLoginKey(value);
-                    c.setValue(null);
-                    c.setMaxAge(0);
-                    response.addCookie(c);
+        if (userUtils.getLoginUser() != null) {
+            Cookie loginCookie = null;
+            for (Cookie cookie : request.getCookies()) {
+                if (cookie.getName().equals("loginKey")) { // 브라우저가 가진 쿠키중 "loginKey"라는 쿠키가 있을경우 잡아냄
+                    loginCookie = cookie;
+                    break;
                 }
             }
+            if (loginCookie != null) { // 해당 쿠키의 내용이 있을경우
+                service.delAutoLoginKey(loginCookie.getValue()); // db의 쿠키정보를 만료일을 현재시간으로 만들고 만료상태를 true로 update함
+                loginCookie.setMaxAge(0); // 브라우저에게 줄 쿠키의 사용기한을 0으로 넣음
+                loginCookie.setValue(null); //쿠키의 내용을 비워줌
+                response.addCookie(loginCookie); // 해당 쿠키를 브라우저의 메모리에 보내줘서 기존 쿠키를 만료시킴
+            }
         }
-        hs.invalidate();
+        hs.invalidate(); // login 정보가 담긴 session 비워줌
         return "redirect:/user/login";
     }
 
