@@ -10,9 +10,11 @@ if(cmtFrmElem) {
         let cmtVal = cmtFrmElem.ctnt.value;
         if(cmtVal.length === 0) {
             alert("내용을 입력해 주세요.");
-        } else if (cmtVal.includes("<") || cmtVal.includes(">")) {
+        }
+        else if (cmtVal.includes("<") || cmtVal.includes(">")) {
             alert("내용에 < 혹은 >를 사용하실 수 없습니다.");
-        } else {
+        }
+        else {
             insBoardCmtAjax(cmtVal);
             // location.href="/board/detail?iboard="+ iboard;
         }
@@ -49,6 +51,20 @@ if(cmtFrmElem) {
     }
 }
 
+let dtCtnt = document.querySelector("#dtCtnt");
+
+// const getDetail = () => {
+//     fetch('/board/detailItem')
+//         .then(res => {
+//             return res.json();
+//         }).then(data => {
+//         console.log(data);
+//         dtCtnt.innerHTML = `
+//                             ${data.ctnt}
+//                             `;
+//     });
+// }
+// getDetail();
 
 let cmtListElem = document.querySelector("#cmt_list");
 
@@ -291,3 +307,4 @@ const onLike = () => {
         }
     })
 // }
+

@@ -21,6 +21,9 @@ public class BoardService {
 
     public int insBoard(BoardEntity entity) {
         entity.setIuser(userUtils.getLoginUserPk());
+        if ((entity.getTitle()).equals("") || (entity.getCtnt()).equals("")) {
+            return 0;
+        }
         return mapper.insBoard(entity);
     }
 

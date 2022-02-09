@@ -12,7 +12,7 @@
         <a href="/board/list"><button class="boardBtn btn btn-outline-primary">글 목록</button> </a>
         <a href="/board/detail?iboard=${requestScope.prevNext.nextiboard}" class="${requestScope.prevNext.nextiboard == 0 ? 'lastNBtn' : ''}"><button class="boardBtn btn btn-outline-success">다음 글</button></a>
     </div>
-    <div id="dtCtnt"><pre><c:out value="${data.ctnt}"/></pre></div>
+    <div id="dtCtnt"><pre>${requestScope.data.ctnt}</pre></div>
     <c:if test="${sessionScope.loginUser != null}">
         <div id="likeBtnDv">
     <i id="likeBtn" class="far fa-heart"></i>
