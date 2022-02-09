@@ -80,17 +80,22 @@ img { border-radius: 10px; }
     color: black;
 }
 
-.header span { color: black; font-family: 'Black Han Sans', sans-serif; font-weight: normal;}
-
 .header .main_title {
+    color: black; font-family: 'Black Han Sans', sans-serif; font-weight: normal;
     font-size: 64px;
 }
 
-.header .login, .logout{
+#header-login {
     position: absolute;
     right: 20px;
     top:10px;
     padding: 5px 10px;
+}
+
+#header-login li {
+    background-color: transparent;
+    border: none;
+    padding: 0 10px;
 }
 
 .header .login a, .logout a {
