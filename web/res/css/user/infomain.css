@@ -1,0 +1,27 @@
+.container_box {
+    align-items: normal;
+    flex-direction: row;
+}
+
+.info {
+    width: 200px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+}
+
+.info .info_profileCard div {
+    margin: 10px 0;
+}
+
+.info .info_profileCard .nickname {
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 5px;
+}
+
+.btn-link {
+    text-align: center;
+}

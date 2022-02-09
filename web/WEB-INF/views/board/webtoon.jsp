@@ -38,11 +38,15 @@
 <%--                        <span class="webtoonLink"><a href="${item.link}">>> 보러가기 <<</a></span>--%>
 <%--                    </li>--%>
 <%--                </div>--%>
-                <div class="card webtoonModalElement" id="card">
+                <div class="card webtoonModalElement" id="card" data-nm="${item.nm}"
+                     data-weekend="${item.weekend}"
+                     data-iuser="${sessionScope.loginUser.iuser}"
+                     data-writernm="${sessionScope.loginUser.nm}">
                     <img src="${item.img}" class="card-img-top">
                     <div class="card-body" id="card-body">
                         <span class="card-title" id="card-title">${item.nm}</span>
                         <span class="card-text">${item.writer}</span>
+                        <span class="card-text webtoonLink"><a href="${item.link}">>> 보러가기 <<</a></span>
                     </div>
                 </div>
             </c:forEach>
@@ -84,7 +88,7 @@
             </div>
             <div>
                 <form id="reviewFrm">
-                    <input type="text" name="ctnt" class="reviewTextInput">
+                    <input type="text" name="ctnt" class="reviewTextInput" placeholder="리뷰를 작성해주세요.">
                     <input type="button" id="btn_submit" value="작성">
                 </form>
                 <div id="review_list">

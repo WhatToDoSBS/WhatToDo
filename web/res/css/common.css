@@ -34,10 +34,13 @@
     flex-direction: column;
 }
 
+/* ------ img 관련 ------- */
+.circular--img { display: inline-block; overflow: hidden; border-radius: 50%; border: 1px solid #ecf0f1; }
+.wh-100 { width: 100px; height: 100px; }
+.wh-80 { width: 80px; height: 80px; }
+
 /* -----Font 관련----------*/
-.font-14px {
-    font-size: 14px;
-}
+.font-14px { font-size: 14px; }
 
 * {
     margin: 0;
@@ -74,6 +77,7 @@ img { border-radius: 10px; }
     justify-content: center;
     align-items: center;
 }
+.hidden { display: none; }
 
 .header > a { /* 회원가입 부트스크랩때문에 따로 적용함 */
     text-decoration: none;
@@ -87,8 +91,8 @@ img { border-radius: 10px; }
 
 #header-login {
     position: absolute;
-    right: 20px;
     top:10px;
+    right: 0px;
     padding: 5px 10px;
 }
 

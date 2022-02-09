@@ -28,6 +28,13 @@ public class ReviewController {
         return reviewService.selReviewWebtoon(nm);
     }
 
+    @PutMapping
+    public Map<String, Integer> updBoardCmt(@RequestBody ReviewEntity entity) {
+        Map<String, Integer> result = new HashMap<>();
+        result.put("result", reviewService.updReviewWebtoon(entity));
+        return result;
+    }
+
     @DeleteMapping("/{rnum}")
     public Map<String, Integer> delBoardCmt(@PathVariable int rnum) {
         Map<String, Integer> result = new HashMap<>();

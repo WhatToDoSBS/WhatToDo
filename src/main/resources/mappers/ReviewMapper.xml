@@ -16,6 +16,12 @@
         ORDER BY A.rnum
     </select>
 
+    <update id="updReviewWebtoon">
+        UPDATE review_webtoon
+        SET ctnt = #{ctnt}
+        WHERE rnum = ${rnum} AND iuser = ${iuser}
+    </update>
+
     <delete id="delReviewWebtoon">
         DELETE FROM review_webtoon
         WHERE rnum = ${rnum}

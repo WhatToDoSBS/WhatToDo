@@ -10,4 +10,5 @@ public interface ReviewMapper {
     int insReviewWebtoon(ReviewEntity entity);
     List<ReviewEntity> selReviewWebtoon(ReviewEntity entity);
     int delReviewWebtoon(ReviewEntity entity);
+    int updReviewWebtoon(ReviewEntity entity);
 }

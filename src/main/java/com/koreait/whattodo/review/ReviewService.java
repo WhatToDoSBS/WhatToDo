@@ -32,4 +32,9 @@ public class ReviewService {
         entity.setIuser(userUtils.getLoginUserPk());
         return reviewMapper.delReviewWebtoon(entity);
     }
+
+    public int updReviewWebtoon(ReviewEntity entity) {
+        entity.setIuser(userUtils.getLoginUserPk());
+        return reviewMapper.updReviewWebtoon(entity);
+    }
 }

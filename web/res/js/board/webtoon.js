@@ -219,7 +219,7 @@ const setCmtList = (list) => {
 
     // 평가 없을 때
     if(list.length === 0) {
-        reviewListElem.innerHTML = '<span>평가를 적어주세요</span>';
+        reviewListElem.innerHTML = '<span style="font-size: 14px">첫 리뷰의 주인공이 되어주세요.</span>';
         return;
     }
 
@@ -261,14 +261,70 @@ const makeTr = item => {
         const modBtn = document.createElement('input');
         modBtn.type = 'button';
         modBtn.value = '수정';
+        modBtn.classList.add('modBtn');
 
         const delBtn = document.createElement('input');
         delBtn.type = 'button';
         delBtn.value = '삭제';
+        delBtn.classList.add('delBtn');
 
+        modBtn.addEventListener('click', () => {
+            console.log('수정 버튼 클릭');
+            const tdArr = tr.querySelectorAll('td');
+            const tdCell = tdArr[0];
+
+            const modInput = document.createElement('input');
+            modInput.value = item.ctnt;
+            const saveBtn = document.createElement('input')
+            saveBtn.type = 'button';
+            saveBtn.value = '저장';
+            saveBtn.addEventListener('click', () => {
+                const param = {
+                    rnum: item.rnum,
+                    ctnt: modInput.value
+                }
+                myFetch.put('/board/review', data => {
+                    switch(data.result) {
+                        case 0:
+                            alert('댓글 수정에 실패하였습니다.')
+                            break;
+                        case 1:
+                            tdCell.innerText = modInput.value;
+                            item.ctnt = modInput.value;
+                            removeCancelBtn();
+                            break;
+                    }
+                }, param);
+            });
+
+            tdCell.innerHTML = null;
+            tdCell.appendChild(modInput);
+            tdCell.appendChild(saveBtn);
+
+            const cancelBtn = document.createElement('input');
+            cancelBtn.type = 'button';
+            cancelBtn.value = '취소';
+            cancelBtn.addEventListener('click', () => {
+                tdCell.innerText = item.ctnt;
+                removeCancelBtn();
+            });
+
+            const removeCancelBtn = () => {
+                modBtn.classList.remove('hidden');
+                delBtn.classList.remove('hidden');
+                cancelBtn.remove();
+            }
+
+            td.insertBefore(cancelBtn, modBtn);
+            modBtn.classList.add('hidden');
+            delBtn.classList.add('hidden');
+        });
+
+        // 댓글 삭제 이벤트
         delBtn.addEventListener('click', () => {
             if(confirm('삭제하시겠습니까?')) {
-                delCmt(item.runm, tr);
+                console.log(item.rnum);
+                delCmt(item.rnum, tr);
             }
         });
 
