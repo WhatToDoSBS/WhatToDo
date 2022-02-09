@@ -41,22 +41,24 @@ if(Number(totalDataNum % pageSelectVal()) === 0) {
 }
 
 let makeIdx = () => {
-    if (pageCount > pagingCount) {
+    // if (pageCount > pagingCount) {
     pageIdxElem.innerHTML +=
         `
         <li class="pageNum page-item" data-idx="${firstPageNum}"><a class="page-preNext"> < </a></li>
-        ` }
+        `
+// }
     for(let i=1; i<=pageCount; i++) {
             pageIdxElem.innerHTML +=
                 `
         <li class="pageNum page-item" data-idx="${i}"><a class="page-link">${i}</a></li>
         `
     }
-    if (pageCount > pagingCount) {
+    // if (pageCount > pagingCount) {
         pageIdxElem.innerHTML +=
             `
         <li class="pageNum page-item" data-idx="${pageCount}"><a class="page-preNext"> > </a></li>
-        ` }
+        `
+// }
 }
 makeIdx();
 
@@ -103,22 +105,27 @@ dataPerPageElem.addEventListener('change', ()=> {
         item.remove();
     });
     let pageCount = Math.floor(Number(totalDataNum / pageSelectVal())) + 1;
-    if (pageCount > pagingCount) {
+    if(Number(totalDataNum % pageSelectVal()) === 0) {
+        pageCount = pageCount - 1;
+    }
+    // if (pageCount > pagingCount) {
         pageIdxElem.innerHTML +=
             `
         <li class="pageNum page-item" data-idx="${firstPageNum}"><a class="page-preNext"> < </a></li>
-        ` }
+        `
+// }
         for(let i=1; i<=pageCount; i++) {
             pageIdxElem.innerHTML +=
                 `
         <li class="pageNum page-item" data-idx="${i}"><a class="page-link">${i}</a></li>
         `
         }
-    if (pageCount > pagingCount) {
+    // if (pageCount > pagingCount) {
         pageIdxElem.innerHTML +=
             `
         <li class="pageNum page-item" data-idx="${pageCount}"><a class="page-preNext"> > </a></li>
-        ` }
+        `
+// }
         let pageNumElem = document.querySelectorAll('.pageNum');
         totalDataArr.forEach(function(element) {
             element.style.display='none'});
@@ -156,37 +163,64 @@ dataPerPageElem.addEventListener('change', ()=> {
 
 let searchBtn = document.querySelector(".searchBtn");
 
+//검색
 searchBtn.addEventListener("click", ()=> {
     let searchTxt = document.querySelector(".searchTxt").value;
+
+    let totalDataNum = document.querySelectorAll("tr.showList > td").length / 4;
+
+    //여기서 포문 돌려서 4로 나눴을때 1이 남는 인덱스만 찾아내서 그 값을 얻는다
+    let totalCtntData = [];
+    for (let i=0; i<totalDataNum * 4; i++) {
+
+        if(i%4===1) {
+            totalCtntData.push(document.querySelectorAll("tr.showList > td")[i]);
+        }
+    }
+    console.log(totalCtntData);
+    let totalSelectedData = [];
+
+    for (let i=0; i<totalDataNum; i++) {
+        if (totalCtntData[i].textContent.includes(searchTxt)) {
+            totalSelectedData.push(totalCtntData[i].parentNode);
+        }
+    }
+    console.log(searchTxt);
+    console.log(totalSelectedData);
+
+    let totalSelectedDataNum = totalSelectedData.length;
 
     document.querySelectorAll(".pageNum").forEach((item) => {
         item.remove();
     });
 
-    let totalSelectedDataNum = document.querySelectorAll("tr.showList > td").length
-    //여기서 포문 돌려서 4로 나눴을때 1이 남는 인덱스만 찾아내서 그 값을 얻는다
     let pageCount = Math.floor(Number(totalSelectedDataNum / pageSelectVal())) + 1;
-    if (pageCount > pagingCount) {
+    if(Number(totalSelectedDataNum % pageSelectVal()) === 0) {
+        pageCount = pageCount - 1;
+    }
+    // if (pageCount > pagingCount) {
         pageIdxElem.innerHTML +=
             `
         <li class="pageNum page-item" data-idx="${firstPageNum}"><a class="page-preNext"> < </a></li>
-        ` }
+        `
+// }
     for(let i=1; i<=pageCount; i++) {
         pageIdxElem.innerHTML +=
             `
         <li class="pageNum page-item" data-idx="${i}"><a class="page-link">${i}</a></li>
         `
     }
-    if (pageCount > pagingCount) {
+    // if (pageCount > pagingCount) {
         pageIdxElem.innerHTML +=
             `
         <li class="pageNum page-item" data-idx="${pageCount}"><a class="page-preNext"> > </a></li>
-        ` }
+        `
+// }
     let pageNumElem = document.querySelectorAll('.pageNum');
     totalDataArr.forEach(function(element) {
         element.style.display='none'});
     totalDataArr[0].style.display='';
-    let selData = totalDataArr.slice(((firstPageNum-1) * pageSelectVal()) + 1, firstPageNum * pageSelectVal() + 1)
+    let selData = totalSelectedData.slice(((firstPageNum-1) * pageSelectVal()) + 1, firstPageNum * pageSelectVal() + 1);
     selData.forEach(function (element) {
         element.style.display=''});
 
@@ -203,7 +237,7 @@ searchBtn.addEventListener("click", ()=> {
             console.log(val);
             let currentPageNum = val;
             pageIdxElem[val-1].classList.add("selected");
-            let currentPageData = totalDataArr.slice(((currentPageNum - 1) * pageSelectVal()) + 1, currentPageNum * pageSelectVal() + 1);
+            let currentPageData = totalSelectedData.slice(((currentPageNum - 1) * pageSelectVal()) + 1, currentPageNum * pageSelectVal() + 1);
             let showCurrentPage = () => {
                 totalDataArr[0].style.display = '';
                 currentPageData.forEach(function (element) {
@@ -214,6 +248,69 @@ searchBtn.addEventListener("click", ()=> {
         })
     }
     pageNumElem.forEach(pageNumVal);
+
+    let dataPerPageElem = document.querySelector("select");
+    dataPerPageElem.addEventListener('change', ()=> {
+
+        document.querySelectorAll(".pageNum").forEach((item) => {
+            item.remove();
+        });
+        let pageCount = Math.floor(Number(totalSelectedDataNum / pageSelectVal())) + 1;
+        if(Number(totalSelectedDataNum % pageSelectVal()) === 0) {
+            pageCount = pageCount - 1;
+        }
+        // if (pageCount > pagingCount) {
+        pageIdxElem.innerHTML +=
+            `
+        <li class="pageNum page-item" data-idx="${firstPageNum}"><a class="page-preNext"> < </a></li>
+        `
+// }
+        for(let i=1; i<=pageCount; i++) {
+            pageIdxElem.innerHTML +=
+                `
+        <li class="pageNum page-item" data-idx="${i}"><a class="page-link">${i}</a></li>
+        `
+        }
+        // if (pageCount > pagingCount) {
+        pageIdxElem.innerHTML +=
+            `
+        <li class="pageNum page-item" data-idx="${pageCount}"><a class="page-preNext"> > </a></li>
+        `
+// }
+        let pageNumElem = document.querySelectorAll('.pageNum');
+        totalDataArr.forEach(function(element) {
+            element.style.display='none'});
+        totalDataArr[0].style.display='';
+        let selData = totalSelectedData.slice(((firstPageNum-1) * pageSelectVal()) + 1, firstPageNum * pageSelectVal() + 1)
+        selData.forEach(function (element) {
+            element.style.display=''});
+
+        let pageNumVal = (item) => {
+            item.addEventListener('click', ()=> {
+                let pageIdxElem = document.querySelectorAll("a.page-link");
+                pageIdxElem.forEach(function (item) {
+                    item.classList.remove("selected")
+                });
+                // item.querySelector("a").classList.add("selected");
+                totalDataArr.forEach(function(element) {
+                    element.style.display='none'});
+                let val = Number(item.dataset.idx);
+                console.log(val);
+                let currentPageNum = val;
+                pageIdxElem[val-1].classList.add("selected");
+                let currentPageData = totalSelectedData.slice(((currentPageNum - 1) * pageSelectVal()) + 1, currentPageNum * pageSelectVal() + 1);
+                let showCurrentPage = () => {
+                    totalDataArr[0].style.display = '';
+                    currentPageData.forEach(function (element) {
+                        element.style.display = ''
+                    });
+                }
+                showCurrentPage();
+            })
+        }
+        pageNumElem.forEach(pageNumVal);
+
+    })
 });
 
 
