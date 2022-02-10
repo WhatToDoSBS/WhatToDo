@@ -27,10 +27,12 @@
     <link rel="stylesheet" href="/res/css/<tiles:getAsString name='common'/>.css">
     <link rel="stylesheet" href="/res/css/<tiles:getAsString name='addr1'/>/index.css">
     <link rel="stylesheet" href="/res/css/<tiles:getAsString name='addr2'/>.css">
+    <link rel="stylesheet" href="/res/css/<tiles:getAsString name='addr3'/>.css">
 
     <script defer src="/res/js/<tiles:getAsString name='common'/>.js"></script>
     <script defer src="/res/js/<tiles:getAsString name='addr1'/>/index.js"></script>
     <script defer src="/res/js/<tiles:getAsString name='addr2'/>.js"></script>
+    <script defer src="/res/js/<tiles:getAsString name='addr3'/>.js"></script>
     <title><tiles:insertAttribute name="title" ignore="true" /></title>
 </head>
 <body>
