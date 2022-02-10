@@ -27,6 +27,3 @@
 <!-- 네이버 로그인 버튼 노출 영역 -->
 <div id="naver_id_login"></div>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-
-
-
