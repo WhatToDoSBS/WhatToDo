@@ -67,6 +67,7 @@ img { border-radius: 10px; }
 
 .header,
 .footer {
+    font-family: 'Nanum Gothic', sans-serif;
     width: 100%;
     padding: 5vh 0;
     text-align: center;
@@ -164,6 +165,7 @@ img { border-radius: 10px; }
 /* --- container --- */
 
 .container_box {
+    font-family: 'Nanum Gothic', sans-serif;
     text-align: center;
     display: flex;
     justify-content: space-evenly;

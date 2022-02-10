@@ -1,3 +1,13 @@
+table, th, tr, td {
+    padding: 0;
+    border: none;
+}
+
+td {
+    padding-right: 10px;
+    font-size: 13px;
+}
+
 .container_box {
     align-items: normal;
     flex-direction: row;
@@ -27,7 +37,7 @@
     text-align: center;
 }
 
-card-title span {
+.card-title span {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

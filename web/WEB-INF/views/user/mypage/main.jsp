@@ -47,15 +47,24 @@
         <div class="col info">
             <div class="card" style="width: 18rem;">
                 <div class="card-body info_profileCard">
-                    <h5 class="card-title">Click History</h5>
+                    <h5 class="card-title">My Review</h5>
                     <div>
-                        최근 평가
+                        최근 작성한 평가
                     </div>
                     <div>
-                        <c:forEach var="item" items="${webtoonReviewMy}" begin="0" end="0">
-                            <span>${item.nm} | </span>
-                            <span>${item.ctnt}</span>
-                        </c:forEach>
+                        <table>
+                            <tr>
+                                <td>제목</td>
+                                <td>내용</td>
+                            </tr>
+                            <c:forEach var="item" items="${webtoonReviewMy}" begin="0" end="0">
+                                <tr>
+                                    <td>${item.nm}</td>
+                                    <td>${item.ctnt}</td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+
                     </div>
                     <div class="btn-link">
                         <a href="/user/mypage/myreview" class="card-link"><button>확인하기</button></a>
