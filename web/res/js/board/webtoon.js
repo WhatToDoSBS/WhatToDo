@@ -51,6 +51,7 @@ function webtoonGenreRandom(url) {
         return res.json();
     }).then((data) => {// 사이즈 구하는 법 : Object.keys(data).length
         let randomNum = Math.floor((Math.random() * data.length));  // 랜덤 숫자
+        console.log(data[randomNum].img);
         resultDisplay(data[randomNum].img, data[randomNum].link, data[randomNum].nm, data[randomNum].writer, 'RANDOM');
     }).catch((err) => {
         console.log(err);

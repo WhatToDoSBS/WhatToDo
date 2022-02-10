@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div hidden id="data" data-iboard="${data.iboard}"
-     data-iboard="${data.iboard}"
      data-iuser="${sessionScope.loginUser.iuser}"></div>
 <div style="width : 50%">
     <div><p>조회수: ${data.hits} | 등록일시: ${data.rdt} | 글쓴이: ${data.iuser}</p></div>

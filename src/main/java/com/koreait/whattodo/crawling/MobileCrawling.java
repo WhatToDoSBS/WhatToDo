@@ -72,7 +72,7 @@ public class MobileCrawling {
             List<MecaRankEntity> list = new ArrayList<>();
             for(int i=0;i<rankNmList.size();i++) {
                 entity.setRankNum((String)rankNumList.get(i));
-                entity.setRankNm((String)rankNmList.get(i));
+                entity.setGameNm((String)rankNmList.get(i));
                 entity.setCompany((String)companyList.get(i));
                 list.add(entity);
                 System.out.println(list);

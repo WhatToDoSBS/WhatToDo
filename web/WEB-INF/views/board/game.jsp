@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <style>
     @font-face {
@@ -8,6 +9,7 @@
     }
 </style>
 <div class="container">
+    <div hidden id="data" data-iuser="${sessionScope.loginUser.iuser}"></div>
         <div class="choiceBtn_section">
 <%--            <div class="choiceBtn_section_line rating">--%>
 <%--                <label id="rtLb">평가--%>
@@ -54,17 +56,21 @@
             <button class="fun-btn">뭐하Gee?</button>
         </div>
     <div id="modal" class="modal-overlay" style="display: none">
-        <div class="modal-window">
-            <div class="modalTitle">
-                오늘의 게임
-            </div>
-            <div class="close-area">X</div>
-            <div class="selected-img">
-            </div>
-            <div class="modalContent">
-            </div>
-            <div class="gameLink">
-            </div>
+        <div class="modal-window modal">
+            <div class="modalTitle">오늘의 게임</div>
+            <div class="close-area close text-important">X</div>
+            <div class="selected-img"></div>
+            <div class="modalContent"></div>
+            <div class="gameLink"></div>
+            <div class="gameCmtList"></div>
+            <c:if test="${sessionScope.loginUser != null}">
+                <div>
+                    <form id="gameCmtFrm" class="form-group">
+                        <input class="form-control" id="gameCmtCtnt" type="text" name="ctnt">
+                        <input class="btn btn-outline-dark" type="button" id="cmt_submit" value="댓글 달기">
+                    </form>
+                </div>
+            </c:if>
         </div>
     </div>
 </div>
