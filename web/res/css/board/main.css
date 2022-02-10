@@ -45,6 +45,12 @@
     margin-bottom: 10px;
 }
 
+.button-group a {
+    font-size: 22px;
+    font-family: 'Black Han Sans', sans-serif;
+    margin-top: 5px;
+}
+
 .page_info {
     display: flex;
     text-align: left;
@@ -99,7 +105,11 @@
     justify-content: center;
 }
 
-/* 페이지 버튼 위치 커스텀 지정*/
-/*#pagination {*/
-/*    bottom: 35px;*/
-/*}*/
+.swiper-slide span {
+    margin: 20px 0;
+}
+
+ /*페이지 버튼 위치 커스텀 지정*/
+#pagination {
+    bottom: -5px;
+}

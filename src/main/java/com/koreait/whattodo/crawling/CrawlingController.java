@@ -35,34 +35,11 @@ public class CrawlingController {
 
     @GetMapping("/netflix")
     public void netflix() {
-//        String mecaUrl = "https://www.gamemeca.com/ranking.php";
-//        String steamUrl = "https://store.steampowered.com/stats/?l=koreana";
-//        String ratingUrl = "https://namu.wiki/w/%EB%A9%94%ED%83%80%ED%81%AC%EB%A6%AC%ED%8B%B1/MUST-PLAY%20%EB%AA%A9%EB%A1%9D";
-//
-//        crawlingService.insertMeca(mecaUrl);
-//        crawlingService.insertSteam(steamUrl);
-//        crawlingService.insertRating(ratingUrl);
     }
 
-//    @GetMapping("/ranking")
-//    public String ranking(Model model, MecaRankEntity entity, SteamRankEntity steamRankEntity, RatingEntity ratingEntity, PlatformRankEntity platEntity) throws IOException {
-////        String mecaUrl = "https://www.gamemeca.com/ranking.php";
-////        String steamUrl = "https://store.steampowered.com/stats/?l=koreana";
-////        String ratingUrl = "https://namu.wiki/w/%EB%A9%94%ED%83%80%ED%81%AC%EB%A6%AC%ED%8B%B1/MUST-PLAY%20%EB%AA%A9%EB%A1%9D";
-////
-////        crawlingService.insertMeca(mecaUrl);
-////        crawlingService.insertSteam(steamUrl);
-////        crawlingService.insertRating(ratingUrl);
-////
-////        model.addAttribute("mecaRankList", crawlingService.mecaRankList(entity));
-////        model.addAttribute("steamRankList", crawlingService.steamRankList(steamRankEntity));
-////        model.addAttribute("ratingList", crawlingService.ratingList(ratingEntity));
-////
-////        return "board/ranking";
-//    }
 
     @GetMapping("/main")
-    public void main(Model model, RatingEntity ratingEntity) {
+    public void main(Model model, PlatformRankEntity entity) {
         String ratingUrl = "https://namu.wiki/w/%EB%A9%94%ED%83%80%ED%81%AC%EB%A6%AC%ED%8B%B1/MUST-PLAY%20%EB%AA%A9%EB%A1%9D";
         String naverWebtoonURL = "https://comic.naver.com/webtoon/weekdayList?week=mon&order=User&view=image";  // 월요일&인기순
 
@@ -75,16 +52,16 @@ public class CrawlingController {
 
         // 게임
         crawlingService.insertRating(ratingUrl);
-        List<RatingEntity> list = crawlingService.ratingList(ratingEntity);
+        List gameList = crawlingService.platformListWithImg(entity);
         List<WebtoonRecommandEntity> webtoonRecommandEntityList = webtoonService.listRecommandWebtoon();
 
         // 랜덤번째 리스트를 전달해줌
-        int randomGameNum = utils.randomNumOutput(list.size());
+        int randomGameNum = utils.randomNumOutput(gameList.size());
         int randomWebtoon = utils.randomNumOutput(webtoonRecommandEntityList.size());
         System.out.println("랜덤 [게임] 숫자 : " + randomGameNum);
         System.out.println("랜덤 [웹툰] 숫자 : " + randomWebtoon);
 
-        model.addAttribute("randomGame", list.get(randomGameNum).getGameNm());
+        model.addAttribute("randomGame", gameList.get(randomGameNum));
         model.addAttribute("randomWebtoon", webtoonRecommandEntityList.get(randomWebtoon));
     }
 
