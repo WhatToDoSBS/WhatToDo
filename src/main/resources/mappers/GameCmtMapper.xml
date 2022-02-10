@@ -6,7 +6,7 @@
         VALUES (#{gameNm}, ${iuser}, #{ctnt})
     </insert>
 
-    <select id="selGameCmtList" resultType="BoardCmtVo">
+    <select id="selGameCmtList" resultType="GameCmtEntity">
         SELECT *
         FROM game_cmt
         WHERE gameNm = #{gameNm}

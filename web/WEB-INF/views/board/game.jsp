@@ -11,13 +11,6 @@
 <div class="container">
     <div hidden id="data" data-iuser="${sessionScope.loginUser.iuser}"></div>
         <div class="choiceBtn_section">
-<%--            <div class="choiceBtn_section_line rating">--%>
-<%--                <label id="rtLb">평가--%>
-<%--                    <button class="rtBtn">GOAT</button>--%>
-<%--                    <button class="rtBtn">띵작</button>--%>
-<%--                    <button class="rtBtn">수작</button>--%>
-<%--                </label>--%>
-<%--            </div>--%>
             <div class="choiceBtn_section_line popular">
                 <label id="ppLb"><p class="btLb" style= "display: inline-block; font-family: 'SDSamliphopangche_Outline'">인기</p>
                     <div class="btn-group">
@@ -67,7 +60,7 @@
                 <div>
                     <form id="gameCmtFrm" class="form-group">
                         <input class="form-control" id="gameCmtCtnt" type="text" name="ctnt">
-                        <input class="btn btn-outline-dark" type="button" id="cmt_submit" value="댓글 달기">
+                        <input style="font-weight: bolder; color: white" class="btn btn-outline-dark" type="button" id="cmt_submit" value="나의 평가 쓰기">
                     </form>
                 </div>
             </c:if>
