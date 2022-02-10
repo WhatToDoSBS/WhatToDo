@@ -17,10 +17,10 @@
         </c:otherwise>
     </c:choose>
 </div>
-<div class="header_menu">
-    <ul>
+<nav class="header_menu navbar navbar-expand-sm bg-light " style=" justify-content: center; background-color: var(--main-color-dark)">
+    <ul class="navbar-nav">
         <c:forEach items="${menuList}" var="item">
-            <li class="${lastPath == ''.concat(item.nmval) ? 'menu-selected' : ''}" onclick= location.href="/board/${item.nmval}">${item.nm}</li>
+            <li class="${lastPath == ''.concat(item.nmval) ? 'menu-selected' : ''} nav-item" style="color: black; font-weight: bolder" onclick= location.href="/board/${item.nmval}">${item.nm}</li>
         </c:forEach>
     </ul>
-</div>
+</nav>
