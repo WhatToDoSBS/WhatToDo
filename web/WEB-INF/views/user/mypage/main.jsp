@@ -53,7 +53,7 @@
                         <span class="nickname">별명 : </span>
                     </div>
                     <div class="btn-link">
-                        <a href="#" class="card-link"><button>수정</button></a>
+                        <a href="/user/mypage/myreview" class="card-link"><button>확인하기</button></a>
                     </div>
                 </div>
             </div>

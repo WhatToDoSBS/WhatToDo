@@ -1,6 +1,7 @@
 .container_box {
     align-items: normal;
     flex-direction: row;
+    background-color: #f5f6f8;
 }
 
 .info {
@@ -10,6 +11,7 @@
     justify-content: center;
     align-items: center;
     text-align: left;
+    background-color: black;
 }
 
 .info .info_profileCard div {

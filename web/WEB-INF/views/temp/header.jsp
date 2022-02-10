@@ -13,7 +13,7 @@
         <c:when test="${sessionScope.loginUser != null}">
             <ul class="list-group list-group-horizontal" id="header-login">
                 <li class="list-group-item"><a href="/user/logout">로그아웃</a></li>
-                <li class="list-group-item" id="mypageBtn"><span><a href="/user/infomain">My page</a></span></li>
+                <li class="list-group-item" id="mypageBtn"><span><a href="/user/mypage/main">My page</a></span></li>
             </ul>
         </c:when>
         <c:otherwise>

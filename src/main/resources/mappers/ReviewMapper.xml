@@ -16,6 +16,13 @@
         ORDER BY A.rnum
     </select>
 
+    <select id="selReviewWebtoonMy" resultType="ReviewEntity">
+        SELECT *
+        FROM review_webtoon
+        WHERE iuser = ${iuser}
+        ORDER BY rnum DESC
+    </select>
+
     <update id="updReviewWebtoon">
         UPDATE review_webtoon
         SET ctnt = #{ctnt}
