@@ -24,9 +24,8 @@ public class GameCmtController {
         result.put("result", service.insGameCmt(entity));
         return result;
     }
-
-    @GetMapping
-    public List<GameCmtEntity> selGameCmtList(String gameNm, Model model) {
+    @GetMapping("/{gameNm}")
+    public List<GameCmtEntity> selGameCmtList(@PathVariable String gameNm, Model model) {
         model.addAttribute("data", service.selGameCmtList(gameNm));
         return service.selGameCmtList(gameNm);
     }

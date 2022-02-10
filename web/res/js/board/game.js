@@ -3,7 +3,7 @@
     let ppBtns = document.querySelectorAll(".ppBtn");
     let kdBtns = document.querySelectorAll(".kdBtn");
     let pfBtns = document.querySelectorAll(".pfBtn");
-
+    let gameCmtListElem = document.querySelector(".gameCmtList");
 
 
     //
@@ -102,11 +102,15 @@
     ppBtn.addEventListener("click", function () {
         if (ppBtns[0].classList.contains("clicked")) {
             mecaData.getMrTopRandomGame();
+            makeGameCmt();
         } else if (ppBtns[1].classList.contains("clicked")) {
             mecaData.getMrGreatRandomGame();
+            makeGameCmt();
         } else if (ppBtns[2].classList.contains("clicked")) {
             mecaData.getMrGoodRandomGame();
+            makeGameCmt();
         } else mecaData.getMrAllRandomGame();
+        makeGameCmt();
 
         modalWindow.style.display = 'flex';
         modalXBtn.addEventListener('click', () => {
@@ -122,17 +126,24 @@
     kdBtn.addEventListener("click", function () {
         if(kdBtns[0].classList.contains("clicked")) {
             genreData.getRpgRandomGame();
+            makeGameCmt();
         } else if (kdBtns[1].classList.contains("clicked")) {
             genreData.getFpsRandomGame();
+            makeGameCmt();
         } else if (kdBtns[2].classList.contains("clicked")) {
             genreData.getSportsRandomGame();
+            makeGameCmt();
         } else if (kdBtns[3].classList.contains("clicked")) {
             genreData.getActionRandomGame();
+            makeGameCmt();
         } else if (kdBtns[4].classList.contains("clicked")) {
             genreData.getStrRandomGame();
+            makeGameCmt();
         } else if (kdBtns[5].classList.contains("clicked")) {
             genreData.getOthersRandomGame();
+            makeGameCmt();
         } else pfData.getAllPfRandomGame();
+        makeGameCmt();
 
         modalWindow.style.display = 'flex';
         modalXBtn.addEventListener('click', () => {
@@ -148,11 +159,15 @@
     pfBtn.addEventListener("click", function () {
         if(pfBtns[0].classList.contains("clicked")) {
             pfData.getMobileRandomGame();
+            makeGameCmt();
         } else if(pfBtns[1].classList.contains("clicked")) {
             pfData.getPcRandomGame();
+            makeGameCmt();
         } else if(pfBtns[2].classList.contains("clicked")) {
             pfData.getStRandomGame();
+            makeGameCmt();
         } else pfData.getAllPfRandomGame();
+        makeGameCmt();
 
         modalWindow.style.display = 'flex';
         modalXBtn.addEventListener('click', () => {
@@ -185,7 +200,9 @@
         console.log(randomNum)
         if(randomNum === 1) {
             mecaData.getMrAllRandomGame();
+            makeGameCmt();
         } else pfData.getAllPfRandomGame();
+        makeGameCmt();
 
         modalWindow.style.display = 'flex';
         modalXBtn.addEventListener('click', () => {
@@ -240,7 +257,7 @@ let mecaData = {
             console.log(JSON.stringify(mrdata[mrRN].gameNm));
             // let rGame = JSON.stringify(mrdata[mrRN])
             //     console.log(rGame);
-            let selectedGameNm = JSON.stringify(mrdata[mrRN].gameNm).replace("\"", "").replace("\"", "")
+            selectedGameNm = JSON.stringify(mrdata[mrRN].gameNm).replace("\"", "").replace("\"", "")
             document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${mrdata[mrRN].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
             document.querySelector(".selected-img").innerHTML = `<img src=${mrdata[mrRN].imgsrc}>`
         }).catch((err) => {
@@ -259,7 +276,7 @@ let mecaData = {
             }
             let mrRN = Math.floor(Math.random() * 20)
 
-            let selectedGameNm = JSON.stringify(mrdata[mrRN].gameNm).replace("\"", "").replace("\"", "")
+            selectedGameNm = JSON.stringify(mrdata[mrRN].gameNm).replace("\"", "").replace("\"", "")
             document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${mrdata[mrRN].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
             document.querySelector(".selected-img").innerHTML = `<img src=${mrdata[mrRN].imgsrc}>`
         }).catch((err) => {
@@ -278,7 +295,7 @@ let mecaData = {
             }
             let mrRN = Math.floor(Math.random() * 20)
 
-            let selectedGameNm = JSON.stringify(mrdata[mrRN].gameNm).replace("\"", "").replace("\"", "")
+            selectedGameNm = JSON.stringify(mrdata[mrRN].gameNm).replace("\"", "").replace("\"", "")
             document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${mrdata[mrRN].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
             document.querySelector(".selected-img").innerHTML = `<img src=${mrdata[mrRN].imgsrc}>`
         }).catch((err) => {
@@ -308,7 +325,7 @@ let genreData = {
         })
         let randomNm = Math.floor(Math.random() * rpgdata.length)
 
-        let selectedGameNm = JSON.stringify(rpgdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
+        selectedGameNm = JSON.stringify(rpgdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
         document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${rpgdata[randomNm].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
         document.querySelector(".selected-img").innerHTML = `<img src=${rpgdata[randomNm].imgsrc}>`
     }).catch((err) => {
@@ -333,7 +350,7 @@ let genreData = {
             })
             let randomNm = Math.floor(Math.random() * fpsdata.length)
 
-            let selectedGameNm = JSON.stringify(fpsdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
+            selectedGameNm = JSON.stringify(fpsdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
             document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${fpsdata[randomNm].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
             document.querySelector(".selected-img").innerHTML = `<img src=${fpsdata[randomNm].imgsrc}>`
         }).catch((err) => {
@@ -360,7 +377,7 @@ let genreData = {
             })
             let randomNm = Math.floor(Math.random() * actiondata.length)
 
-            let selectedGameNm = JSON.stringify(actiondata[randomNm].gameNm).replace("\"", "").replace("\"", "")
+            selectedGameNm = JSON.stringify(actiondata[randomNm].gameNm).replace("\"", "").replace("\"", "")
             document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${actiondata[randomNm].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
             document.querySelector(".selected-img").innerHTML = `<img src=${actiondata[randomNm].imgsrc}>`
         }).catch((err) => {
@@ -387,7 +404,7 @@ let genreData = {
             })
             let randomNm = Math.floor(Math.random() * strdata.length)
 
-            let selectedGameNm = JSON.stringify(strdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
+            selectedGameNm = JSON.stringify(strdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
             document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${strdata[randomNm].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
             document.querySelector(".selected-img").innerHTML = `<img src=${strdata[randomNm].imgsrc}>`
         }).catch((err) => {
@@ -414,7 +431,7 @@ let genreData = {
             })
             let randomNm = Math.floor(Math.random() * sportsdata.length)
 
-            let selectedGameNm = JSON.stringify(sportsdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
+            selectedGameNm = JSON.stringify(sportsdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
             document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${sportsdata[randomNm].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
             document.querySelector(".selected-img").innerHTML = `<img src=${sportsdata[randomNm].imgsrc}>`
         }).catch((err) => {
@@ -440,7 +457,7 @@ let genreData = {
             ))
             let randomNm = Math.floor(Math.random() * othsData.length)
 
-            let selectedGameNm = JSON.stringify(mdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
+            selectedGameNm = JSON.stringify(mdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
             document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${mdata[randomNm].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
             document.querySelector(".selected-img").innerHTML = `<img src=${mdata[randomNm].imgsrc}>`
         }).catch((err) => {
@@ -463,7 +480,7 @@ let pfData = {
             }
             let randomNm = Math.floor(Math.random() * 120);
 
-            let selectedGameNm = JSON.stringify(mdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
+            selectedGameNm = JSON.stringify(mdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
             document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${mdata[randomNm].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
             document.querySelector(".selected-img").innerHTML = `<img src=${mdata[randomNm].imgsrc}>`
         }).catch((err) => {
@@ -483,7 +500,7 @@ let pfData = {
         }
         let randomNm = Math.floor(Math.random() * 40);
 
-            let selectedGameNm = JSON.stringify(mdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
+            selectedGameNm = JSON.stringify(mdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
             document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${mdata[randomNm].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
             document.querySelector(".selected-img").innerHTML = `<img src=${mdata[randomNm].imgsrc}>`
     }).catch((err) => {
@@ -502,7 +519,7 @@ let pfData = {
             }
             let randomNm = Math.floor(Math.random() * 40);
 
-            let selectedGameNm = JSON.stringify(pdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
+            selectedGameNm = JSON.stringify(pdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
             document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${pdata[randomNm].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
             document.querySelector(".selected-img").innerHTML = `<img src=${pdata[randomNm].imgsrc}>`
         }).catch((err) => {
@@ -523,7 +540,7 @@ let pfData = {
             }
             let randomNm = Math.floor(Math.random() * 40);
 
-            let selectedGameNm = JSON.stringify(sdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
+            selectedGameNm = JSON.stringify(sdata[randomNm].gameNm).replace("\"", "").replace("\"", "")
             document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${sdata[randomNm].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
             document.querySelector(".selected-img").innerHTML = `<img src=${sdata[randomNm].imgsrc}>`
         }).catch((err) => {
@@ -534,206 +551,208 @@ let pfData = {
 
     let dataElem = document.querySelector("#data");
     let gameCmtFrmElem = document.querySelector("#gameCmtFrm");
-    if(gameCmtFrmElem) {
-        gameCmtFrmElem.addEventListener("submit", (e) => {
-            e.preventDefault();
-        });
 
-        gameCmtFrmElem.cmt_submit.addEventListener('click', () => {
-            let cmtVal = gameCmtFrmElem.ctnt.value;
-            if(cmtVal.length === 0) {
-                alert("내용을 입력해 주세요.");
-            }
-            else if (cmtVal.includes("<") || cmtVal.includes(">")) {
-                alert("내용에 < 혹은 >를 사용하실 수 없습니다.");
-            }
-            else {
-                insGameCmtAjax(cmtVal);
-                // location.href="/board/detail?iboard="+ iboard;
-            }
-        });
-        // const item = {
-        //     icmt: data.result,
-        //     iuser: parseInt(dataElem.dataset.iuser),
-        //     ctnt: gameCmtFrmElem.ctnt.value,
-        // }
-        let insGameCmtAjax = (val) => {
-            let param = {
-                'gameNm' : selectedGameNm,
-                'iuser' : dataElem.dataset.iuser,
-                'ctnt' : val
-            };
-            console.log(param);
-            fetch('/game', {
-                'method' : 'POST',
-                'headers' : { 'Content-Type': 'application/json' },
-                'body' : JSON.stringify(param),
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    const tableElem = document.querySelector('table');
-                    if(tableElem){
-                        tableElem.remove();
-                    }
-                    gameCmtListElem.innerText = '';
-                    gameCmtListElem.ctnt.value = null;
-                    getCmtList();
+    function makeGameCmt() {
+        if(gameCmtFrmElem) {
+            gameCmtFrmElem.addEventListener("submit", (e) => {
+                e.preventDefault();
+            });
 
-                }).catch(e => {
+            gameCmtFrmElem.cmt_submit.addEventListener('click', () => {
+                let cmtVal = gameCmtFrmElem.ctnt.value;
+                if(cmtVal.length === 0) {
+                    alert("내용을 입력해 주세요.");
+                }
+                else if (cmtVal.includes("<") || cmtVal.includes(">")) {
+                    alert("내용에 < 혹은 >를 사용하실 수 없습니다.");
+                }
+                else {
+                    insGameCmtAjax(cmtVal);
+                    // location.href="/board/detail?iboard="+ iboard;
+                }
+            });
+            // const item = {
+            //     icmt: data.result,
+            //     iuser: parseInt(dataElem.dataset.iuser),
+            //     ctnt: gameCmtFrmElem.ctnt.value,
+            // }
+            let insGameCmtAjax = (val) => {
+                let param = {
+                    gameNm : selectedGameNm,
+                    iuser : dataElem.dataset.iuser,
+                    ctnt : val
+                };
+                console.log(param);
+                fetch('/game', {
+                    'method' : 'POST',
+                    'headers' : { 'Content-Type': 'application/json' },
+                    'body' : JSON.stringify(param),
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        const tableElem = document.querySelector('table');
+                        if(tableElem){
+                            tableElem.remove();
+                        }
+                        gameCmtListElem.innerText = '';
+                        gameCmtListElem.ctnt = null;
+                        getCmtList();
+
+                    }).catch(e => {
+                    console.log(e);
+                })
+            }
+        }
+        const getCmtList = () => {
+            let gameNm = selectedGameNm;
+            fetch(`/game/${gameNm}`)
+                .then(res => {
+                    return res.json();
+                }).then(data => {
+                console.log(data);
+                setCmtList(data);
+            }).catch(e=> {
                 console.log(e);
-            })
-        }
-    }
-
-    let gameCmtListElem = document.querySelector(".gameCmtList");
-
-    const getCmtList = () => {
-        fetch(`/game`)
-            .then(res => {
-                return res.json();
-            }).then(data => {
-            console.log(data);
-            setCmtList(data);
-        }).catch(e=> {
-            console.log(e);
-        });
-    }
-
-    const setCmtList = (list) => {
-
-        if(list.length === 0) {
-            gameCmtListElem.innerText = '유저 평가가 없습니다.';
-            return;
+            });
         }
 
-        const table = document.createElement('table');
-        table.innerHTML = `
+        const setCmtList = (list) => {
+
+            if(list.length === 0) {
+                gameCmtListElem.innerText = '유저 평가가 없습니다.';
+                return;
+            }
+            let table = document.createElement('table');
+            table.classList.add("table-striped");
+            table.innerHTML = `
         <tr>
-            <th>내용</th>
-            <th>작성자</th>
-            <th></th>
+            <th style="width: 60%">내용</th>
+            <th style="width: 20%">작성자</th>
+            <th style="width: 20%"></th>
         </tr>
         `
-        list.forEach(item => {
-            makeTr(table, item);
-        });
-        gameCmtListElem.appendChild(table);
-    }
+            list.forEach(item => {
+                makeTr(table, item);
+            });
+            gameCmtListElem.appendChild(table);
+        }
 
-    const makeTr = (table, item) => {
-        const tr = document.createElement('tr');
+        const makeTr = (table, item) => {
+            const tr = document.createElement('tr');
 
-        tr.innerHTML = `
+            tr.innerHTML = `
         <td>${item.ctnt}</td>
         <td>${item.iuser}</td>
         `;
 
-        const td = document.createElement('td');
-        tr.appendChild(td);
+            const td = document.createElement('td');
+            tr.appendChild(td);
 
-        if(parseInt(dataElem.dataset.iuser)===item.iuser) {
-            const modBtn = document.createElement("input");
-            modBtn.type = 'button';
-            modBtn.value = '수정';
-            modBtn.classList.add('boardBtn');
-            modBtn.addEventListener('click', () => {
-                const tdArr = tr.querySelectorAll('td');
-                const tdCell = tdArr[1];//댓글 내용
+            if(parseInt(dataElem.dataset.iuser)===item.iuser) {
+                const modBtn = document.createElement("input");
+                modBtn.type = 'button';
+                modBtn.value = '수정';
+                modBtn.classList.add('boardBtn');
+                modBtn.addEventListener('click', () => {
+                    const tdArr = tr.querySelectorAll('td');
+                    const tdCell = tdArr[1];//댓글 내용
 
-                const modInput = document.createElement('input');
-                modInput.value = item.ctnt;
-                const saveBtn = document.createElement('input');
-                saveBtn.type = 'button';
-                saveBtn.value = '저장';
-                saveBtn.classList.add('boardBtn');
-                saveBtn.addEventListener('click', () => {
-                    const param = {
-                        icmt : item.icmt,
-                        ctnt : modInput.value
+                    const modInput = document.createElement('input');
+                    modInput.value = item.ctnt;
+                    const saveBtn = document.createElement('input');
+                    saveBtn.type = 'button';
+                    saveBtn.value = '저장';
+                    saveBtn.classList.add('boardBtn');
+                    saveBtn.addEventListener('click', () => {
+                        const param = {
+                            icmt : item.icmt,
+                            ctnt : modInput.value
+                        }
+                        fetch('/game', {
+                            'method': 'put',
+                            'headers': { 'Content-Type': 'application/json' },
+                            'body': JSON.stringify(param)
+                        })
+                            .then(data => {
+                                console.log(data);
+                                tdCell.innerText = modInput.value;
+                                item.ctnt = modInput.value;
+                                removeCancelBtn();
+                            })
+                            .catch(data => {
+                                alert("평가 작성에 실패했습니다.");
+                                console.log(data);
+                            })
+                    });
+                    tdCell.innerHTML = null;
+                    tdCell.appendChild(modInput);
+                    tdCell.appendChild(saveBtn);
+
+                    const cancelBtn = document.createElement('input');
+                    cancelBtn.type = 'button';
+                    cancelBtn.value = '취소';
+                    cancelBtn.classList.add('boardBtn');
+                    cancelBtn.addEventListener('click', () => {
+                        tdCell.innerText = item.ctnt;
+                        removeCancelBtn();
+                    });
+
+                    const removeCancelBtn = () => {
+                        modBtn.classList.remove('hidden');
+                        delBtn.classList.remove('hidden');
+                        cancelBtn.remove();
                     }
-                    fetch('/game', {
-                        'method': 'put',
-                        'headers': { 'Content-Type': 'application/json' },
-                        'body': JSON.stringify(param)
-                    })
-                        .then(data => {
-                            console.log(data);
-                            tdCell.innerText = modInput.value;
-                            item.ctnt = modInput.value;
-                            removeCancelBtn();
-                        })
-                        .catch(data => {
-                            alert("평가 작성에 실패했습니다.");
-                            console.log(data);
-                        })
-                });
-                tdCell.innerHTML = null;
-                tdCell.appendChild(modInput);
-                tdCell.appendChild(saveBtn);
 
-                const cancelBtn = document.createElement('input');
-                cancelBtn.type = 'button';
-                cancelBtn.value = '취소';
-                cancelBtn.classList.add('boardBtn');
-                cancelBtn.addEventListener('click', () => {
-                    tdCell.innerText = item.ctnt;
-                    removeCancelBtn();
+                    td.insertBefore(cancelBtn, modBtn);
+                    modBtn.classList.add('hidden');
+                    delBtn.classList.add('hidden');
                 });
 
-                const removeCancelBtn = () => {
-                    modBtn.classList.remove('hidden');
-                    delBtn.classList.remove('hidden');
-                    cancelBtn.remove();
-                }
-
-                td.insertBefore(cancelBtn, modBtn);
-                modBtn.classList.add('hidden');
-                delBtn.classList.add('hidden');
-            });
 
 
+                const delBtn = document.createElement("input");
+                delBtn.type = 'button';
+                delBtn.value = '삭제';
+                delBtn.classList.add('boardBtn');
+                delBtn.addEventListener('click', ()=> {
+                    if(confirm("나의 평가를 삭제하시겠습니까?")) {
+                        delCmt(item.icmt, tr);
+                        // location.href='/board/detail?iboard='+iboard;
+                    }
+                });
 
-            const delBtn = document.createElement("input");
-            delBtn.type = 'button';
-            delBtn.value = '삭제';
-            delBtn.classList.add('boardBtn');
-            delBtn.addEventListener('click', ()=> {
-                if(confirm("나의 평가를 삭제하시겠습니까?")) {
-                    delCmt(item.icmt, tr);
-                    // location.href='/board/detail?iboard='+iboard;
-                }
-            });
-
-            td.appendChild(modBtn);
-            td.appendChild(delBtn);
+                td.appendChild(modBtn);
+                td.appendChild(delBtn);
+            }
+            table.appendChild(tr);
         }
-        table.appendChild(tr);
+        getCmtList();
+
+
+
+        const delCmt = (icmt, tr) => {
+            fetch(`/game`,
+                {'method': 'delete',
+                    'headers': { 'Content-Type': 'application/json' }
+                }).then(res => res.json())
+                .then(data => {
+                    console.log(data.result);
+                    const tableElem = document.querySelector('table');
+                    tableElem.remove();
+                    getCmtList();
+                }).catch(e=> {
+                console.log(e)
+            });
+        }
+
+        const getTrLen = ()=> {
+            const cmtListElem = document.querySelector('#cmt_list');
+            const trArr = cmtListElem.querySelectorAll('table tr');
+            return trArr.length;
+        }
     }
-    getCmtList();
 
-
-
-    const delCmt = (icmt, tr) => {
-        fetch(`/game`,
-            {'method': 'delete',
-                'headers': { 'Content-Type': 'application/json' }
-            }).then(res => res.json())
-            .then(data => {
-                console.log(data.result);
-                const tableElem = document.querySelector('table');
-                tableElem.remove();
-                getCmtList();
-            }).catch(e=> {
-            console.log(e)
-        });
-    }
-
-    const getTrLen = ()=> {
-        const cmtListElem = document.querySelector('#cmt_list');
-        const trArr = cmtListElem.querySelectorAll('table tr');
-        return trArr.length;
-    }
 
 
 }
