@@ -271,15 +271,15 @@ button.rtBtn.clicked {
 }
 
 button.ppBtn.clicked {
-    background-color: lightblue; color: greenyellow;
+    background-color: lightblue;
 }
 
 button.kdBtn.clicked {
-    background-color: lightpink; color: aquamarine;
+    background-color: lightpink;
 }
 
 button.pfBtn.clicked {
-    background-color: lightseagreen; color: fuchsia;
+    background-color: lightseagreen;
 }
 
 

@@ -37,7 +37,7 @@ public class CrawlingService {
 
         // 크롤링 과정
         Elements rankNum = doc.select("tr.ranking-table-rows").select("span.rank");    // 순위 번호(1,2,3...) 가져오기
-        Elements rankNm = doc.select("div.game-name > a"); // 게임 이름
+        Elements gameNm = doc.select("div.game-name > a"); // 게임 이름
         Elements company = doc.select("div.game-info > span.company"); // 회사 명
         Elements img = doc.select("img.game-icon"); // 이미지
 
@@ -46,7 +46,7 @@ public class CrawlingService {
             String num = element.text();
             rankNumList.add(num);
         }
-        for (Element element : rankNm) {
+        for (Element element : gameNm) {
             String name = element.text();
             rankNmList.add(name);
         }
@@ -58,7 +58,7 @@ public class CrawlingService {
             String imgSrc = element.attributes().get("src");
             imgList.add(imgSrc);
         }
-        for (Element element : rankNm) {
+        for (Element element : gameNm) {
             String link = "https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=" + element.text();
             linkList.add(link);
         }
@@ -73,7 +73,7 @@ public class CrawlingService {
         for (int i = 0; i < rankNmList.size(); i++) {
             MecaRankEntity entity = new MecaRankEntity();
             entity.setRankNum((String) rankNumList.get(i));
-            entity.setRankNm((String) rankNmList.get(i));
+            entity.setGameNm((String) rankNmList.get(i));
             entity.setCompany((String) companyList.get(i));
             entity.setImgsrc((String) imgList.get(i));
             entity.setSelLink((String) linkList.get(i));
