@@ -39,7 +39,7 @@
     border-radius: 10px;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
     width: 480px;
-    height: 650px;
+    height: 700px;
     position: relative;
     top: -100px;
     padding: 10px;
@@ -54,7 +54,7 @@
     font-size: xx-large;
     font-weight: bolder;
     text-align: center;
-    margin: 20px 0px;
+    margin: 10px 0px;
 }
 
 #modal .close-area {
@@ -67,7 +67,7 @@
 }
 
 .modalContent {
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 0px 10px;
     text-shadow: 1px 1px 2px gray;
     color: white;
@@ -81,7 +81,7 @@
 }
 
 .modalContent a:hover {
-    color: lightgreen;
+    color: #b1bfca;
 }
 
 .selected-img {
@@ -91,7 +91,6 @@
 .selected-img > img {
     width: 400px;
     height: 300px;
-    margin: 20px 0px;
 }
 
 #ppRanBtn {
@@ -153,4 +152,15 @@
 
 #pfRanBtn:hover {
     animation: random-bg .5s linear infinite, grow 1300ms ease infinite;
+}
+
+.form-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-control {
+    width: 50%;
+    margin: 15px;
 }
