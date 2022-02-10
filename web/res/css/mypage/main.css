@@ -26,3 +26,9 @@
 .btn-link {
     text-align: center;
 }
+
+card-title span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

@@ -17,12 +17,12 @@ public class UserMypageController {
     ReviewService reviewService = new ReviewService();
 
     @GetMapping("/mypage/main")
-    public void main() {
-
+    public void main(Model model) {
+        model.addAttribute("webtoonReviewMy",reviewService.selReviewWebtoonMy());
     }
 
     @GetMapping("/mypage/myreview")
-    public void main(Model model) {
+    public void myreview(Model model) {
         model.addAttribute("webtoonReviewMy",reviewService.selReviewWebtoonMy());
     }
 }

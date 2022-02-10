@@ -49,8 +49,13 @@
                 <div class="card-body info_profileCard">
                     <h5 class="card-title">Click History</h5>
                     <div>
-                        <img src="/res/img/board/lol.jpg" alt="" class="wh-80 circular--img">
-                        <span class="nickname">별명 : </span>
+                        최근 평가
+                    </div>
+                    <div>
+                        <c:forEach var="item" items="${webtoonReviewMy}" begin="0" end="0">
+                            <span>${item.nm} | </span>
+                            <span>${item.ctnt}</span>
+                        </c:forEach>
                     </div>
                     <div class="btn-link">
                         <a href="/user/mypage/myreview" class="card-link"><button>확인하기</button></a>
