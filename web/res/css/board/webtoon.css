@@ -2,6 +2,10 @@ h1 {
     text-align: center;
 }
 
+span {
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
 button:hover {
     cursor: pointer;
 }
@@ -10,20 +14,40 @@ button:hover {
     cursor: pointer;
 }
 
-.webtoonLink {
+.webtoonLink, .webtoonInfoHidden {
     display: none;
 }
 
 #recommand_box ul {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    /*border-top: 1px solid black;*/
+    /*border-bottom: 1px solid black;*/
     margin: 10px 0;
 }
 
 #recommand_box ul li {
     margin: 10px;
+}
+
+.recommend_section {
+    width: 800px;
+}
+
+.recommend_section #card {
+    margin: 10px;
+}
+
+.recommend_section #card #card-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 200px;
+}
+
+#card-body {
+    display: flex;
+    flex-direction: column;
 }
 
 .recommend_section span {
@@ -75,14 +99,20 @@ button:hover {
     margin: 0 10px;
 }
 
+.naver_section img {
+    border-radius: 4px;
+}
+
 .naver_section #webtoon_databox span {
     display: block;
     width: 83px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin-bottom: 5px;
+    margin: 10px 0;
 }
+
+/* MODAL CSS */
 
 #modal.modal-overlay {
     width: 100%;
@@ -107,25 +137,25 @@ button:hover {
     -webkit-backdrop-filter: blur( 13.5px );
     border-radius: 10px;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
-    width: 400px;
-    height: 450px;
+    min-width: 350px;
     top: -100px;
-    padding: 10px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
 }
 #modal .modal-window span {
+    font-family: 'Nanum Gothic', sans-serif;
     font-size: 16px;
 }
 .modalTitle {
-    padding-left: 10px;
+    padding-left: 5px;
     display: block;
     text-shadow: 1px 1px 2px gray;
     color: white;
-    font-size: xx-large;
-    font-weight: bolder;
+    font-size: 40px;
     text-align: center;
-    margin: 20px 0px;
+    margin: 10px 0px;
+    font-family: 'Black Han Sans', sans-serif;
 }
 
 #modal .close-area {
@@ -138,13 +168,15 @@ button:hover {
 }
 
 .modalContent {
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 0px 10px;
     text-shadow: 1px 1px 2px gray;
     color: white;
     text-align: center;
-    font-size: x-large;
-    font-weight: bold;
+}
+
+.modalContent #webtoon_databox {
+    margin-top: 10px;
 }
 
 .modalContent li {
@@ -153,11 +185,11 @@ button:hover {
     align-items: center;
 }
 
-.modalContent li span {
+.modalContent span {
     margin: 10px 0;
 }
 
-.modalContent li .webtoonLink {
+.modalContent .webtoonLink {
     display: inline-block;
 }
 
@@ -168,3 +200,48 @@ button:hover {
 .modalContent a:hover {
     color: lightgreen;
 }
+
+.modalContent img {
+    margin: 10px 0;
+    border-radius: 10px;
+}
+
+#reviewFrm {
+    margin-bottom: 20px;
+}
+
+#review_list {
+    display: flex;
+    justify-content: center;
+}
+
+#review_list table, td, th {
+    border: none;
+}
+
+#review_list .modBtn, .delBtn {
+    margin-left: 5px;
+    border-radius: 30px;
+    border: 0;
+    height: 23px;
+    width: 45px;
+}
+
+.reviewTextInput {
+    border-radius: 30px;
+    height: 23px;
+    border: 0;
+    width: 220px;
+    margin-left: 20px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+#btn_submit {
+    margin-left: 5px;
+    border-radius: 30px;
+    border: 0;
+    height: 23px;
+    width: 45px;
+}
+
