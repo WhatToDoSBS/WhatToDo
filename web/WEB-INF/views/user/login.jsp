@@ -23,4 +23,15 @@
     <div><a>아이디</a> · <a>비밀번호찾기</a></div>
     <div><a href="/user/join">아직 계정이 없으신가요?</a></div>
 </div>
+    <div id="naver_id_login"></div>
 </div>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<%--<script type="text/javascript">--%>
+<%--    var naver_id_login = new naver_id_login("s8DDAYotRndJt05wXdOI", "http://localhost:8090/board/main");--%>
+<%--    var state = naver_id_login.getUniqState();--%>
+<%--    naver_id_login.setButton("green", 3,40);--%>
+<%--    naver_id_login.setDomain("green");--%>
+<%--    naver_id_login.setState(state);--%>
+<%--    naver_id_login.setPopup();--%>
+<%--    naver_id_login.init_naver_id_login();--%>
+<%--</script>--%>

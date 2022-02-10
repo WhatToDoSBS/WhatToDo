@@ -11,7 +11,7 @@
     <mvc:resources mapping="/res/**" location="/res/" />
 
 
-    <mvc:interceptors>
+    <mvc:interceptors>  <!-- 자동로그인 인터셉터 설정 -->
         <mvc:interceptor>
             <mvc:mapping path="/user/login"/>
             <mvc:mapping path="/user/join"/>
