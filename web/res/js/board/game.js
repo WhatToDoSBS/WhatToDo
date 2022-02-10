@@ -198,7 +198,7 @@
         })
     })
 
-
+let selectedGameNm;
     /* 랜덤값 도출 */
     //메카 순위별 랜덤함수 객체
 let mecaData = {
@@ -218,7 +218,7 @@ let mecaData = {
         console.log(JSON.stringify(mrdata[mrRN].gameNm));
         // let rGame = JSON.stringify(mrdata[mrRN])
         //     console.log(rGame);
-        let selectedGameNm = JSON.stringify(mrdata[mrRN].gameNm).replace("\"", "").replace("\"", "")
+        selectedGameNm = JSON.stringify(mrdata[mrRN].gameNm).replace("\"", "").replace("\"", "")
         document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${mrdata[mrRN].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
         document.querySelector(".selected-img").innerHTML = `<img src=${mrdata[mrRN].imgsrc}>`
     }).catch((err) => {
@@ -532,8 +532,61 @@ let pfData = {
     }
 }
 
-    let gameCmtListElem = document.querySelector(".gameCmtList");
     let dataElem = document.querySelector("#data");
+    let gameCmtFrmElem = document.querySelector("#gameCmtFrm");
+    if(gameCmtFrmElem) {
+        gameCmtFrmElem.addEventListener("submit", (e) => {
+            e.preventDefault();
+        });
+
+        gameCmtFrmElem.cmt_submit.addEventListener('click', () => {
+            let cmtVal = gameCmtFrmElem.ctnt.value;
+            if(cmtVal.length === 0) {
+                alert("내용을 입력해 주세요.");
+            }
+            else if (cmtVal.includes("<") || cmtVal.includes(">")) {
+                alert("내용에 < 혹은 >를 사용하실 수 없습니다.");
+            }
+            else {
+                insGameCmtAjax(cmtVal);
+                // location.href="/board/detail?iboard="+ iboard;
+            }
+        });
+        // const item = {
+        //     icmt: data.result,
+        //     iuser: parseInt(dataElem.dataset.iuser),
+        //     ctnt: gameCmtFrmElem.ctnt.value,
+        // }
+        let insGameCmtAjax = (val) => {
+            let param = {
+                'gameNm' : selectedGameNm,
+                'iuser' : dataElem.dataset.iuser,
+                'ctnt' : val
+            };
+            console.log(param);
+            fetch('/game', {
+                'method' : 'POST',
+                'headers' : { 'Content-Type': 'application/json' },
+                'body' : JSON.stringify(param),
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    const tableElem = document.querySelector('table');
+                    if(tableElem){
+                        tableElem.remove();
+                    }
+                    gameCmtListElem.innerText = '';
+                    gameCmtListElem.ctnt.value = null;
+                    getCmtList();
+
+                }).catch(e => {
+                console.log(e);
+            })
+        }
+    }
+
+    let gameCmtListElem = document.querySelector(".gameCmtList");
 
     const getCmtList = () => {
         fetch(`/game`)
@@ -542,13 +595,15 @@ let pfData = {
             }).then(data => {
             console.log(data);
             setCmtList(data);
+        }).catch(e=> {
+            console.log(e);
         });
     }
 
     const setCmtList = (list) => {
 
         if(list.length === 0) {
-            gameCmtListElem.innerText = '댓글이 없습니다.';
+            gameCmtListElem.innerText = '유저 평가가 없습니다.';
             return;
         }
 
@@ -609,7 +664,7 @@ let pfData = {
                             removeCancelBtn();
                         })
                         .catch(data => {
-                            alert("댓글 작성에 실패했습니다.");
+                            alert("평가 작성에 실패했습니다.");
                             console.log(data);
                         })
                 });
@@ -644,7 +699,7 @@ let pfData = {
             delBtn.value = '삭제';
             delBtn.classList.add('boardBtn');
             delBtn.addEventListener('click', ()=> {
-                if(confirm("댓글을 삭제하시겠습니까?")) {
+                if(confirm("나의 평가를 삭제하시겠습니까?")) {
                     delCmt(item.icmt, tr);
                     // location.href='/board/detail?iboard='+iboard;
                 }
@@ -660,7 +715,7 @@ let pfData = {
 
 
     const delCmt = (icmt, tr) => {
-        fetch(`/board/cmt/${icmt}`,
+        fetch(`/game`,
             {'method': 'delete',
                 'headers': { 'Content-Type': 'application/json' }
             }).then(res => res.json())
@@ -681,14 +736,4 @@ let pfData = {
     }
 
 
-    let delBtnElem = document.querySelector("#delBtn");
-
-    if(delBtnElem) {
-        delBtnElem.addEventListener('click', () => {
-
-            if(confirm("삭제하시겠습니까?")) {
-                location.href=`/board/del/?iboard=${iboard}`;
-            }
-        });
-    }
 }
