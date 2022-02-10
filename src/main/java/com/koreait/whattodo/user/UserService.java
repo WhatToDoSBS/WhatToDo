@@ -1,6 +1,5 @@
 package com.koreait.whattodo.user;
 
-import com.koreait.whattodo.UserUtils;
 import com.koreait.whattodo.enums.user.LoginEnum;
 import com.koreait.whattodo.model.user.UserDto;
 import com.koreait.whattodo.model.user.UserEntity;
@@ -22,7 +21,7 @@ public class UserService {
 
 
     public static class Config{
-        public static final int AUTO_LOGIN_KEY_EXPIRY_DATE = 7;
+        public static final int AUTO_LOGIN_KEY_EXPIRY_DATE = 7; // 자동로그인 사용가능 기간
     }
 
     private static class Regex { // 정규식
@@ -48,7 +47,7 @@ public class UserService {
     }
 
     public int idChk(String uid) { // 아이디 중복검사
-        if (uid.length() < 4) { // 글자수 4자리 이상이여야 함
+        if (!checkUid(uid)) { // id 정규식검사
             return 2;
         }
         UserDto dto = new UserDto();
@@ -57,36 +56,34 @@ public class UserService {
         return result == null ? 1 : 0; // 계정이 없을시 사용가능
     }
 
-    public UserVo login(UserEntity entity) { // 로그인 로직
+    public UserVo login(UserDto dto) { // 로그인 로직
         UserVo vo = new UserVo();
 
-        if (!UserService.checkUid(entity.getUid())) { // 정규식 검사
-            vo.setLoginResult(LoginEnum.UID_REGEX_ERR);
-            return vo; // 정규식 id 오류
-        } else if (!UserService.checkUpw(entity.getUpw())) {
-            vo.setLoginResult(LoginEnum.UPW_REGEX_ERR);
-            return vo; // 정규식 pw 오류
+        if (!UserService.checkUid(dto.getUid())) { // 정규식 검사
+            vo.setLoginResult(LoginEnum.UID_REGEX_ERR); // 정규식 id 오류
+            return vo;
+        } else if (!UserService.checkUpw(dto.getUpw())) {
+            vo.setLoginResult(LoginEnum.UPW_REGEX_ERR); // 정규식 pw 오류
+            return vo;
         }
 
         try {
-            if (mapper.selUser(entity) == null) {
-                vo.setLoginResult(LoginEnum.UID_ERR);
-                return vo; // 계정없음(아이디 오류)
+            if (mapper.selUser(dto) == null) {
+                vo.setLoginResult(LoginEnum.UID_ERR); // 계정없음(아이디 오류)
+                return vo;
             }
-            vo = mapper.selUser(entity);
+            vo = mapper.selUser(dto);
+            if (!BCrypt.checkpw(dto.getUpw(), vo.getUpw())) {
+                vo.setLoginResult(LoginEnum.UPW_ERR); // 비번 오류
+                return vo;
+            }
+            vo.setLoginResult(LoginEnum.SUCCESS); // 성공
+            return vo;
         } catch (Exception e) {
             e.printStackTrace();
-            vo.setLoginResult(LoginEnum.FAILURE);
-            return vo; // 알 수 없는 에러
+            vo.setLoginResult(LoginEnum.FAILURE); // 알 수 없는 에러
+            return vo;
         }
-
-
-        if (BCrypt.checkpw(entity.getUpw(), vo.getUpw())) {
-            vo.setLoginResult(LoginEnum.SUCCESS);
-            return vo; // 성공
-        }
-        vo.setLoginResult(LoginEnum.UPW_ERR);
-        return vo; // 비번 오류
     }
 
 
@@ -99,11 +96,26 @@ public class UserService {
                 Math.random()); // String.format(uid+upw+생성날짜+0~9랜덤숫자1개)
 
         key = BCrypt.hashpw(key, BCrypt.gensalt()); // 암호화로 키생성
-        mapper.insAutoLoginKey(key, vo.getUid(), Config.AUTO_LOGIN_KEY_EXPIRY_DATE); //
-        vo.setAutoLoginKey(key);
+        mapper.insAutoLoginKey(key, vo.getUid(), Config.AUTO_LOGIN_KEY_EXPIRY_DATE); // db에 cookie 저장시킴
+        vo.setAutoLoginKey(key); // vo(반환)값에 쿠키안에 넣어둘 값을 추가함
     }
 
-    public void delAutoLoginKey(String cookie) {
-        mapper.delAutoLoginKey(cookie);
+    public UserVo login(String loginKey) { // Ch2.자동로그인 쿠키값으로 로그인
+        UserVo dbuser = mapper.selUserWithAutoLogin(loginKey); // 쿠키로 받은 value값으로 db와 동일한지 비교해서 성공하면 유저정보를 가져옴
+        if (dbuser != null) {
+            dbuser.setLoginResult(LoginEnum.SUCCESS);
+            return dbuser;
+        }
+        dbuser = new UserVo();
+        dbuser.setLoginResult(LoginEnum.COOKIE_ERR); // 실패하면 vo(반환)값을 새로 객체화해서 실패 메세지만 반환함
+        return dbuser;
+    }
+
+    public void updAutoLoginKey(String loginKey) { // Ch3.자동로그인 쿠키 만료기한 갱신
+        mapper.updLoginKeyRenewal(loginKey, Config.AUTO_LOGIN_KEY_EXPIRY_DATE); // 쿠키안의 value 값으로 만료기간을 현재기준 일주일로 갱신시킴
+    }
+
+    public void delAutoLoginKey(String loginKey) { // Ch4.자동로그인 쿠키 만료
+        mapper.delAutoLoginKey(loginKey); // value 값으로 만료기한을 현재시간으로 갱신시키고 만료여부를 true 로 바꿈
     }
 }

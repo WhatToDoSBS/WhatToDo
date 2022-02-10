@@ -47,37 +47,36 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginPost(UserEntity entity, RedirectAttributes reAttr, HttpServletResponse response, UserDto dto) {
+    public String loginPost(UserVo vo, RedirectAttributes reAttr, HttpServletResponse response, UserDto dto) {
         UserEntity loginUser = userUtils.getLoginUser();
         // 로그인한 유저의 경우 로그인창으로 접근 막음
         if (loginUser != null) {
             return "redirect:/board/main";
         }
 
-        UserVo result = service.login(entity); // 로그인 결과
-        if (result.getLoginResult().equals(LoginEnum.UID_REGEX_ERR) || result.getLoginResult().equals(LoginEnum.UPW_REGEX_ERR)) { // 정규식 오류
+        vo = service.login(dto); // 로그인 결과
+        if (vo.getLoginResult().equals(LoginEnum.UID_REGEX_ERR) || vo.getLoginResult().equals(LoginEnum.UPW_REGEX_ERR)) { // 정규식 오류
             reAttr.addFlashAttribute("nmsg", "");
             reAttr.addFlashAttribute("keymsg", "");
             reAttr.addFlashAttribute("rmsg", "아이디와 비밀번호를 바르게 작성해주세요.");
             return "redirect:/user/login";
-        } else if (result.getLoginResult().equals(LoginEnum.UID_ERR) || result.getLoginResult().equals(LoginEnum.UPW_ERR)) { // 아이디, 비번 오류
+        } else if (vo.getLoginResult().equals(LoginEnum.UID_ERR) || vo.getLoginResult().equals(LoginEnum.UPW_ERR)) { // 아이디, 비번 오류
             reAttr.addFlashAttribute("nmsg", "");
             reAttr.addFlashAttribute("keymsg", "아이디 또는 비밀번호가 일치하지 않습니다. <br>다시 시도해 주세요.");
             reAttr.addFlashAttribute("rmsg", "");
             return "redirect:/user/login";
-        } else if (result.getLoginResult() == LoginEnum.SUCCESS) { // 성공
-            userUtils.setLoginUser(result);
-            if (dto.isAutoLogin()) {
-                service.insAutoLoginKey(result);
-                Cookie cookie = new Cookie("loginKey", result.getAutoLoginKey());
-                cookie.setMaxAge(60*60*24*UserService.Config.AUTO_LOGIN_KEY_EXPIRY_DATE);
-                cookie.setPath("/");
-                response.addCookie(cookie);
+        } else if (vo.getLoginResult() == LoginEnum.SUCCESS) { // 성공
+            userUtils.setLoginUser(vo); // 세션에 로그인정보 담음
+            if (dto.isAutoLogin()) { // 자동로그인 여부를 확인
+                service.insAutoLoginKey(vo); // 쿠키로 보낼 키 생성해서 db에 넣어둠
+                Cookie cookie = new Cookie("loginKey", vo.getAutoLoginKey()); // cookie 만듬
+                cookie.setMaxAge(60*60*24*UserService.Config.AUTO_LOGIN_KEY_EXPIRY_DATE); // cookie 사용기간 (60*60*24) = (하루 * 7) = 일주일
+                cookie.setPath("/"); // 모든 경로에서 cookie 접근 가능
+                response.addCookie(cookie); // cookie 보내줌
                 return "redirect:/board/main";
             }
             return "redirect:/board/main";
         }
-
         reAttr.addFlashAttribute("nmsg", "알 수 없는 이유로 로그인에 실패하였습니다.");
         reAttr.addFlashAttribute("keymsg", "");
         reAttr.addFlashAttribute("rmsg", "");
@@ -86,21 +85,22 @@ public class UserController {
 
     @GetMapping("/logout")
     public String logout(HttpSession hs, HttpServletRequest request, HttpServletResponse response) {
-        Cookie cookies [] = request.getCookies();
-        if (cookies != null) {
-            for (Cookie c : cookies) {
-                String name = c.getName();
-                String value = c.getValue();
-                if (name.equals("loginKey")) {
-                    service.delAutoLoginKey(value);
+        if (userUtils.getLoginUser() != null) {
+            Cookie loginCookie = null;
+            for (Cookie cookie : request.getCookies()) {
+                if (cookie.getName().equals("loginKey")) { // 브라우저가 가진 쿠키중 "loginKey"라는 쿠키가 있을경우 잡아냄
+                    loginCookie = cookie;
+                    break;
                 }
             }
-            for (int i = 0; i < cookies.length; i++) {
-                cookies[i].setMaxAge(0);
-                response.addCookie(cookies[i]);
+            if (loginCookie != null) { // 해당 쿠키의 내용이 있을경우
+                service.delAutoLoginKey(loginCookie.getValue()); // db의 쿠키정보를 만료일을 현재시간으로 만들고 만료상태를 true로 update함
+                loginCookie.setMaxAge(0); // 브라우저에게 줄 쿠키의 사용기한을 0으로 넣음
+                loginCookie.setValue(null); //쿠키의 내용을 비워줌
+                response.addCookie(loginCookie); // 해당 쿠키를 브라우저의 메모리에 보내줘서 기존 쿠키를 만료시킴
             }
         }
-        hs.invalidate();
+        hs.invalidate(); // login 정보가 담긴 session 비워줌
         return "redirect:/user/login";
     }
 
