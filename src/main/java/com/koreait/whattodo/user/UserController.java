@@ -129,6 +129,4 @@ public class UserController {
         model.addAttribute("msg", "알 수 없는 오류로 회원가입에 실패하였습니다.");
         return "redirect:/user/join";
     }
-
-
 }
