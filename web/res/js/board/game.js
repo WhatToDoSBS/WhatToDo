@@ -46,6 +46,8 @@
     ppBtns.forEach(function (item) {
         item.addEventListener('click', function (e) {
             e.preventDefault();
+            kdClickedRmv();
+            pfClickedRmv();
             if (e.target.classList.contains("clicked")) {
                 ppClickedRmv();
             } else {
@@ -57,6 +59,8 @@
     kdBtns.forEach(function (item) {
         item.addEventListener('click', function (e) {
             e.preventDefault();
+            ppClickedRmv();
+            pfClickedRmv();
             if (e.target.classList.contains("clicked")) {
                 kdClickedRmv();
             } else {
@@ -68,6 +72,8 @@
     pfBtns.forEach(function (item) {
         item.addEventListener('click', function (e) {
             e.preventDefault();
+            ppClickedRmv();
+            kdClickedRmv();
             if (e.target.classList.contains("clicked")) {
                 pfClickedRmv();
             } else {
@@ -99,18 +105,25 @@
     kdBtn = document.querySelector('#kdRanBtn');
     pfBtn = document.querySelector('#pfRanBtn');
 
-    ppBtn.addEventListener("click", function () {
+    ppBtn.addEventListener("click", function async () {
+
         if (ppBtns[0].classList.contains("clicked")) {
-            mecaData.getMrTopRandomGame();
-            makeGameCmt();
+            mecaData.getMrTopRandomGame()
+                    getCmtList();
         } else if (ppBtns[1].classList.contains("clicked")) {
-            mecaData.getMrGreatRandomGame();
-            makeGameCmt();
+            mecaData.getMrGreatRandomGame()
+                getCmtList();
         } else if (ppBtns[2].classList.contains("clicked")) {
-            mecaData.getMrGoodRandomGame();
-            makeGameCmt();
-        } else mecaData.getMrAllRandomGame();
-        makeGameCmt();
+                mecaData.getMrGoodRandomGame()
+                getCmtList();
+        } else {
+            mecaData.getMrAllRandomGame()
+                .then(function() {
+                getCmtList();
+            }).catch(function(e) {
+                console.log(e);
+            });
+        }
 
         modalWindow.style.display = 'flex';
         modalXBtn.addEventListener('click', () => {
@@ -121,29 +134,30 @@
                 modalWindow.style.display = "none"
             }
         })
-    })
+    });
 
     kdBtn.addEventListener("click", function () {
         if(kdBtns[0].classList.contains("clicked")) {
+            getCmtList();
             genreData.getRpgRandomGame();
-            makeGameCmt();
         } else if (kdBtns[1].classList.contains("clicked")) {
+            getCmtList();
             genreData.getFpsRandomGame();
-            makeGameCmt();
         } else if (kdBtns[2].classList.contains("clicked")) {
+            getCmtList();
             genreData.getSportsRandomGame();
-            makeGameCmt();
         } else if (kdBtns[3].classList.contains("clicked")) {
+            getCmtList();
             genreData.getActionRandomGame();
-            makeGameCmt();
         } else if (kdBtns[4].classList.contains("clicked")) {
+            getCmtList();
             genreData.getStrRandomGame();
-            makeGameCmt();
         } else if (kdBtns[5].classList.contains("clicked")) {
+            getCmtList();
             genreData.getOthersRandomGame();
-            makeGameCmt();
-        } else pfData.getAllPfRandomGame();
-        makeGameCmt();
+        } else getCmtList();
+        pfData.getAllPfRandomGame();
+
 
         modalWindow.style.display = 'flex';
         modalXBtn.addEventListener('click', () => {
@@ -158,16 +172,17 @@
 
     pfBtn.addEventListener("click", function () {
         if(pfBtns[0].classList.contains("clicked")) {
+            getCmtList();
             pfData.getMobileRandomGame();
-            makeGameCmt();
         } else if(pfBtns[1].classList.contains("clicked")) {
+            getCmtList();
             pfData.getPcRandomGame();
-            makeGameCmt();
         } else if(pfBtns[2].classList.contains("clicked")) {
+            getCmtList();
             pfData.getStRandomGame();
-            makeGameCmt();
-        } else pfData.getAllPfRandomGame();
-        makeGameCmt();
+        } else getCmtList();
+        pfData.getAllPfRandomGame();
+
 
         modalWindow.style.display = 'flex';
         modalXBtn.addEventListener('click', () => {
@@ -199,10 +214,11 @@
         let randomNum = Math.floor(Math.random()*2)
         console.log(randomNum)
         if(randomNum === 1) {
+            getCmtList();
             mecaData.getMrAllRandomGame();
-            makeGameCmt();
-        } else pfData.getAllPfRandomGame();
-        makeGameCmt();
+        } else getCmtList();
+        pfData.getAllPfRandomGame();
+
 
         modalWindow.style.display = 'flex';
         modalXBtn.addEventListener('click', () => {
@@ -221,27 +237,32 @@ let selectedGameNm;
 let mecaData = {
     //메카순위 1~50
     getMrAllRandomGame : function () {
-        fetch("/board/mecarankingjson"
-).
-    then((res) => {
-        return res.json();
-    }).then((data) => {
-        let mrdata = [];
-        for (let i = 0; i < 50; i++) {
-            mrdata.push(data[i])
-        }
-        let mrRN = Math.floor(Math.random() * 50)
-        // console.log(mrRN);
-        console.log(JSON.stringify(mrdata[mrRN].gameNm));
-        // let rGame = JSON.stringify(mrdata[mrRN])
-        //     console.log(rGame);
-        selectedGameNm = JSON.stringify(mrdata[mrRN].gameNm).replace("\"", "").replace("\"", "")
-        document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${mrdata[mrRN].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
-        document.querySelector(".selected-img").innerHTML = `<img src=${mrdata[mrRN].imgsrc}>`
-    }).catch((err) => {
-        console.log(err);
-    });
-},
+        return new Promise(function(resolve, reject) {
+            fetch("/board/mecarankingjson").
+            then((res) => {
+                return res.json();
+            }).then((data) => {
+                let mrdata = [];
+                for (let i = 0; i < 50; i++) {
+                    mrdata.push(data[i])
+                }
+                let mrRN = Math.floor(Math.random() * 50)
+                // console.log(mrRN);
+                console.log(JSON.stringify(mrdata[mrRN].gameNm));
+                // let rGame = JSON.stringify(mrdata[mrRN])
+                //     console.log(rGame);
+                selectedGameNm = JSON.stringify(mrdata[mrRN].gameNm).replace("\"", "").replace("\"", "")
+                document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${mrdata[mrRN].selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
+                document.querySelector(".selected-img").innerHTML = `<img src=${mrdata[mrRN].imgsrc}>`
+
+                resolve();
+
+            }).catch((err) => {
+                console.log(err);
+                reject();
+            });
+        });
+    },
 
     //메카 1~10위
     getMrTopRandomGame : function() {
@@ -552,7 +573,6 @@ let pfData = {
     let dataElem = document.querySelector("#data");
     let gameCmtFrmElem = document.querySelector("#gameCmtFrm");
 
-    function makeGameCmt() {
         if(gameCmtFrmElem) {
             gameCmtFrmElem.addEventListener("submit", (e) => {
                 e.preventDefault();
@@ -597,6 +617,7 @@ let pfData = {
                         }
                         gameCmtListElem.innerText = '';
                         gameCmtListElem.ctnt = null;
+                        gameCmtFrmElem.ctnt.value = null;
                         getCmtList();
 
                     }).catch(e => {
@@ -605,6 +626,9 @@ let pfData = {
             }
         }
         const getCmtList = () => {
+            if(document.querySelector("table")) {
+                document.querySelector("table").remove();
+            }
             let gameNm = selectedGameNm;
             fetch(`/game/${gameNm}`)
                 .then(res => {
@@ -678,10 +702,11 @@ let pfData = {
                                 console.log(data);
                                 tdCell.innerText = modInput.value;
                                 item.ctnt = modInput.value;
+                                gameCmtFrmElem.ctnt.value = null;
                                 removeCancelBtn();
                             })
                             .catch(data => {
-                                alert("평가 작성에 실패했습니다.");
+                                alert("평가 수정에 실패했습니다.");
                                 console.log(data);
                             })
                     });
@@ -727,12 +752,11 @@ let pfData = {
             }
             table.appendChild(tr);
         }
-        getCmtList();
 
 
 
         const delCmt = (icmt, tr) => {
-            fetch(`/game`,
+            fetch(`/game/${icmt}`,
                 {'method': 'delete',
                     'headers': { 'Content-Type': 'application/json' }
                 }).then(res => res.json())
@@ -740,6 +764,7 @@ let pfData = {
                     console.log(data.result);
                     const tableElem = document.querySelector('table');
                     tableElem.remove();
+                    gameCmtFrmElem.ctnt.value = null;
                     getCmtList();
                 }).catch(e=> {
                 console.log(e)
@@ -751,7 +776,6 @@ let pfData = {
             const trArr = cmtListElem.querySelectorAll('table tr');
             return trArr.length;
         }
-    }
 
 
 

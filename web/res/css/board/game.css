@@ -97,7 +97,7 @@
 
 #ppRanBtn {
     /* change bg color to get different hues    */
-    background-color: #03c75a;
+    background-color: dodgerblue;
     color: white;
     padding: 1em 2em;
     border: none;
@@ -117,7 +117,7 @@
 }
 #kdRanBtn {
     /* change bg color to get different hues    */
-    background-color: #03c75a;
+    background-color: lightpink;
     color: white;
     padding: 1em 2em;
     border: none;
@@ -137,7 +137,7 @@
 }
 #pfRanBtn {
     /* change bg color to get different hues    */
-    background-color: #03c75a;
+    background-color: lightgreen;
     color: white;
     padding: 1em 2em;
     border: none;

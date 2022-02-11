@@ -30,7 +30,7 @@ public class GameCmtController {
         return service.selGameCmtList(gameNm);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{icmt}")
     public Map<String, Integer> delGameCmt(@PathVariable int icmt) {
         Map<String, Integer> result = new HashMap<>();
         result.put("result", service.delGameCmt(icmt));
