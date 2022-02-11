@@ -16,12 +16,12 @@
                 <div class="swiper-wrapper">
                     <!-- Slides -->
                     <div class="swiper-slide">
-                        <span>뭐하Gee의 WEBTOON Pick</span>
                         <span>${randomWebtoon.nm}</span>
-                        <div><img src="${randomWebtoon.img}" alt=""></div>
+                        <div><a href="${randomWebtoon.link}"><img src="${randomWebtoon.img}" alt=""></a></div>
                     </div>
                     <div class="swiper-slide">
-                        <span>뭐하Gee의 GAME Pick</span>
+                        <span>${randomGame.gameNm}</span>
+                        <div><img src="${randomGame.imgsrc}" alt=""></div>
                     </div>
                     <div class="swiper-slide">
                         <span>뭐하Gee의 Pick</span>
@@ -45,16 +45,16 @@
                     <label class="btn btn-light shadow-none" for="btnradio1"><a href="/board/list">자유게시판</a></label>
 
                     <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-                    <label class="btn btn-light shadow-none" for="btnradio2">ALL RANK</label>
+                    <label class="btn btn-light shadow-none" for="btnradio2"><a href="">순위</a> </label>
 
                     <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-                    <label class="btn btn-light shadow-none" for="btnradio3">RANDOM</label>
+                    <label class="btn btn-light shadow-none" for="btnradio3"><a href="">RANDOM</a></label>
 
                     <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
-                    <label class="btn btn-light shadow-none" for="btnradio4"><a href="/board/webtoon">WEBTOON</a></label>
+                    <label class="btn btn-light shadow-none" for="btnradio4"><a href="/board/webtoon">웹툰</a></label>
 
                     <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off">
-                    <label class="btn btn-light shadow-none" for="btnradio5"><a href="/board/game">GAME</a></label>
+                    <label class="btn btn-light shadow-none" for="btnradio5"><a href="/board/game">게임</a></label>
                 </div>
             </div>
 
