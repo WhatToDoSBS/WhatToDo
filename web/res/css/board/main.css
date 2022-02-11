@@ -2,6 +2,7 @@
     justify-content: normal;
     padding: 0;
     margin: 0;
+    min-height: 1200px;
 }
 
 .main_box {
@@ -52,14 +53,16 @@
 }
 
 .page_info {
-    display: flex;
-    text-align: left;
-    justify-content: space-evenly;
     margin: 50px 0;
 }
 
 .page_info .info_section {
-    width: 200px;
+    width: 600px;
+}
+
+.page_info .member_list {
+    display: flex;
+    justify-content: center;
 }
 
 .page_info .member_list ul {
@@ -67,12 +70,19 @@
 }
 .page_info .member_list li {
     margin: 10px 0;
+    margin-right: 10px;
     color: black;
+    float: left;
+}
+
+.page_info .member_list li img {
+    width: 150px;
+    height: 100px;
 }
 
 .member_section {
     display: inline-block;
-    text-align: left;
+    text-align: center;
     height: 30vh;
 }
 .tech_section {
