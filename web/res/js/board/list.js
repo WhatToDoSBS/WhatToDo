@@ -48,14 +48,14 @@ let makeIdx = () => {
         `
 // }
     for(let i=1; i<=pageCount; i++) {
-            pageIdxElem.innerHTML +=
-                `
+        pageIdxElem.innerHTML +=
+            `
         <li class="pageNum page-item" data-idx="${i}"><a class="page-link">${i}</a></li>
         `
     }
     // if (pageCount > pagingCount) {
-        pageIdxElem.innerHTML +=
-            `
+    pageIdxElem.innerHTML +=
+        `
         <li class="pageNum page-item" data-idx="${pageCount}"><a class="page-preNext"> > </a></li>
         `
 // }
@@ -109,55 +109,55 @@ dataPerPageElem.addEventListener('change', ()=> {
         pageCount = pageCount - 1;
     }
     // if (pageCount > pagingCount) {
-        pageIdxElem.innerHTML +=
-            `
+    pageIdxElem.innerHTML +=
+        `
         <li class="pageNum page-item" data-idx="${firstPageNum}"><a class="page-preNext"> < </a></li>
         `
 // }
-        for(let i=1; i<=pageCount; i++) {
-            pageIdxElem.innerHTML +=
-                `
-        <li class="pageNum page-item" data-idx="${i}"><a class="page-link">${i}</a></li>
-        `
-        }
-    // if (pageCount > pagingCount) {
+    for(let i=1; i<=pageCount; i++) {
         pageIdxElem.innerHTML +=
             `
+        <li class="pageNum page-item" data-idx="${i}"><a class="page-link">${i}</a></li>
+        `
+    }
+    // if (pageCount > pagingCount) {
+    pageIdxElem.innerHTML +=
+        `
         <li class="pageNum page-item" data-idx="${pageCount}"><a class="page-preNext"> > </a></li>
         `
 // }
-        let pageNumElem = document.querySelectorAll('.pageNum');
-        totalDataArr.forEach(function(element) {
-            element.style.display='none'});
-        totalDataArr[0].style.display='';
-        let selData = totalDataArr.slice(((firstPageNum-1) * pageSelectVal()) + 1, firstPageNum * pageSelectVal() + 1)
-        selData.forEach(function (element) {
-            element.style.display=''});
+    let pageNumElem = document.querySelectorAll('.pageNum');
+    totalDataArr.forEach(function(element) {
+        element.style.display='none'});
+    totalDataArr[0].style.display='';
+    let selData = totalDataArr.slice(((firstPageNum-1) * pageSelectVal()) + 1, firstPageNum * pageSelectVal() + 1)
+    selData.forEach(function (element) {
+        element.style.display=''});
 
-        let pageNumVal = (item) => {
-            item.addEventListener('click', ()=> {
-                let pageIdxElem = document.querySelectorAll("a.page-link");
-                pageIdxElem.forEach(function (item) {
-                    item.classList.remove("selected")
+    let pageNumVal = (item) => {
+        item.addEventListener('click', ()=> {
+            let pageIdxElem = document.querySelectorAll("a.page-link");
+            pageIdxElem.forEach(function (item) {
+                item.classList.remove("selected")
+            });
+            // item.querySelector("a").classList.add("selected");
+            totalDataArr.forEach(function(element) {
+                element.style.display='none'});
+            let val = Number(item.dataset.idx);
+            console.log(val);
+            let currentPageNum = val;
+            pageIdxElem[val-1].classList.add("selected");
+            let currentPageData = totalDataArr.slice(((currentPageNum - 1) * pageSelectVal()) + 1, currentPageNum * pageSelectVal() + 1);
+            let showCurrentPage = () => {
+                totalDataArr[0].style.display = '';
+                currentPageData.forEach(function (element) {
+                    element.style.display = ''
                 });
-                // item.querySelector("a").classList.add("selected");
-                totalDataArr.forEach(function(element) {
-                    element.style.display='none'});
-                let val = Number(item.dataset.idx);
-                console.log(val);
-                let currentPageNum = val;
-                pageIdxElem[val-1].classList.add("selected");
-                let currentPageData = totalDataArr.slice(((currentPageNum - 1) * pageSelectVal()) + 1, currentPageNum * pageSelectVal() + 1);
-                let showCurrentPage = () => {
-                    totalDataArr[0].style.display = '';
-                    currentPageData.forEach(function (element) {
-                        element.style.display = ''
-                    });
-                }
-                showCurrentPage();
-            })
-        }
-        pageNumElem.forEach(pageNumVal);
+            }
+            showCurrentPage();
+        })
+    }
+    pageNumElem.forEach(pageNumVal);
 
 })
 
@@ -199,8 +199,8 @@ searchBtn.addEventListener("click", ()=> {
         pageCount = pageCount - 1;
     }
     // if (pageCount > pagingCount) {
-        pageIdxElem.innerHTML +=
-            `
+    pageIdxElem.innerHTML +=
+        `
         <li class="pageNum page-item" data-idx="${firstPageNum}"><a class="page-preNext"> < </a></li>
         `
 // }
@@ -211,8 +211,8 @@ searchBtn.addEventListener("click", ()=> {
         `
     }
     // if (pageCount > pagingCount) {
-        pageIdxElem.innerHTML +=
-            `
+    pageIdxElem.innerHTML +=
+        `
         <li class="pageNum page-item" data-idx="${pageCount}"><a class="page-preNext"> > </a></li>
         `
 // }

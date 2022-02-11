@@ -42,7 +42,7 @@ div.container {align-items: center;}
 
 div.footer { position: absolute; bottom: 0}
 
-.selected { background-color: #D3D3D3}
+li .selected { background-color: #D3D3D3}
 
 .page-preNext { position: relative;
     display: block;
