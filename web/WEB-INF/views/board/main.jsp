@@ -17,7 +17,7 @@
                     <!-- Slides -->
                     <div class="swiper-slide">
                         <span>${randomWebtoon.nm}</span>
-                        <div><img src="${randomWebtoon.img}" alt=""></div>
+                        <div><a href="${randomWebtoon.link}"><img src="${randomWebtoon.img}" alt=""></a></div>
                     </div>
                     <div class="swiper-slide">
                         <span>${randomGame.gameNm}</span>

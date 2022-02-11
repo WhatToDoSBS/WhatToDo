@@ -11,11 +11,13 @@
         <tr>
             <th>제목</th>
             <th>나의 평가</th>
+            <th>작성 일시</th>
         </tr>
         <c:forEach var="item" items="${webtoonReviewMy}">
             <tr>
                 <td>${item.nm}</td>
                 <td>${item.ctnt}</td>
+                <td>${item.rdt}</td>
             </tr>
         </c:forEach>
     </table>
