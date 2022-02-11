@@ -21,7 +21,7 @@
                     </div>
                     <div class="swiper-slide">
                         <span>${randomGame.gameNm}</span>
-                        <div><img src="${randomGame.imgsrc}" alt=""></div>
+                        <div><a href="${randomGame.selLink}"><img src="${randomGame.imgsrc}" alt=""></a></div>
                     </div>
                     <div class="swiper-slide">
                         <span>뭐하Gee의 Pick</span>
