@@ -3,10 +3,11 @@ const swiper = new Swiper('.swiper', {
     direction: 'horizontal',
     loop: true, // 슬라이드 반복 여부
     loopAdditionalSlides : 1, // 슬라이드 반복 시 마지막 슬라이드에서 다음 슬라이드가 보여지지 않는 현상
-    autoplay : {  // 자동 슬라이드 설정 , 비 활성화 시 false
-        delay : 3000,   // 시간 설정
-        disableOnInteraction : false,  // false로 설정하면 스와이프 후 자동 재생이 비활성화 되지 않음
-    },
+    autoplay : false,
+    //     {  // 자동 슬라이드 설정 , 비 활성화 시 false
+    //     delay : 3000,   // 시간 설정
+    //     disableOnInteraction : false,  // false로 설정하면 스와이프 후 자동 재생이 비활성화 되지 않음
+    // }
 
     // fade 효과일 때 슬라이드 이미지가 쌓이는 느낌
     // 그림자 이미지가 점점 진하게 드리움 위 현상을 막기 위해 옵션 추가

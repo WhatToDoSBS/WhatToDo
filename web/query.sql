@@ -1,7 +1,7 @@
 CREATE TABLE freeboard
 (
     iboard    INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    icategory INT UNSIGNED NOT NULL,
+    icategory INT UNSIGNED,
     title     VARCHAR(100) NOT NULL,
     ctnt      TEXT         NOT NULL,
     iuser     INT UNSIGNED NOT NULL,

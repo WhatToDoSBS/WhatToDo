@@ -9,7 +9,7 @@
     <select id="selReviewWebtoon" resultType="ReviewEntity">
         SELECT DISTINCT A.*
         FROM review_webtoon A
-                 LEFT JOIN t_user B
+                 LEFT JOIN whattodo_user B
                            ON A.iuser = B.iuser
         LEFT JOIN webtoon C ON A.nm = C.nm
         WHERE A.nm = #{nm}

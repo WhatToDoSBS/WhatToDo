@@ -10,8 +10,8 @@ public class Utils {
 
     // 네이버 웹툰 삭제 후 데이터베이스 삽입입(월~)
     public static void insertWebtoon(WebtoonService service) {
-        service.delWebtoon();
         service.delRecommandWebtoon();
+        service.delWebtoon();
         service.delGenreWebtoon();
         service.insertWebtoon(Const.NAVER_WEBTOON_1);
         service.insertWebtoon(Const.NAVER_WEBTOON_2);

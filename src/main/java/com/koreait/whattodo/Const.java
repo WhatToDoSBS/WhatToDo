@@ -36,4 +36,7 @@ public class Const {
 
     // 기본 주소
     public static final String NAVER_WEBTOON_MAIN = "https://comic.naver.com/index";
+
+    // YOUTUBE
+    public static final String YOUTUBE_TAEJUN_KEY = "AIzaSyBZal1oi0pC032oLeM-AYoqfo2sojWbbmo";
 }

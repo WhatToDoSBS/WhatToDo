@@ -1,3 +1,13 @@
+table, th, tr, td {
+    padding: 0;
+    border: none;
+}
+
+td {
+    padding-right: 10px;
+    font-size: 13px;
+}
+
 .container_box {
     align-items: normal;
     flex-direction: row;
@@ -11,7 +21,6 @@
     justify-content: center;
     align-items: center;
     text-align: left;
-    background-color: black;
 }
 
 .info .info_profileCard div {
@@ -26,4 +35,10 @@
 
 .btn-link {
     text-align: center;
+}
+
+.card-title span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

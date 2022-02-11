@@ -11,4 +11,6 @@ public class ReviewEntity {
     private String nm;
     private int iuser;
     private String nickname;
+    private String rdt;
+    private String mdt;
 }
