@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!-- 현재 날짜 사용시 -->
 <%--bootstrap--%>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -7,6 +9,10 @@
         rel="stylesheet"
         href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
 />
+<jsp:useBean id="now" class="java.util.Date"/>
+<fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" var="today"/>
+
+<!-- Code -->
 <div class="main_box">
     <div class="left_section">
         <div class="recommend_section">
@@ -32,8 +38,8 @@
                 <div class="swiper-pagination" id="pagination"></div>
 
                 <!-- If we need navigation buttons -->
-<%--                <div class="swiper-button-prev"></div>--%>
-<%--                <div class="swiper-button-next"></div>--%>
+                <%--                <div class="swiper-button-prev"></div>--%>
+                <%--                <div class="swiper-button-next"></div>--%>
 
                 <!-- If we need scrollbar -->
                 <%--<div class="swiper-scrollbar"></div>--%>
@@ -57,70 +63,99 @@
                     <label class="btn btn-light shadow-none" for="btnradio5"><a href="/board/game">게임</a></label>
                 </div>
             </div>
-
-            <div class="page_info">
-                <div class="accordion" id="accordionExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" dat    a-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                김태준
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                주무기 : JAVA / JAVASCRIPT
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                Accordion Item #2
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                Accordion Item #3
-                            </button>
-                        </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                        <ul>
-                                <li>
-                                    <img src="/res/img/profile_taejun.jpg" alt="">
-                                    <div><span>김태준</span></div>
-                                </li>
-                            <a href="">
-
-                                <li>
-                                    <img src="/res/img/profile_taejun.jpg" alt="">
-                                    <div><span>손주영</span></div>
-                                </li>
-                            </a>
-                            <a href="">
-                                <li>
-                                    <img src="/res/img/profile_taejun.jpg" alt="">
-                                    <div><span>최성완</span></div>
-                                </li>
-                            </a>
-                        </ul>
-                    </div>
-                </div>
         </div>
     </div>
+    <div class="page_info">
+        <div class="member_section">
+            <h4><i class="fa-solid fa-users"></i>Member</h4>
+            <div class="flex-center">
+                <ul>
+                    <li>
+                        <img src="/res/img/profile_taejun.jpg" alt="">
+                        <div class="member_info">
+                            <span>김태준</span>
+                            <ul>
+                                <li>전체적인 구성/디자인(CSS) 담당</li>
+                                <li>RANDOM, 크롤링 Logic 구현</li>
+                                <li>Webtoon, Youtube, Main Part</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="/res/img/profile_taejun.jpg" alt="">
+                        <div class="member_info">
+                            <span>최성완</span>
+                            <ul>
+                                <li>한 일</li>
+                                <li>한 일</li>
+                                <li>한 일</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="/res/img/profile_taejun.jpg" alt="">
+                        <div class="member_info">
+                            <span>손주영</span>
+                            <ul>
+                                <li>한 일</li>
+                                <li>한 일</li>
+                                <li>한 일</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="rank_section">
+            <div class="game_rank">
+                <div class="rank_title">
+                    <div class="rank_title_left">
+                        <h4><i class="fa-solid fa-gamepad"></i>Hot Game</h4>
+                        <span><c:out value="${today}"/>기준</span>
+                    </div>
 
+                    <a href="/board/game"><span>보러가기</span></a>
+                </div>
+                <ul>
+                    <c:forEach var="item" items="${gameList}" begin="0" end="4">
+                        <li>
+                            <div>
+                                <a href="${item.selLink}"><img src="${item.imgsrc}" alt=""></a>
+                            </div>
+                            <div class="rank_info rank_info_game">
+                                <span>${item.rankNum}위</span>
+                                <span>${item.gameNm}</span>
+                                <span>${item.company}</span>
+                            </div>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
+            <div class="webtoon_rank">
+
+                <div class="rank_title">
+                    <div class="rank_title_left">
+                        <h4><i class="fa-solid fa-pager"></i></i>이 웹툰들 어때요?</h4>
+                    </div>
+
+                    <a href="/board/webtoon"><span>보러가기</span></a>
+                </div>
+                <ul>
+                    <c:forEach var="item" items="${webtoonListRandom}" begin="0" end="4">
+                        <li>
+                            <div>
+                                <a href="${item.link}"><img src="${item.img}" alt=""></a>
+                            </div>
+                            <div class="rank_info rank_info_webtoon">
+                                <span>${item.nm}</span>
+                                <span>${item.writer}</span>
+                            </div>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
+
+        </div>
     </div>
 </div>
 

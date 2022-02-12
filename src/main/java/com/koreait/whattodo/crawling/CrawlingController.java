@@ -61,8 +61,10 @@ public class CrawlingController {
         System.out.println("랜덤 [게임] 숫자 : " + randomGameNum);
         System.out.println("랜덤 [웹툰] 숫자 : " + randomWebtoon);
 
+        model.addAttribute("gameList", gameList);
         model.addAttribute("randomGame", gameList.get(randomGameNum));
         model.addAttribute("randomWebtoon", webtoonRecommandEntityList.get(randomWebtoon));
+        model.addAttribute("webtoonListRandom", webtoonService.listWebtoonRandom());
     }
 
     @GetMapping("/book")

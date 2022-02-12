@@ -8,6 +8,14 @@
     --menu-radius:10px;
 }
 
+/* -----폰트 ------*/
+@font-face {
+    font-family: 'MaplestoryOTFBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* -----색상------- */
 .gold { color: var(--gold); }
 .sliver { color: var(--sliver); }
@@ -86,8 +94,9 @@ img { border-radius: 10px; }
 }
 
 .header .main_title {
-    color: black; font-family: 'Black Han Sans', sans-serif; font-weight: normal;
-    font-size: 64px;
+    color: black;
+    font-family: 'MaplestoryOTFBold';
+    font-size: 40px;
 }
 
 #header-login {
