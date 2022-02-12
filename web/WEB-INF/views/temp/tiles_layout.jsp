@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Gothic+A1&family=Nanum+Gothic&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
@@ -33,7 +34,6 @@
     <script defer src="/res/js/<tiles:getAsString name='common'/>.js"></script>
     <script defer src="/res/js/<tiles:getAsString name='addr1'/>/index.js"></script>
     <script defer src="/res/js/<tiles:getAsString name='addr2'/>.js"></script>
-<%--    <script defer src="/res/js/<tiles:getAsString name='addr3'/>.js"></script>--%>
     <title><tiles:insertAttribute name="title" ignore="true" /></title>
 </head>
 <body>

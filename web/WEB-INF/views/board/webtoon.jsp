@@ -17,35 +17,25 @@
             <button>스포츠</button>
             <button>완결</button>
             <button id="randomSubmitBtn" class="fun-btn">RANDOM</button>
+            <button class="crawlingBtn">크롤링</button>
         </div>
         <div class="result_box">
         </div>
     </div>
     <div id="recommand_box">
-        <span>이런 웹툰 어때요?</span>
-            <button class="crawlingBtn">크롤링</button>
+        <span class="webtoon_recommand_title">이런 웹툰 어때요?</span>
 
         <ul class="recommend_section">
             <c:forEach var="item" items="${webtoonRecommandListRandom}">
-<%--                <div class="webtoonModalElement" data-nm="${item.nm}"--%>
-<%--                     data-weekend="${item.weekend}"--%>
-<%--                     data-iuser="${sessionScope.loginUser.iuser}"--%>
-<%--                data-writernm="${sessionScope.loginUser.nm}">--%>
-<%--                    <li>--%>
-<%--                        <img src="${item.img}" alt="">--%>
-<%--                        <span>${item.nm}</span>--%>
-<%--                        <span class="webtoonLink">작가 : ${item.writer}</span>--%>
-<%--                        <span class="webtoonLink"><a href="${item.link}">>> 보러가기 <<</a></span>--%>
-<%--                    </li>--%>
-<%--                </div>--%>
                 <div class="card webtoonModalElement" id="card" data-nm="${item.nm}"
                      data-weekend="${item.weekend}"
                      data-iuser="${sessionScope.loginUser.iuser}"
                      data-writernm="${sessionScope.loginUser.nm}">
                     <img src="${item.img}" class="card-img-top">
                     <div class="card-body" id="card-body">
-                        <span class="card-title" id="card-title">${item.nm}</span>
-                        <span class="card-text">${item.writer}</span>
+                        <span class="webtoonLink"><i class="fa-solid fa-heart-crack" id="fav_icon"></i></span>
+                        <span class="card-title card-nm" id="card-title">${item.nm}</span>
+                        <span class="card-text card-writer" id="card-writer">${item.writer}</span>
                         <span class="card-text webtoonLink"><a href="${item.link}">>> 보러가기 <<</a></span>
                     </div>
                 </div>
@@ -67,6 +57,7 @@
                     <div id="webtoon_databox">
                         <span class="font-14px">${item.nm}</span>
                     </div>
+                    <span class="webtoonLink"><i class="fa-solid fa-heart-crack"></i></span>
                     <span class="webtoonLink webtoonWriter">작가 : ${item.writer}</span>
                     <span class="webtoonLink"><a href="${item.link}">>> 보러가기 <<</a></span>
                     <span class="webtoonInfoHidden webtoonWeekend">${item.weekend}</span>
