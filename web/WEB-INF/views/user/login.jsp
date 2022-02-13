@@ -23,4 +23,14 @@
     <div><a>아이디</a> · <a>비밀번호찾기</a></div>
     <div><a href="/user/join">아직 계정이 없으신가요?</a></div>
 </div>
+    <div class="api_login">
+        <ul>
+            <img src="/res/img/kakao_login_medium_narrow.png" alt="" onclick="kakaoLogin();">
+            <li onclick="kakaoLogout();">
+                <a href="javascript:void(0)">
+                    <span>카카오 로그아웃</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </div>
