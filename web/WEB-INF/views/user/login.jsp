@@ -28,7 +28,7 @@
             <img src="/res/img/kakao_login_medium_narrow.png" alt="" onclick="kakaoLogin();">
             <li onclick="kakaoLogout();">
                 <a href="javascript:void(0)">
-                    <span>카카오 로그아웃</span>
+                    <span>카카오 연결끊기(로그아웃이었던 것)</span>
                 </a>
             </li>
         </ul>
