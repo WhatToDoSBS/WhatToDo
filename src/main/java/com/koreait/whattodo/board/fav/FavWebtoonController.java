@@ -10,9 +10,9 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/webtoon/fav")
-public class FavController {
+public class FavWebtoonController {
     @Autowired
-    private FavService service;
+    private FavWebtoonService service;
 
     @PostMapping
     public Map<String, Integer> insBoardFav(@RequestBody FavWebtoonEntity entity) {

@@ -33,7 +33,7 @@
                      data-writernm="${sessionScope.loginUser.nm}">
                     <img src="${item.img}" class="card-img-top">
                     <div class="card-body" id="card-body">
-                        <span class="webtoonLink"><i class="fa-solid fa-heart-crack" id="fav_icon"></i></span>
+                        <span class="webtoonLink"><i class="fa-solid fa-heart-crack fav_icon"></i></span>
                         <span class="card-title card-nm" id="card-title">${item.nm}</span>
                         <span class="card-text card-writer" id="card-writer">${item.writer}</span>
                         <span class="card-text webtoonLink"><a href="${item.link}">>> 보러가기 <<</a></span>

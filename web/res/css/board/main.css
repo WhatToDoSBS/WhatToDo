@@ -11,6 +11,10 @@
     font-style: normal;
 }
 
+i {
+    margin: 0 10px;
+}
+
 .container_box {
     justify-content: normal;
     padding: 0;
@@ -179,7 +183,8 @@
 }
 
 .member_section i {
-    margin: 0 10px;
+    vertical-align: middle;
+    color: blue;
 }
 
 .member_section ul {
@@ -217,6 +222,35 @@
     width: 200px;
     height: 250px;
     margin-bottom: 10px;
+}
+
+.youtube_section {
+    margin: 10px 0;
+}
+
+.youtube_section i {
+    color: red;
+}
+
+.youtube_section h4 {
+    display: inline;
+}
+
+.youtube_section_title {
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+#video_section {
+    border-top: 1px solid #ebeff8;
+    border-bottom: 1px solid #ebeff8;
+    display: inline-block;
+    background-color: #080808;
+    border-radius: 10px;
+}
+
+#video_section iframe {
+    margin: 30px;
 }
 
 /* slider */

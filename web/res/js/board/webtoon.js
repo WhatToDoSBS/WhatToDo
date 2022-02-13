@@ -142,11 +142,6 @@ let dataNm, dataWeekend, iuser, writerName;
 webtoonModalElem.forEach(function (item) {
     item.addEventListener('click', function (e) {
 
-        console.log(item.dataset.nm);
-        console.log(item.dataset.weekend);
-        console.log(item.dataset.iuser);
-        console.log(item.dataset.writernm);
-
         // 데이터 담기
         dataNm = item.dataset.nm;
         dataWeekend = item.dataset.weekend;
@@ -385,7 +380,12 @@ const delCmt = (rnum, tr) => {
 
 // ------------- 좋아요 ------------------ //
 
-let favIconElem = document.querySelector('#fav_icon');
+const favIcon = document.querySelectorAll('.fav_icon');
+favIcon.forEach(function (item) {
+    item.addEventListener('click', function (e) {
+        console.log(e.target);
+    })
+});
 
 const isFav = () => {
     const nm = dataNm;
@@ -417,13 +417,14 @@ const enableFav = () => {
     }
 }
 
-
-favIconElem.addEventListener('click', () => {
+favIcon.addEventListener('click', () => {
     console.log('좋아요 버튼 클릭');
     isFav();
-    const nm = dataNm;
-    if (favIconElem.classList.contains('fa-heart-crack')) { // no 좋아요
-        const param = {nm};
+    if (favIcon.classList.contains('fa-heart-crack')) { // no 좋아요
+        const param = {
+            'nm' : dataNm,
+            'iuser' : iuser
+        };
         console.log('param' + param);
         myFetch.post(`/webtoon/fav`, data => {
             switch (data.result) {

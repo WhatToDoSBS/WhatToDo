@@ -36,3 +36,51 @@ const swiper = new Swiper('.swiper', {
     //     el: '.swiper-scrollbar',
     // },
 });
+
+// ------------------youtube---------------------- //
+
+let q = '고양이';  // 검색해서 출력 해낼 것
+let part = 'id';
+let maxResults = 50;    // 최대 결과값
+let videoSection = document.querySelector('#video_section');
+const url = 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyBZal1oi0pC032oLeM-AYoqfo2sojWbbmo&part='+part+ '&q='+q + '&maxResults=' + maxResults;
+const url2 = 'https://www.googleapis.com/youtube/v3/videos?key=AIzaSyBZal1oi0pC032oLeM-AYoqfo2sojWbbmo&part=' + part +'&maxResults='+ maxResults + '&regionCode=KR&chart=mostPopular';
+
+function youtubeSearchApi(url) {
+    fetch(url).then(function(res) {
+        return res.json();
+    }).then(function(data) {
+        // 랜덤 숫자 도출
+        // min <= number <= max
+        // Math.floor(Math.random() * (max - min + 1)) + min;
+        let randomNum = Math.floor((Math.random() * (maxResults-1)));
+        console.log('randomNum:' + randomNum);
+        console.log(data);
+        videoInput(data.items[randomNum].id.videoId);
+    }).catch(function (err) {
+        console.log(err);
+    })
+}
+function youtubePopApi(url) {
+    fetch(url).then(function(res) {
+        return res.json();
+    }).then(function(data) {
+        // 랜덤 숫자 도출
+        // min <= number <= max
+        // Math.floor(Math.random() * (max - min + 1)) + min;
+        let randomNum = Math.floor((Math.random() * (maxResults-1)));
+        console.log('randomNum:' + randomNum);
+        console.log(data);
+        videoInput(data.items[randomNum].id);
+    }).catch(function (err) {
+        console.log(err);
+    })
+}
+function videoInput(img) {
+    videoSection.innerHTML += `
+    <iframe width="500" height="315" src="https://www.youtube.com/embed/${img}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    `;
+}
+
+youtubeSearchApi(url);
+youtubePopApi(url2)

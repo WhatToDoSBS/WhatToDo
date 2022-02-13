@@ -156,6 +156,13 @@
             </div>
 
         </div>
+        <div class="youtube_section">
+            <div class="youtube_section_title"><h4><i class="fa-brands fa-youtube"></i>이런 Youtube는 어때?</h4></div>
+            <div id="video_section">
+
+            </div>
+        </div>
+
     </div>
 </div>
 

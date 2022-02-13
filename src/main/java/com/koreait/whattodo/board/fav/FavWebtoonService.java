@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class FavService {
+public class FavWebtoonService {
     @Autowired
-    private FavMapper mapper;
+    private FavWebtoonMapper mapper;
     @Autowired private UserUtils userUtils;
 
     public int insWebtoonFav(FavWebtoonEntity entity) {
