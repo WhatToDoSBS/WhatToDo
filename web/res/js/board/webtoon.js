@@ -73,7 +73,7 @@ function webtoonGenreBtnClickRandom(url, btnGenre) {
 
 function filterFunction(data, genre) {
     return data.filter(function (item, index, arr) {
-        if(genre=='완결') {
+        if (genre == '완결') {
             return item.state = genre;
         } else return item.genre == genre;
     });
@@ -81,11 +81,49 @@ function filterFunction(data, genre) {
 
 
 function resultDisplay(webtoonimg, webtoonLink, webtoonNm, webtoonWriter, btnGenre) {
-    resultBox.innerHTML = `<div id="genre_title"><b>${btnGenre}</b></div>
+    resultBox.innerHTML = `<div class="random-card"><div><div id="genre_title"><b>${btnGenre}</b></div>
 <div><a href="${webtoonLink}"><img src="${webtoonimg}"></a></div>
-    <div><a href="${webtoonLink}"><span class="font-14px"><b>${webtoonNm}</b></span></a></div>
-    <div><span class="font-14px">${webtoonWriter}</span></div>
+    <div class="random-webtoon-nm"><a href="${webtoonLink}"><span class="card-nm"><b>${webtoonNm}</b></span></a></div>
+    <div><span class="card-writer">${webtoonWriter}</span></div></div></div>
 `;
+    let genreTitle = document.querySelector('#genre_title');
+    let randomCard = document.querySelector('.random-card');
+    let cardNm = document.querySelector('.card-nm');
+    let cardWriter = document.querySelector('.card-writer');
+
+    if (btnGenre == '일상 ') {
+        genreTitle.classList.toggle('daily');
+        randomCard.style.backgroundColor = '#F0FFF0';
+    } else if (btnGenre == '개그 ') {
+        genreTitle.classList.toggle('comic');
+        randomCard.style.backgroundColor = 'rgb(232 250 253)';
+    } else if (btnGenre == '판타지') {
+        genreTitle.classList.toggle('fantasy');
+        randomCard.style.backgroundColor = 'rgb(255 227 227)';
+    } else if (btnGenre == '액션 ') {
+        genreTitle.classList.toggle('action');
+        randomCard.style.backgroundColor = 'rgb(235 243 251)';
+    } else if (btnGenre == '드라마') {
+        genreTitle.classList.toggle('drama');
+        randomCard.style.backgroundColor = 'rgb(255 233 233)';
+    } else if (btnGenre == '순정 ') {
+        genreTitle.classList.toggle('pure');
+        randomCard.style.backgroundColor = 'rgb(255 255 231)';
+    } else if (btnGenre == '감성 ') {
+        genreTitle.classList.toggle('emotional');
+        randomCard.style.backgroundColor = 'rgb(236 233 253)';
+    } else if (btnGenre == '스릴러') {
+        genreTitle.classList.toggle('thriller');
+        randomCard.style.backgroundColor = 'rgb(24 24 24)';
+        cardNm.style.color = 'white';
+        cardWriter.style.color = 'white';
+    } else if (btnGenre == '시대극') {
+        genreTitle.classList.toggle('historical');
+        randomCard.style.backgroundColor = 'rgb(211 211 211)';
+    } else if (btnGenre == '스포츠') {
+        genreTitle.classList.toggle('sports');
+        randomCard.style.backgroundColor = 'rgb(100 236 255)';
+    }
 }
 
 randomSubmitBtn.addEventListener('click', function () {  // 랜덤버튼 누르면 무작위 랜덤웹툰 출력
@@ -103,11 +141,6 @@ let dataNm, dataWeekend, iuser, writerName;
 
 webtoonModalElem.forEach(function (item) {
     item.addEventListener('click', function (e) {
-
-        console.log(item.dataset.nm);
-        console.log(item.dataset.weekend);
-        console.log(item.dataset.iuser);
-        console.log(item.dataset.writernm);
 
         // 데이터 담기
         dataNm = item.dataset.nm;
@@ -145,18 +178,18 @@ window.addEventListener("mouseup", (e) => { // 모달창 밖으로 마우스 클
 /* -------- MODAL REVIEW 관련 -------- */
 const reviewFrm = document.querySelector('#reviewFrm');
 
-reviewFrm.addEventListener('submit', (e)=> {    //input-text ctnt에서 엔터치면 submit날아가기 때문에 막는다.
+reviewFrm.addEventListener('submit', (e) => {    //input-text ctnt에서 엔터치면 submit날아가기 때문에 막는다.
     e.preventDefault();
 });
 
 // 리뷰 작성 버튼 분기문
 reviewFrm.btn_submit.addEventListener('click', () => {
     const reviewVal = reviewFrm.ctnt.value;
-    if(reviewVal.length === 0) {
+    if (reviewVal.length === 0) {
         alert('리뷰 내용을 작성해 주세요.');
-    } else if(isWrongWith('ctnt', reviewVal)) {
+    } else if (isWrongWith('ctnt', reviewVal)) {
         alert(msg.ctnt);
-    } else if(iuser=='') {
+    } else if (iuser == '') {
         alert('로그인 해주세요.');
     } else { //리뷰 insert 시도
         insReviewWebtoonAjax(reviewVal);
@@ -173,7 +206,7 @@ const insReviewWebtoonAjax = (val) => {
     };
     myFetch.post('/board/review', (data) => {
         console.log('result : ' + data.result);
-        switch(data.result) {
+        switch (data.result) {
             case 0:
                 alert('리뷰 등록에 실패하였습니다.');
                 break;
@@ -181,13 +214,13 @@ const insReviewWebtoonAjax = (val) => {
                 //기존 table태그가 있는지 확인
 
                 let table = reviewListElem.querySelector('table');
-                if(!table) {
+                if (!table) {
                     reviewListElem.innerHTML = null;
                     table = makeTable();
                     reviewListElem.appendChild(table);
                 }
                 const item = {
-                    rnum:data.result,
+                    rnum: data.result,
                     nm: dataNm,
                     iuser: iuser,
                     nickname: data.resultNickname,
@@ -219,7 +252,7 @@ const setCmtList = (list) => {
     const reviewListElem = document.querySelector('#review_list');
 
     // 평가 없을 때
-    if(list.length === 0) {
+    if (list.length === 0) {
         reviewListElem.innerHTML = '<span style="font-size: 14px">첫 리뷰의 주인공이 되어주세요.</span>';
         return;
     }
@@ -258,7 +291,7 @@ const makeTr = item => {
 
     console.log('게시글에 적힌 iuser :' + item.iuser);
     console.log('내 iuser : ' + iuser);
-    if(parseInt(iuser) === parseInt(item.iuser)) {
+    if (parseInt(iuser) === parseInt(item.iuser)) {
         const modBtn = document.createElement('input');
         modBtn.type = 'button';
         modBtn.value = '수정';
@@ -285,7 +318,7 @@ const makeTr = item => {
                     ctnt: modInput.value
                 }
                 myFetch.put('/board/review', data => {
-                    switch(data.result) {
+                    switch (data.result) {
                         case 0:
                             alert('댓글 수정에 실패하였습니다.')
                             break;
@@ -323,7 +356,7 @@ const makeTr = item => {
 
         // 댓글 삭제 이벤트
         delBtn.addEventListener('click', () => {
-            if(confirm('삭제하시겠습니까?')) {
+            if (confirm('삭제하시겠습니까?')) {
                 console.log(item.rnum);
                 delCmt(item.rnum, tr);
             }
@@ -337,7 +370,7 @@ const makeTr = item => {
 
 const delCmt = (rnum, tr) => {
     myFetch.delete(`/board/review/${rnum}`, data => {
-        if(data.result) {
+        if (data.result) {
             tr.remove();
         } else {
             alert('댓글을 삭제할 수 없습니다.');
@@ -345,3 +378,75 @@ const delCmt = (rnum, tr) => {
     });
 }
 
+// ------------- 좋아요 ------------------ //
+
+const favIcon = document.querySelectorAll('.fav_icon');
+favIcon.forEach(function (item) {
+    item.addEventListener('click', function (e) {
+        console.log(e.target);
+    })
+});
+
+const isFav = () => {
+    const nm = dataNm;
+    myFetch.get(`/webtoon/fav/${nm}`, (data) => {
+        switch (data.result) {
+            case 0:
+                console.log('실패' + data);
+                disableFav();
+                break;
+            case 1:
+                console.log('성공' + data);
+                enableFav();
+                break;
+        }
+    });
+}
+
+const disableFav = () => {
+    if (dataNm) {
+        favIconElem.classList.remove('fa-heart-crack');
+        favIconElem.classList.add('fa-heart');
+    }
+}
+
+const enableFav = () => {
+    if (favIconElem) {
+        favIconElem.classList.remove('fa-heart');
+        favIconElem.classList.add('fa-heart-crack');
+    }
+}
+
+favIcon.addEventListener('click', () => {
+    console.log('좋아요 버튼 클릭');
+    isFav();
+    if (favIcon.classList.contains('fa-heart-crack')) { // no 좋아요
+        const param = {
+            'nm' : dataNm,
+            'iuser' : iuser
+        };
+        console.log('param' + param);
+        myFetch.post(`/webtoon/fav`, data => {
+            switch (data.result) {
+                case 0:
+                    alert('좋아요 처리에 실패하였습니다.');
+                    break;
+                case 1:
+                    enableFav();
+                    break;
+            }
+        }, param);
+    } else { // yes 좋아요
+        myFetch.delete(`/webtoon/fav/${nm}`, data => {
+            switch (data.result) {
+                case 0:
+                    alert('좋아요 처리에 실패하였습니다.');
+                    break;
+                case 1:
+                    disableFav();
+                    break;
+            }
+        });
+    }
+});
+//좋아요 ------------------------------------------------------------ [end] --

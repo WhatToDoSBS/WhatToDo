@@ -3,11 +3,11 @@ const swiper = new Swiper('.swiper', {
     direction: 'horizontal',
     loop: true, // 슬라이드 반복 여부
     loopAdditionalSlides : 1, // 슬라이드 반복 시 마지막 슬라이드에서 다음 슬라이드가 보여지지 않는 현상
-    autoplay : false,
-    //     {  // 자동 슬라이드 설정 , 비 활성화 시 false
-    //     delay : 3000,   // 시간 설정
-    //     disableOnInteraction : false,  // false로 설정하면 스와이프 후 자동 재생이 비활성화 되지 않음
-    // }
+    autoplay :
+        {  // 자동 슬라이드 설정 , 비 활성화 시 false
+        delay : 3000,   // 시간 설정
+        disableOnInteraction : false,  // false로 설정하면 스와이프 후 자동 재생이 비활성화 되지 않음
+    },
 
     // fade 효과일 때 슬라이드 이미지가 쌓이는 느낌
     // 그림자 이미지가 점점 진하게 드리움 위 현상을 막기 위해 옵션 추가
@@ -37,24 +37,50 @@ const swiper = new Swiper('.swiper', {
     // },
 });
 
+// ------------------youtube---------------------- //
 
+let q = '고양이';  // 검색해서 출력 해낼 것
+let part = 'id';
+let maxResults = 50;    // 최대 결과값
+let videoSection = document.querySelector('#video_section');
+const url = 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyBZal1oi0pC032oLeM-AYoqfo2sojWbbmo&part='+part+ '&q='+q + '&maxResults=' + maxResults;
+const url2 = 'https://www.googleapis.com/youtube/v3/videos?key=AIzaSyBZal1oi0pC032oLeM-AYoqfo2sojWbbmo&part=' + part +'&maxResults='+ maxResults + '&regionCode=KR&chart=mostPopular';
 
-
-var naver_id_login = new naver_id_login("s8DDAYotRndJt05wXdOI", "http://localhost:8090/board/main");
-// 접근 토큰 값 출력
-alert(naver_id_login.oauthParams.access_token);
-// 네이버 사용자 프로필 조회
-naver_id_login.get_naver_userprofile("naverSignInCallback()");
-
-// 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-function naverSignInCallback() {
-    alert(naver_id_login.getProfileData('email'));
-    alert(naver_id_login.getProfileData('nickname'));
-    alert(naver_id_login.getProfileData('age'));
-    alert(naver_id_login.getProfileData('id'));
-    alert(naver_id_login.getProfileData('birthday'));
-    alert(naver_id_login.getProfileData('gender'));
-    alert(naver_id_login.getProfileData('mobile'));
+function youtubeSearchApi(url) {
+    fetch(url).then(function(res) {
+        return res.json();
+    }).then(function(data) {
+        // 랜덤 숫자 도출
+        // min <= number <= max
+        // Math.floor(Math.random() * (max - min + 1)) + min;
+        let randomNum = Math.floor((Math.random() * (maxResults-1)));
+        console.log('randomNum:' + randomNum);
+        console.log(data);
+        videoInput(data.items[randomNum].id.videoId);
+    }).catch(function (err) {
+        console.log(err);
+    })
+}
+function youtubePopApi(url) {
+    fetch(url).then(function(res) {
+        return res.json();
+    }).then(function(data) {
+        // 랜덤 숫자 도출
+        // min <= number <= max
+        // Math.floor(Math.random() * (max - min + 1)) + min;
+        let randomNum = Math.floor((Math.random() * (maxResults-1)));
+        console.log('randomNum:' + randomNum);
+        console.log(data);
+        videoInput(data.items[randomNum].id);
+    }).catch(function (err) {
+        console.log(err);
+    })
+}
+function videoInput(img) {
+    videoSection.innerHTML += `
+    <iframe width="500" height="315" src="https://www.youtube.com/embed/${img}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    `;
 }
 
-
+youtubeSearchApi(url);
+youtubePopApi(url2)
