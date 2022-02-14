@@ -10,12 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.net.DatagramSocket;
+import java.net.SocketException;
 import java.util.List;
 import java.util.Random;
 
@@ -132,14 +132,33 @@ public class CrawlingController {
     public void game(Model model, MecaRankEntity entity1, PlatformRankEntity entity2) {
         String platformUrl = "https://trees.gamemeca.com/gamerank/";
         String mecaUrl = "https://www.gamemeca.com/ranking.php";
-        crawlingService.insertMeca(mecaUrl);
-        crawlingService.insertPlatform(platformUrl);
-        crawlingService.insertPlatformImgList(entity2);
 
-        List gameList = crawlingService.mecaRankList(entity1);
-        List platformGameList = crawlingService.platformListWithImg(entity2);
-        model.addAttribute("gameList", gameList);
-        model.addAttribute("pfGameList", platformGameList);
+
+
+        boolean canRun = true;
+        // 로직 수행 가능여부 설정
+        try{ DatagramSocket ds = new DatagramSocket(8090);
+            // 포트점유
+             }
+             catch (SocketException e) { System.out.println("동일한 프로그램이 동작중입니다. 포트 : " + 8090);
+            e.printStackTrace();
+            canRun = false;
+        }
+        if(canRun){
+            crawlingService.insertMeca(mecaUrl);
+            crawlingService.insertPlatform(platformUrl);
+            crawlingService.insertPlatformImgList(entity2);
+
+            List gameList = crawlingService.mecaRankList(entity1);
+            List platformGameList = crawlingService.platformListWithImg(entity2);
+            model.addAttribute("gameList", gameList);
+            model.addAttribute("pfGameList", platformGameList);
+        } else {
+            List gameList = crawlingService.mecaRankList(entity1);
+            List platformGameList = crawlingService.platformListWithImg(entity2);
+            model.addAttribute("gameList", gameList);
+            model.addAttribute("pfGameList", platformGameList);
+        }
     }
 
     @GetMapping("/platformrankingjson")
