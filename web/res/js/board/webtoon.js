@@ -137,6 +137,7 @@ const modalXBtn = document.querySelector(".close-area");
 const webtoonModalElem = document.querySelectorAll('.webtoonModalElement');
 const modalContent = document.querySelector('.modalContent');
 const reviewListElem = document.querySelector('#review_list');
+const data = document.querySelector('#data');
 let dataNm, dataWeekend, iuser, writerName;
 
 webtoonModalElem.forEach(function (item) {
@@ -378,14 +379,49 @@ const delCmt = (rnum, tr) => {
     });
 }
 
-// ------------- 좋아요 ------------------ //
+// ***************** 좋아요 ************************* //
 
 const favIcon = document.querySelectorAll('.fav_icon');
 favIcon.forEach(function (item) {
-    item.addEventListener('click', function (e) {
-        console.log(e.target);
-    })
-});
+    item.addEventListener('click', () => {
+        console.log('button click');
+        const nm = dataNm;
+        isFav();
+        if(iuser=='') {
+            alert('로그인 해주세요.');
+        } else {
+            if (favIcon.classList.contains('fa-heart-crack')) { // no 좋아요
+                console.log('하트 깨진 상태');
+                const param = {
+                    'nm' : dataNm,
+                    'iuser' : iuser
+                };
+                myFetch.post(`/webtoon/fav`, data => {
+                    switch (data.result) {
+                        case 0:
+                            alert('좋아요 처리에 실패하였습니다.');
+                            break;
+                        case 1:
+                            enableFav();
+                            break;
+                    }
+                }, param);
+            } else { // yes 좋아요
+                myFetch.delete(`/webtoon/fav/${nm}`, data => {
+                    switch (data.result) {
+                        case 0:
+                            alert('좋아요 처리에 실패하였습니다.');
+                            break;
+                        case 1:
+                            disableFav();
+                            break;
+                    }
+                });
+            }
+        }
+    });
+})
+
 
 const isFav = () => {
     const nm = dataNm;
@@ -404,49 +440,20 @@ const isFav = () => {
 }
 
 const disableFav = () => {
-    if (dataNm) {
-        favIconElem.classList.remove('fa-heart-crack');
-        favIconElem.classList.add('fa-heart');
+    console.log('disableFav 작동 중');
+    if (favIcon) {
+        favIcon.classList.remove('fa-heart');
+        favIcon.classList.add('fa-heart-crack');
     }
 }
 
 const enableFav = () => {
-    if (favIconElem) {
-        favIconElem.classList.remove('fa-heart');
-        favIconElem.classList.add('fa-heart-crack');
+    console.log('enableFav 작동 중');
+    if (favIcon) {
+        favIcon.classList.remove('fa-heart-crack');
+        favIcon.classList.add('fa-heart');
     }
 }
 
-favIcon.addEventListener('click', () => {
-    console.log('좋아요 버튼 클릭');
-    isFav();
-    if (favIcon.classList.contains('fa-heart-crack')) { // no 좋아요
-        const param = {
-            'nm' : dataNm,
-            'iuser' : iuser
-        };
-        console.log('param' + param);
-        myFetch.post(`/webtoon/fav`, data => {
-            switch (data.result) {
-                case 0:
-                    alert('좋아요 처리에 실패하였습니다.');
-                    break;
-                case 1:
-                    enableFav();
-                    break;
-            }
-        }, param);
-    } else { // yes 좋아요
-        myFetch.delete(`/webtoon/fav/${nm}`, data => {
-            switch (data.result) {
-                case 0:
-                    alert('좋아요 처리에 실패하였습니다.');
-                    break;
-                case 1:
-                    disableFav();
-                    break;
-            }
-        });
-    }
-});
+
 //좋아요 ------------------------------------------------------------ [end] --

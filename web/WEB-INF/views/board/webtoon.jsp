@@ -45,7 +45,7 @@
     <div class="naver_section">
         <ul>
             <c:forEach var="item" items="${webtoonListRandom}">
-            <div class="webtoonModalElement"
+            <div class="webtoonModalElement" id="data"
                  data-nm="${item.nm}"
                  data-weekend="${item.weekend}"
                  data-iuser="${sessionScope.loginUser.iuser}"
@@ -57,7 +57,7 @@
                     <div id="webtoon_databox">
                         <span class="font-14px">${item.nm}</span>
                     </div>
-                    <span class="webtoonLink"><i class="fa-solid fa-heart-crack"></i></span>
+                    <span class="webtoonLink"><i class="fa-solid fa-heart-crack fav_icon"></i></span>
                     <span class="webtoonLink webtoonWriter">작가 : ${item.writer}</span>
                     <span class="webtoonLink"><a href="${item.link}">>> 보러가기 <<</a></span>
                     <span class="webtoonInfoHidden webtoonWeekend">${item.weekend}</span>
@@ -74,8 +74,6 @@
                 웹툰 정보
             </div>
             <div class="modalContent">
-            </div>
-            <div class="gameLink">
             </div>
             <div>
                 <form id="reviewFrm">

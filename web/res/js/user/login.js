@@ -13,8 +13,7 @@ function kakaoLogin() {
                         url: '/v2/user/me',
                         success: function (data) {
                             console.log(data);
-                            loginKakao(data.id,data.id,data.properties.nickname,1,data.properties.profile_image);
-                            insKakaoInfo(data.id,data.id,data.properties.nickname,1,data.properties.profile_image);
+                            insKakaoInfo(data.id,data.id,data.properties.nickname,data.properties.profile_image);
                             },
                         fail: function (error) {
                             console.log(error)
@@ -47,33 +46,30 @@ function kakaoLogout() {
     }
 }
 
-function insKakaoInfo(uid, upw, nm, gender, profileImg) {
+function insKakaoInfo(uid, upw, nm, profileImg) {
     const param = {
         'uid' : uid,
         'upw' : upw,
         'nm' : nm,
-        'gender' : gender,
         'profileImg' : profileImg
     };
     myFetch.post('/user/kakao', (data)=> {
         console.log('카카오 회원가입 결과 : ' + data.result);
-        switch (data.result) {
+        switch (data.resultLogin) {
             case 0:
-                console.log('등록 실패');
+                console.log('카카오 로그인 실패');
+                break;
+            case 1:
+                console.log('회원가입 후 로그인');
+                location.href = '/board/main';
+                break;
+            case 2:
+                console.log('일반 로그인');
+                location.href = '/board/main';
                 break;
             default:
-                console.log('등록 성공');
+                console.log('뭔지 모를 오류');
                 break;
         }
-    }, param);
-}
-
-function loginKakao(uid, upw) {
-    const param = {
-        'uid' : uid,
-        'upw' : upw
-    };
-    myFetch.post('/user/login', (data)=> {
-        console.log('카카오 로그인 결과 : ' + data);
     }, param);
 }

@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.koreait.whattodo.user.UserMapper">
     <insert id="insUser"><!--  회원가입  -->
-        INSERT INTO whattodo_user (uid, upw, nm, gender, profileimg)
-        VALUES (#{uid}, #{upw}, #{nm}, ${gender}, #{profileimg})
+        INSERT INTO whattodo_user (uid, upw, nm, profileimg)
+        VALUES (#{uid}, #{upw}, #{nm}, #{profileimg})
     </insert>
 
     <insert id="insAutoLoginKey"><!--  자동로그인 키 생성  -->

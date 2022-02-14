@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
+@RestController
 @RequestMapping("/webtoon/fav")
 public class FavWebtoonController {
     @Autowired
