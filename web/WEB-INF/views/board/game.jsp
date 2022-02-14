@@ -1,5 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="now" class="java.util.Date"/>
+<fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" var="today"/>
 <style>
     @font-face {
         font-family: 'SDSamliphopangche_Outline';
@@ -66,4 +69,75 @@
             </c:if>
         </div>
     </div>
+</div>
+
+<div class="rank_section">
+    <div class="meca_game_rank">
+        <h4>MECA TOP 50</h4>
+        <ul>
+            <c:forEach var="item" items="${gameList}" begin="0" end="49">
+                <li>
+                    <div>
+                        <a href="${item.selLink}"><img style="width: 100px; height: 100px" src="${item.imgsrc}" alt=""></a>
+                    </div>
+                    <div class="rank_info rank_info_game">
+                        <span>${item.rankNum}위</span>
+                        <span>${item.gameNm}</span>
+                        <span>${item.company}</span>
+                    </div>
+                </li>
+            </c:forEach>
+        </ul>
+    </div>
+        <div class="mobile_game_rank">
+            <h4>MOBILE TOP 40</h4>
+            <ul>
+                <c:forEach var="item" items="${pfGameList}" begin="0" end="39">
+                    <li>
+                        <div>
+                            <a href="${item.selLink}"><img style="width: 100px; height: 100px" src="${item.imgsrc}" alt=""></a>
+                        </div>
+                        <div class="rank_info rank_info_game">
+                            <span>${item.rankNum}위</span>
+                            <span>${item.gameNm}</span>
+                            <span>${item.company}</span>
+                        </div>
+                    </li>
+                </c:forEach>
+            </ul>
+        </div>
+        <div class="pc_game_rank">
+            <h4>PC TOP 40</h4>
+            <ul>
+                <c:forEach var="item" items="${pfGameList}" begin="40" end="79">
+                    <li>
+                        <div>
+                            <a href="${item.selLink}"><img style="width: 100px; height: 100px" src="${item.imgsrc}" alt=""></a>
+                        </div>
+                        <div class="rank_info rank_info_game">
+                            <span>${item.rankNum}위</span>
+                            <span>${item.gameNm}</span>
+                            <span>${item.company}</span>
+                        </div>
+                    </li>
+                </c:forEach>
+            </ul>
+        </div>
+        <div class="st_game_rank">
+            <h4>STEAM TOP 40</h4>
+            <ul>
+                <c:forEach var="item" items="${pfGameList}" begin="80">
+                    <li>
+                        <div>
+                            <a href="${item.selLink}"><img style="width: 100px; height: 100px" src="${item.imgsrc}" alt=""></a>
+                        </div>
+                        <div class="rank_info rank_info_game">
+                            <span>${item.rankNum}위</span>
+                            <span>${item.gameNm}</span>
+                            <span>${item.company}</span>
+                        </div>
+                    </li>
+                </c:forEach>
+            </ul>
+        </div>
 </div>

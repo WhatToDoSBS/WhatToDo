@@ -212,7 +212,8 @@ public class CrawlingService {
         // 크롤링해서 가져온 값의 text만 뽑아서 리스트에 담음.
         for (Element element : rankNum) {
             String num = element.text();
-            String num1 = num.substring(0, num.lastIndexOf(" "));
+            System.out.println(num);
+            String num1 = num.split(" ")[0];
             rankNumList.add(num1);
         }
         for (Element element : gameNm) {
@@ -294,8 +295,8 @@ public class CrawlingService {
                 for (Element element : imgs) {
                     System.out.println(i);
                     PlatformImgEntity platformImgEntity = new PlatformImgEntity();
-                    String imgSrc = element.attributes().get("src");
                     platformImgEntity.setGameNm(gameNmList.get(i));
+                    String imgSrc = imgs.get(0).attr("src");
                     platformImgEntity.setImgsrc(imgSrc);
                     list.add(platformImgEntity);
                 }
