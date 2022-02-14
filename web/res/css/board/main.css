@@ -15,6 +15,10 @@ i {
     margin: 0 10px;
 }
 
+#header-color ul li {
+    color: white;
+}
+
 .container_box {
     justify-content: normal;
     padding: 0;

@@ -22,7 +22,7 @@ public class FavWebtoonController {
         return result;
     }
 
-    @GetMapping("/{nm}")
+    @GetMapping("/{nm}")    // 좋아요 했는지 안했는 지 체크..하는 건데 제 생각엔 여기서 잘못가져오는건가 싶기도 하고..
     public Map<String, Integer> isFav(@PathVariable String nm) {
         FavWebtoonEntity dbEntity = service.selWebtoondFav(nm);
         Map<String, Integer> result = new HashMap<>();

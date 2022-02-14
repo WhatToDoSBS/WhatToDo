@@ -353,3 +353,7 @@ button.pfBtn.clicked {
     position: absolute;
     bottom: 0;
 }
+
+#header-color {
+    background-color: rgb(42, 174, 207);
+}

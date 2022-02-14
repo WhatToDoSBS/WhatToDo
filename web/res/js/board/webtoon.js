@@ -150,8 +150,10 @@ webtoonModalElem.forEach(function (item) {
         writerName = item.dataset.writernm;
 
         modalWindow.style.display = 'flex';
-
         modalContent.innerHTML = item.innerHTML;
+
+        console.log('test : ' + dataNm);
+        isFav(); //
 
         getCmtList();
         delCmtList();
@@ -381,11 +383,12 @@ const delCmt = (rnum, tr) => {
 
 // ***************** 좋아요 ************************* //
 
-const favIcon = document.querySelectorAll('.fav_icon');
-favIcon.forEach(function (item) {
-    item.addEventListener('click', () => {
+const favIcon = document.querySelector('.fav_icon');
+
+favIcon.addEventListener('click', () => {
         console.log('button click');
         const nm = dataNm;
+        console.log(dataNm);
         isFav();
         if(iuser=='') {
             alert('로그인 해주세요.');
@@ -396,6 +399,7 @@ favIcon.forEach(function (item) {
                     'nm' : dataNm,
                     'iuser' : iuser
                 };
+                // 혹시 저기 그...좋아요 처리 하기 전에 db에서 좋아요 등록 돼 있을때 갖고 나온?? 처리한거 있나요 ??
                 myFetch.post(`/webtoon/fav`, data => {
                     switch (data.result) {
                         case 0:
@@ -420,11 +424,12 @@ favIcon.forEach(function (item) {
             }
         }
     });
-})
+
 
 
 const isFav = () => {
     const nm = dataNm;
+    console.log(dataNm);
     myFetch.get(`/webtoon/fav/${nm}`, (data) => {
         switch (data.result) {
             case 0:

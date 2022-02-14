@@ -33,7 +33,7 @@
                      data-writernm="${sessionScope.loginUser.nm}">
                     <img src="${item.img}" class="card-img-top">
                     <div class="card-body" id="card-body">
-                        <span class="webtoonLink"><i class="fa-solid fa-heart-crack fav_icon"></i></span>
+
                         <span class="card-title card-nm" id="card-title">${item.nm}</span>
                         <span class="card-text card-writer" id="card-writer">${item.writer}</span>
                         <span class="card-text webtoonLink"><a href="${item.link}">>> 보러가기 <<</a></span>
@@ -49,7 +49,7 @@
                  data-nm="${item.nm}"
                  data-weekend="${item.weekend}"
                  data-iuser="${sessionScope.loginUser.iuser}"
-            data-writernm="${sessionScope.loginUser.nm}">
+                 data-writernm="${sessionScope.loginUser.nm}">
                 <li>
                     <div id="webtoon_img">
                         <img src="${item.img}">
@@ -57,7 +57,7 @@
                     <div id="webtoon_databox">
                         <span class="font-14px">${item.nm}</span>
                     </div>
-                    <span class="webtoonLink"><i class="fa-solid fa-heart-crack fav_icon"></i></span>
+
                     <span class="webtoonLink webtoonWriter">작가 : ${item.writer}</span>
                     <span class="webtoonLink"><a href="${item.link}">>> 보러가기 <<</a></span>
                     <span class="webtoonInfoHidden webtoonWeekend">${item.weekend}</span>
@@ -71,9 +71,11 @@
         <div class="modal-window">
             <div class="close-area">X</div>
             <div class="modalTitle">
-                웹툰 정보
+                웹툰 정보<span><i class="fa-solid fa-heart-crack fav_icon"></i></span>
             </div>
+
             <div class="modalContent">
+
             </div>
             <div>
                 <form id="reviewFrm">
