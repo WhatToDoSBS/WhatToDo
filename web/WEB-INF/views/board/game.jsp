@@ -19,7 +19,7 @@
                     <button class="ppBtn">GOOD</button>
                     </div>
                 </label>
-                    <button id="ppRanBtn">RANDOM PICK</button>
+                    <button id="ppRanBtn">인기 RANDOM</button>
             </div>
             <div class="choiceBtn_section_line kinds">
                 <label id="kdLb"><p class="btLb" style= "display: inline-block; font-family: 'SDSamliphopangche_Outline'">장르</p>
@@ -32,7 +32,7 @@
                     <button class="kdBtn">기타</button>
                     </div>
                 </label>
-                <button id="kdRanBtn">RANDOM PICK</button>
+                <button id="kdRanBtn">장르 RANDOM</button>
             </div>
             <div class="choiceBtn_section_line theme">
                 <label id="pfLb"><p class="btLb" style= "display: inline-block; font-family: 'SDSamliphopangche_Outline'">플랫폼</p>
@@ -42,7 +42,7 @@
                     <button class="pfBtn">스팀</button>
                     </div>
                 </label>
-                <button id="pfRanBtn">RANDOM PICK</button>
+                <button id="pfRanBtn">플랫폼 RANDOM</button>
             </div>
         </div>
         <div class="search_section">

@@ -287,14 +287,11 @@ img { border-radius: 10px; }
 }
 
 table, td, th { border: 1px solid #4f4f4f; border-collapse: collapse; }
+
 td, th { padding: 7px; }
 
-button.rtBtn.clicked {
-    background-color: lightgreen;
-}
-
 button.ppBtn.clicked {
-    background-color: lightblue;
+    background-color: dodgerblue;
 }
 
 button.kdBtn.clicked {
@@ -302,7 +299,7 @@ button.kdBtn.clicked {
 }
 
 button.pfBtn.clicked {
-    background-color: lightseagreen;
+    background-color: lightgreen;
 }
 
 
