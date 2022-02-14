@@ -429,7 +429,6 @@ favIcon.addEventListener('click', () => {
 
 const isFav = () => {
     const nm = dataNm;
-    console.log(dataNm);
     myFetch.get(`/webtoon/fav/${nm}`, (data) => {
         switch (data.result) {
             case 0:
