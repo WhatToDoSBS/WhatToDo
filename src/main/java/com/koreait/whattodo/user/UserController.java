@@ -130,5 +130,8 @@ public class UserController {
         return "redirect:/user/join";
     }
 
-
+    @GetMapping("/naver/callback")
+    public String naverCallback() {
+        return "user/naver/callback";
+    }
 }

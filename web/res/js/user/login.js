@@ -1,3 +1,16 @@
+// 네이버 로그인
+var naver_id_login = new naver_id_login("9CbEg9cxRUs7V2Q6_IMd", "http://localhost:8090/user/naver/callback");
+var state = naver_id_login.getUniqState();
+console.log(state);
+naver_id_login.setButton("green", 3);
+naver_id_login.setDomain("http://localhost:8090/user/login");
+naver_id_login.setState(state);
+naver_id_login.init_naver_id_login();
+
+
+
+
+
 Kakao.init('31a4b437d075fde689913e97c7d35df1'); //발급받은 키 중 javascript키를 사용해준다.
 console.log(Kakao.isInitialized()); // sdk초기화여부판단
 //카카오로그인
@@ -73,3 +86,4 @@ function insKakaoInfo(uid, upw, nm, profileImg) {
         }
     }, param);
 }
+
