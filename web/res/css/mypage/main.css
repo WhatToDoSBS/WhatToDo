@@ -8,6 +8,12 @@ td {
     font-size: 13px;
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .container_box {
     align-items: normal;
     flex-direction: row;
@@ -30,7 +36,7 @@ td {
 .info .info_profileCard .nickname {
     position: absolute;
     margin-top: 15px;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 .btn-link {
@@ -41,4 +47,15 @@ td {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+button {
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.card-body i {
+    margin-right: 10px;
+    font-size: 18px;
 }

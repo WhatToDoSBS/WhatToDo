@@ -7,9 +7,10 @@
         <div class="col info">
             <div class="card" style="width: 18rem;">
                 <div class="card-body info_profileCard">
-                    <h5 class="card-title">Profile Card</h5>
+                    <h5 class="card-title"><i class="fa-solid fa-id-card"></i>Profile Card</h5>
                     <div>
-                        <img src="/res/img/board/lol.jpg" alt="" class="wh-80 circular--img">
+
+                        <img src="${sessionScope.loginUser.profileimg}" alt="" class="wh-80 circular--img">
                         <span class="nickname">별명 : ${sessionScope.loginUser.nm}</span>
                     </div>
                     <div class="btn-link">
@@ -20,7 +21,7 @@
         </div>
         <div class="col info"><div class="card" style="width: 18rem;">
             <div class="card-body info_profileCard">
-                <h5 class="card-title">사용자 정보</h5>
+                <h5 class="card-title"><i class="fa-solid fa-info"></i>사용자 정보</h5>
                 <div>
                     <img src="/res/img/board/lol.jpg" alt="" class="wh-80 circular--img">
                     <span class="nickname">별명 : </span>
@@ -33,13 +34,9 @@
         <div class="col info">
             <div class="card" style="width: 18rem;">
                 <div class="card-body info_profileCard">
-                    <h5 class="card-title">비밀번호 변경</h5>
-                    <div>
-                        <img src="/res/img/board/lol.jpg" alt="" class="wh-80 circular--img">
-                        <span class="nickname">별명 : </span>
-                    </div>
+                    <h5 class="card-title"><i class="fa-solid fa-unlock"></i>비밀번호 변경</h5>
                     <div class="btn-link">
-                        <a href="#" class="card-link"><button>수정</button></a>
+                        <a href="#" class="card-link"><button>변경</button></a>
                     </div>
                 </div>
             </div>
@@ -47,7 +44,7 @@
         <div class="col info">
             <div class="card" style="width: 18rem;">
                 <div class="card-body info_profileCard">
-                    <h5 class="card-title">My Review</h5>
+                    <h5 class="card-title"><i class="fa-solid fa-star"></i>My Review</h5>
                     <div>
                         최근 작성한 평가
                     </div>
