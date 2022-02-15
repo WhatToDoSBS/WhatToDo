@@ -1,5 +1,6 @@
 package com.koreait.whattodo.user;
 
+import com.koreait.whattodo.UserUtils;
 import com.koreait.whattodo.enums.user.LoginEnum;
 import com.koreait.whattodo.model.user.UserDto;
 import com.koreait.whattodo.model.user.UserEntity;
@@ -9,6 +10,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -17,6 +20,9 @@ public class UserService {
 
     @Autowired
     private UserMapper mapper;
+
+    @Autowired
+    private UserUtils userUtils;
 
 
     public static class Config{
@@ -116,5 +122,23 @@ public class UserService {
 
     public void delAutoLoginKey(String loginKey) { // Ch4.자동로그인 쿠키 만료
         mapper.delAutoLoginKey(loginKey); // value 값으로 만료기한을 현재시간으로 갱신시키고 만료여부를 true 로 바꿈
+    }
+
+    public int kakaoLogin(UserDto dto) {
+        UserVo vo = null;
+        try {
+            if (mapper.selUser(dto) == null) {
+                mapper.insUser(dto);
+                vo = mapper.selUser(dto);
+                userUtils.setLoginUser(vo);
+                return 1;   // 아이디가 없어서 회원가입 처리
+            }
+            vo = mapper.selUser(dto);
+            userUtils.setLoginUser(vo);
+            return 2;   // 아이디가 있음
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;   // 아예 안됨(JSON이 못 가져옴)
     }
 }
