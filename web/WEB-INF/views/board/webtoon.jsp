@@ -71,9 +71,11 @@
         <div class="modal-window">
             <div class="close-area">X</div>
             <div class="modalTitle">
-                웹툰 정보<span><i class="fa-solid fa-heart-crack fav_icon"></i></span>
+                웹툰 정보
             </div>
-
+            <div class="heart_section">
+                <span><i class="fa-solid fa-heart-crack fav_icon"></i></span>
+            </div>
             <div class="modalContent">
 
             </div>
