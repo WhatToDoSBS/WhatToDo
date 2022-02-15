@@ -101,7 +101,7 @@
     /* change bg color to get different hues    */
     background-color: dodgerblue;
     color: white;
-    padding: 1em 2em;
+    padding: 15px 30px;
     border: none;
     transition: all .3s ease;
     border-radius: 5px;
@@ -121,7 +121,7 @@
     /* change bg color to get different hues    */
     background-color: lightpink;
     color: white;
-    padding: 1em 2em;
+    padding: 15px 30px;
     border: none;
     transition: all .3s ease;
     border-radius: 5px;
@@ -141,7 +141,7 @@
     /* change bg color to get different hues    */
     background-color: lightgreen;
     color: white;
-    padding: 1em 2em;
+    padding: 15px 30px;
     border: none;
     transition: all .3s ease;
     border-radius: 5px;
@@ -186,6 +186,7 @@ tr {
 .rank_section {
     display: flex;
     justify-content: space-evenly;
+    margin-top: 20px;
 }
 
 .rank_section ul {

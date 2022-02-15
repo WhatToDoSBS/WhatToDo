@@ -77,12 +77,12 @@
         <ul>
             <c:forEach var="item" items="${gameList}" begin="0" end="49">
                 <li>
-                    <div>
-                        <a href="${item.selLink}"><img style="width: 100px; height: 100px" src="${item.imgsrc}" alt=""></a>
+                    <div class="meca_thumb_img">
+                        <img style="width: 100px; height: 100px" src="${item.imgsrc}" alt="">
                     </div>
                     <div class="rank_info rank_info_game">
                         <span>${item.rankNum}위</span>
-                        <span>${item.gameNm}</span>
+                        <a href="${item.selLink}"><span class="sel_gameNm">${item.gameNm}</span></a>
                         <span>${item.company}</span>
                     </div>
                 </li>
@@ -94,12 +94,12 @@
             <ul>
                 <c:forEach var="item" items="${pfGameList}" begin="0" end="39">
                     <li>
-                        <div>
-                            <a href="${item.selLink}"><img style="width: 100px; height: 100px" src="${item.imgsrc}" alt=""></a>
+                        <div class="game_thumb_img">
+                            <img style="width: 100px; height: 100px" src="${item.imgsrc}" alt="">
                         </div>
                         <div class="rank_info rank_info_game">
                             <span>${item.rankNum}위</span>
-                            <span>${item.gameNm}</span>
+                            <a href="${item.selLink}"><span class="sel_gameNm">${item.gameNm}</span></a>
                             <span>${item.company}</span>
                         </div>
                     </li>
@@ -111,12 +111,12 @@
             <ul>
                 <c:forEach var="item" items="${pfGameList}" begin="40" end="79">
                     <li>
-                        <div>
-                            <a href="${item.selLink}"><img style="width: 100px; height: 100px" src="${item.imgsrc}" alt=""></a>
+                        <div class="game_thumb_img">
+                            <img style="width: 100px; height: 100px" src="${item.imgsrc}" alt="">
                         </div>
                         <div class="rank_info rank_info_game">
                             <span>${item.rankNum}위</span>
-                            <span>${item.gameNm}</span>
+                            <a href="${item.selLink}"><span class="sel_gameNm">${item.gameNm}</span></a>
                             <span>${item.company}</span>
                         </div>
                     </li>
@@ -128,12 +128,12 @@
             <ul>
                 <c:forEach var="item" items="${pfGameList}" begin="80">
                     <li>
-                        <div>
-                            <a href="${item.selLink}"><img style="width: 100px; height: 100px" src="${item.imgsrc}" alt=""></a>
+                        <div class="game_thumb_img">
+                            <img style="width: 100px; height: 100px" src="${item.imgsrc}" alt="">
                         </div>
                         <div class="rank_info rank_info_game">
                             <span>${item.rankNum}위</span>
-                            <span>${item.gameNm}</span>
+                            <a href="${item.selLink}"><span class="sel_gameNm">${item.gameNm}</span></a>
                             <span>${item.company}</span>
                         </div>
                     </li>

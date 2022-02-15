@@ -241,7 +241,7 @@ img { border-radius: 10px; }
     /* change bg color to get different hues    */
     background-color: salmon;
     color: white;
-    padding: 2em 3em;
+    padding: 30px 45px;
     border: none;
     transition: all .3s ease;
     border-radius: 5px;
