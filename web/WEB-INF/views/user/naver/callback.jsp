@@ -39,7 +39,7 @@
         nUser.gender = gender;
         nUser.profile_image = profile_image;
 
-        console.log(nUser);
+        JSON.stringify(nUser);
     }
 </script>
 </body>
