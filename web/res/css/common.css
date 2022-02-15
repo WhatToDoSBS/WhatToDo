@@ -107,6 +107,7 @@ img { border-radius: 10px; }
 }
 
 #header-login li {
+    font-size: 14px;
     background-color: transparent;
     border: none;
     padding: 0 10px;

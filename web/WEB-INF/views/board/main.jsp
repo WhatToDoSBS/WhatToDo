@@ -67,13 +67,16 @@
     </div>
     <div class="page_info">
         <div class="member_section">
-            <h4><i class="fa-solid fa-users"></i>Member</h4>
+            <h4><i class="fa-solid fa-address-card"></i>Member</h4>
             <div class="flex-center">
                 <ul>
                     <li>
                         <img src="/res/img/profile_taejun.jpg" alt="">
                         <div class="member_info">
-                            <span>김태준</span>
+                            <div class="member_name">
+                                <span>김태준</span>
+                            </div>
+
                             <ul>
                                 <li>전체적인 구성/디자인(CSS) 담당</li>
                                 <li>RANDOM, 크롤링 Logic 구현</li>
@@ -84,7 +87,9 @@
                     <li>
                         <img src="/res/img/profile_taejun.jpg" alt="">
                         <div class="member_info">
-                            <span>최성완</span>
+                            <div class="member_name">
+                                <span>최성완</span>
+                            </div>
                             <ul>
                                 <li>한 일</li>
                                 <li>한 일</li>
@@ -95,7 +100,9 @@
                     <li>
                         <img src="/res/img/profile_taejun.jpg" alt="">
                         <div class="member_info">
-                            <span>손주영</span>
+                            <div class="member_name">
+                                <span>손주영</span>
+                            </div>
                             <ul>
                                 <li>한 일</li>
                                 <li>한 일</li>
