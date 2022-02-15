@@ -107,6 +107,7 @@ img { border-radius: 10px; }
 }
 
 #header-login li {
+    font-size: 14px;
     background-color: transparent;
     border: none;
     padding: 0 10px;
@@ -349,4 +350,14 @@ button.pfBtn.clicked {
     font-size: 14px;
     position: absolute;
     bottom: 0;
+}
+
+#header-color {
+    background-color: rgb(42, 174, 207);
+}
+
+#header-color li:hover {
+    border-radius: 20px;
+    color: white;
+    background-color: lightskyblue;
 }

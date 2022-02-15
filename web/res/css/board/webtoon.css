@@ -341,3 +341,6 @@ button:hover {
     width: 45px;
 }
 
+#modal .heart_section i {
+    color: red;
+}

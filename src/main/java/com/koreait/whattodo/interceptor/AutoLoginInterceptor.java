@@ -39,7 +39,6 @@ public class AutoLoginInterceptor implements HandlerInterceptor {
             }
             if (autoLoginCookie != null) { // 위 과정을 통해 필요한 쿠키가 있어야함
                 UserVo vo = service.login(autoLoginCookie.getValue()); // cookie 안에있는 value 값을통해 로그인을 시도하여 성공하면 vo(반환)에 값을 담아줌
-                System.out.println(vo.getLoginResult());
                 if (vo.getLoginResult().equals(LoginEnum.SUCCESS)) { // 자동로그인 성공시에
                     userUtils.setLoginUser(vo); // 세션에 user정보 담아줌 (기존 login과 같은과정)
 

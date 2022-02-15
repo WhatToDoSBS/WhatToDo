@@ -32,16 +32,17 @@ VALUES ('game'),
        ('youtube'),
        ('list');
 
+
 CREATE TABLE whattodo_user
 (
     iuser      INT UNSIGNED AUTO_INCREMENT,
     uid        VARCHAR(15)  NOT NULL,
     upw        VARCHAR(100) NOT NULL,
     nm         VARCHAR(10)  NOT NULL,
-    gender     TINYINT      NOT NULL CHECK ( gender IN (0, 1, 2, 3) ),
+    gender     TINYINT      NOT NULL DEFAULT 3 CHECK (gender IN (1, 2, 3)),
     profileimg VARCHAR(100),
-    rdt        DATETIME DEFAULT CURRENT_TIMESTAMP,
-    mdt        DATETIME DEFAULT CURRENT_TIMESTAMP,
+    rdt        DATETIME              DEFAULT CURRENT_TIMESTAMP,
+    mdt        DATETIME              DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT PRIMARY KEY (iuser),
     CONSTRAINT UNIQUE (uid)
 );
@@ -63,9 +64,6 @@ CREATE TABLE meca_rankdb
     company VARCHAR(50),
     PRIMARY KEY (irank)
 );
-
-
-
 
 CREATE TABLE steam_rankdb
 (
@@ -92,9 +90,9 @@ CREATE TABLE webtoon
     rating   VARCHAR(10),
     img      VARCHAR(300),
     weekend  VARCHAR(10),
-    homepage INT DEFAULT 1
+    homepage INT DEFAULT 1,
+    CONSTRAINT UNIQUE (nm)
 );
-
 
 CREATE TABLE webtoon_recommand
 (
@@ -120,4 +118,25 @@ CREATE TABLE auto_login
     CONSTRAINT PRIMARY KEY (`index`),
     CONSTRAINT UNIQUE (auto_key),
     CONSTRAINT FOREIGN KEY (user_id) REFERENCES whattodo_user (uid)
+);
+
+CREATE TABLE fav_webtoon
+(
+    nm    VARCHAR(50),
+    iuser INT UNSIGNED,
+    rdt   DATETIME DEFAULT CURRENT_TIMESTAMP,
+    mdt   DATETIME DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (nm, iuser)
+);
+
+CREATE TABLE review_webtoon
+(
+    rnum     INT UNSIGNED auto_increment,
+    ctnt     VARCHAR(500) NOT NULL,
+    nm       VARCHAR(50)  NOT NULL,
+    nickname VARCHAR(50),
+    iuser    INT unsigned,
+    wnum     INT unsigned,
+    PRIMARY KEY (rnum),
+    FOREIGN KEY (`nm`) REFERENCES `webtoon` (`nm`)
 );

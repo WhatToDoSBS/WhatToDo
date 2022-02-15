@@ -25,6 +25,7 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
+    <script defer src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
     <link rel="stylesheet" href="/res/css/<tiles:getAsString name='common'/>.css">
     <link rel="stylesheet" href="/res/css/<tiles:getAsString name='addr1'/>/index.css">
