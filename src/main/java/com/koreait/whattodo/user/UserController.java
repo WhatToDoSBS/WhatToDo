@@ -1,6 +1,7 @@
 package com.koreait.whattodo.user;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.koreait.whattodo.UserUtils;
 import com.koreait.whattodo.enums.user.LoginEnum;
 import com.koreait.whattodo.model.user.UserDto;
@@ -132,14 +133,16 @@ public class UserController {
     }
 
     @GetMapping("/naver/callback")
-    public String naverCallback() {
-        Gson gson = new Gson();
-        UserVo vo = gson.fromJson("nUser", UserVo.class);
+    @ResponseBody
+    public Map<String, String> naverCallback(@PathVariable String uid) {
+        Map<String, String> map = new HashMap();
+        System.out.println(uid);
 
-        System.out.println(vo.getUid());
-        System.out.println(vo.getNm());
-        System.out.println(vo.getGender());
-        System.out.println(vo.getProfileimg());
-        return "user/naver/callback";
+//        UserVo vo = gson.fromJson("nUser", UserVo.class);
+//        System.out.println(vo.getUid());
+//        System.out.println(vo.getNm());
+//        System.out.println(vo.getGender());
+//        System.out.println(vo.getProfileimg());
+        return map;
     }
 }
