@@ -52,3 +52,9 @@ var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
 var popover = new bootstrap.Popover(document.querySelector('.example-popover'), {
     container: 'body'
 })
+
+// tooltip 삽입
+const guide = document.querySelector('.guide_tooltip');
+function guideInput(content) {
+    guide.innerHTML = content;
+}

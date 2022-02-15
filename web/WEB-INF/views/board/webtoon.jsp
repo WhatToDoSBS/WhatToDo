@@ -23,11 +23,8 @@
         </div>
     </div>
     <div class="webtoon_box">
-        <div style="margin: 10px 0;">
-            <button type="button" class="btn btn-danger" data-bs-toggle="popover" title="랜덤 웹툰"
-                    data-bs-content="RESTful api 방식. 사용자가 고르고 싶은 주제를 선택하면 JavaScript에서 분기를 처리해 배경과 글씨색을 바꾸고 선택한 장르에 맞는 랜덤한 데이터를 출력함.">
-                랜덤웹툰 설명 << Click! </button>
-        </div>
+
+
         <div class="choiceBtn_section">
             <button>일상</button>
             <button>개그</button>

@@ -38,6 +38,8 @@
 </head>
 <body>
     <tiles:insertAttribute name="header" />
+    <div class="guide_tooltip">
+    </div>
     <div class="container_box">
         <tiles:insertAttribute name="body" />
     </div>

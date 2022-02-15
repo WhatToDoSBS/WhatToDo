@@ -460,3 +460,6 @@ const enableFav = () => {
 
 
 //좋아요 ------------------------------------------------------------ [end] --
+
+const webtoonGuide = '하이';
+guideInput(webtoonGuide);
