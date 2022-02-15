@@ -42,7 +42,7 @@
                 <img src="/res/img/kakao_login_medium_narrow.png" alt="카카오 로그인" onclick="kakaoLogin();">
             </li>
             <li>
-                <img src="/res/img/naver_login.png" alt="네이버 로그인">
+                <div id="naver_id_login"></div>
             </li>
             <li onclick="kakaoLogout();">
                 <a href="javascript:void(0)">
@@ -53,5 +53,5 @@
     </div>
 </div>
 <!-- 네이버 로그인 버튼 노출 영역 -->
-<div id="naver_id_login"></div>
+
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
