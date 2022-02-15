@@ -242,7 +242,7 @@ img { border-radius: 10px; }
     /* change bg color to get different hues    */
     background-color: salmon;
     color: white;
-    padding: 2em 3em;
+    padding: 30px 45px;
     border: none;
     transition: all .3s ease;
     border-radius: 5px;
@@ -288,14 +288,11 @@ img { border-radius: 10px; }
 }
 
 table, td, th { border: 1px solid #4f4f4f; border-collapse: collapse; }
+
 td, th { padding: 7px; }
 
-button.rtBtn.clicked {
-    background-color: lightgreen;
-}
-
 button.ppBtn.clicked {
-    background-color: lightblue;
+    background-color: dodgerblue;
 }
 
 button.kdBtn.clicked {
@@ -303,7 +300,7 @@ button.kdBtn.clicked {
 }
 
 button.pfBtn.clicked {
-    background-color: lightseagreen;
+    background-color: lightgreen;
 }
 
 
