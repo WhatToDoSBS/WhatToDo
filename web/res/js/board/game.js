@@ -713,7 +713,7 @@
     let dataElem = document.querySelector("#data");
     let gameCmtFrmElem = document.querySelector("#gameCmtFrm");
 
-    if (gameCmtFrmElem) {
+    let insCmt = function () {if (gameCmtFrmElem) {
         gameCmtFrmElem.addEventListener("submit", (e) => {
             e.preventDefault();
         });
@@ -762,12 +762,13 @@
                 console.log(e);
             })
         }
-    }
-    const getCmtList = () => {
+    }}
+
+    const getCmtList = (gameNm) => {
         if (document.querySelector("table")) {
             document.querySelector("table").remove();
         }
-        let gameNm = selectedGameNm;
+        gameNm = selectedGameNm;
         fetch(`/game/${gameNm}`)
             .then(res => {
                 return res.json();
@@ -917,5 +918,220 @@
         return trArr.length;
     }
 
+    let mecaThumbElems = document.querySelectorAll(".meca_thumb_img");
+    let gameThumbElems = document.querySelectorAll(".game_thumb_img");
+
+    mecaThumbElems.forEach(function (item) {
+        item.addEventListener("click", ()=> {
+
+            let selectedGameNm = item.parentNode.children[1].querySelector(".sel_gameNm").textContent;
+
+            function getMrAllRandomGame () {
+                return new Promise(function (resolve, reject) {
+                    fetch("/board/mecarankingjson").then((res) => {
+                        return res.json();
+                    }).then((data) => {
+                        data.forEach( function (item) {
+                        if (item.gameNm == selectedGameNm) {
+
+                            document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${item.selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
+                            document.querySelector(".selected-img").innerHTML = `<img src=${item.imgsrc}>`
+
+                            resolve();
+                        }})
+                    }).catch((err) => {
+                        console.log(err);
+                        reject();
+                    });
+                });
+            }
+            getMrAllRandomGame ();
+
+
+
+            const getCmtList = () => {
+                if (document.querySelector("table")) {
+                    document.querySelector("table").remove();
+                }
+                let gameNm = selectedGameNm;
+                fetch(`/game/${gameNm}`)
+                    .then(res => {
+                        return res.json();
+                    }).then(data => {
+                    console.log(data);
+                    gameCmtListElem.innerText = '';
+                    gameCmtListElem.ctnt = null;
+                    gameCmtFrmElem.ctnt.value = null;
+                    setCmtList(data);
+                }).catch(e => {
+                    console.log(e);
+                });
+            }
+            getCmtList(selectedGameNm);
+
+            let gameCmtFrmElem = document.querySelector("#gameCmtFrm");
+
+            if (gameCmtFrmElem) {
+                gameCmtFrmElem.addEventListener("submit", (e) => {
+                    e.preventDefault();
+                });
+
+                gameCmtFrmElem.cmt_submit.addEventListener('click', () => {
+                    let cmtVal = gameCmtFrmElem.ctnt.value;
+                    if (cmtVal.length === 0) {
+                        alert("내용을 입력해 주세요.");
+                    } else if (cmtVal.includes("<") || cmtVal.includes(">")) {
+                        alert("내용에 < 혹은 >를 사용하실 수 없습니다.");
+                    } else {
+                        insGameCmtAjax(cmtVal);
+                    }
+                });
+                let insGameCmtAjax = (val) => {
+                    let param = {
+                        gameNm: selectedGameNm,
+                        iuser: dataElem.dataset.iuser,
+                        ctnt: val
+                    };
+                    console.log(param);
+                    fetch('/game', {
+                        'method': 'POST',
+                        'headers': {'Content-Type': 'application/json'},
+                        'body': JSON.stringify(param),
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data);
+                            const tableElem = document.querySelector('table');
+                            if (tableElem) {
+                                tableElem.remove();
+                            }
+                            gameCmtListElem.innerText = '';
+                            gameCmtListElem.ctnt = null;
+                            gameCmtFrmElem.ctnt.value = null;
+                            getCmtList();
+
+                        }).catch(e => {
+                        console.log(e);
+                    })
+                }
+            }
+
+            modalWindow.style.display = 'flex';
+            modalXBtn.addEventListener('click', () => {
+                modalWindow.style.display = 'none';
+            })
+            window.addEventListener("keyup", (e) => {
+                if (modalWindow.style.display === "flex" && e.key === "Escape") {
+                    modalWindow.style.display = "none"
+                }
+            })
+        })
+    })
+
+    gameThumbElems.forEach(function (item) {
+        item.addEventListener("click", ()=> {
+            let selectedGameNm = item.parentNode.children[1].querySelector(".sel_gameNm").textContent;
+
+            function getAllPfRandomGame () {
+                return new Promise(function (resolve, reject) {
+                    fetch("/board/platformrankingjson"
+                        ).then((res) => {
+                        return res.json();
+                    }).then((data) => {
+                        data.forEach( function (item) {
+
+                            if (item.gameNm == selectedGameNm) {
+                        document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${item.selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
+                        document.querySelector(".selected-img").innerHTML = `<img src=${item.imgsrc}>`
+
+                        resolve();
+                            }})
+                    }).catch((err) => {
+                        console.log(err);
+
+                        reject();
+                    });
+                });
+            }
+            getAllPfRandomGame();
+
+            const getCmtList = () => {
+                if (document.querySelector("table")) {
+                    document.querySelector("table").remove();
+                }
+                let gameNm = selectedGameNm;
+                fetch(`/game/${gameNm}`)
+                    .then(res => {
+                        return res.json();
+                    }).then(data => {
+                    console.log(data);
+                    gameCmtListElem.innerText = '';
+                    gameCmtListElem.ctnt = null;
+                    gameCmtFrmElem.ctnt.value = null;
+                    setCmtList(data);
+                }).catch(e => {
+                    console.log(e);
+                });
+            }
+            getCmtList(selectedGameNm);
+
+            let gameCmtFrmElem = document.querySelector("#gameCmtFrm");
+
+            if (gameCmtFrmElem) {
+                gameCmtFrmElem.addEventListener("submit", (e) => {
+                    e.preventDefault();
+                });
+
+                gameCmtFrmElem.cmt_submit.addEventListener('click', () => {
+                    let cmtVal = gameCmtFrmElem.ctnt.value;
+                    if (cmtVal.length === 0) {
+                        alert("내용을 입력해 주세요.");
+                    } else if (cmtVal.includes("<") || cmtVal.includes(">")) {
+                        alert("내용에 < 혹은 >를 사용하실 수 없습니다.");
+                    } else {
+                        insGameCmtAjax(cmtVal);
+                    }
+                });
+                let insGameCmtAjax = (val) => {
+                    let param = {
+                        gameNm: selectedGameNm,
+                        iuser: dataElem.dataset.iuser,
+                        ctnt: val
+                    };
+                    console.log(param);
+                    fetch('/game', {
+                        'method': 'POST',
+                        'headers': {'Content-Type': 'application/json'},
+                        'body': JSON.stringify(param),
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data);
+                            const tableElem = document.querySelector('table');
+                            if (tableElem) {
+                                tableElem.remove();
+                            }
+                            gameCmtListElem.innerText = '';
+                            gameCmtListElem.ctnt = null;
+                            gameCmtFrmElem.ctnt.value = null;
+                            getCmtList();
+
+                        }).catch(e => {
+                        console.log(e);
+                    })
+                }
+            }
+
+            modalWindow.style.display = 'flex';
+            modalXBtn.addEventListener('click', () => {
+                modalWindow.style.display = 'none';
+            })
+            window.addEventListener("keyup", (e) => {
+                if (modalWindow.style.display === "flex" && e.key === "Escape") {
+                    modalWindow.style.display = "none"
+                }
+            })
+        })
+    })
 
 }

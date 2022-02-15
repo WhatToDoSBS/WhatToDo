@@ -212,7 +212,8 @@ public class CrawlingService {
         // 크롤링해서 가져온 값의 text만 뽑아서 리스트에 담음.
         for (Element element : rankNum) {
             String num = element.text();
-            String num1 = num.substring(0, num.lastIndexOf(" "));
+            System.out.println(num);
+            String num1 = num.split(" ")[0];
             rankNumList.add(num1);
         }
         for (Element element : gameNm) {
@@ -284,25 +285,26 @@ public class CrawlingService {
             }
 
             // 크롤링 과정
-            Elements imgs = doc.select("div.detail_info > a > img");    // 순위 번호(1,2,3...) 가져오기
+            Element imgs = doc.select("div.detail_info > a > img").first();    // 순위 번호(1,2,3...) 가져오기
 //            Elements name = doc.select("div.title_area.type_keep._title_area > h2 > a > strong");//
 
 
 //
             // 크롤링해서 가져온 값의 src만 뽑아서 리스트에 담음.
-            if(imgs.size() != 0) {
-                for (Element element : imgs) {
-                    System.out.println(i);
+            if(imgs != null) {
                     PlatformImgEntity platformImgEntity = new PlatformImgEntity();
-                    String imgSrc = element.attributes().get("src");
                     platformImgEntity.setGameNm(gameNmList.get(i));
+                    String imgSrc = imgs.attr("src");
+                    System.out.println(i + "번째 img src : " + imgSrc);
                     platformImgEntity.setImgsrc(imgSrc);
                     list.add(platformImgEntity);
-                }
-            } else {
+            }
+        else {
                 PlatformImgEntity platformImgEntity = new PlatformImgEntity();
                 platformImgEntity.setGameNm(gameNmList.get(i));
-//                System.out.println(platformImgEntity);
+                String imgSrc = null;
+                System.out.println(i + "번째 img src : " + imgSrc);
+                platformImgEntity.setImgsrc(imgSrc);
                 list.add(platformImgEntity);
             }
 //            for (Element element : name) {
