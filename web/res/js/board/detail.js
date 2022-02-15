@@ -1,6 +1,8 @@
 let cmtFrmElem = document.querySelector("#cmtFrm");
-let dataElem = document.querySelector("#data");
+let dataElem = document.querySelector("#dataWithIboard");
 let iboard = dataElem.dataset.iboard;
+console.log(dataElem);
+console.log(iboard);
 if(cmtFrmElem) {
     cmtFrmElem.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -67,8 +69,8 @@ let dtCtnt = document.querySelector("#dtCtnt");
 // getDetail();
 
 let cmtListElem = document.querySelector("#cmt_list");
-
-    // const iboard = dataElem.dataset.iboard;
+    console.log(iboard);
+    // let iboard = dataElem.dataset.iboard;
     const getCmtList = () => {
         fetch(`/board/cmt/${iboard}`)
             .then(res => {

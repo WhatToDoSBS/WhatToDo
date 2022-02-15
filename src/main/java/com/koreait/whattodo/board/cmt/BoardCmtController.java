@@ -34,4 +34,11 @@ public class BoardCmtController {
         result.put("result", service.delboard(icmt));
         return result;
     }
+
+    @PutMapping
+    public Map<String, Integer> updBoardCmt(@RequestBody BoardCmtEntity entity) {
+        Map<String, Integer> result = new HashMap<>();
+        result.put("result", service.updBoardCmt(entity));
+        return result;
+    }
 }
