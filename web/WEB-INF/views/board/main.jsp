@@ -30,10 +30,16 @@
                         <div><a href="${randomGame.selLink}"><img src="${randomGame.imgsrc}" alt=""></a></div>
                     </div>
                     <div class="swiper-slide">
-                        <span>뭐하Gee의 Pick</span>
+                        <c:forEach var="item" items="${weeklyMovieList}" begin="0" end="0">
+                        <span>영화관 가서 ${item.movieNm} 어때요?</span>
+                            <div>
+                                <a href="https://www.cgv.co.kr/"><img src="${item.img}" alt=""></a>
+                            </div>
+                        </c:forEach>
                     </div>
-                    ...
                 </div>
+
+
                 <!-- If we need pagination -->
                 <div class="swiper-pagination" id="pagination"></div>
 
