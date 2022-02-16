@@ -133,8 +133,6 @@ public class CrawlingController {
         String platformUrl = "https://trees.gamemeca.com/gamerank/";
         String mecaUrl = "https://www.gamemeca.com/ranking.php";
 
-
-
         boolean canRun = true;
         // 로직 수행 가능여부 설정
         try{ DatagramSocket ds = new DatagramSocket(8090);

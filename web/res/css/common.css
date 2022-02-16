@@ -361,3 +361,9 @@ button.pfBtn.clicked {
     color: white;
     background-color: lightskyblue;
 }
+
+#guide-tooltip {
+    position: fixed;
+    right: 30px;
+    top: 300px;
+}

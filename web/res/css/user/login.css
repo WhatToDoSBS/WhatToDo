@@ -104,7 +104,7 @@ a:hover { color: #C0C0C0 }
 
 .divider {
     display: inline-block;
-    width: calc(50% - 50px);
+    width: calc(50% - 30px);
     height: 1px;
     background: #cccccc;
     margin-top: 11px;

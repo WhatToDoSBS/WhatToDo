@@ -383,7 +383,7 @@ const delCmt = (rnum, tr) => {
 
 // ***************** 좋아요 ************************* //
 
-const favIcon = document.querySelector('.fav_icon');
+const favIcon = document.querySelector('#fav_icon');
 
 favIcon.addEventListener('click', () => {
         console.log('button click');
@@ -393,13 +393,12 @@ favIcon.addEventListener('click', () => {
         if(iuser=='') {
             alert('로그인 해주세요.');
         } else {
-            if (favIcon.classList.contains('fa-heart-crack')) { // no 좋아요
+            if (favIcon.classList.contains('fa-regular')) { // no 좋아요
                 console.log('하트 깨진 상태');
                 const param = {
                     'nm' : dataNm,
                     'iuser' : iuser
                 };
-                // 혹시 저기 그...좋아요 처리 하기 전에 db에서 좋아요 등록 돼 있을때 갖고 나온?? 처리한거 있나요 ??
                 myFetch.post(`/webtoon/fav`, data => {
                     switch (data.result) {
                         case 0:
@@ -420,44 +419,55 @@ favIcon.addEventListener('click', () => {
                             disableFav();
                             break;
                     }
+                    favCntDisplay(data.favcount);
                 });
             }
         }
     });
-
-
 
 const isFav = () => {
     const nm = dataNm;
     myFetch.get(`/webtoon/fav/${nm}`, (data) => {
         switch (data.result) {
             case 0:
-                console.log('실패' + data);
+                console.log('isFav 없음' + data);
                 disableFav();
+                favCntDisplay(data.favcount);
                 break;
             case 1:
-                console.log('성공' + data);
+                console.log('isFav 있음' + data);
                 enableFav();
+                favCntDisplay(data.favcount);
                 break;
         }
+
     });
+}
+const likeCnt = document.querySelector('.like_cnt');
+function favCntDisplay(favCnt) {
+    console.log('favCntDisplay 실행!');
+    likeCnt.innerHTML = `${favCnt}명이 좋아합니다.`;
 }
 
 const disableFav = () => {
     console.log('disableFav 작동 중');
     if (favIcon) {
-        favIcon.classList.remove('fa-heart');
-        favIcon.classList.add('fa-heart-crack');
+        favIcon.classList.remove('fa-solid');
+        favIcon.classList.add('fa-regular');
     }
 }
 
 const enableFav = () => {
     console.log('enableFav 작동 중');
     if (favIcon) {
-        favIcon.classList.remove('fa-heart-crack');
-        favIcon.classList.add('fa-heart');
+        favIcon.classList.remove('fa-regular');
+        favIcon.classList.add('fa-solid');
     }
 }
 
 
 //좋아요 ------------------------------------------------------------ [end] --
+
+var popover = new bootstrap.Popover(document.querySelector('.popover-dismiss'), {
+    trigger: 'focus'
+})

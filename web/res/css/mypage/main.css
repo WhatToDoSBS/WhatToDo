@@ -8,6 +8,12 @@ td {
     font-size: 13px;
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .container_box {
     align-items: normal;
     flex-direction: row;
@@ -23,14 +29,21 @@ td {
     text-align: left;
 }
 
+.info_profileCard {
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .info .info_profileCard div {
-    margin: 10px 0;
+    margin-top: 25px;
 }
 
 .info .info_profileCard .nickname {
     position: absolute;
     margin-top: 15px;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 .btn-link {
@@ -41,4 +54,31 @@ td {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+button {
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.card-body i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.fa-heart {
+    color: red;
+}
+
+.fa-star {
+    color: yellow;
+}
+
+.fa-unlock {
+    color: forestgreen;
+}
+
+.fa-id-card {
+    color: midnightblue;
 }

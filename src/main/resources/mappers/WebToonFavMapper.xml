@@ -13,6 +13,18 @@
           AND iuser = ${iuser}
     </select>
 
+    <select id="selWebtoonMyFav" resultType="FavWebtoonEntity">
+        SELECT *
+        FROM fav_webtoon
+        WHERE iuser = ${iuser}
+    </select>
+
+    <select id="selWebtoonFavCount" resultType="FavWebtoonEntity">
+        SELECT COUNT(iuser) as 'count'
+        FROM fav_webtoon
+        WHERE nm = #{nm}
+    </select>
+
     <delete id="delWebtoonFav">
         DELETE FROM fav_webtoon
         WHERE nm = #{nm}
