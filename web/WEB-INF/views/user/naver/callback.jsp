@@ -20,28 +20,30 @@
         const name = naver_id_login.getProfileData('name');
         const gender = naver_id_login.getProfileData('gender');
         const profile_image = naver_id_login.getProfileData('profile_image');
-
         console.log(email);
         console.log(name);
         console.log(gender);
         console.log(profile_image);
 
-        const naverUser = {
-            uid : email,
-            nm : name,
-            gender : gender,
-            profileimg : profile_image
-        };
 
-        fetch('/user/naver/callback', {
+
+        fetch('http://localhost:8090/user/naver/login', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(naverUser),
-        }).then((response) => console.log(response));
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                'uid' : email,
+                'nm' : name,
+                'gender' : gender,
+                'profileimg' : profile_image
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+        }) .catch((e) => {
+            console.log(e);
+        });
 
-        console.log(naverUser);
 
         <%--if (email === null || email === undefined) {--%>
         <%--    var state = naver_id_login.getUniqState();--%>

@@ -133,16 +133,15 @@ public class UserController {
     }
 
     @GetMapping("/naver/callback")
-    @ResponseBody
-    public Map<String, String> naverCallback(@PathVariable String uid) {
-        Map<String, String> map = new HashMap();
-        System.out.println(uid);
-
-//        UserVo vo = gson.fromJson("nUser", UserVo.class);
-//        System.out.println(vo.getUid());
-//        System.out.println(vo.getNm());
-//        System.out.println(vo.getGender());
-//        System.out.println(vo.getProfileimg());
-        return map;
+    public String naverCallback() {
+        return "/user/naver/callback";
     }
+
+    @PostMapping("/naver/login")
+    @ResponseBody
+    public String naverLogin(@RequestBody Map<String, Integer> map) {
+        System.out.println(map);
+        return "redirect:/board/main";
+    }
+
 }
