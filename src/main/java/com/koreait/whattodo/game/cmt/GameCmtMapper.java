@@ -1,4 +1,4 @@
-package com.koreait.whattodo.game;
+package com.koreait.whattodo.game.cmt;
 
 import com.koreait.whattodo.model.BoardCmtEntity;
 import com.koreait.whattodo.model.GameCmtEntity;
