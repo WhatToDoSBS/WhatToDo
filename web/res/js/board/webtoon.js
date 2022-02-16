@@ -419,12 +419,11 @@ favIcon.addEventListener('click', () => {
                             disableFav();
                             break;
                     }
+                    favCntDisplay(data.favcount);
                 });
             }
         }
     });
-
-
 
 const isFav = () => {
     const nm = dataNm;
@@ -439,7 +438,14 @@ const isFav = () => {
                 enableFav();
                 break;
         }
+
+        favCntDisplay(data.favcount);
     });
+}
+const likeCnt = document.querySelector('.like_cnt');
+function favCntDisplay(favCnt) {
+    console.log('favCntDisplay 실행!');
+    likeCnt.innerHTML = `${favCnt}명이 좋아합니다.`;
 }
 
 const disableFav = () => {
@@ -461,5 +467,6 @@ const enableFav = () => {
 
 //좋아요 ------------------------------------------------------------ [end] --
 
-const webtoonGuide = '하이';
-guideInput(webtoonGuide);
+var popover = new bootstrap.Popover(document.querySelector('.popover-dismiss'), {
+    trigger: 'focus'
+})

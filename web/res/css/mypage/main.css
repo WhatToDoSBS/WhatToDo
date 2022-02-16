@@ -29,8 +29,15 @@ td {
     text-align: left;
 }
 
+.info_profileCard {
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .info .info_profileCard div {
-    margin: 10px 0;
+    margin-top: 25px;
 }
 
 .info .info_profileCard .nickname {
@@ -58,4 +65,20 @@ button {
 .card-body i {
     margin-right: 10px;
     font-size: 18px;
+}
+
+.fa-heart {
+    color: red;
+}
+
+.fa-star {
+    color: yellow;
+}
+
+.fa-unlock {
+    color: forestgreen;
+}
+
+.fa-id-card {
+    color: midnightblue;
 }
