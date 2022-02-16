@@ -10,3 +10,7 @@ table, tbody, td, tfoot, th, thead, tr { border: none; text-align: left }
 i {
     margin: 0 10px;
 }
+
+.fa-heart {
+    color: red;
+}

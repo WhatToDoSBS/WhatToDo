@@ -10,6 +10,7 @@ import java.util.List;
 public interface GameCmtMapper {
     int insGameCmt(GameCmtEntity entity);
     List<GameCmtEntity> selGameCmtList(GameCmtEntity entity);
+    List<GameCmtEntity> selGameCmtListMy(GameCmtEntity entity);
     int delGameCmt(GameCmtEntity entity);
     int updGameCmt(GameCmtEntity entity);
 }

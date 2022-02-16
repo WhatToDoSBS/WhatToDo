@@ -20,6 +20,7 @@
 .gold { color: var(--gold); }
 .sliver { color: var(--sliver); }
 .bronze { color: var(--bronze); }
+.color-red { color: red; }
 
 /* -----display 관련------- */
 .flex-center {
@@ -366,4 +367,11 @@ button.pfBtn.clicked {
     position: fixed;
     right: 30px;
     top: 300px;
+}
+
+#guide-tooltip a {
+    background: none;
+    border: none;
+    color: #0dcaf0;
+    padding: 0;
 }
