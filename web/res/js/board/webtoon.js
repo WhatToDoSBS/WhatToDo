@@ -430,16 +430,17 @@ const isFav = () => {
     myFetch.get(`/webtoon/fav/${nm}`, (data) => {
         switch (data.result) {
             case 0:
-                console.log('실패' + data);
+                console.log('isFav 없음' + data);
                 disableFav();
+                favCntDisplay(data.favcount);
                 break;
             case 1:
-                console.log('성공' + data);
+                console.log('isFav 있음' + data);
                 enableFav();
+                favCntDisplay(data.favcount);
                 break;
         }
 
-        favCntDisplay(data.favcount);
     });
 }
 const likeCnt = document.querySelector('.like_cnt');
