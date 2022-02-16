@@ -1,8 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div hidden id="data" data-iboard="${data.iboard}"
+<div id="dataWithIboard" data-iboard="${data.iboard}"
      data-iuser="${sessionScope.loginUser.iuser}"></div>
+
 <div style="width : 50%">
     <div><p>조회수: ${data.hits} | 등록일시: ${data.rdt} | 글쓴이: ${data.iuser}</p></div>
     <div id="dTitle"><c:out value="${data.title}" /></div>

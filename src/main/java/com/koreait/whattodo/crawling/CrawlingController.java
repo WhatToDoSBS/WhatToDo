@@ -133,21 +133,19 @@ public class CrawlingController {
         String platformUrl = "https://trees.gamemeca.com/gamerank/";
         String mecaUrl = "https://www.gamemeca.com/ranking.php";
 
-
-
         boolean canRun = true;
         // 로직 수행 가능여부 설정
         try{ DatagramSocket ds = new DatagramSocket(8090);
             // 포트점유
-             }
-             catch (SocketException e) { System.out.println("동일한 프로그램이 동작중입니다. 포트 : " + 8090);
+        }
+        catch (SocketException e) { System.out.println("동일한 프로그램이 동작중입니다. 포트 : " + 8090);
             e.printStackTrace();
             canRun = false;
         }
         if(canRun){
-            crawlingService.insertMeca(mecaUrl);
-            crawlingService.insertPlatform(platformUrl);
-            crawlingService.insertPlatformImgList(entity2);
+//            crawlingService.insertMeca(mecaUrl);
+//            crawlingService.insertPlatform(platformUrl);
+//            crawlingService.insertPlatformImgList(entity2);
 
             List gameList = crawlingService.mecaRankList(entity1);
             List platformGameList = crawlingService.platformListWithImg(entity2);

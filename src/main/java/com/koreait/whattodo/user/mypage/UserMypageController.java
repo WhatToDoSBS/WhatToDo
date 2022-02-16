@@ -1,6 +1,7 @@
 package com.koreait.whattodo.user.mypage;
 
 import com.koreait.whattodo.UserUtils;
+import com.koreait.whattodo.board.fav.FavWebtoonService;
 import com.koreait.whattodo.review.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +16,13 @@ public class UserMypageController {
     UserUtils userUtils = new UserUtils();
     @Autowired
     ReviewService reviewService = new ReviewService();
+    @Autowired
+    FavWebtoonService favWebtoonService = new FavWebtoonService();
 
     @GetMapping("/mypage/main")
     public String main(Model model) {
         model.addAttribute("webtoonReviewMy",reviewService.selReviewWebtoonMy());
+        model.addAttribute("webtoonFavMy",favWebtoonService.selWebtoonMyFav());
         if(userUtils.getLoginUserPk()!=0) {
             return "user/mypage/main";
         }
@@ -28,5 +32,11 @@ public class UserMypageController {
     @GetMapping("/mypage/myreview")
     public void myreview(Model model) {
         model.addAttribute("webtoonReviewMy",reviewService.selReviewWebtoonMy());
+
+    }
+
+    @GetMapping("/mypage/myfav")
+    public void myfav(Model model) {
+        model.addAttribute("webtoonFavMy",favWebtoonService.selWebtoonMyFav());
     }
 }
