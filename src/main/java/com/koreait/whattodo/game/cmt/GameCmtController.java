@@ -1,7 +1,5 @@
-package com.koreait.whattodo.game;
+package com.koreait.whattodo.game.cmt;
 
-import com.koreait.whattodo.board.cmt.BoardCmtService;
-import com.koreait.whattodo.model.BoardCmtEntity;
 import com.koreait.whattodo.model.GameCmtEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;

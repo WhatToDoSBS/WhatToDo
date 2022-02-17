@@ -1,13 +1,9 @@
-package com.koreait.whattodo.game;
+package com.koreait.whattodo.game.cmt;
 
 import com.koreait.whattodo.UserUtils;
-import com.koreait.whattodo.board.cmt.BoardCmtMapper;
-import com.koreait.whattodo.model.BoardCmtEntity;
 import com.koreait.whattodo.model.GameCmtEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
