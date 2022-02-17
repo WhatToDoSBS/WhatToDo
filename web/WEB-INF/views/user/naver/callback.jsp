@@ -16,12 +16,12 @@
     naver_id_login.get_naver_userprofile("naverSignInCallback()");
     // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
     function naverSignInCallback() {
-        const email = naver_id_login.getProfileData('email');
+        const id = naver_id_login.getProfileData('id');
         const name = naver_id_login.getProfileData('name');
         const gender = naver_id_login.getProfileData('gender');
         let genderState = 0;
         const profile_image = naver_id_login.getProfileData('profile_image');
-        console.log(email);
+        console.log(id);
         console.log(name);
         console.log(gender);
         console.log(profile_image);
@@ -36,7 +36,7 @@
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                uid: email,
+                uid: id,
                 nm: name,
                 gender: genderState,
                 profileimg: profile_image
@@ -51,19 +51,9 @@
                     location.href = "http://localhost:8090/user/login";
                     break;
                 case 1:
-                    location.href = "http://localhost:8090/board/main";
-                    break;
                 case 2:
                     location.href = "http://localhost:8090/board/main";
                     break;
-                case 3:
-                    var state = naver_id_login.getUniqState();
-                    console.log(state);
-                    alert('정보제공에 동의해주세요');
-                    var uri = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=9CbEg9cxRUs7V2Q6_IMd&state=${state}&redirect_uri=http://localhost:8090/user/naver/callback&auth_type=reprompt`;
-                    location.href = uri;
-                    break;
-
             }
         }).catch((e) => {
            console.log(e)

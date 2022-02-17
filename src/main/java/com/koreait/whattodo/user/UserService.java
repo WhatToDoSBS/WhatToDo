@@ -134,12 +134,12 @@ public class UserService {
         upw = BCrypt.hashpw(upw, BCrypt.gensalt()); // 암호화
         dto.setUpw(upw);
 
-        if (dto.getGender() == 0) { // 성별 없으면 기본값 '선택안함'
-            dto.setGender(3);
+        if (dto.getNm() == null) { // 성함 제공안하면 기본값 '제공안함'
+            dto.setNm("not provided");
         }
 
-        if (dto.getUid() == null || dto.getNm() == null) {
-            return 3; // 필수값 없음 => 동의 안함
+        if (dto.getGender() == 0) { // 성별 없으면 기본값 '선택안함'
+            dto.setGender(3);
         }
 
         try {
