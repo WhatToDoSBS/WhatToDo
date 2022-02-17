@@ -141,7 +141,9 @@ public class UserController {
     @PostMapping("/naver/login")
     @ResponseBody
     public int naverLogin(@RequestBody UserDto dto) {
-        return service.socialLogin(dto);
+        int result = service.socialLogin(dto);
+        System.out.println("API 로그인 결과 : " + result);
+        return result;
     }
 
 }
