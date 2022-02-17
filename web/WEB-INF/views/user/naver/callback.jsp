@@ -19,54 +19,55 @@
         const email = naver_id_login.getProfileData('email');
         const name = naver_id_login.getProfileData('name');
         const gender = naver_id_login.getProfileData('gender');
+        let genderState = 0;
         const profile_image = naver_id_login.getProfileData('profile_image');
         console.log(email);
         console.log(name);
         console.log(gender);
         console.log(profile_image);
 
-
+        if (gender === 'M') {
+            genderState = 1;
+        } else if (gender === 'F') {
+            genderState = 2;
+        }
 
         fetch('http://localhost:8090/user/naver/login', {
-            method: 'POST',
+            method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                'uid' : email,
-                'nm' : name,
-                'gender' : gender,
-                'profileimg' : profile_image
+                uid: email,
+                nm: name,
+                gender: genderState,
+                profileimg: profile_image
             })
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-        }) .catch((e) => {
-            console.log(e);
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            switch (data) {
+                case 0:
+                    alert('로그인 실패');
+                    location.href = "http://localhost:8090/user/login";
+                    break;
+                case 1:
+                    location.href = "http://localhost:8090/board/main";
+                    break;
+                case 2:
+                    location.href = "http://localhost:8090/board/main";
+                    break;
+                case 3:
+                    var state = naver_id_login.getUniqState();
+                    console.log(state);
+                    alert('정보제공에 동의해주세요');
+                    var uri = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=9CbEg9cxRUs7V2Q6_IMd&state=${state}&redirect_uri=http://localhost:8090/user/naver/callback&auth_type=reprompt`;
+                    location.href = uri;
+                    break;
+
+            }
+        }).catch((e) => {
+           console.log(e)
         });
-
-
-        <%--if (email === null || email === undefined) {--%>
-        <%--    var state = naver_id_login.getUniqState();--%>
-        <%--    console.log(state);--%>
-        <%--    alert('이메일 정보는 필수정보 입니다.');--%>
-        <%--    var uri = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=9CbEg9cxRUs7V2Q6_IMd&state=${state}&redirect_uri=http://localhost:8090/user/naver/callback&auth_type=reprompt`;--%>
-        <%--    location.href = uri;--%>
-        <%--} else if (name === null || name === undefined) {--%>
-        <%--    var state = naver_id_login.getUniqState();--%>
-        <%--    console.log(state);--%>
-        <%--    alert('성함은 필수정보 입니다.');--%>
-        <%--    var uri = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=9CbEg9cxRUs7V2Q6_IMd&state=${state}&redirect_uri=http://localhost:8090/user/naver/callback&auth_type=reprompt`;--%>
-        <%--    location.href = uri;--%>
-        <%--} else if (gender === null || gender === undefined) {--%>
-        <%--    var state = naver_id_login.getUniqState();--%>
-        <%--    console.log(state);--%>
-        <%--    alert('성별은 필수정보 입니다.');--%>
-        <%--    var uri = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=9CbEg9cxRUs7V2Q6_IMd&state=${state}&redirect_uri=http://localhost:8090/user/naver/callback&auth_type=reprompt`;--%>
-        <%--    location.href = uri;--%>
-        <%--}--%>
-
-
-
     }
 </script>
 </body>

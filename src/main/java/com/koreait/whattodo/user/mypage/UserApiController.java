@@ -26,7 +26,7 @@ public class UserApiController {
     @PostMapping
     public Map<String, Integer> insReviewWebtoon(@RequestBody UserDto dto) {
         Map<String, Integer> result = new HashMap<>();
-        result.put("resultLogin", userService.kakaoLogin(dto));
+        result.put("resultLogin", userService.socialLogin(dto));
         System.out.println(userUtils.getLoginUserPk());
         return result;
     }
