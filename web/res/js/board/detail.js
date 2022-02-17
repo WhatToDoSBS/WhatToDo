@@ -67,6 +67,8 @@ let dtCtnt = document.querySelector("#dtCtnt");
 //     });
 // }
 // getDetail();
+let likeCountElem = document.querySelector("#likeCount");
+
 
 let cmtListElem = document.querySelector("#cmt_list");
     console.log(iboard);
@@ -105,11 +107,11 @@ let cmtListElem = document.querySelector("#cmt_list");
 
     const makeTr = (table, item) => {
         const tr = document.createElement('tr');
-
+        tr.style.borderBottom = "1px solid darkgray";
         tr.innerHTML = `
         <td>${item.icmt}</td>
         <td>${item.ctnt}</td>
-        <td>${item.iuser}</td>
+        <td>${item.nm}</td>
         `;
 
         const td = document.createElement('td');
@@ -248,10 +250,16 @@ if(lastNBtnElem) {
 }
 
 const likeBtnElem = document.querySelector('#likeBtn');
-const isLike = () => {
+
+
+const isLike = function(iboard) {
+    iboard = dataElem.dataset.iboard;
+    console.log("like i :" + iboard);
     fetch(`/board/like/${iboard}`)
         .then(res => res.json())
         .then((data) => {
+            console.log(data)
+            likeCountElem.innerHTML = `<div style="margin-top: 5px; color: lightpink; font-weight: bolder">${data.count}명의 유저가 좋아합니다.</div>`
             switch (data.result) {
                 case 0:
                     offLike();
@@ -295,7 +303,9 @@ const onLike = () => {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
+                    console.log("ins like board : " + iboard)
                     onLike();
+                    isLike(iboard);
                 })
         } else  {
             fetch(`/board/like/${iboard}`, {
@@ -304,7 +314,9 @@ const onLike = () => {
             }).then(res => res.json())
                 .then(data => {
                     console.log(data);
+                    console.log("del like board : " + iboard);
                     offLike();
+                    isLike(iboard);
                 });
         }
     })

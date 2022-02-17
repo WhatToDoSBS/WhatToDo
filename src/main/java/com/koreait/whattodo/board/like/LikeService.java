@@ -2,6 +2,7 @@ package com.koreait.whattodo.board.like;
 
 import com.koreait.whattodo.UserUtils;
 import com.koreait.whattodo.model.BoardLikeEntity;
+import com.koreait.whattodo.model.GameLikeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,10 @@ public class LikeService {
 
     public BoardLikeEntity selBoardLike(int iboard) {
         return mapper.selBoardLike(createBoardLikeEntity(iboard));
+    }
+
+    public BoardLikeEntity boardLikeCount(BoardLikeEntity entity) {
+        return mapper.boardLikeCount(entity);
     }
 
     public int delBoardLike(int iboard) {

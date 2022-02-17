@@ -18,6 +18,7 @@ public class BoardCmtService {
 
     public int insBoardCmt(BoardCmtEntity entity) {
         entity.setIuser(userUtils.getLoginUserPk());
+        entity.setNm(userUtils.getLoginUserNm());
         return mapper.insBoardCmt(entity);
     }
 

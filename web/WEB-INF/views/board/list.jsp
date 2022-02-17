@@ -31,7 +31,7 @@
                             <td>${item.iboard}</td>
                             <td><c:out value="${item.title}"/></td>
                             <td>${item.hits}</td>
-                            <td>${item.iuser}</td>
+                            <td>${item.nm}</td>
                         </tr>
                     </c:forEach>
                 </table>

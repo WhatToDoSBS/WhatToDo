@@ -2,6 +2,7 @@ package com.koreait.whattodo.board.like;
 
 import com.koreait.whattodo.model.BoardLikeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -24,8 +25,10 @@ public class LikeController {
     @GetMapping("/{iboard}")
     public Map<String, Integer> isLike(@PathVariable int iboard) {
         BoardLikeEntity entity = service.selBoardLike(iboard);
+        int count = service.boardLikeCount(entity).getCount();
         Map<String, Integer> result = new HashMap<>();
         result.put("result", entity == null ? 0 : 1);
+        result.put("count", count);
         return result;
     }
 

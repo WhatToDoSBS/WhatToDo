@@ -18,6 +18,7 @@ public class GameCmtService {
 
     public int insGameCmt(GameCmtEntity entity) {
         entity.setIuser(userUtils.getLoginUserPk());
+        entity.setNm(userUtils.getLoginUserNm());
         return mapper.insGameCmt(entity);
     }
 
