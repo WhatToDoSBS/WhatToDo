@@ -32,6 +32,10 @@ public class ReviewService {
         return reviewMapper.selReviewWebtoonMy(entity);
     }
 
+    public List<ReviewEntity> selReviewAllMy() {
+        return reviewMapper.selReviewAllMy();
+    }
+
     public int delReviewWebtoon(int rnum) {
         ReviewEntity entity = new ReviewEntity();
         entity.setRnum(rnum);

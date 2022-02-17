@@ -24,7 +24,7 @@ public class FavWebtoonController {
     }
 
     @GetMapping("/{nm}")
-    public Map<String, Integer> isFav(@PathVariable String nm, Model model) {
+    public Map<String, Integer> isFav(@PathVariable String nm) {
         FavWebtoonEntity dbEntity = service.selWebtoondFav(nm);
         int favcount = service.selWebtoonFavCnt(nm);
         Map<String, Integer> result = new HashMap<>();

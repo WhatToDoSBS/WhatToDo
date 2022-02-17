@@ -27,6 +27,12 @@ public class GameCmtService {
         return mapper.selGameCmtList(entity);
     }
 
+    public List<GameCmtEntity> selGameCmtListMy() {
+        GameCmtEntity entity = new GameCmtEntity();
+        entity.setIuser(userUtils.getLoginUserPk());
+        return mapper.selGameCmtListMy(entity);
+    }
+
     public int updGameCmt(GameCmtEntity entity) {
         entity.setIuser(userUtils.getLoginUserPk());
         return mapper.updGameCmt(entity);

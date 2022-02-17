@@ -13,6 +13,13 @@
         ORDER BY icmt
     </select>
 
+    <select id="selGameCmtListMy" resultType="GameCmtEntity">
+        SELECT *
+        FROM game_cmt
+        WHERE iuser = ${iuser}
+        ORDER BY icmt DESC
+    </select>
+
     <update id="updGameCmt">
         UPDATE game_cmt
         SET ctnt = #{ctnt}

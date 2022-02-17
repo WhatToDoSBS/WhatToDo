@@ -275,6 +275,10 @@ button:hover {
     margin-top: 10px;
 }
 
+a, a:link, a:visited {
+    color: whitesmoke;
+}
+
 .modalContent li {
     display: flex;
     flex-direction: column;
@@ -291,10 +295,6 @@ button:hover {
 
 .modalContent .webtoonLink {
     display: inline-block;
-}
-
-.modalContent a:link {
-    color: whitesmoke;
 }
 
 .modalContent a:hover {

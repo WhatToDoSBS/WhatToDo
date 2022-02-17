@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.koreait.whattodo.Utils;
 import com.koreait.whattodo.board.BoardService;
 import com.koreait.whattodo.model.*;
+import com.koreait.whattodo.video.VideoService;
 import com.koreait.whattodo.webtoon.WebtoonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,9 @@ public class CrawlingController {
 
     @Autowired
     private WebtoonService webtoonService;
+
+    @Autowired
+    private VideoService videoService;
 
     private Utils utils;
 
@@ -65,6 +69,11 @@ public class CrawlingController {
         model.addAttribute("randomGame", gameList.get(randomGameNum));
         model.addAttribute("randomWebtoon", webtoonRecommandEntityList.get(randomWebtoon));
         model.addAttribute("webtoonListRandom", webtoonService.listWebtoonRandom());
+        List<VideoMovieEntity> list = videoService.listWeeklyMovie();
+        for(int i=0; i< list.size();i++) {
+            videoService.naverImgSearch(list.get(i).getMovieNm());
+        }
+        model.addAttribute("weeklyMovieList", videoService.listWeeklyMovieRandom());
     }
 
     @GetMapping("/book")
