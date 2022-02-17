@@ -12,7 +12,9 @@
 .choiceBtn_section_line { margin: 25px 0;}
 
 .fun-btn { font-weight: bolder;
-    font-size: larger; }
+    background-color: mediumpurple;
+    font-size: larger;
+    padding: 20px 45px;}
 
 .search_section {text-align: center}
 

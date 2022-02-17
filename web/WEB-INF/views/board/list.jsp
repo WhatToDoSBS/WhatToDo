@@ -5,7 +5,7 @@
 <div class="listContainer">
 
     <h1 id="listTitle">자유게시판</h1>
-    <div class="form-group" id="paging">
+    <div class="form-group dropdown" id="paging">
     <select class="form-control" style="width: 20%; font-size: small">
         <option value="5">5개씩 보기</option>
         <option value=10>10개씩 보기</option>

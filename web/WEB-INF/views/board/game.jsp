@@ -53,7 +53,8 @@
         </div>
     </div>
     <div class="search_section">
-        <button class="fun-btn">뭐하Gee?</button>
+        <button class="fun-btn">뭐하Gee?<br>
+        ALL RANDOM</button>
     </div>
 </div>
 
@@ -423,13 +424,11 @@
         <div class="modalContent">
         <div class="gameCmtList"></div>
         <div>
-            <c:if test="${sessionScope.loginUser != null}">
             <form id="gameCmtFrm" class="form-group">
                     <input class="form-control" id="gameCmtCtnt" type="text" name="ctnt">
                     <input style="font-weight: bolder; color: white" class="btn btn-outline-dark" type="button"
                            id="cmt_submit" value="나의 평가 쓰기">
             </form>
-            </c:if>
         </div>
     </div>
 </div>

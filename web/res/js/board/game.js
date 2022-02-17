@@ -737,6 +737,10 @@
     let dataElem = document.querySelector("#data");
     let gameCmtFrmElem = document.querySelector("#gameCmtFrm");
 
+    if(dataElem.dataset.iuser <= 0) {
+        gameCmtFrmElem.style.display = 'none';
+    }
+
     let insCmt = function () {
         if (gameCmtFrmElem) {
             gameCmtFrmElem.addEventListener("submit", (e) => {
@@ -761,8 +765,8 @@
             // }
             let insGameCmtAjax = (val) => {
 
-                // selectedGameNm = gameNm;
-
+                selectedGameNm = gameNm;
+                console.log("ins cmt gameNm : " + selectedGameNm)
                 let param = {
                     gameNm: selectedGameNm,
                     iuser: dataElem.dataset.iuser,
@@ -1053,8 +1057,12 @@
 
     const likeBtnElem = document.querySelector('#likeBtn');
     let likeCountElem = document.querySelector(".like_count")
-    const isLike = (selectedGameNm) => {
-        fetch(`/game/like/${selectedGameNm}`)
+
+
+    const isLike = function(selectedGameNm) {
+        gameNm = selectedGameNm
+        console.log(gameNm);
+        fetch(`/game/like/${gameNm}`)
             .then(res => res.json())
             .then((data) => {
                 console.log(data)
@@ -1088,6 +1096,11 @@
     }
 
     likeBtnElem.addEventListener('click', (e) => {
+        if (dataElem.dataset.iuser <= 0) {
+            alert("로그인 해주세요.");
+            return;
+        }
+
         if(e.target.classList.contains('fa-heart-crack')) {
             const param = {gameNm : gameNm,
                            'iuser' : dataElem.dataset.iuser};
@@ -1100,7 +1113,9 @@
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
+                    console.log("ins like gameNm : " + gameNm)
                     onLike();
+                    isLike(gameNm);
                 })
         } else  {
             fetch(`/game/like/${gameNm}`, {
@@ -1109,10 +1124,11 @@
             }).then(res => res.json())
                 .then(data => {
                     console.log(data);
+                    console.log("del like gameNm : " + gameNm);
                     offLike();
+                    isLike(gameNm);
                 });
         }
-        isLike(selectedGameNm);
     })
 
 }
