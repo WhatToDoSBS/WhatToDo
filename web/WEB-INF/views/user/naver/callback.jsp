@@ -10,6 +10,11 @@
 <body>
 <div>로그인 중입니다.</div>
 <script type="text/javascript">
+    var link = document.location.href.split("?").reverse()[0];
+    if (link.indexOf("error") === 0) {
+        location.href = "http://localhost:8090/user/login";
+    }
+
     var naver_id_login = new naver_id_login("9CbEg9cxRUs7V2Q6_IMd", "http://localhost:8090/user/naver/callback");
     // 접근 토큰 값 출력
     // 네이버 사용자 프로필 조회
@@ -21,6 +26,7 @@
         const gender = naver_id_login.getProfileData('gender');
         let genderState = 0;
         const profile_image = naver_id_login.getProfileData('profile_image');
+
         console.log(id);
         console.log(name);
         console.log(gender);
