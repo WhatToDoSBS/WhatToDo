@@ -35,8 +35,7 @@ public class UserMypageController {
 
     @GetMapping("/mypage/myreview")
     public void myreview(Model model) {
-        model.addAttribute("webtoonReviewMy",reviewService.selReviewWebtoonMy());
-        model.addAttribute("gameCmtMy", gameCmtService.selGameCmtListMy());
+        model.addAttribute("reviewAll",reviewService.selReviewAllMy());
     }
 
     @GetMapping("/mypage/myfav")

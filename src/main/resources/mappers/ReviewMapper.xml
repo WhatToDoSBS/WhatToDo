@@ -23,6 +23,10 @@
         ORDER BY rnum DESC
     </select>
 
+    <select id="selReviewAllMy" resultType="ReviewEntity">
+        SELECT nm, ctnt, rdt FROM review_webtoon UNION ALL SELECT gameNm AS nm, ctnt, rdt FROM game_cmt ORDER BY rdt desc;
+    </select>
+
     <update id="updReviewWebtoon">
         UPDATE review_webtoon
         SET ctnt = #{ctnt}

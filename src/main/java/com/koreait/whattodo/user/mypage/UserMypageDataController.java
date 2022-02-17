@@ -41,4 +41,7 @@ public class UserMypageDataController {
     public List<ReviewEntity> webtoonReviewMyList() {
         return reviewService.selReviewWebtoonMy();
     }
+
+    @GetMapping("/cmt-all-mylist")
+    public List<ReviewEntity> reviewAllMyList() { return reviewService.selReviewAllMy(); }
 }

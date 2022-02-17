@@ -1,13 +1,11 @@
 function changeVal(val) {
     console.log(val);
     if (val == 1) {
-        console.log('전체');
+        allReviewList()
     } else if (val == 2) {
         webtoonCmtList();
-        console.log('웹툰만');
     } else if (val == 3) {
         gameCmtList();
-        console.log('게임만');
     } else {
         console.log('처음 상태');
     }
@@ -19,9 +17,14 @@ const gameCmtList = () => {
     });
 }
 
-
 const webtoonCmtList = () => {
     myFetch.get(`/webtoon/mypage/cmt-webtoon-mylist`, (data) => {
+        setWebtoonList(data);
+    });
+}
+
+const allReviewList = () => {
+    myFetch.get(`/webtoon/mypage/cmt-all-mylist`, (data) => {
         setWebtoonList(data);
     });
 }
@@ -83,11 +86,7 @@ const makeTr = item => {
 }
 
 const makeWebtoonTr = item => {
-    console.log(item);
     const tr =document.createElement('tr');
-    console.log(item.gameNm);
-    console.log(item.ctnt);
-    console.log(item.rdt);
     tr.innerHTML = `
             <td>${item.nm}</td>
                 <td>${item.ctnt}</td>
@@ -97,3 +96,4 @@ const makeWebtoonTr = item => {
     tr.appendChild(td);
     return tr;
 }
+
