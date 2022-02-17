@@ -10,4 +10,5 @@ public class FavWebtoonEntity {
     private String nm;
     private String rdt;
     private String mdt;
+    private int count;
 }

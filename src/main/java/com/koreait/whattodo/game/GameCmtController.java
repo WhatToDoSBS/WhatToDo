@@ -36,4 +36,11 @@ public class GameCmtController {
         result.put("result", service.delGameCmt(icmt));
         return result;
     }
+
+    @PutMapping
+    public Map<String, Integer> updBoardCmt(@RequestBody GameCmtEntity entity) {
+        Map<String, Integer> result = new HashMap<>();
+        result.put("result", service.updGameCmt(entity));
+        return result;
+    }
 }

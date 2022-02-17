@@ -111,12 +111,11 @@
 
         if (ppBtns[0].classList.contains("clicked")) {
             mecaData.getMrTopRandomGame()
-        .then(function () {
-                getCmtList();
-            }).catch(function (e) {
+                .then(function () {
+                    getCmtList();
+                }).catch(function (e) {
                 console.log(e);
             });
-                    getCmtList();
         } else if (ppBtns[1].classList.contains("clicked")) {
             mecaData.getMrGreatRandomGame()
                 .then(function () {
@@ -124,7 +123,6 @@
                 }).catch(function (e) {
                 console.log(e);
             });
-                    getCmtList();
         } else if (ppBtns[2].classList.contains("clicked")) {
             mecaData.getMrGoodRandomGame()
                 .then(function () {
@@ -132,7 +130,6 @@
                 }).catch(function (e) {
                 console.log(e);
             });
-                    getCmtList();
         } else {
             mecaData.getMrAllRandomGame()
                 .then(function () {
@@ -154,16 +151,16 @@
     kdBtn.addEventListener("click", function async () {
         if (kdBtns[0].classList.contains("clicked")) {
             genreData.getRpgRandomGame()
-        .then(function () {
-                getCmtList();
-            }).catch(function (e) {
+                .then(function () {
+                    getCmtList();
+                }).catch(function (e) {
                 console.log(e);
             });
         } else if (kdBtns[1].classList.contains("clicked")) {
             genreData.getFpsRandomGame()
-        .then(function () {
-                getCmtList();
-            }).catch(function (e) {
+                .then(function () {
+                    getCmtList();
+                }).catch(function (e) {
                 console.log(e);
             });
         } else if (kdBtns[2].classList.contains("clicked")) {
@@ -284,8 +281,8 @@
         } else {
             pfData.getAllPfRandomGame()
                 .then(function () {
-                getCmtList();
-            }).catch(function (e) {
+                    getCmtList();
+                }).catch(function (e) {
                 console.log(e);
             });
         }
@@ -763,12 +760,13 @@
             })
         }
     }}
+    insCmt();
 
-    const getCmtList = (gameNm) => {
+    const getCmtList = () => {
         if (document.querySelector("table")) {
             document.querySelector("table").remove();
         }
-        gameNm = selectedGameNm;
+        let gameNm = selectedGameNm;
         fetch(`/game/${gameNm}`)
             .then(res => {
                 return res.json();
@@ -822,7 +820,7 @@
             modBtn.classList.add('boardBtn');
             modBtn.addEventListener('click', () => {
                 const tdArr = tr.querySelectorAll('td');
-                const tdCell = tdArr[1];//댓글 내용
+                const tdCell = tdArr[0];//댓글 내용
 
                 const modInput = document.createElement('input');
                 modInput.value = item.ctnt;
@@ -932,13 +930,13 @@
                         return res.json();
                     }).then((data) => {
                         data.forEach( function (item) {
-                        if (item.gameNm == selectedGameNm) {
+                            if (item.gameNm == selectedGameNm) {
 
-                            document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${item.selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
-                            document.querySelector(".selected-img").innerHTML = `<img src=${item.imgsrc}>`
+                                document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${item.selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
+                                document.querySelector(".selected-img").innerHTML = `<img src=${item.imgsrc}>`
 
-                            resolve();
-                        }})
+                                resolve();
+                            }})
                     }).catch((err) => {
                         console.log(err);
                         reject();
@@ -971,12 +969,10 @@
 
             let gameCmtFrmElem = document.querySelector("#gameCmtFrm");
 
-            if (gameCmtFrmElem) {
-                gameCmtFrmElem.addEventListener("submit", (e) => {
+            function gameCmtIns () {
+                if (gameCmtFrmElem) {
+                gameCmtFrmElem.cmt_submit.addEventListener('click', (e) => {
                     e.preventDefault();
-                });
-
-                gameCmtFrmElem.cmt_submit.addEventListener('click', () => {
                     let cmtVal = gameCmtFrmElem.ctnt.value;
                     if (cmtVal.length === 0) {
                         alert("내용을 입력해 주세요.");
@@ -1014,18 +1010,23 @@
                         console.log(e);
                     })
                 }
-            }
+            }}
 
-            modalWindow.style.display = 'flex';
+            gameCmtIns();
+
+            modalWindow.style.display = 'flex'
             modalXBtn.addEventListener('click', () => {
+                gameCmtFrmElem.cmt_submit.removeEventListener("click", gameCmtIns());
                 modalWindow.style.display = 'none';
             })
             window.addEventListener("keyup", (e) => {
                 if (modalWindow.style.display === "flex" && e.key === "Escape") {
+                    gameCmtFrmElem.cmt_submit.removeEventListener("click", gameCmtIns());
                     modalWindow.style.display = "none"
                 }
             })
         })
+
     })
 
     gameThumbElems.forEach(function (item) {
@@ -1041,10 +1042,10 @@
                         data.forEach( function (item) {
 
                             if (item.gameNm == selectedGameNm) {
-                        document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${item.selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
-                        document.querySelector(".selected-img").innerHTML = `<img src=${item.imgsrc}>`
+                                document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${item.selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
+                                document.querySelector(".selected-img").innerHTML = `<img src=${item.imgsrc}>`
 
-                        resolve();
+                                resolve();
                             }})
                     }).catch((err) => {
                         console.log(err);

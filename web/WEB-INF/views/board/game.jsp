@@ -82,7 +82,7 @@
                     </div>
                     <div class="rank_info rank_info_game">
                         <span>${item.rankNum}위</span>
-                        <a href="${item.selLink}"><span class="sel_gameNm">${item.gameNm}</span></a>
+                        <a href="${item.selLink}" target='_blank'><span class="sel_gameNm">${item.gameNm}</span></a>
                         <span>${item.company}</span>
                     </div>
                 </li>
@@ -99,7 +99,7 @@
                         </div>
                         <div class="rank_info rank_info_game">
                             <span>${item.rankNum}위</span>
-                            <a href="${item.selLink}"><span class="sel_gameNm">${item.gameNm}</span></a>
+                            <a href="${item.selLink}" target='_blank'><span class="sel_gameNm">${item.gameNm}</span></a>
                             <span>${item.company}</span>
                         </div>
                     </li>
@@ -116,7 +116,7 @@
                         </div>
                         <div class="rank_info rank_info_game">
                             <span>${item.rankNum}위</span>
-                            <a href="${item.selLink}"><span class="sel_gameNm">${item.gameNm}</span></a>
+                            <a href="${item.selLink}" target='_blank'><span class="sel_gameNm">${item.gameNm}</span></a>
                             <span>${item.company}</span>
                         </div>
                     </li>
@@ -133,7 +133,7 @@
                         </div>
                         <div class="rank_info rank_info_game">
                             <span>${item.rankNum}위</span>
-                            <a href="${item.selLink}"><span class="sel_gameNm">${item.gameNm}</span></a>
+                            <a href="${item.selLink}" target='_blank'><span class="sel_gameNm">${item.gameNm}</span></a>
                             <span>${item.company}</span>
                         </div>
                     </li>
