@@ -58,7 +58,10 @@
                     break;
                 case 3:
                     var state = naver_id_login.getUniqState();
-                    location.href = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=9CbEg9cxRUs7V2Q6_IMd&state=${state}&redirect_uri=http://localhost:8090/user/naver/callback&auth_type=reprompt`;
+                    console.log(state);
+                    alert('정보제공에 동의해주세요');
+                    var uri = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=9CbEg9cxRUs7V2Q6_IMd&state=${state}&redirect_uri=http://localhost:8090/user/naver/callback&auth_type=reprompt`;
+                    location.href = uri;
                     break;
 
             }
