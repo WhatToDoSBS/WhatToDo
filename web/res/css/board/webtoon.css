@@ -145,6 +145,7 @@ button:hover {
 .webtoon_box .result_box #genre_title {
     font-family: 'LeferiPoint-BlackA';
     font-size: 24px;
+    margin: 10px 0;
 }
 
 .webtoon_box .webtoon_nm {
@@ -212,7 +213,7 @@ button:hover {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin: 0 10px;
+    margin: 10px;
 }
 
 .like_cnt {
@@ -274,7 +275,7 @@ button:hover {
 }
 
 .modalContent {
-    margin-top: 10px;
+    margin: 30px;
     padding: 0px 10px;
     text-shadow: 1px 1px 2px gray;
     color: white;
@@ -301,6 +302,10 @@ button:hover {
 
 .modalContent .webtoonLink {
     display: inline-block;
+}
+
+.modalContent a {
+    margin: 10px 0;
 }
 
 .modalContent a:hover {
