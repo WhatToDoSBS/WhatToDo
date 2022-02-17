@@ -81,7 +81,7 @@ button:hover {
 }
 
 #recommand_box .webtoon_recommand_title {
-    font-family: 'MaplestoryOTFBold';
+    font-family: 'SBAggroM', 'sans-serif';
     font-size: 24px;
 }
 
@@ -345,7 +345,7 @@ button:hover {
     border-radius: 30px;
     height: 30px;
     border: 0;
-    width: 220px;
+    width: 300px;
     margin-left: 20px;
     padding: 10px;
     font-size: 14px;
@@ -369,6 +369,7 @@ button:hover {
     padding: 10px;
     border-radius: 30px;
     height: 28px;
+    width: 100%;
 }
 
 .buttonStyle {
@@ -381,7 +382,7 @@ button:hover {
 
 table {
     table-layout: fixed;
-    width: 350px;
+    width: 400px;
 }
 
 th:first-child {

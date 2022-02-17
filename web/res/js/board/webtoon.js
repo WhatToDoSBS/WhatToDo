@@ -336,6 +336,7 @@ const makeTr = item => {
             console.log('수정 버튼 클릭');
             const tdArr = tr.querySelectorAll('td');
             const tdCell = tdArr[0];
+            const tdSaveCell = tdArr[2];
 
             const modInput = document.createElement('input');
             modInput.value = item.ctnt;
@@ -365,8 +366,7 @@ const makeTr = item => {
             });
 
             tdCell.innerHTML = null;
-            tdCell.appendChild(modInput);
-            tdCell.appendChild(saveBtn);
+            tdCell.appendChild(modInput);   // 첫번째 열에 수정 내용
 
             const cancelBtn = document.createElement('input');
             cancelBtn.type = 'button';
@@ -377,14 +377,16 @@ const makeTr = item => {
                 tdCell.innerText = item.ctnt;
                 removeCancelBtn();
             });
+            tdSaveCell.appendChild(cancelBtn);    // 세번째 열에 저장 버튼
 
             const removeCancelBtn = () => {
                 modBtn.classList.remove('hidden');
                 delBtn.classList.remove('hidden');
                 cancelBtn.remove();
+                saveBtn.remove();
             }
 
-            td.insertBefore(cancelBtn, modBtn);
+            td.insertBefore(saveBtn, modBtn);
             modBtn.classList.add('hidden');
             delBtn.classList.add('hidden');
         });
