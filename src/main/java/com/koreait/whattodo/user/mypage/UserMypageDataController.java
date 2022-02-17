@@ -2,7 +2,7 @@ package com.koreait.whattodo.user.mypage;
 
 import com.koreait.whattodo.UserUtils;
 import com.koreait.whattodo.board.fav.FavWebtoonService;
-import com.koreait.whattodo.game.GameCmtService;
+import com.koreait.whattodo.game.cmt.GameCmtService;
 import com.koreait.whattodo.model.FavWebtoonEntity;
 import com.koreait.whattodo.model.GameCmtEntity;
 import com.koreait.whattodo.model.ReviewEntity;

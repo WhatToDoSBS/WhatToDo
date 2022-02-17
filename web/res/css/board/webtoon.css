@@ -26,6 +26,9 @@
     font-style: normal;
 }
 
+.modalContent a {
+    color: whitesmoke;
+}
 h1 {
     text-align: center;
 }
@@ -273,10 +276,6 @@ button:hover {
 
 .modalContent #webtoon_databox {
     margin-top: 10px;
-}
-
-a, a:link, a:visited {
-    color: whitesmoke;
 }
 
 .modalContent li {

@@ -15,6 +15,12 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'SBAggroM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroM.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 /* -----색상------- */
 .gold { color: var(--gold); }
@@ -58,6 +64,8 @@
     text-decoration: none;
     box-sizing: border-box;
 }
+
+a, a:link, a:visited, a:active, a:hover { color: black; text-decoration: none; }
 
 html,
 body {
@@ -147,12 +155,13 @@ img { border-radius: 10px; }
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'SBAggroM', 'sans-serif';
     font-weight: normal;
-    font-size: 20px;
+    font-size: 22px;
     float: left;
     margin: 7px 20px;
-    padding: 5px 15px;
+    padding: 0 15px;
+    padding-top: 3px;
 }
 
 .header_menu li:hover {
@@ -369,8 +378,6 @@ button.pfBtn.clicked {
 #guide-tooltip a {
     background: none;
     border: none;
-    color: #0dcaf0;
-    padding: 0;
 }
 
 #guide-tooltip .btn-outline-info {

@@ -2,8 +2,7 @@ package com.koreait.whattodo.user.mypage;
 
 import com.koreait.whattodo.UserUtils;
 import com.koreait.whattodo.board.fav.FavWebtoonService;
-import com.koreait.whattodo.game.GameCmtMapper;
-import com.koreait.whattodo.game.GameCmtService;
+import com.koreait.whattodo.game.cmt.GameCmtService;
 import com.koreait.whattodo.review.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

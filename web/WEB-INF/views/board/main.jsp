@@ -56,20 +56,20 @@
                 <div class="button-group">
                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group" id="mainBtnGroup">
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-                        <label class="btn btn-light shadow-none" for="btnradio1" style="border-top-left-radius: 4px;
-                        border-bottom-left-radius: 4px;"><a href="/board/list">자유게시판</a></label>
+                        <a href="/board/list" class="btn btn-light shadow-none" for="btnradio1" style="border-top-left-radius: 4px;
+                        border-bottom-left-radius: 4px;">자유게시판</a>
 
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-                        <label class="btn btn-light shadow-none" for="btnradio2"><a href="">순위</a> </label>
+                        <a href="" class="btn btn-light shadow-none" for="btnradio1">순위</a>
 
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-                        <label class="btn btn-light shadow-none" for="btnradio3"><a href="">RANDOM</a></label>
+                        <a href="/board/list" class="btn btn-light shadow-none" for="btnradio1">랜덤</a>
 
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
-                        <label class="btn btn-light shadow-none" for="btnradio4"><a href="/board/webtoon">웹툰</a></label>
+                        <a href="/board/webtoon" class="btn btn-light shadow-none" for="btnradio1">웹툰</a>
 
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off">
-                        <label class="btn btn-light shadow-none" for="btnradio5"><a href="/board/game">게임</a></label>
+                        <a href="/board/game" class="btn btn-light shadow-none" for="btnradio1">게임</a>
                     </div>
                 </div>
             </div>
