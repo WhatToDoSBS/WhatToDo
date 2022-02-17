@@ -42,12 +42,13 @@ public class UserService {
         return upw.matches(Regex.PASSWORD);
     }
 
-    public int join(UserEntity entity) { // 회원가입 로직
+    public int join(UserDto dto) { // 회원가입 로직
         UserDto copyEntity = new UserDto();
-        BeanUtils.copyProperties(entity, copyEntity);
+        BeanUtils.copyProperties(dto, copyEntity); // 같은거 하나더 만듬
 
         String hashPw = BCrypt.hashpw(copyEntity.getUpw(), BCrypt.gensalt());
         copyEntity.setUpw(hashPw); // 비밀번호 해시화 해서 넣음
+        System.out.println(dto.getGender());
         return mapper.insUser(copyEntity);
     }
 
@@ -124,12 +125,27 @@ public class UserService {
         mapper.delAutoLoginKey(loginKey); // value 값으로 만료기한을 현재시간으로 갱신시키고 만료여부를 true 로 바꿈
     }
 
-    public int kakaoLogin(UserDto dto) {
+    public int socialLogin(UserDto dto) {
         UserVo vo = null;
+        String upw = String.format("%f%s%f",
+                Math.random(),
+                new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date()),
+                Math.random()); // 비밀번호 = 0~9랜덤값 , 오늘날짜 , 0~9랜덤값
+        upw = BCrypt.hashpw(upw, BCrypt.gensalt()); // 암호화
+        dto.setUpw(upw);
+
+        if (dto.getGender() == 0) { // 성별 없으면 기본값 '선택안함'
+            dto.setGender(3);
+        }
+
+        if (dto.getUid() == null || dto.getNm() == null) {
+            return 3; // 필수값 없음 => 동의 안함
+        }
+
         try {
             if (mapper.selUser(dto) == null) {
                 mapper.insUser(dto);
-                vo = mapper.selUser(dto);
+                vo = mapper.selUser(dto); // iuser 값 필요해서 넘어온 db값을 vo에 다시 담음
                 userUtils.setLoginUser(vo);
                 return 1;   // 아이디가 없어서 회원가입 처리
             }
@@ -139,6 +155,6 @@ public class UserService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return 0;   // 아예 안됨(JSON이 못 가져옴)
+        return 0;   // db에서 값 반환이 안됨
     }
 }

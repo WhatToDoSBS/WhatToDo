@@ -25,7 +25,7 @@ function kakaoLogin() {
                         url: '/v2/user/me',
                         success: function (data) {
                             console.log(data);
-                            insKakaoInfo(data.id,data.id,data.properties.nickname,data.properties.profile_image);
+                            insKakaoInfo(data.id,data.properties.nickname,data.properties.profile_image);
                             },
                         fail: function (error) {
                             console.log(error)
@@ -58,10 +58,9 @@ function kakaoLogout() {
     }
 }
 
-function insKakaoInfo(uid, upw, nm, profileImg) {
+function insKakaoInfo(uid, nm, profileImg) {
     const param = {
         'uid' : uid,
-        'upw' : upw,
         'nm' : nm,
         'profileImg' : profileImg
     };

@@ -117,14 +117,15 @@ public class UserController {
     }
 
     @PostMapping("/join")
-    public String joinPost(UserEntity entity, Model model) {
+    public String joinPost(UserDto dto, Model model) {
         UserEntity loginUser = userUtils.getLoginUser();
         // 로그인 세션을 가져와서 로그인한 유저일경우 회원가입접근 막음
         if (loginUser != null) {
             return "redirect:/board/main";
         }
 
-        int result = service.join(entity);
+        System.out.println();
+        int result = service.join(dto);
         if (result == 1) {
             return "redirect:/user/login";
         }
@@ -139,9 +140,8 @@ public class UserController {
 
     @PostMapping("/naver/login")
     @ResponseBody
-    public String naverLogin(@RequestBody Map<String, Integer> map) {
-        System.out.println(map);
-        return "redirect:/board/main";
+    public int naverLogin(@RequestBody UserDto dto) {
+        return service.socialLogin(dto);
     }
 
 }
