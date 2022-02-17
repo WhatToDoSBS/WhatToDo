@@ -255,6 +255,7 @@ i {
 }
 
 #video_section {
+    height: 300px;
     border-top: 1px solid #ebeff8;
     border-bottom: 1px solid #ebeff8;
     display: inline-block;

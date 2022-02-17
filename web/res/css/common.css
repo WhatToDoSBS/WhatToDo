@@ -375,3 +375,7 @@ button.pfBtn.clicked {
     color: #0dcaf0;
     padding: 0;
 }
+
+#guide-tooltip .btn-outline-info {
+    background: white;
+}
