@@ -49,7 +49,14 @@
             <button id="randomSubmitBtn" class="fun-btn">RANDOM</button>
             <button class="crawlingBtn">크롤링</button>
         </div>
-        <div class="result_box">
+        <div class="result_box" data-iuser="${sessionScope.loginUser.iuser}"
+             data-writernm="${sessionScope.loginUser.nm}">
+            <div class="random-card webtoonModalElement" id="resultBoxData" data-nm="${webtoonNm}" data-writer="${webtoonWriter}" >
+                <div class="genre_title" id="genre_title"><b>${btnGenre}</b></div>
+                <div><img src="${webtoonimg}"></div>
+                <div class="random-webtoon-nm"><span class="card-nm"><b>${webtoonNm}</b></span>
+                    <div><span class="card-writer">${webtoonWriter}</span></div></div>
+                <div class="webtoonLink"><span><a href="${webtoonLink}"> >>보러가기<< </a></span></div></div>
         </div>
     </div>
     <div id="recommand_box">
