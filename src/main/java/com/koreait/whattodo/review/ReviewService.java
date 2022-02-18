@@ -38,15 +38,17 @@ public class ReviewService {
     }
 
     public List<ReviewEntity> selReviewWebtoonMyPaging(UserPagingDTO dto) {
+        dto.setIuser(userUtils.getLoginUserPk());
         return reviewMapper.selReviewWebtoonMyPaging(dto);
     }
     public List<ReviewEntity> selReviewGameMyPaging(UserPagingDTO dto) {
+        dto.setIuser(userUtils.getLoginUserPk());
         return reviewMapper.selReviewGameMyPaging(dto);
     }
     public List<ReviewEntity> selReviewAllMyPaging(UserPagingDTO dto) {
 //        dto.setPage(2); // 보여줄 페이지(시작 행, 2로 지정하면 (2-1)*10이 되서 10번째 값부터 PerPageNum개만큼 출력
 //        dto.setPerPageNum(10);  // 한 페이지에 보여줄 갯수
-
+        dto.setIuser(userUtils.getLoginUserPk());
         return reviewMapper.selReviewAllMyPaging(dto);
     }
 

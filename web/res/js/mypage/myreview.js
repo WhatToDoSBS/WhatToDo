@@ -1,10 +1,12 @@
 function changeVal(val) {
     console.log(val);
+    const selectForm = document.querySelector('.form-select');
     if (val == 1) {
+
         // allReviewList()
     } else if (val == 2) {
         location.href = '/user/mypage/myreview?category=' + val;
-        // webtoonCmtList();
+        $("#select_form").val(2).prop("selected", true);
     } else if (val == 3) {
         location.href = '/user/mypage/myreview?category=' + val;
         // gameCmtList();

@@ -9,10 +9,7 @@ import com.koreait.whattodo.review.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/user")
@@ -42,7 +39,14 @@ public class UserMypageController {
         pageMaker.setUserPagingDTO(dto);
         pageMaker.setTotalCount(reviewService.selReviewAllMy().size());
 
-        model.addAttribute("pageList", reviewService.selReviewAllMyPaging(dto));
+        if(dto.getCategory()==2) {
+            model.addAttribute("pageList", reviewService.selReviewWebtoonMyPaging(dto));
+        } else if(dto.getCategory()==3) {
+            model.addAttribute("pageList", reviewService.selReviewGameMyPaging(dto));
+        } else {
+            model.addAttribute("pageList", reviewService.selReviewAllMyPaging(dto));
+        }
+
         model.addAttribute("pageMaker", pageMaker);
     }
 

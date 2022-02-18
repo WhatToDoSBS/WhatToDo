@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserPagingDTO {
+public class UserPagingDTO extends UserEntity {
     private int page;
     private int perPageNum;
     private int category;

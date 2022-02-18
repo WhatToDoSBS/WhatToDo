@@ -23,6 +23,10 @@
         ORDER BY rnum DESC
     </select>
 
+    <select id="selReviewAllMy" resultType="ReviewEntity">
+        SELECT nm, ctnt, rdt FROM review_webtoon UNION ALL SELECT gameNm AS nm, ctnt, rdt FROM game_cmt ORDER BY rdt desc;
+    </select>
+
     <select id="selReviewGameMyPaging" resultType="ReviewEntity">
         SELECT gameNm AS nm, ctnt, rdt
         FROM game_cmt
@@ -34,15 +38,13 @@
         SELECT *
         FROM review_webtoon
         WHERE iuser = ${iuser}
-        ORDER BY rdt desc DESC LIMIT ${pageStart}, ${perPageNum};
-    </select>
-
-    <select id="selReviewAllMy" resultType="ReviewEntity">
-        SELECT nm, ctnt, rdt FROM review_webtoon UNION ALL SELECT gameNm AS nm, ctnt, rdt FROM game_cmt ORDER BY rdt desc;
+        ORDER BY rdt desc LIMIT ${pageStart}, ${perPageNum};
     </select>
 
     <select id="selReviewAllMyPaging" resultType="ReviewEntity">
-        SELECT nm, ctnt, rdt FROM review_webtoon UNION ALL SELECT gameNm AS nm, ctnt, rdt FROM game_cmt ORDER BY rdt desc LIMIT ${pageStart}, ${perPageNum};
+        SELECT nm, ctnt, rdt FROM review_webtoon UNION ALL SELECT gameNm AS nm, ctnt, rdt FROM game_cmt
+        WHERE iuser=${iuser}
+        ORDER BY rdt desc LIMIT ${pageStart}, ${perPageNum};
     </select>
 
     <update id="updReviewWebtoon">
