@@ -252,3 +252,8 @@ i {
     font-size: larger;
     margin-top: 10px;
 }
+
+#crawingBtn {
+    margin-top: 20px;
+    font-weight: bolder;
+}

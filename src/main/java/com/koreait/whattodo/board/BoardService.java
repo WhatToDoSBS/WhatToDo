@@ -21,6 +21,7 @@ public class BoardService {
 
     public int insBoard(BoardEntity entity) {
         entity.setIuser(userUtils.getLoginUserPk());
+        entity.setNm(userUtils.getLoginUserNm());
         if ((entity.getTitle()).equals("") || (entity.getCtnt()).equals("")) {
             return 0;
         }

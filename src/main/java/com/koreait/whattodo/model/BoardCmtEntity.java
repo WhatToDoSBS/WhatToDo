@@ -14,4 +14,5 @@ public class BoardCmtEntity {
     private String ctnt;
     private String rdt;
     private String mdt;
+    private String nm;
 }

@@ -27,9 +27,9 @@
                         <tr>
                             <td>최근 누른 좋아요</td>
                         </tr>
-                        <c:forEach var="item" items="${webtoonFavMy}" begin="0" end="0">
+                        <c:forEach var="item" items="${webtoonFavMy}" begin="0">
                             <tr>
-                                <td>${item.nm}</td>
+                                <td>${item.nm} + (웹툰)</td>
                             </tr>
                         </c:forEach>
                     </table>

@@ -14,6 +14,10 @@
 </style>
 <div class="container">
     <div hidden id="data" data-iuser="${sessionScope.loginUser.iuser}"></div>
+    <button id="crawingBtn" class="btn btn-outline-dark" style="display: inline-block; font-family: 'SDSamliphopangche_Outline'">
+        <span class="spinner-border-sm"></span>
+        최신 게임 정보 불러오기
+    </button>
     <div class="choiceBtn_section">
         <div class="choiceBtn_section_line popular">
             <label id="ppLb"><p class="btLb" style="display: inline-block; font-family: 'SDSamliphopangche_Outline'">

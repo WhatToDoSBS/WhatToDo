@@ -845,7 +845,7 @@
 
         tr.innerHTML = `
         <td>${item.ctnt}</td>
-        <td>${item.iuser}</td>
+        <td>${item.nm}</td>
         `;
 
         const td = document.createElement('td');
@@ -942,7 +942,7 @@
                 const tableElem = document.querySelector('table');
                 tableElem.remove();
                 gameCmtFrmElem.ctnt.value = null;
-                getCmtList();
+                getCmtList(selectedGameNm);
             }).catch(e => {
             console.log(e)
         });
@@ -1129,6 +1129,12 @@
                     isLike(gameNm);
                 });
         }
+    })
+
+    let crawlingBtnElem = document.querySelector("#crawingBtn");
+
+    crawlingBtnElem.addEventListener("click", ()=> {
+        location.href=
     })
 
 }

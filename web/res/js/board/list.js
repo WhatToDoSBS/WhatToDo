@@ -214,7 +214,7 @@ searchBtn.addEventListener("click", () => {
         }
     }
     console.log(searchTxt);
-    console.log(totalSelectedData);
+    console.log("totalSelectedData : " +totalSelectedData);
 
     let totalSelectedDataNum = totalSelectedData.length;
 
@@ -245,11 +245,15 @@ searchBtn.addEventListener("click", () => {
         `
 // }
     let pageNumElem = document.querySelectorAll('.pageNum');
+
     totalDataArr.forEach(function (element) {
         element.style.display = 'none'
     });
+
     totalDataArr[0].style.display = '';
-    let selData = totalSelectedData.slice(((firstPageNum - 1) * pageSelectVal()) + 1, firstPageNum * pageSelectVal() + 1);
+
+    let selData = totalSelectedData.slice(((firstPageNum - 1) * pageSelectVal()), firstPageNum * pageSelectVal() + 1);
+    console.log("seldata : " + selData)
     selData.forEach(function (element) {
         element.style.display = ''
     });

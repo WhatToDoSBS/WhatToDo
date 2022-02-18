@@ -3,9 +3,9 @@
 <mapper namespace="com.koreait.whattodo.board.BoardMapper">
     <insert id="insBoard">
         INSERT INTO freeboard
-            (title, ctnt, iuser)
+            (title, ctnt, iuser, nm)
         VALUES
-            (#{title}, #{ctnt}, ${iuser})
+            (#{title}, #{ctnt}, ${iuser}, #{nm})
     </insert>
 
     <select id="selBoardList" resultType="BoardVo">
