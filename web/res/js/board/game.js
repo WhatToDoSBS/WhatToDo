@@ -1131,10 +1131,5 @@
         }
     })
 
-    let crawlingBtnElem = document.querySelector("#crawingBtn");
-
-    crawlingBtnElem.addEventListener("click", ()=> {
-        location.href=
-    })
 
 }

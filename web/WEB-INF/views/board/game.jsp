@@ -14,9 +14,21 @@
 </style>
 <div class="container">
     <div hidden id="data" data-iuser="${sessionScope.loginUser.iuser}"></div>
-    <button id="crawingBtn" class="btn btn-outline-dark" style="display: inline-block; font-family: 'SDSamliphopangche_Outline'">
+    <button id="crawlingBtn" class="btn btn-outline-dark" onclick="crawling()">
         <span class="spinner-border-sm"></span>
         최신 게임 정보 불러오기
+        <script>
+            let crawlingBtnElem = document.querySelector("#crawlingBtn");
+            let dataElem = document.querySelector("#data");
+            let crawling = function () {
+                if (dataElem.dataset.iuser <= 0) {
+                    alert("로그인 해주세요");
+                    return;
+                }
+                crawlingBtnElem.childNodes[1].classList.add("spinner-border");
+                location.href="/board/gameCrawling"
+            }
+        </script>
     </button>
     <div class="choiceBtn_section">
         <div class="choiceBtn_section_line popular">

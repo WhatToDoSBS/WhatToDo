@@ -139,6 +139,16 @@ public class CrawlingController {
     //모바일, pc온라인, 스팀
     @GetMapping("/game")
     public void game(Model model, MecaRankEntity entity1, PlatformRankEntity entity2) {
+
+            List gameList = crawlingService.mecaRankList(entity1);
+            List platformGameList = crawlingService.platformListWithImg(entity2);
+            model.addAttribute("gameList", gameList);
+            model.addAttribute("pfGameList", platformGameList);
+        }
+
+    @GetMapping("/gameCrawling")
+    public String gameCrawling(Model model, MecaRankEntity entity1, PlatformRankEntity entity2) {
+
         String platformUrl = "https://trees.gamemeca.com/gamerank/";
         String mecaUrl = "https://www.gamemeca.com/ranking.php";
 
@@ -152,9 +162,9 @@ public class CrawlingController {
             canRun = false;
         }
         if(canRun){
-//            crawlingService.insertMeca(mecaUrl);
-//            crawlingService.insertPlatform(platformUrl);
-//            crawlingService.insertPlatformImgList(entity2);
+            crawlingService.insertMeca(mecaUrl);
+            crawlingService.insertPlatform(platformUrl);
+            crawlingService.insertPlatformImgList(entity2);
 
             List gameList = crawlingService.mecaRankList(entity1);
             List platformGameList = crawlingService.platformListWithImg(entity2);
@@ -166,6 +176,7 @@ public class CrawlingController {
             model.addAttribute("gameList", gameList);
             model.addAttribute("pfGameList", platformGameList);
         }
+        return "redirect:/board/game";
     }
 
     @GetMapping("/platformrankingjson")
