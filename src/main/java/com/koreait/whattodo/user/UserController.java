@@ -1,7 +1,5 @@
 package com.koreait.whattodo.user;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.koreait.whattodo.UserUtils;
 import com.koreait.whattodo.enums.user.LoginEnum;
 import com.koreait.whattodo.model.user.UserDto;
