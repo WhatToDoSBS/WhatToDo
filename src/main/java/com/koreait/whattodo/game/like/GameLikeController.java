@@ -24,23 +24,11 @@ public class GameLikeController {
 
     @GetMapping("/{gameNm}")
     public Map<String, Integer> isLike(@PathVariable String gameNm) {
-        GameLikeEntity entity = service.selGameLike(gameNm);
-        int count = service.gameLikeCount(entity).getCount();
-        Map<String, Integer> result = new HashMap<>();
-        result.put("result", entity == null ? 0 : 1);
-        result.put("count", count);
-        return result;
+        return service.getLikeInfo(gameNm);
     }
 
     @DeleteMapping("/{gameNm}")
     public Map<String, Integer> delGameLike(@PathVariable String gameNm) {
-        Map<String, Integer> result = new HashMap<>();
-
-        GameLikeEntity entity = service.selGameLike(gameNm);
-        int count = service.gameLikeCount(entity).getCount();
-
-        result.put("result", service.delGameLike(gameNm));
-        result.put("count", count);
-        return result;
+        return service.delLikeInfo(gameNm);
     }
 }

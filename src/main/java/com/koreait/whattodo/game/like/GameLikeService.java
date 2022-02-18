@@ -6,6 +6,9 @@ import com.koreait.whattodo.model.GameLikeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class GameLikeService {
     @Autowired
@@ -18,16 +21,35 @@ public class GameLikeService {
         return mapper.insGameLike(entity);
     }
 
-    public GameLikeEntity selGameLike(String gameNm) {
-        return mapper.selGameLike(createGameLikeEntity(gameNm));
+    public GameLikeEntity selGameLike(GameLikeEntity entity) {
+        return mapper.selGameLike(entity);
     }
 
     public GameLikeEntity gameLikeCount(GameLikeEntity entity) {
         return mapper.gameLikeCount(entity);
     }
 
-    public int delGameLike(String gameNm) {
-        return mapper.delGameLike(createGameLikeEntity(gameNm));
+    public Map<String, Integer> getLikeInfo(String gameNm) {
+        GameLikeEntity entity = createGameLikeEntity(gameNm);
+        Map<String, Integer> result = new HashMap<>();
+
+        GameLikeEntity dbLikeInfo = selGameLike(entity);
+        result.put("result",  dbLikeInfo == null ? 0 : 1);
+        result.put("count", gameLikeCount(entity).getCount());
+        return result;
+    }
+
+    public Map<String, Integer> delLikeInfo(String gameNm) {
+        GameLikeEntity entity = createGameLikeEntity(gameNm);
+        Map<String, Integer> result = new HashMap<>();
+
+        result.put("result", delGameLike(entity));
+        result.put("count", gameLikeCount(entity).getCount());
+        return result;
+    }
+
+    public int delGameLike(GameLikeEntity entity) {
+        return mapper.delGameLike(entity);
     }
 
     private GameLikeEntity createGameLikeEntity(String gameNm) {
@@ -36,4 +58,6 @@ public class GameLikeService {
         entity.setIuser(userUtils.getLoginUserPk());
         return entity;
     }
+
+
 }

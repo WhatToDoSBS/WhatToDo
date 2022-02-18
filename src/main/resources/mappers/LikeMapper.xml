@@ -7,7 +7,7 @@
     </insert>
 
     <select id="selBoardLike" resultType="BoardLikeEntity">
-        SELECT iboard, iuser, rdt
+        SELECT *
         FROM freeboard_like
         WHERE iboard = ${iboard}
         AND iuser = ${iuser}

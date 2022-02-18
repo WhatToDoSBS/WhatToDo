@@ -6,6 +6,9 @@ import com.koreait.whattodo.model.GameLikeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class LikeService {
     @Autowired
@@ -24,6 +27,25 @@ public class LikeService {
 
     public BoardLikeEntity boardLikeCount(BoardLikeEntity entity) {
         return mapper.boardLikeCount(entity);
+    }
+
+    public Map<String, Integer> getLikeInfo(int iboard) {
+        BoardLikeEntity entity = createBoardLikeEntity(iboard);
+        Map<String, Integer> result = new HashMap<>();
+
+        BoardLikeEntity dbLikeInfo = selBoardLike(iboard);
+        result.put("result", dbLikeInfo == null ? 0 : 1);
+        result.put("count", boardLikeCount(entity).getCount());
+        return result;
+    }
+
+    public Map<String, Integer> delLikeInfo(int iboard) {
+        BoardLikeEntity entity = createBoardLikeEntity(iboard);
+        Map<String, Integer> result = new HashMap<>();
+
+        result.put("result", delBoardLike(iboard));
+        result.put("count", boardLikeCount(entity).getCount());
+        return result;
     }
 
     public int delBoardLike(int iboard) {

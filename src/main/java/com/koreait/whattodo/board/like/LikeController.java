@@ -24,18 +24,11 @@ public class LikeController {
 
     @GetMapping("/{iboard}")
     public Map<String, Integer> isLike(@PathVariable int iboard) {
-        BoardLikeEntity entity = service.selBoardLike(iboard);
-        int count = service.boardLikeCount(entity).getCount();
-        Map<String, Integer> result = new HashMap<>();
-        result.put("result", entity == null ? 0 : 1);
-        result.put("count", count);
-        return result;
+        return service.getLikeInfo(iboard);
     }
 
     @DeleteMapping("/{iboard}")
     public Map<String, Integer> delBoardLike(@PathVariable int iboard) {
-        Map<String, Integer> result = new HashMap<>();
-        result.put("result", service.delBoardLike(iboard));
-        return result;
+        return service.delLikeInfo(iboard);
     }
 }
