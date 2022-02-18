@@ -1,11 +1,13 @@
 function changeVal(val) {
     console.log(val);
     if (val == 1) {
-        allReviewList()
+        // allReviewList()
     } else if (val == 2) {
-        webtoonCmtList();
+        location.href = '/user/mypage/myreview?category=' + val;
+        // webtoonCmtList();
     } else if (val == 3) {
-        gameCmtList();
+        location.href = '/user/mypage/myreview?category=' + val;
+        // gameCmtList();
     } else {
         console.log('처음 상태');
     }
