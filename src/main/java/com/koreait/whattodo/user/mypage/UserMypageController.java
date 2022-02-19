@@ -2,7 +2,9 @@ package com.koreait.whattodo.user.mypage;
 
 import com.koreait.whattodo.UserUtils;
 import com.koreait.whattodo.board.fav.FavWebtoonService;
+import com.koreait.whattodo.board.like.LikeService;
 import com.koreait.whattodo.game.cmt.GameCmtService;
+import com.koreait.whattodo.model.BoardLikeEntity;
 import com.koreait.whattodo.review.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,8 @@ public class UserMypageController {
     FavWebtoonService favWebtoonService = new FavWebtoonService();
     @Autowired
     GameCmtService gameCmtService = new GameCmtService();
+    @Autowired
+    LikeService likeService;
 
     @GetMapping("/mypage/main")
     public String main(Model model) {
@@ -38,7 +42,7 @@ public class UserMypageController {
     }
 
     @GetMapping("/mypage/myfav")
-    public void myfav(Model model) {
-        model.addAttribute("webtoonFavMy",favWebtoonService.selWebtoonMyFav());
+    public void myfav(Model model, BoardLikeEntity entity) {
+        model.addAttribute("likeAll", likeService.selAllLikeList(entity));
     }
 }

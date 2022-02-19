@@ -9,7 +9,10 @@
 }
 .btLb { font-size: xx-large; font-weight: bolder; color: darkslateblue}
 
-.choiceBtn_section_line { margin: 25px 0;}
+.choiceBtn_section_line {
+    margin: 25px 0;
+    border-bottom: 1px solid lightsteelblue;
+}
 
 .fun-btn { font-weight: bolder;
     background-color: mediumpurple;

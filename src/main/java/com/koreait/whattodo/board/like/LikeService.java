@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -23,6 +24,11 @@ public class LikeService {
 
     public BoardLikeEntity selBoardLike(int iboard) {
         return mapper.selBoardLike(createBoardLikeEntity(iboard));
+    }
+
+    public List<BoardLikeEntity> selAllLikeList(BoardLikeEntity entity) {
+        entity.setIuser(userUtils.getLoginUserPk());
+        return mapper.selAllLikeList(entity);
     }
 
     public BoardLikeEntity boardLikeCount(BoardLikeEntity entity) {

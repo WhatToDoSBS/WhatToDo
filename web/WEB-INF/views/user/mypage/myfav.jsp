@@ -9,10 +9,10 @@
     </select>
     <table>
         <tr>
-            <th>제목</th>
+            <th>게임 이름 or 게시판 번호</th>
             <th>누른 일자</th>
         </tr>
-        <c:forEach var="item" items="${webtoonFavMy}">
+        <c:forEach var="item" items="${likeAll}">
             <tr>
                 <td>${item.nm}</td>
                 <td>${item.rdt}</td>

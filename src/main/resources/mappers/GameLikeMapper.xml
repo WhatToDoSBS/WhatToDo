@@ -25,5 +25,12 @@
         SELECT COUNT(*) AS 'count' FROM game_like
         WHERE gameNm = #{gameNm}
     </select>
+
+    <select id="selGameLikeList" resultType="GameLikeEntity">
+        SELECT gameNm, iuser, rdt
+        FROM game_like
+        WHERE iuser = ${iuser}
+        ORDER BY rdt desc
+    </select>
     
 </mapper>

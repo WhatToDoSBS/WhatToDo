@@ -23,4 +23,19 @@
         SELECT COUNT(*) AS 'count' FROM freeboard_like
         WHERE iboard = ${iboard}
     </select>
+
+    <select id="selBoardLikeList" resultType="BoardLikeEntity">
+        SELECT *
+        FROM freeboard_like
+        WHERE iboard = ${iboard}
+          AND iuser = ${iuser}
+        ORDER BY rdt desc
+    </select>
+
+    <select id="selAllLikeList" resultType="BoardLikeEntity">
+        SELECT iboard AS nm, rdt FROM freeboard_like
+        WHERE iuser = ${iuser} UNION ALL SELECT
+                                                gameNm AS nm, rdt FROM game_like
+                                                WHERE iuser = ${iuser} ORDER BY rdt desc;
+    </select>
 </mapper>
