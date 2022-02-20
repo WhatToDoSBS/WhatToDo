@@ -44,6 +44,20 @@
             <div class="card" style="width: 18rem;">
                 <div class="card-body info_profileCard password_change">
                     <h5 class="card-title"><i class="fa-solid fa-unlock"></i>비밀번호 변경</h5>
+                    <form>
+                        <label>
+                            <span>현제 비밀번호</span>
+                            <input type="password" name="oldUpw">
+                        </label>
+                        <label>
+                            <span>새 비밀번호</span>
+                            <input type="password" name="newUpw">
+                        </label>
+                        <label>
+                            <span>새 비밀번호 확인</span>
+                            <input type="password" name="newUpwChk">
+                        </label>
+                    </form>
                     <div class="btn-link">
                         <a href="#" class="card-link"><button>변경</button></a>
                     </div>
