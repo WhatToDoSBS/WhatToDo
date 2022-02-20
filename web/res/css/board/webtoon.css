@@ -26,6 +26,9 @@
     font-style: normal;
 }
 
+.modalContent a {
+    color: whitesmoke;
+}
 h1 {
     text-align: center;
 }
@@ -58,6 +61,10 @@ button:hover {
 }
 
 #recommand_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     margin: 20px 0;
 }
 
@@ -74,7 +81,7 @@ button:hover {
 }
 
 #recommand_box .webtoon_recommand_title {
-    font-family: 'MaplestoryOTFBold';
+    font-family: 'SBAggroM', 'sans-serif';
     font-size: 24px;
 }
 
@@ -138,6 +145,7 @@ button:hover {
 .webtoon_box .result_box #genre_title {
     font-family: 'LeferiPoint-BlackA';
     font-size: 24px;
+    margin: 10px 0;
 }
 
 .webtoon_box .webtoon_nm {
@@ -205,7 +213,7 @@ button:hover {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin: 0 10px;
+    margin: 10px;
 }
 
 .like_cnt {
@@ -235,11 +243,12 @@ button:hover {
     -webkit-backdrop-filter: blur( 13.5px );
     border-radius: 10px;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
-    min-width: 350px;
+    min-width: 450px;
     top: -100px;
     padding: 20px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin-top: 200px;
 }
 
@@ -261,10 +270,12 @@ button:hover {
     text-shadow: 1px 1px 2px gray;
     color: white;
     font-size: larger;
+    position: absolute;
+    right: 20px;
 }
 
 .modalContent {
-    margin-top: 10px;
+    margin: 30px;
     padding: 0px 10px;
     text-shadow: 1px 1px 2px gray;
     color: white;
@@ -293,8 +304,8 @@ button:hover {
     display: inline-block;
 }
 
-.modalContent a:link {
-    color: whitesmoke;
+.modalContent a {
+    margin: 10px 0;
 }
 
 .modalContent a:hover {
@@ -319,7 +330,15 @@ button:hover {
     border: none;
 }
 
-#review_list .modBtn, .delBtn {
+#review_list .modBtn, .delBtn  {
+    margin-left: 5px;
+    border-radius: 30px;
+    border: 0;
+    height: 23px;
+    width: 45px;
+}
+
+#review_list .cancleBtn .saveBtn {
     margin-left: 5px;
     border-radius: 30px;
     border: 0;
@@ -329,15 +348,36 @@ button:hover {
 
 .reviewTextInput {
     border-radius: 30px;
-    height: 23px;
+    height: 30px;
     border: 0;
-    width: 220px;
+    width: 300px;
     margin-left: 20px;
     padding: 10px;
     font-size: 14px;
+    text-align: center;
 }
 
 #btn_submit {
+    margin-left: 5px;
+    border-radius: 30px;
+    border: 0;
+    height: 30px;
+    width: 55px;
+}
+
+#modal .heart_section i {
+    color: red;
+}
+
+.inputStyle {
+    border: none;
+    padding: 10px;
+    border-radius: 30px;
+    height: 28px;
+    width: 100%;
+}
+
+.buttonStyle {
     margin-left: 5px;
     border-radius: 30px;
     border: 0;
@@ -345,6 +385,31 @@ button:hover {
     width: 45px;
 }
 
-#modal .heart_section i {
-    color: red;
+table {
+    table-layout: fixed;
+    width: 400px;
+}
+
+th:first-child {
+    width: 45%;
+}
+
+th:nth-child(2) {
+    width: 20%;
+}
+
+th:nth-child(3) {
+    width: 35%;
+}
+
+td:first-child {
+    overflow:hidden;
+    white-space : nowrap;
+    text-overflow: ellipsis;
+}
+
+td:nth-child(2) {
+    overflow:hidden;
+    white-space : nowrap;
+    text-overflow: ellipsis;
 }

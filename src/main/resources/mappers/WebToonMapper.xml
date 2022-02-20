@@ -56,6 +56,6 @@
     </select>
 
     <select id="webtoonGenreListBtnRandom" resultType="WebtoonGenreEntity">
-        SELECT DISTINCT * FROM webtoon_genre WHERE genre = #{genre} OR state = #{state} ORDER BY RAND() LIMIT 1
+        SELECT DISTINCT * FROM webtoon_genre ORDER BY RAND() LIMIT 1
     </select>
 </mapper>

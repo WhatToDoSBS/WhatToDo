@@ -15,11 +15,18 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'SBAggroM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroM.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 /* -----색상------- */
 .gold { color: var(--gold); }
 .sliver { color: var(--sliver); }
 .bronze { color: var(--bronze); }
+.color-red { color: red; }
 
 /* -----display 관련------- */
 .flex-center {
@@ -58,6 +65,8 @@
     box-sizing: border-box;
 }
 
+a, a:link, a:visited, a:active, a:hover { color: black; text-decoration: none; }
+
 html,
 body {
     height: 100%;
@@ -65,9 +74,6 @@ body {
 }
 
 table { border-collapse: collapse; }
-
-a, a:link ,a:visited, a:hover, a:active { color: black; text-decoration: none; }
-
 
 img { border-radius: 10px; }
 
@@ -149,12 +155,13 @@ img { border-radius: 10px; }
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'SBAggroM', 'sans-serif';
     font-weight: normal;
-    font-size: 20px;
+    font-size: 22px;
     float: left;
     margin: 7px 20px;
-    padding: 5px 15px;
+    padding: 0 15px;
+    padding-top: 3px;
 }
 
 .header_menu li:hover {
@@ -366,4 +373,13 @@ button.pfBtn.clicked {
     position: fixed;
     right: 30px;
     top: 300px;
+}
+
+#guide-tooltip a {
+    background: none;
+    border: none;
+}
+
+#guide-tooltip .btn-outline-info {
+    background: white;
 }

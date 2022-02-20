@@ -2,6 +2,7 @@ package com.koreait.whattodo.user.mypage;
 
 import com.koreait.whattodo.UserUtils;
 import com.koreait.whattodo.board.fav.FavWebtoonService;
+import com.koreait.whattodo.game.cmt.GameCmtService;
 import com.koreait.whattodo.review.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,8 @@ public class UserMypageController {
     ReviewService reviewService = new ReviewService();
     @Autowired
     FavWebtoonService favWebtoonService = new FavWebtoonService();
+    @Autowired
+    GameCmtService gameCmtService = new GameCmtService();
 
     @GetMapping("/mypage/main")
     public String main(Model model) {
@@ -31,8 +34,7 @@ public class UserMypageController {
 
     @GetMapping("/mypage/myreview")
     public void myreview(Model model) {
-        model.addAttribute("webtoonReviewMy",reviewService.selReviewWebtoonMy());
-
+        model.addAttribute("reviewAll",reviewService.selReviewAllMy());
     }
 
     @GetMapping("/mypage/myfav")

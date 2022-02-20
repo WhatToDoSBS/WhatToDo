@@ -40,6 +40,7 @@ public class WebtoonController {
         model.addAttribute("webtoonRecommandList", webtoonRecommandEntityList);
         model.addAttribute("webtoonListRandom", webtoonService.listWebtoonRandom());
         model.addAttribute("webtoonRecommandListRandom", webtoonService.listRecommandWebtoonRandom());
+        model.addAttribute("webtoonGenreListRandom", webtoonService.listGenreBtnRandom());
     }
 
     @GetMapping("/webtooncrawling")

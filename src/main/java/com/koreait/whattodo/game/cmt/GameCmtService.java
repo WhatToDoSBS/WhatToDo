@@ -1,13 +1,9 @@
-package com.koreait.whattodo.game;
+package com.koreait.whattodo.game.cmt;
 
 import com.koreait.whattodo.UserUtils;
-import com.koreait.whattodo.board.cmt.BoardCmtMapper;
-import com.koreait.whattodo.model.BoardCmtEntity;
 import com.koreait.whattodo.model.GameCmtEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -22,6 +18,7 @@ public class GameCmtService {
 
     public int insGameCmt(GameCmtEntity entity) {
         entity.setIuser(userUtils.getLoginUserPk());
+        entity.setNm(userUtils.getLoginUserNm());
         return mapper.insGameCmt(entity);
     }
 
@@ -29,6 +26,12 @@ public class GameCmtService {
         GameCmtEntity entity = new GameCmtEntity();
         entity.setGameNm(gameNm);
         return mapper.selGameCmtList(entity);
+    }
+
+    public List<GameCmtEntity> selGameCmtListMy() {
+        GameCmtEntity entity = new GameCmtEntity();
+        entity.setIuser(userUtils.getLoginUserPk());
+        return mapper.selGameCmtListMy(entity);
     }
 
     public int updGameCmt(GameCmtEntity entity) {

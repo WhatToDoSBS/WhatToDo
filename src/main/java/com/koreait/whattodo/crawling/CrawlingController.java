@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.koreait.whattodo.Utils;
 import com.koreait.whattodo.board.BoardService;
 import com.koreait.whattodo.model.*;
+import com.koreait.whattodo.video.VideoService;
 import com.koreait.whattodo.webtoon.WebtoonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,9 @@ public class CrawlingController {
 
     @Autowired
     private WebtoonService webtoonService;
+
+    @Autowired
+    private VideoService videoService;
 
     private Utils utils;
 
@@ -65,6 +69,11 @@ public class CrawlingController {
         model.addAttribute("randomGame", gameList.get(randomGameNum));
         model.addAttribute("randomWebtoon", webtoonRecommandEntityList.get(randomWebtoon));
         model.addAttribute("webtoonListRandom", webtoonService.listWebtoonRandom());
+        List<VideoMovieEntity> list = videoService.listWeeklyMovie();
+        for(int i=0; i< list.size();i++) {
+            videoService.naverImgSearch(list.get(i).getMovieNm());
+        }
+        model.addAttribute("weeklyMovieList", videoService.listWeeklyMovieRandom());
     }
 
     @GetMapping("/book")
@@ -130,6 +139,16 @@ public class CrawlingController {
     //모바일, pc온라인, 스팀
     @GetMapping("/game")
     public void game(Model model, MecaRankEntity entity1, PlatformRankEntity entity2) {
+
+            List gameList = crawlingService.mecaRankList(entity1);
+            List platformGameList = crawlingService.platformListWithImg(entity2);
+            model.addAttribute("gameList", gameList);
+            model.addAttribute("pfGameList", platformGameList);
+        }
+
+    @GetMapping("/gameCrawling")
+    public String gameCrawling(Model model, MecaRankEntity entity1, PlatformRankEntity entity2) {
+
         String platformUrl = "https://trees.gamemeca.com/gamerank/";
         String mecaUrl = "https://www.gamemeca.com/ranking.php";
 
@@ -143,9 +162,9 @@ public class CrawlingController {
             canRun = false;
         }
         if(canRun){
-//            crawlingService.insertMeca(mecaUrl);
-//            crawlingService.insertPlatform(platformUrl);
-//            crawlingService.insertPlatformImgList(entity2);
+            crawlingService.insertMeca(mecaUrl);
+            crawlingService.insertPlatform(platformUrl);
+            crawlingService.insertPlatformImgList(entity2);
 
             List gameList = crawlingService.mecaRankList(entity1);
             List platformGameList = crawlingService.platformListWithImg(entity2);
@@ -157,6 +176,7 @@ public class CrawlingController {
             model.addAttribute("gameList", gameList);
             model.addAttribute("pfGameList", platformGameList);
         }
+        return "redirect:/board/game";
     }
 
     @GetMapping("/platformrankingjson")

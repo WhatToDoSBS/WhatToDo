@@ -26,11 +26,11 @@
                 <div>
                     <table>
                         <tr>
-                            <td>제목</td>
+                            <td>최근 누른 좋아요</td>
                         </tr>
-                        <c:forEach var="item" items="${webtoonFavMy}" begin="0" end="0">
+                        <c:forEach var="item" items="${webtoonFavMy}" begin="0">
                             <tr>
-                                <td>${item.nm}</td>
+                                <td>${item.nm} + (웹툰)</td>
                             </tr>
                         </c:forEach>
                     </table>
@@ -42,7 +42,7 @@
         </div></div>
         <div class="col info">
             <div class="card" style="width: 18rem;">
-                <div class="card-body info_profileCard">
+                <div class="card-body info_profileCard password_change">
                     <h5 class="card-title"><i class="fa-solid fa-unlock"></i>비밀번호 변경</h5>
                     <div class="btn-link">
                         <a href="#" class="card-link"><button>변경</button></a>

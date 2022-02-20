@@ -84,3 +84,15 @@ function videoInput(img) {
 
 youtubeSearchApi(url);
 youtubePopApi(url2)
+
+// 스크롤 위치에 따라 button group 이동
+$(window).scroll(function () {
+    var height = $(document).scrollTop();
+    const guideBox = document.querySelector('#guide-tooltip');
+    if(height>1300) {
+        guideBox.style.top = '200px';
+    } else {
+        guideBox.style.top = '300px';
+    }
+});
+

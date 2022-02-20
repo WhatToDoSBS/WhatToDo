@@ -292,6 +292,6 @@ public class WebtoonService {
     public List<WebtoonRecommandEntity> listRecommandWebtoon() { return mapper.webtoonRecommandList(); }
     public List<WebtoonRecommandEntity> listRecommandWebtoonRandom() { return mapper.webtoonRecommandListRandom(); }
     public List<WebtoonGenreEntity> listGenreAll() { return mapper.webtoonGenreListAll(); }
-    public List<WebtoonGenreEntity> listGenreBtnRandom(WebtoonGenreEntity entity) { return mapper.webtoonGenreListBtnRandom(entity); }
+    public List<WebtoonGenreEntity> listGenreBtnRandom() { return mapper.webtoonGenreListBtnRandom(); }
 
 }

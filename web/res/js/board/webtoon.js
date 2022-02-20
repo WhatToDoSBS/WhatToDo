@@ -11,39 +11,15 @@ crawlingBtn.addEventListener('click', function () {
 
 var webtoonGenreRandomUrl = '/board/webtoonGenreRandom'
 
+/* --- MODAL 관련 --- */
 
-choiceBtn.forEach(function (item) {
-    item.addEventListener('click', function (e) {
-        let btnName = null;
-        console.log('실행');
-        if (e.target.innerText == '일상') {
-            btnName = '일상 ';
-        } else if (e.target.innerText == '개그') {
-            btnName = '개그 ';
-        } else if (e.target.innerText == '판타지') {
-            btnName = '판타지';
-        } else if (e.target.innerText == '액션') {
-            btnName = '액션 ';
-        } else if (e.target.innerText == '드라마') {
-            btnName = '드라마';
-        } else if (e.target.innerText == '순정') {
-            btnName = '순정 ';
-        } else if (e.target.innerText == '감성') {
-            btnName = '감성 ';
-        } else if (e.target.innerText == '스릴러') {
-            btnName = '스릴러';
-        } else if (e.target.innerText == '시대극') {
-            btnName = '시대극';
-        } else if (e.target.innerText == '스포츠') {
-            btnName = '스포츠';
-        } else if (e.target.innerText == '완결') {
-            btnName = '완결';
-        }
-
-        console.log('선택 버튼 : ' + btnName);
-        webtoonGenreBtnClickRandom(webtoonGenreRandomUrl, btnName);
-    })
-});
+const modalWindow = document.getElementById("modal");
+const modalXBtn = document.querySelector(".close-area");
+const webtoonModalElem = document.querySelectorAll('.webtoonModalElement');
+const modalContent = document.querySelector('.modalContent');
+const reviewListElem = document.querySelector('#review_list');
+const data = document.querySelector('#data');
+let dataNm, dataWeekend, iuser, writerName;
 
 // RANDOM 버튼 눌렀을 때
 function webtoonGenreRandom(url) {
@@ -79,17 +55,119 @@ function filterFunction(data, genre) {
     });
 }
 
+randomSubmitBtn.addEventListener('click', function () {  // 랜덤버튼 누르면 무작위 랜덤웹툰 출력
+    webtoonGenreRandom(webtoonGenreRandomUrl);
+})
+
+webtoonModalElem.forEach(function (item) {
+    item.addEventListener('click', function (e) {
+        console.log('모달elem 버튼 클릭!');
+        // 데이터 담기
+        dataNm = item.dataset.nm;
+        dataWeekend = item.dataset.weekend;
+        iuser = item.dataset.iuser;
+        writerName = item.dataset.writernm;
+
+        modalWindow.style.display = 'flex';
+        modalContent.innerHTML = item.innerHTML;
+        modalContent.style.display = 'block';
+
+        console.log('test : ' + dataNm);
+        isFav();
+
+        getCmtList();
+        delCmtList();
+    })
+})
+
+choiceBtn.forEach(function (item) {
+    item.addEventListener('click', function (e) {
+        let btnName = null;
+        if (e.target.innerText == '일상') {
+            btnName = '일상 ';
+        } else if (e.target.innerText == '개그') {
+            btnName = '개그 ';
+        } else if (e.target.innerText == '판타지') {
+            btnName = '판타지';
+        } else if (e.target.innerText == '액션') {
+            btnName = '액션 ';
+        } else if (e.target.innerText == '드라마') {
+            btnName = '드라마';
+        } else if (e.target.innerText == '순정') {
+            btnName = '순정 ';
+        } else if (e.target.innerText == '감성') {
+            btnName = '감성 ';
+        } else if (e.target.innerText == '스릴러') {
+            btnName = '스릴러';
+        } else if (e.target.innerText == '시대극') {
+            btnName = '시대극';
+        } else if (e.target.innerText == '스포츠') {
+            btnName = '스포츠';
+        } else if (e.target.innerText == '완결') {
+            btnName = '완결';
+        }
+
+        webtoonGenreBtnClickRandom(webtoonGenreRandomUrl, btnName);
+    })
+});
+
+modalXBtn.addEventListener('click', () => {
+    modalWindow.style.display = 'none';
+    reviewFrm.ctnt.value = null;
+})
+window.addEventListener("keyup", (e) => {
+    if (modalWindow.style.display === "flex" && e.key === "Escape") {
+        modalWindow.style.display = 'none';
+        reviewFrm.ctnt.value = null;
+    }
+
+});
+window.addEventListener("mouseup", (e) => { // 모달창 밖으로 마우스 클릭하면 닫힘
+    if (modalWindow.style.display === "flex" && e.target === modalWindow) {
+        modalWindow.style.display = 'none';
+        reviewFrm.ctnt.value = null;
+    }
+});
 
 function resultDisplay(webtoonimg, webtoonLink, webtoonNm, webtoonWriter, btnGenre) {
-    resultBox.innerHTML = `<div class="random-card"><div><div id="genre_title"><b>${btnGenre}</b></div>
-<div><a href="${webtoonLink}"><img src="${webtoonimg}"></a></div>
-    <div class="random-webtoon-nm"><a href="${webtoonLink}"><span class="card-nm"><b>${webtoonNm}</b></span></a></div>
-    <div><span class="card-writer">${webtoonWriter}</span></div></div></div>
+    resultBox.innerHTML = `<div class="random-card webtoonModalElement" id="resultBoxData" data-nm="${webtoonNm}" data-writer="${webtoonWriter}" >
+<div class="genre_title" id="genre_title"><b>${btnGenre}</b></div>
+<div><img src="${webtoonimg}"></div>
+    <div class="random-webtoon-nm"><span class="card-nm"><b>${webtoonNm}</b></span>
+    <div><span class="card-writer">${webtoonWriter}</span></div></div>
+    <div class="webtoonLink"><span><a href="${webtoonLink}"> >>보러가기<< </a></span></div></div>
 `;
     let genreTitle = document.querySelector('#genre_title');
     let randomCard = document.querySelector('.random-card');
     let cardNm = document.querySelector('.card-nm');
     let cardWriter = document.querySelector('.card-writer');
+    let resultmodal = resultBox.querySelector('.webtoonModalElement');
+    let resultBoxData = resultBox.querySelector('#resultBoxData');
+    console.log(resultmodal.dataset.nm);
+
+    resultmodal.addEventListener('click', function (e) {
+        console.log('모달elem 버튼 클릭!');
+        // 데이터 담기
+        dataNm = resultBoxData.dataset.nm;
+        iuser = resultBox.dataset.iuser;
+        writerName = resultBox.dataset.writernm;
+
+        modalContent.style.display = 'flex';
+        modalContent.style.justifyContent = 'center';
+        modalWindow.style.display = 'flex';
+        modalContent.innerHTML = resultBox.innerHTML;
+
+        let randomCardModal = modalContent.querySelector('.random-card');
+        let genreTitleModal = modalContent.querySelector('.genre_title');
+        randomCardModal.style.background = 'none';
+        genreTitleModal.style.color = 'white';
+
+        console.log('test : ' + dataNm);
+        isFav(); //
+
+        getCmtList();
+        delCmtList();
+    })
 
     if (btnGenre == '일상 ') {
         genreTitle.classList.toggle('daily');
@@ -126,57 +204,6 @@ function resultDisplay(webtoonimg, webtoonLink, webtoonNm, webtoonWriter, btnGen
     }
 }
 
-randomSubmitBtn.addEventListener('click', function () {  // 랜덤버튼 누르면 무작위 랜덤웹툰 출력
-    webtoonGenreRandom(webtoonGenreRandomUrl);
-})
-
-/* --- MODAL 관련 --- */
-
-const modalWindow = document.getElementById("modal");
-const modalXBtn = document.querySelector(".close-area");
-const webtoonModalElem = document.querySelectorAll('.webtoonModalElement');
-const modalContent = document.querySelector('.modalContent');
-const reviewListElem = document.querySelector('#review_list');
-const data = document.querySelector('#data');
-let dataNm, dataWeekend, iuser, writerName;
-
-webtoonModalElem.forEach(function (item) {
-    item.addEventListener('click', function (e) {
-
-        // 데이터 담기
-        dataNm = item.dataset.nm;
-        dataWeekend = item.dataset.weekend;
-        iuser = item.dataset.iuser;
-        writerName = item.dataset.writernm;
-
-        modalWindow.style.display = 'flex';
-        modalContent.innerHTML = item.innerHTML;
-
-        console.log('test : ' + dataNm);
-        isFav(); //
-
-        getCmtList();
-        delCmtList();
-    })
-})
-
-modalXBtn.addEventListener('click', () => {
-    modalWindow.style.display = 'none';
-    reviewFrm.ctnt.value = null;
-})
-window.addEventListener("keyup", (e) => {
-    if (modalWindow.style.display === "flex" && e.key === "Escape") {
-        modalWindow.style.display = 'none';
-        reviewFrm.ctnt.value = null;
-    }
-
-});
-window.addEventListener("mouseup", (e) => { // 모달창 밖으로 마우스 클릭하면 닫힘
-    if (modalWindow.style.display === "flex" && e.target === modalWindow) {
-        modalWindow.style.display = 'none';
-        reviewFrm.ctnt.value = null;
-    }
-});
 
 /* -------- MODAL REVIEW 관련 -------- */
 const reviewFrm = document.querySelector('#reviewFrm');
@@ -284,7 +311,7 @@ const makeTr = item => {
     const tr = document.createElement('tr');
 
     tr.innerHTML = `
-                <td>${item.ctnt}</td>
+                <td><span>${item.ctnt}</span></td>
                 <td>
                     <span>${item.nickname}</span>
                 </td>
@@ -309,11 +336,15 @@ const makeTr = item => {
             console.log('수정 버튼 클릭');
             const tdArr = tr.querySelectorAll('td');
             const tdCell = tdArr[0];
+            const tdSaveCell = tdArr[2];
 
             const modInput = document.createElement('input');
             modInput.value = item.ctnt;
+            modInput.classList.add('inputStyle');
             const saveBtn = document.createElement('input')
             saveBtn.type = 'button';
+            saveBtn.classList.add('saveBtn');
+            saveBtn.classList.add('buttonStyle');
             saveBtn.value = '저장';
             saveBtn.addEventListener('click', () => {
                 const param = {
@@ -335,24 +366,27 @@ const makeTr = item => {
             });
 
             tdCell.innerHTML = null;
-            tdCell.appendChild(modInput);
-            tdCell.appendChild(saveBtn);
+            tdCell.appendChild(modInput);   // 첫번째 열에 수정 내용
 
             const cancelBtn = document.createElement('input');
             cancelBtn.type = 'button';
+            cancelBtn.classList.add('cancelBtn');
             cancelBtn.value = '취소';
+            cancelBtn.classList.add('buttonStyle');
             cancelBtn.addEventListener('click', () => {
                 tdCell.innerText = item.ctnt;
                 removeCancelBtn();
             });
+            tdSaveCell.appendChild(cancelBtn);    // 세번째 열에 저장 버튼
 
             const removeCancelBtn = () => {
                 modBtn.classList.remove('hidden');
                 delBtn.classList.remove('hidden');
                 cancelBtn.remove();
+                saveBtn.remove();
             }
 
-            td.insertBefore(cancelBtn, modBtn);
+            td.insertBefore(saveBtn, modBtn);
             modBtn.classList.add('hidden');
             delBtn.classList.add('hidden');
         });
@@ -471,3 +505,16 @@ const enableFav = () => {
 var popover = new bootstrap.Popover(document.querySelector('.popover-dismiss'), {
     trigger: 'focus'
 })
+
+// Style 함수
+
+function reviewListbuttonStyleAdd(button) {
+    button.style.borderRadius = '30px';
+    button.style.marginLeft = '5px';
+    button.style.border = '0';
+    button.style.height = '30px';
+    button.style.width = '55px';
+}
+
+function inputStyle(elem) {
+}

@@ -112,67 +112,78 @@
         if (ppBtns[0].classList.contains("clicked")) {
             mecaData.getMrTopRandomGame()
                 .then(function () {
-                    getCmtList();
+                    isLike(selectedGameNm);
+                    getCmtList(selectedGameNm);
                 }).catch(function (e) {
                 console.log(e);
             });
         } else if (ppBtns[1].classList.contains("clicked")) {
             mecaData.getMrGreatRandomGame()
                 .then(function () {
-                    getCmtList();
+                    isLike(selectedGameNm);
+                    getCmtList(selectedGameNm);
                 }).catch(function (e) {
                 console.log(e);
             });
         } else if (ppBtns[2].classList.contains("clicked")) {
             mecaData.getMrGoodRandomGame()
                 .then(function () {
-                    getCmtList();
+                    isLike(selectedGameNm);
+                    getCmtList(selectedGameNm);
                 }).catch(function (e) {
                 console.log(e);
             });
         } else {
             mecaData.getMrAllRandomGame()
                 .then(function () {
-                    getCmtList();
+                    isLike(selectedGameNm);
+                    getCmtList(selectedGameNm);
                 }).catch(function (e) {
                 console.log(e);
             });
         }
         modalXBtn.addEventListener('click', () => {
             modalWindow.style.display = 'none';
+            gameCmtFrmElem.ctnt = null;
         })
         window.addEventListener("keyup", (e) => {
             if (modalWindow.style.display === "flex" && e.key === "Escape") {
                 modalWindow.style.display = "none"
+                gameCmtFrmElem.ctnt = null;
             }
         })
     });
 
-    kdBtn.addEventListener("click", function async () {
+    kdBtn.addEventListener("click", function async() {
+
         if (kdBtns[0].classList.contains("clicked")) {
             genreData.getRpgRandomGame()
                 .then(function () {
-                    getCmtList();
+                    isLike(selectedGameNm);
+                    getCmtList(selectedGameNm);
                 }).catch(function (e) {
                 console.log(e);
             });
         } else if (kdBtns[1].classList.contains("clicked")) {
             genreData.getFpsRandomGame()
                 .then(function () {
-                    getCmtList();
+                    isLike(selectedGameNm);
+                    getCmtList(selectedGameNm);
                 }).catch(function (e) {
                 console.log(e);
             });
         } else if (kdBtns[2].classList.contains("clicked")) {
             genreData.getSportsRandomGame()
                 .then(function () {
-                    getCmtList();
+                    isLike(selectedGameNm);
+                    getCmtList(selectedGameNm);
                 }).catch(function (e) {
                 console.log(e);
             });
         } else if (kdBtns[3].classList.contains("clicked")) {
             genreData.getActionRandomGame()
                 .then(function () {
+                    isLike(selectedGameNm);
                     getCmtList();
                 }).catch(function (e) {
                 console.log(e);
@@ -180,21 +191,24 @@
         } else if (kdBtns[4].classList.contains("clicked")) {
             genreData.getStrRandomGame()
                 .then(function () {
-                    getCmtList();
+                    isLike(selectedGameNm);
+                    getCmtList(selectedGameNm);
                 }).catch(function (e) {
                 console.log(e);
             });
         } else if (kdBtns[5].classList.contains("clicked")) {
             genreData.getOthersRandomGame()
                 .then(function () {
-                    getCmtList();
+                    isLike(selectedGameNm);
+                    getCmtList(selectedGameNm);
                 }).catch(function (e) {
                 console.log(e);
             });
         } else {
             pfData.getAllPfRandomGame()
                 .then(function () {
-                    getCmtList();
+                    isLike(selectedGameNm);
+                    getCmtList(selectedGameNm);
                 }).catch(function (e) {
                 console.log(e);
             });
@@ -203,40 +217,47 @@
         modalWindow.style.display = 'flex';
         modalXBtn.addEventListener('click', () => {
             modalWindow.style.display = 'none';
+            gameCmtFrmElem.ctnt.value = null;
         })
         window.addEventListener("keyup", (e) => {
             if (modalWindow.style.display === "flex" && e.key === "Escape") {
                 modalWindow.style.display = "none"
+                gameCmtFrmElem.ctnt = null;
             }
         })
     })
 
-    pfBtn.addEventListener("click", function async () {
+    pfBtn.addEventListener("click", function async() {
+
         if (pfBtns[0].classList.contains("clicked")) {
             pfData.getMobileRandomGame()
                 .then(function () {
-                    getCmtList();
+                    isLike(selectedGameNm);
+                    getCmtList(selectedGameNm);
                 }).catch(function (e) {
                 console.log(e);
             });
         } else if (pfBtns[1].classList.contains("clicked")) {
             pfData.getPcRandomGame()
                 .then(function () {
-                    getCmtList();
+                    getCmtList(selectedGameNm);
+                    isLike(selectedGameNm);
                 }).catch(function (e) {
                 console.log(e);
             });
         } else if (pfBtns[2].classList.contains("clicked")) {
             pfData.getStRandomGame()
                 .then(function () {
-                    getCmtList();
+                    isLike(selectedGameNm);
+                    getCmtList(selectedGameNm);
                 }).catch(function (e) {
                 console.log(e);
             });
         } else {
             pfData.getAllPfRandomGame()
                 .then(function () {
-                    getCmtList();
+                    isLike(selectedGameNm);
+                    getCmtList(selectedGameNm);
                 }).catch(function (e) {
                 console.log(e);
             });
@@ -245,15 +266,17 @@
         modalWindow.style.display = 'flex';
         modalXBtn.addEventListener('click', () => {
             modalWindow.style.display = 'none';
+            gameCmtFrmElem.ctnt = null;
         })
         window.addEventListener("keyup", (e) => {
             if (modalWindow.style.display === "flex" && e.key === "Escape") {
                 modalWindow.style.display = "none"
+                gameCmtFrmElem.ctnt = null;
             }
         })
     })
 
-    funBtn.addEventListener('click', function async () {
+    funBtn.addEventListener('click', function async() {
 
         // if (pfBtns[0].classList.contains("clicked")) {
         //     if (kdBtns[0].classList.contains("clicked")) {
@@ -274,14 +297,16 @@
         if (randomNum === 1) {
             mecaData.getMrAllRandomGame()
                 .then(function () {
-                    getCmtList();
+                    isLike(selectedGameNm);
+                    getCmtList(selectedGameNm);
                 }).catch(function (e) {
                 console.log(e);
             });
         } else {
             pfData.getAllPfRandomGame()
                 .then(function () {
-                    getCmtList();
+                    isLike(selectedGameNm);
+                    getCmtList(selectedGameNm);
                 }).catch(function (e) {
                 console.log(e);
             });
@@ -290,10 +315,12 @@
         modalWindow.style.display = 'flex';
         modalXBtn.addEventListener('click', () => {
             modalWindow.style.display = 'none';
+            gameCmtFrmElem.ctnt = null;
         })
         window.addEventListener("keyup", (e) => {
             if (modalWindow.style.display === "flex" && e.key === "Escape") {
                 modalWindow.style.display = "none"
+                gameCmtFrmElem.ctnt = null;
             }
         })
     })
@@ -710,71 +737,82 @@
     let dataElem = document.querySelector("#data");
     let gameCmtFrmElem = document.querySelector("#gameCmtFrm");
 
-    let insCmt = function () {if (gameCmtFrmElem) {
-        gameCmtFrmElem.addEventListener("submit", (e) => {
-            e.preventDefault();
-        });
+    if(dataElem.dataset.iuser <= 0) {
+        gameCmtFrmElem.style.display = 'none';
+    }
 
-        gameCmtFrmElem.cmt_submit.addEventListener('click', () => {
-            let cmtVal = gameCmtFrmElem.ctnt.value;
-            if (cmtVal.length === 0) {
-                alert("내용을 입력해 주세요.");
-            } else if (cmtVal.includes("<") || cmtVal.includes(">")) {
-                alert("내용에 < 혹은 >를 사용하실 수 없습니다.");
-            } else {
-                insGameCmtAjax(cmtVal);
-                // location.href="/board/detail?iboard="+ iboard;
+    let insCmt = function () {
+        if (gameCmtFrmElem) {
+            gameCmtFrmElem.addEventListener("submit", (e) => {
+                e.preventDefault();
+            });
+
+            gameCmtFrmElem.cmt_submit.addEventListener('click', () => {
+                let cmtVal = gameCmtFrmElem.ctnt.value;
+                if (cmtVal.length === 0) {
+                    alert("내용을 입력해 주세요.");
+                } else if (cmtVal.includes("<") || cmtVal.includes(">")) {
+                    alert("내용에 < 혹은 >를 사용하실 수 없습니다.");
+                } else {
+                    insGameCmtAjax(cmtVal);
+                    // location.href="/board/detail?iboard="+ iboard;
+                }
+            });
+            // const item = {
+            //     icmt: data.result,
+            //     iuser: parseInt(dataElem.dataset.iuser),
+            //     ctnt: gameCmtFrmElem.ctnt.value,
+            // }
+            let insGameCmtAjax = (val) => {
+
+                selectedGameNm = gameNm;
+                console.log("ins cmt gameNm : " + selectedGameNm)
+                let param = {
+                    gameNm: selectedGameNm,
+                    iuser: dataElem.dataset.iuser,
+                    ctnt: val
+                };
+                console.log(param);
+                fetch('/game', {
+                    'method': 'POST',
+                    'headers': {'Content-Type': 'application/json'},
+                    'body': JSON.stringify(param),
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        const tableElem = document.querySelector('table');
+                        if (tableElem) {
+                            tableElem.remove();
+                        }
+                        gameCmtListElem.innerText = '';
+                        gameCmtListElem.ctnt = null;
+                        gameCmtFrmElem.ctnt.value = null;
+                        getCmtList(selectedGameNm);
+
+                    }).catch(e => {
+                    console.log(e);
+                })
             }
-        });
-        // const item = {
-        //     icmt: data.result,
-        //     iuser: parseInt(dataElem.dataset.iuser),
-        //     ctnt: gameCmtFrmElem.ctnt.value,
-        // }
-        let insGameCmtAjax = (val) => {
-            let param = {
-                gameNm: selectedGameNm,
-                iuser: dataElem.dataset.iuser,
-                ctnt: val
-            };
-            console.log(param);
-            fetch('/game', {
-                'method': 'POST',
-                'headers': {'Content-Type': 'application/json'},
-                'body': JSON.stringify(param),
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    const tableElem = document.querySelector('table');
-                    if (tableElem) {
-                        tableElem.remove();
-                    }
-                    gameCmtListElem.innerText = '';
-                    gameCmtListElem.ctnt = null;
-                    gameCmtFrmElem.ctnt.value = null;
-                    getCmtList();
-
-                }).catch(e => {
-                console.log(e);
-            })
         }
-    }}
+    }
     insCmt();
 
-    const getCmtList = () => {
+    let gameNm;
+
+    const getCmtList = (selectedGameNm) => {
         if (document.querySelector("table")) {
             document.querySelector("table").remove();
         }
-        let gameNm = selectedGameNm;
+        gameNm = selectedGameNm;
         fetch(`/game/${gameNm}`)
             .then(res => {
                 return res.json();
             }).then(data => {
             console.log(data);
             gameCmtListElem.innerText = '';
-            gameCmtListElem.ctnt = null;
-            gameCmtFrmElem.ctnt.value = null;
+            // gameCmtListElem.ctnt = null;
+            // gameCmtFrmElem.ctnt.value = null;
             setCmtList(data);
         }).catch(e => {
             console.log(e);
@@ -807,7 +845,7 @@
 
         tr.innerHTML = `
         <td>${item.ctnt}</td>
-        <td>${item.iuser}</td>
+        <td>${item.nm}</td>
         `;
 
         const td = document.createElement('td');
@@ -904,7 +942,7 @@
                 const tableElem = document.querySelector('table');
                 tableElem.remove();
                 gameCmtFrmElem.ctnt.value = null;
-                getCmtList();
+                getCmtList(selectedGameNm);
             }).catch(e => {
             console.log(e)
         });
@@ -920,133 +958,76 @@
     let gameThumbElems = document.querySelectorAll(".game_thumb_img");
 
     mecaThumbElems.forEach(function (item) {
-        item.addEventListener("click", ()=> {
+        item.addEventListener("click", () => {
 
             let selectedGameNm = item.parentNode.children[1].querySelector(".sel_gameNm").textContent;
+            isLike(selectedGameNm);
 
-            function getMrAllRandomGame () {
+            function getMrAllRandomGame() {
                 return new Promise(function (resolve, reject) {
                     fetch("/board/mecarankingjson").then((res) => {
                         return res.json();
                     }).then((data) => {
-                        data.forEach( function (item) {
+                        data.forEach(function (item) {
                             if (item.gameNm == selectedGameNm) {
 
                                 document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${item.selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
                                 document.querySelector(".selected-img").innerHTML = `<img src=${item.imgsrc}>`
 
+                                getCmtList(selectedGameNm);
+
                                 resolve();
-                            }})
+                            } else {
+                                return;
+                            }
+                        })
                     }).catch((err) => {
                         console.log(err);
                         reject();
                     });
                 });
             }
+
             getMrAllRandomGame ();
-
-
-
-            const getCmtList = () => {
-                if (document.querySelector("table")) {
-                    document.querySelector("table").remove();
-                }
-                let gameNm = selectedGameNm;
-                fetch(`/game/${gameNm}`)
-                    .then(res => {
-                        return res.json();
-                    }).then(data => {
-                    console.log(data);
-                    gameCmtListElem.innerText = '';
-                    gameCmtListElem.ctnt = null;
-                    gameCmtFrmElem.ctnt.value = null;
-                    setCmtList(data);
-                }).catch(e => {
-                    console.log(e);
-                });
-            }
-            getCmtList(selectedGameNm);
-
-            let gameCmtFrmElem = document.querySelector("#gameCmtFrm");
-
-            function gameCmtIns () {
-                if (gameCmtFrmElem) {
-                gameCmtFrmElem.cmt_submit.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    let cmtVal = gameCmtFrmElem.ctnt.value;
-                    if (cmtVal.length === 0) {
-                        alert("내용을 입력해 주세요.");
-                    } else if (cmtVal.includes("<") || cmtVal.includes(">")) {
-                        alert("내용에 < 혹은 >를 사용하실 수 없습니다.");
-                    } else {
-                        insGameCmtAjax(cmtVal);
-                    }
-                });
-                let insGameCmtAjax = (val) => {
-                    let param = {
-                        gameNm: selectedGameNm,
-                        iuser: dataElem.dataset.iuser,
-                        ctnt: val
-                    };
-                    console.log(param);
-                    fetch('/game', {
-                        'method': 'POST',
-                        'headers': {'Content-Type': 'application/json'},
-                        'body': JSON.stringify(param),
-                    })
-                        .then(res => res.json())
-                        .then(data => {
-                            console.log(data);
-                            const tableElem = document.querySelector('table');
-                            if (tableElem) {
-                                tableElem.remove();
-                            }
-                            gameCmtListElem.innerText = '';
-                            gameCmtListElem.ctnt = null;
-                            gameCmtFrmElem.ctnt.value = null;
-                            getCmtList();
-
-                        }).catch(e => {
-                        console.log(e);
-                    })
-                }
-            }}
-
-            gameCmtIns();
 
             modalWindow.style.display = 'flex'
             modalXBtn.addEventListener('click', () => {
-                gameCmtFrmElem.cmt_submit.removeEventListener("click", gameCmtIns());
                 modalWindow.style.display = 'none';
+                gameCmtFrmElem.ctnt = null;
             })
             window.addEventListener("keyup", (e) => {
                 if (modalWindow.style.display === "flex" && e.key === "Escape") {
-                    gameCmtFrmElem.cmt_submit.removeEventListener("click", gameCmtIns());
                     modalWindow.style.display = "none"
+                    gameCmtFrmElem.ctnt = null;
                 }
             })
         })
 
-    })
+    }
+        )
 
     gameThumbElems.forEach(function (item) {
-        item.addEventListener("click", ()=> {
+        item.addEventListener("click", () => {
             let selectedGameNm = item.parentNode.children[1].querySelector(".sel_gameNm").textContent;
+            isLike(selectedGameNm);
 
-            function getAllPfRandomGame () {
+            function getAllPfRandomGame() {
                 return new Promise(function (resolve, reject) {
                     fetch("/board/platformrankingjson"
                         ).then((res) => {
                         return res.json();
                     }).then((data) => {
-                        data.forEach( function (item) {
+                        data.forEach(function (item) {
 
                             if (item.gameNm == selectedGameNm) {
                                 document.querySelector(".modalContent").innerHTML = `<a class="text-important" href="${item.selLink}" target="_blank">` + selectedGameNm + " 어때요?" + "</a>"
                                 document.querySelector(".selected-img").innerHTML = `<img src=${item.imgsrc}>`
 
+                                getCmtList(selectedGameNm);
+
                                 resolve();
-                            }})
+                            }
+                        })
                     }).catch((err) => {
                         console.log(err);
 
@@ -1054,85 +1035,101 @@
                     });
                 });
             }
+
             getAllPfRandomGame();
 
-            const getCmtList = () => {
-                if (document.querySelector("table")) {
-                    document.querySelector("table").remove();
-                }
-                let gameNm = selectedGameNm;
-                fetch(`/game/${gameNm}`)
-                    .then(res => {
-                        return res.json();
-                    }).then(data => {
-                    console.log(data);
-                    gameCmtListElem.innerText = '';
-                    gameCmtListElem.ctnt = null;
-                    gameCmtFrmElem.ctnt.value = null;
-                    setCmtList(data);
-                }).catch(e => {
-                    console.log(e);
-                });
-            }
-            getCmtList(selectedGameNm);
-
-            let gameCmtFrmElem = document.querySelector("#gameCmtFrm");
-
-            if (gameCmtFrmElem) {
-                gameCmtFrmElem.addEventListener("submit", (e) => {
-                    e.preventDefault();
-                });
-
-                gameCmtFrmElem.cmt_submit.addEventListener('click', () => {
-                    let cmtVal = gameCmtFrmElem.ctnt.value;
-                    if (cmtVal.length === 0) {
-                        alert("내용을 입력해 주세요.");
-                    } else if (cmtVal.includes("<") || cmtVal.includes(">")) {
-                        alert("내용에 < 혹은 >를 사용하실 수 없습니다.");
-                    } else {
-                        insGameCmtAjax(cmtVal);
-                    }
-                });
-                let insGameCmtAjax = (val) => {
-                    let param = {
-                        gameNm: selectedGameNm,
-                        iuser: dataElem.dataset.iuser,
-                        ctnt: val
-                    };
-                    console.log(param);
-                    fetch('/game', {
-                        'method': 'POST',
-                        'headers': {'Content-Type': 'application/json'},
-                        'body': JSON.stringify(param),
-                    })
-                        .then(res => res.json())
-                        .then(data => {
-                            console.log(data);
-                            const tableElem = document.querySelector('table');
-                            if (tableElem) {
-                                tableElem.remove();
-                            }
-                            gameCmtListElem.innerText = '';
-                            gameCmtListElem.ctnt = null;
-                            gameCmtFrmElem.ctnt.value = null;
-                            getCmtList();
-
-                        }).catch(e => {
-                        console.log(e);
-                    })
-                }
-            }
 
             modalWindow.style.display = 'flex';
             modalXBtn.addEventListener('click', () => {
                 modalWindow.style.display = 'none';
+                gameCmtFrmElem.ctnt = null;
             })
             window.addEventListener("keyup", (e) => {
                 if (modalWindow.style.display === "flex" && e.key === "Escape") {
                     modalWindow.style.display = "none"
+                    gameCmtFrmElem.ctnt = null;
                 }
             })
         })
     })
+
+    //좋아요
+
+    const likeBtnElem = document.querySelector('#likeBtn');
+    let likeCountElem = document.querySelector(".like_count")
+
+
+    const isLike = function(selectedGameNm) {
+        gameNm = selectedGameNm
+        console.log(gameNm);
+        fetch(`/game/like/${gameNm}`)
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data)
+                switch (data.result) {
+                    case 0:
+                        offLike();
+                        break;
+                    case 1:
+                        onLike();
+                        break;
+                }
+                likeCountElem.innerHTML = `<div style="margin-top: 5px; color: lightpink; font-weight: bolder">${data.count}명의 유저가 좋아합니다.</div>`
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    }
+
+    const offLike = () => {
+        if(likeBtnElem) {
+            likeBtnElem.classList.remove('fa-heart');
+            likeBtnElem.classList.add('fa-heart-crack');
+        }
+    }
+
+    const onLike = () => {
+        if(likeBtnElem) {
+            likeBtnElem.classList.remove('fa-heart-crack');
+            likeBtnElem.classList.add('fa-heart');
+        }
+    }
+
+    likeBtnElem.addEventListener('click', (e) => {
+        if (dataElem.dataset.iuser <= 0) {
+            alert("로그인 해주세요.");
+            return;
+        }
+
+        if(e.target.classList.contains('fa-heart-crack')) {
+            const param = {gameNm : gameNm,
+                           'iuser' : dataElem.dataset.iuser};
+
+            fetch('/game/like', {
+                'method': 'post',
+                'headers': { 'Content-Type': 'application/json' },
+                'body': JSON.stringify(param)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    console.log("ins like gameNm : " + gameNm)
+                    onLike();
+                    isLike(gameNm);
+                })
+        } else  {
+            fetch(`/game/like/${gameNm}`, {
+                'method': 'delete',
+                'headers': { 'Content-Type': 'application/json' },
+            }).then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    console.log("del like gameNm : " + gameNm);
+                    offLike();
+                    isLike(gameNm);
+                });
+        }
+    })
+
 
 }

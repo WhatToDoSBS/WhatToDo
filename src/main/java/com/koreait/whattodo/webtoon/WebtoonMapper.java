@@ -21,5 +21,5 @@ public interface WebtoonMapper {
     List<WebtoonRecommandEntity> webtoonRecommandList();
     List<WebtoonRecommandEntity> webtoonRecommandListRandom();
     List<WebtoonGenreEntity> webtoonGenreListAll();
-    List<WebtoonGenreEntity> webtoonGenreListBtnRandom(WebtoonGenreEntity entity);
+    List<WebtoonGenreEntity> webtoonGenreListBtnRandom();
 }
