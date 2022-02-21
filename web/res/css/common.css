@@ -376,10 +376,25 @@ button.pfBtn.clicked {
 }
 
 #guide-tooltip a {
+    color: black;
     background: none;
     border: none;
 }
 
 #guide-tooltip .btn-outline-info {
     background: white;
+}
+
+.pagination a:hover {
+    color: rgb(42, 174, 207);
+    font-weight: bold;
+    border-bottom: 1px solid rgb(42, 174, 207);
+    padding-bottom: 3px;
+}
+
+.active a {
+    color: rgb(42, 174, 207);
+    font-weight: bold;
+    border-bottom: 1px solid rgb(42, 174, 207);
+    padding-bottom: 3px;
 }

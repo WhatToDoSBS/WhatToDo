@@ -3,22 +3,12 @@ package com.koreait.whattodo.user.mypage;
 import com.koreait.whattodo.UserUtils;
 import com.koreait.whattodo.board.fav.FavWebtoonService;
 import com.koreait.whattodo.game.cmt.GameCmtService;
-import com.koreait.whattodo.model.user.mypage.ChaUpwEntity;
-import com.koreait.whattodo.model.user.mypage.ChaUpwVo;
 import com.koreait.whattodo.review.ReviewService;
-import com.koreait.whattodo.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/user")
@@ -31,12 +21,6 @@ public class UserMypageController {
     FavWebtoonService favWebtoonService = new FavWebtoonService();
     @Autowired
     GameCmtService gameCmtService = new GameCmtService();
-
-    @Autowired
-    private UserMypageService userMypageService;
-
-    @Autowired
-    private UserService userService;
 
     @GetMapping("/mypage/main")
     public String main(Model model) {
@@ -75,8 +59,20 @@ public class UserMypageController {
     }
 
     @GetMapping("/mypage/myreview")
-    public void myreview(Model model) {
-        model.addAttribute("reviewAll",reviewService.selReviewAllMy());
+    public void myreview(Model model, UserPagingDTO dto) {
+        UserPagingMaker pageMaker = new UserPagingMaker();
+        pageMaker.setUserPagingDTO(dto);
+        pageMaker.setTotalCount(reviewService.selReviewAllMy().size());
+
+        if(dto.getCategory()==2) {
+            model.addAttribute("pageList", reviewService.selReviewWebtoonMyPaging(dto));
+        } else if(dto.getCategory()==3) {
+            model.addAttribute("pageList", reviewService.selReviewGameMyPaging(dto));
+        } else {
+            model.addAttribute("pageList", reviewService.selReviewAllMyPaging(dto));
+        }
+
+        model.addAttribute("pageMaker", pageMaker);
     }
 
     @GetMapping("/mypage/myfav")

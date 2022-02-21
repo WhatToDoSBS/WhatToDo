@@ -1,11 +1,15 @@
 function changeVal(val) {
     console.log(val);
+    const selectForm = document.querySelector('.form-select');
     if (val == 1) {
-        allReviewList()
+
+        // allReviewList()
     } else if (val == 2) {
-        webtoonCmtList();
+        location.href = '/user/mypage/myreview?category=' + val;
+        $("#select_form").val(2).prop("selected", true);
     } else if (val == 3) {
-        gameCmtList();
+        location.href = '/user/mypage/myreview?category=' + val;
+        // gameCmtList();
     } else {
         console.log('처음 상태');
     }

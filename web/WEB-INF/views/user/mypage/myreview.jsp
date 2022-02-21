@@ -14,7 +14,7 @@
                 <th>나의 평가</th>
                 <th>작성 일시</th>
             </tr>
-            <c:forEach var="item" items="${reviewAll}">
+            <c:forEach var="item" items="${pageList}">
                 <tr>
                     <td>${item.nm}</td>
                     <td>${item.ctnt}</td>
@@ -22,6 +22,23 @@
                 </tr>
             </c:forEach>
         </table>
+        <div>
+            <ul class="pagination">
+                <c:if test="${pageMaker.prev}">
+                    <li><a href="/user/mypage/myreview?page=${pageMaker.startPage - 1}">이전</a></li>
+                </c:if>
+                <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+                    <li <c:out value="${pageMaker.dto.page == idx ? 'class=active' : ''}"/>>
+                        <a href="/user/mypage/myreview?page=${idx}">${idx}</a>
+                    </li>
+                </c:forEach>
+                <c:if test="${pageMaker.next && pageMaker.endPage >0}">
+                    <li>
+                        <a href="/user/mypage/myreview?page=${pageMaker.endPage + 1}">다음</a>
+                    </li>
+                </c:if>
+            </ul>
+        </div>
     </div>
 
 </div>

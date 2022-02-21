@@ -14,3 +14,12 @@ i {
 .fa-star {
     color: yellow;
 }
+
+.pagination {
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.pagination li {
+    margin: 0 5px;
+}
