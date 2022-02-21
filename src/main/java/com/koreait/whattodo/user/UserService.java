@@ -125,7 +125,7 @@ public class UserService {
         mapper.delAutoLoginKey(loginKey); // value 값으로 만료기한을 현재시간으로 갱신시키고 만료여부를 true 로 바꿈
     }
 
-    public int socialLogin(UserDto dto) {
+    public int socialLogin(UserDto dto) { // 소셜 로그인
         UserVo vo = null;
         String upw = String.format("%f%s%f",
                 Math.random(),
