@@ -46,7 +46,7 @@ td {
 }
 
 .info .info_profileCard div {
-    margin-top: 25px;
+    margin-top: 20px;
 }
 
 .info .info_profileCard .nickname {
@@ -94,4 +94,22 @@ button {
 
 .password_change {
     text-align: center;
+}
+
+.password_change > form > label:nth-child(1) {
+    padding-left: 1rem;
+}
+
+.password_change > form > label:nth-child(2) {
+    padding-left: 2rem;
+}
+
+.password_change > form > label > input:focus {
+    border: solid 1px black;
+    outline: none;
+}
+
+.password_change > form > div.btn-link > input {
+    padding: 5px 10px;
+    border: none;
 }

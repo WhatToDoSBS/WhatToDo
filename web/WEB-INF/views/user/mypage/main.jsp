@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <div class="container">
@@ -40,12 +41,28 @@
             </div>
         </div></div>
         <div class="col info">
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 21rem;">
                 <div class="card-body info_profileCard password_change">
                     <h5 class="card-title"><i class="fa-solid fa-unlock"></i>비밀번호 변경</h5>
-                    <div class="btn-link">
-                        <a href="#" class="card-link"><button>변경</button></a>
-                    </div>
+                    <h6>변경 후 로그아웃 됩니다.</h6>
+                    <form action="/user/mypage/cheUpw" method="post">
+                        <label>
+                            <span>현제 비밀번호</span>
+                            <input type="password" name="oldUpw">
+                        </label>
+                        <label>
+                            <span>새 비밀번호</span>
+                            <input type="password" name="newUpw">
+                        </label>
+                        <label>
+                            <span>새 비밀번호 확인</span>
+                            <input type="password" name="newUpwChk">
+                        </label>
+                        <div hidden id="upwChaResult">${requestScope.result}</div>
+                        <div class="btn-link">
+                            <input type="submit" value="변경">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -79,3 +96,10 @@
         </div>
     </div>
 </div>
+
+<script>
+    const upwChaResult = document.querySelector('#upwChaResult');
+    if (upwChaResult.innerText !== '') {
+        alert(upwChaResult.innerText);
+    }
+</script>
