@@ -21,17 +21,15 @@ public class FavWebtoonService {
     public FavWebtoonEntity selWebtoondFav(String nm) {
         return mapper.selWebtoondFav(createBoardFavEntity(nm));
     }
-    public List<FavWebtoonEntity> selWebtoonMyFav() {
-        FavWebtoonEntity webtoonEntity = new FavWebtoonEntity();
-        webtoonEntity.setIuser(userUtils.getLoginUserPk());
-        return mapper.selWebtoonMyFav(webtoonEntity);
-    }
+
     public int selWebtoonFavCnt(String nm) {
         FavWebtoonEntity entity = new FavWebtoonEntity();
         entity.setNm(nm);
         entity.setIuser(userUtils.getLoginUserPk());
         return mapper.selWebtoonFavCount(entity).getCount();
     }
+
+
 
     public int delWebtoonFav(String nm) {
         return mapper.delWebtoonFav(createBoardFavEntity(nm));

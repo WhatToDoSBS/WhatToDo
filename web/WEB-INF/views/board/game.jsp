@@ -26,7 +26,7 @@
                     return;
                 }
                 crawlingBtnElem.childNodes[1].classList.add("spinner-border");
-                location.href="/board/gameCrawling"
+                location.href = "/board/gameCrawling"
             }
         </script>
     </button>
@@ -70,7 +70,8 @@
     </div>
     <div class="search_section">
         <button class="fun-btn">뭐하Gee?<br>
-        ALL RANDOM</button>
+            ALL RANDOM
+        </button>
     </div>
 </div>
 
@@ -79,20 +80,20 @@
         <div class="swiper-slide">
             <h4 style="display: inline-block; font-family: 'SDSamliphopangche_Outline'">MECA TOP 50</h4>
             <ul class="meca_game_rank">
-            <div class="rank_container">
-            <c:forEach var="item" items="${gameList}" begin="0" end="9">
-                <li>
-                    <div class="meca_thumb_img">
-                        <img style="width: 100px; height: 100px" src="${item.imgsrc}" alt="">
-                    </div>
-                    <div class="rank_info rank_info_game">
-                        <div>${item.rankNum}위</div>
-                        <a href="${item.selLink}" target='_blank'><span class="sel_gameNm">${item.gameNm}</span></a>
-                        <div>${item.company}</div>
-                    </div>
-                </li>
-            </c:forEach>
-            </div>
+                <div class="rank_container">
+                    <c:forEach var="item" items="${gameList}" begin="0" end="9">
+                        <li>
+                            <div class="meca_thumb_img">
+                                <img style="width: 100px; height: 100px" src="${item.imgsrc}" alt="">
+                            </div>
+                            <div class="rank_info rank_info_game">
+                                <div>${item.rankNum}위</div>
+                                <a href="${item.selLink}" target='_blank'><span class="sel_gameNm">${item.gameNm}</span></a>
+                                <div>${item.company}</div>
+                            </div>
+                        </li>
+                    </c:forEach>
+                </div>
             </ul>
         </div>
 
@@ -180,18 +181,18 @@
             <h4 style="display: inline-block; font-family: 'SDSamliphopangche_Outline'">MOBILE TOP 40</h4>
             <ul class="mobile_game_rank">
                 <div class="rank_container">
-                <c:forEach var="item" items="${pfGameList}" begin="0" end="9">
-                    <li>
-                        <div class="game_thumb_img">
-                            <img style="width: 100px; height: 100px" src="${item.imgsrc}" alt="">
-                        </div>
-                        <div class="rank_info rank_info_game">
-                            <div>${item.rankNum}위</div>
-                            <a href="${item.selLink}" target='_blank'><span class="sel_gameNm">${item.gameNm}</span></a>
-                            <div>${item.company}</div>
-                        </div>
-                    </li>
-                </c:forEach>
+                    <c:forEach var="item" items="${pfGameList}" begin="0" end="9">
+                        <li>
+                            <div class="game_thumb_img">
+                                <img style="width: 100px; height: 100px" src="${item.imgsrc}" alt="">
+                            </div>
+                            <div class="rank_info rank_info_game">
+                                <div>${item.rankNum}위</div>
+                                <a href="${item.selLink}" target='_blank'><span class="sel_gameNm">${item.gameNm}</span></a>
+                                <div>${item.company}</div>
+                            </div>
+                        </li>
+                    </c:forEach>
                 </div>
             </ul>
         </div>
@@ -260,18 +261,18 @@
             <h4 style="display: inline-block; font-family: 'SDSamliphopangche_Outline'">PC TOP 40</h4>
             <ul class="pc_game_rank">
                 <div class="rank_container">
-                <c:forEach var="item" items="${pfGameList}" begin="40" end="49">
-                    <li>
-                        <div class="game_thumb_img">
-                            <img style="width: 100px; height: 100px" src="${item.imgsrc}" alt="">
-                        </div>
-                        <div class="rank_info rank_info_game">
-                            <div>${item.rankNum}위</div>
-                            <a href="${item.selLink}" target='_blank'><span class="sel_gameNm">${item.gameNm}</span></a>
-                            <div>${item.company}</div>
-                        </div>
-                    </li>
-                </c:forEach>
+                    <c:forEach var="item" items="${pfGameList}" begin="40" end="49">
+                        <li>
+                            <div class="game_thumb_img">
+                                <img style="width: 100px; height: 100px" src="${item.imgsrc}" alt="">
+                            </div>
+                            <div class="rank_info rank_info_game">
+                                <div>${item.rankNum}위</div>
+                                <a href="${item.selLink}" target='_blank'><span class="sel_gameNm">${item.gameNm}</span></a>
+                                <div>${item.company}</div>
+                            </div>
+                        </li>
+                    </c:forEach>
                 </div>
             </ul>
         </div>
@@ -340,18 +341,18 @@
             <h4 style="display: inline-block; font-family: 'SDSamliphopangche_Outline'">STEAM TOP 40</h4>
             <ul class="st_game_rank">
                 <div class="rank_container">
-                <c:forEach var="item" items="${pfGameList}" begin="80" end="89">
-                    <li>
-                        <div class="game_thumb_img">
-                            <img style="width: 100px; height: 100px" src="${item.imgsrc}" alt="">
-                        </div>
-                        <div class="rank_info rank_info_game">
-                            <div>${item.rankNum}위</div>
-                            <a href="${item.selLink}" target='_blank'><span class="sel_gameNm">${item.gameNm}</span></a>
-                            <div>${item.company}</div>
-                        </div>
-                    </li>
-                </c:forEach>
+                    <c:forEach var="item" items="${pfGameList}" begin="80" end="89">
+                        <li>
+                            <div class="game_thumb_img">
+                                <img style="width: 100px; height: 100px" src="${item.imgsrc}" alt="">
+                            </div>
+                            <div class="rank_info rank_info_game">
+                                <div>${item.rankNum}위</div>
+                                <a href="${item.selLink}" target='_blank'><span class="sel_gameNm">${item.gameNm}</span></a>
+                                <div>${item.company}</div>
+                            </div>
+                        </li>
+                    </c:forEach>
                 </div>
             </ul>
         </div>
@@ -435,19 +436,19 @@
         <div class="gameLink"></div>
         <div class="heart_section">
             <div class="like_count"></div>
-            <span><i id="likeBtn" class="fa-solid fa-heart-crack fav_icon"></i></span>
+            <span><i id="likeBtn" class="far fa-heart fav_icon"></i></span>
         </div>
         <div class="modalContent">
-        <div class="gameCmtList"></div>
-        <div>
-            <form id="gameCmtFrm" class="form-group">
+            <div class="gameCmtList"></div>
+            <div>
+                <form id="gameCmtFrm" class="form-group">
                     <input class="form-control" id="gameCmtCtnt" type="text" name="ctnt">
                     <input style="font-weight: bolder; color: white" class="btn btn-outline-dark" type="button"
                            id="cmt_submit" value="나의 평가 쓰기">
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 </div>
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 

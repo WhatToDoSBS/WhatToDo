@@ -20,22 +20,22 @@
             </div>
         </div>
         <div class="col info"><div class="card" style="width: 18rem;">
-            <div class="card-body info_profileCard">
+            <div class="card-body like_info_profileCard">
                 <h5 class="card-title"><i class="fa-solid fa-heart"></i>My Like</h5>
                 <div>
                     <table>
                         <tr>
-                            <td>최근 누른 좋아요</td>
+                            <td style="font-weight: bolder; font-size: large; color: lightpink">최근 누른 좋아요</td>
                         </tr>
-                        <c:forEach var="item" items="${webtoonFavMy}" begin="0">
+                        <c:forEach var="item" items="${myLike}" begin="0" end="4">
                             <tr>
-                                <td>${item.nm} + (웹툰)</td>
+                                <td>${item.nm}</td>
                             </tr>
                         </c:forEach>
                     </table>
                 </div>
                 <div class="btn-link">
-                    <a href="/user/mypage/myfav" class="card-link"><button>확인하기</button></a>
+                    <a href="/user/mypage/mylike" class="card-link"><button>확인하기</button></a>
                 </div>
             </div>
         </div></div>

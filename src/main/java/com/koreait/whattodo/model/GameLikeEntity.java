@@ -10,4 +10,6 @@ public class GameLikeEntity {
     private int iuser;
     private String rdt;
     private int count;
+    private String nm;
+    private int iboardNull;
 }

@@ -27,7 +27,7 @@
     </select>
 
     <select id="selGameLikeList" resultType="GameLikeEntity">
-        SELECT gameNm, iuser, rdt
+        SELECT gameNm as nm, iuser, rdt
         FROM game_like
         WHERE iuser = ${iuser}
         ORDER BY rdt desc

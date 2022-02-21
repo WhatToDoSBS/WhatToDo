@@ -43,7 +43,7 @@ public class CrawlingController {
 
 
     @GetMapping("/main")
-    public void main(Model model, PlatformRankEntity entity) {
+    public void main(Model model, MecaRankEntity entity) {
         String ratingUrl = "https://namu.wiki/w/%EB%A9%94%ED%83%80%ED%81%AC%EB%A6%AC%ED%8B%B1/MUST-PLAY%20%EB%AA%A9%EB%A1%9D";
         String naverWebtoonURL = "https://comic.naver.com/webtoon/weekdayList?week=mon&order=User&view=image";  // 월요일&인기순
 
@@ -56,7 +56,7 @@ public class CrawlingController {
 
         // 게임
         crawlingService.insertRating(ratingUrl);
-        List gameList = crawlingService.platformListWithImg(entity);
+        List gameList = crawlingService.mecaRankList(entity);
         List<WebtoonRecommandEntity> webtoonRecommandEntityList = webtoonService.listRecommandWebtoon();
 
         // 랜덤번째 리스트를 전달해줌

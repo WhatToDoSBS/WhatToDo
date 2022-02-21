@@ -61,10 +61,17 @@ li .selected { background-color: #D3D3D3}
 }
 
 .form-control {
-    width: 50%;
     margin: 15px;
 }
 
 .btn-light {
     height: 50%;
+}
+
+.form-group .searchTxt {
+    flex-basis: 85%
+}
+
+.form-group #sel1 {
+    flex-basis: 15%;
 }

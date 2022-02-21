@@ -27,9 +27,9 @@ public class UserMypageController {
     LikeService likeService;
 
     @GetMapping("/mypage/main")
-    public String main(Model model) {
+    public String main(Model model, BoardLikeEntity entity) {
         model.addAttribute("webtoonReviewMy",reviewService.selReviewWebtoonMy());
-        model.addAttribute("webtoonFavMy",favWebtoonService.selWebtoonMyFav());
+        model.addAttribute("myLike",likeService.selAllLikeList(entity));
         if(userUtils.getLoginUserPk()!=0) {
             return "user/mypage/main";
         }
@@ -41,7 +41,7 @@ public class UserMypageController {
         model.addAttribute("reviewAll",reviewService.selReviewAllMy());
     }
 
-    @GetMapping("/mypage/myfav")
+    @GetMapping("/mypage/mylike")
     public void myfav(Model model, BoardLikeEntity entity) {
         model.addAttribute("likeAll", likeService.selAllLikeList(entity));
     }

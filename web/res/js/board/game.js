@@ -1,4 +1,3 @@
-{
     // let rtBtns = document.querySelectorAll(".rtBtn");
     let ppBtns = document.querySelectorAll(".ppBtn");
     let kdBtns = document.querySelectorAll(".kdBtn");
@@ -1083,15 +1082,15 @@
 
     const offLike = () => {
         if(likeBtnElem) {
-            likeBtnElem.classList.remove('fa-heart');
-            likeBtnElem.classList.add('fa-heart-crack');
+            likeBtnElem.classList.remove('fas');
+            likeBtnElem.classList.add('far');
         }
     }
 
     const onLike = () => {
         if(likeBtnElem) {
-            likeBtnElem.classList.remove('fa-heart-crack');
-            likeBtnElem.classList.add('fa-heart');
+            likeBtnElem.classList.remove('far');
+            likeBtnElem.classList.add('fas');
         }
     }
 
@@ -1101,7 +1100,7 @@
             return;
         }
 
-        if(e.target.classList.contains('fa-heart-crack')) {
+        if(e.target.classList.contains('far')) {
             const param = {gameNm : gameNm,
                            'iuser' : dataElem.dataset.iuser};
 
@@ -1131,5 +1130,3 @@
         }
     })
 
-
-}

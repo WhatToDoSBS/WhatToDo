@@ -9,7 +9,7 @@ import java.util.List;
 public interface FavWebtoonMapper {
     int insWebtoonFav(FavWebtoonEntity entity);
     FavWebtoonEntity selWebtoondFav(FavWebtoonEntity entity);
-    List<FavWebtoonEntity> selWebtoonMyFav(FavWebtoonEntity entity);
     FavWebtoonEntity selWebtoonFavCount(FavWebtoonEntity entity);
     int delWebtoonFav(FavWebtoonEntity entity);
+    List<FavWebtoonEntity> selWebtoonLikeList(FavWebtoonEntity entity);
 }
