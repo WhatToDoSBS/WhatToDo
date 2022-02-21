@@ -51,7 +51,6 @@ public class UserMypageController {
     @PostMapping("/mypage/cheUpw")
     public String cheUpw(ChaUpwEntity entity, HttpSession hs, HttpServletRequest request, HttpServletResponse response, RedirectAttributes reAttr) {
         ChaUpwVo vo = userMypageService.passwordChange(entity);
-        System.out.println(vo.getChaUpwResult());
         if (vo.getChaUpwResult().equals("성공")) {
             if (userUtils.getLoginUser() != null) {
                 Cookie loginCookie = null;
