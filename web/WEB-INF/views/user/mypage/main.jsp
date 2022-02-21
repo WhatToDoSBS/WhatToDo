@@ -98,7 +98,7 @@
 </div>
 
 <script>
-    const upwChaResult = document.querySelector('#upwChaResult');
+    const upwChaResult = document.querySelector('#upwChaResult'); // div값으로 실패이유를 받아서 alert값으로 띄워줌
     if (upwChaResult.innerText !== '') {
         alert(upwChaResult.innerText);
     }

@@ -51,7 +51,7 @@ public class UserMypageController {
     @PostMapping("/mypage/cheUpw")
     public String cheUpw(ChaUpwEntity entity, HttpSession hs, HttpServletRequest request, HttpServletResponse response, RedirectAttributes reAttr) {
         ChaUpwVo vo = userMypageService.passwordChange(entity);
-        if (vo.getChaUpwResult().equals("성공")) {
+        if (vo.getChaUpwResult().equals("성공")) { // 변경 성공했을경우 세션을비우고(쿠키가있으면 쿠키도 지움) 로그인으로 보내줌
             if (userUtils.getLoginUser() != null) {
                 Cookie loginCookie = null;
                 for (Cookie cookie : request.getCookies()) {
@@ -70,7 +70,7 @@ public class UserMypageController {
             hs.invalidate();
             return "redirect:/user/mypage/main";
         }
-        reAttr.addFlashAttribute("result", vo.getChaUpwResult());
+        reAttr.addFlashAttribute("result", vo.getChaUpwResult()); // 실패시 실패이유 전송
         return "redirect:/user/mypage/main";
     }
 
