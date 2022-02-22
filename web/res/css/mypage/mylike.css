@@ -2,15 +2,13 @@ table  {
     border: none;
 }
 
-tbody, td, tfoot, th, thead, tr {text-align: left }
-
-tr {
-    border-collapse: collapse;
-    border: 1px solid lightgrey;
+tbody, td, tfoot, th, thead, tr {
+    text-align: left;
+    border: none;
 }
 
 #select_form {
-    width: 30%;
+    width: auto;
     text-align: center;
     display: inline-block;
     margin: 20px 0;
@@ -40,6 +38,7 @@ i {
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
+
 #modal-like > .modal-window {
     background: rgba( 69, 139, 197, 0.70 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
@@ -67,7 +66,7 @@ i {
     margin: 10px 0px;
 }
 
-#modal-like > .close-area {
+#close-area {
     text-align: right;
     padding-right: 10px;
     cursor: pointer;
@@ -76,7 +75,7 @@ i {
     font-size: larger;
 }
 
-#modal-like > .modalContent {
+.modalContent {
     margin-top: 10px;
     padding: 0px 10px;
     text-shadow: 1px 1px 2px gray;
@@ -87,19 +86,62 @@ i {
     overflow-y: initial !important
 }
 
-#modal-like > .modalContent a:link {
+.modalContent a:link {
     color: whitesmoke;
 }
 
-#modal-like > .modalContent a:hover {
+.modalContent a:hover {
     color: #b1bfca;
 }
 
-#modal-like > .selected-img {
+.selected-img {
     text-align: center;
     margin: 20px 0px;
 }
-#modal-like > .selected-img > img {
+.selected-img > img {
     width: 400px;
     height: 300px;
+}
+
+.form-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-control {
+    width: 50%;
+    margin: 15px;
+}
+
+.gameCmtList {
+    display: flex;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.boardBtn {
+    font-size: smaller;
+    border: none;
+    border-radius: 3px;
+    background-color: white;
+    padding: 2px;
+}
+
+.boardBtn:hover {
+    background-color: lightgray;
+}
+
+i {
+    color: lightpink;
+    font-size: larger;
+    margin-top: 10px;
+}
+
+tbody > tr:hover {
+    cursor: pointer;
+}
+
+td {
+    border: none;
 }

@@ -10,17 +10,21 @@
         <option value="4">게시글</option>
     </select>
     <div class="myLike">
-        <table class="table table-bordered">
+        <table class="table table-hover">
+            <thead>
             <tr style="background-color : lightgray">
                 <th>게임 & 웹툰 & 게시판 제목</th>
                 <th>누른 일자</th>
             </tr>
+            </thead>
+            <tbody>
             <c:forEach var="item" items="${likeAll}">
                 <tr class="likeAllList" data-iboard="${item.iboard}">
                     <td>${item.nm}</td>
                     <td>${item.rdt}</td>
                 </tr>
             </c:forEach>
+            </tbody>
         </table>
     </div>
 
@@ -30,7 +34,7 @@
 <div id="modal-like" class="modal modal-overlay">
     <div class="modal-window modal">
         <div class="modalTitle">오늘의 게임</div>
-        <div class="close-area close text-important">X</div>
+        <div id="close-area" class="close text-important">X</div>
         <div class="selected-img"></div>
         <div class="modalContent"></div>
         <div class="gameLink"></div>
