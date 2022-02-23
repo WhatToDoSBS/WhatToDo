@@ -24,7 +24,7 @@ table { margin-top: 10px; text-align: center; width: 100%; border: none;}
 
 td, th { border : none; border-bottom: dimgrey}
 
-#paging { margin-top: 10px; display: flex; justify-content: right}
+#paging { margin-top: 10px; display: flex; justify-content: right; width: auto}
 
 #pageIdx { display: flex; justify-content: center}
 
@@ -61,10 +61,17 @@ li .selected { background-color: #D3D3D3}
 }
 
 .form-control {
-    width: 50%;
     margin: 15px;
 }
 
 .btn-light {
     height: 50%;
+}
+
+.form-group .searchTxt {
+    flex-basis: 85%
+}
+
+.form-group #sel1 {
+    flex-basis: 15%;
 }

@@ -10,4 +10,5 @@ public class BoardLikeEntity {
     private int iuser;
     private String rdt;
     private int count;
+    private String nm;
 }

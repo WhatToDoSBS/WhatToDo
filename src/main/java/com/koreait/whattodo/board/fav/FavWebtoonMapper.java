@@ -1,6 +1,7 @@
 package com.koreait.whattodo.board.fav;
 
 import com.koreait.whattodo.model.FavWebtoonEntity;
+import com.koreait.whattodo.model.WebtoonGenreEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -9,7 +10,8 @@ import java.util.List;
 public interface FavWebtoonMapper {
     int insWebtoonFav(FavWebtoonEntity entity);
     FavWebtoonEntity selWebtoondFav(FavWebtoonEntity entity);
-    List<FavWebtoonEntity> selWebtoonMyFav(FavWebtoonEntity entity);
     FavWebtoonEntity selWebtoonFavCount(FavWebtoonEntity entity);
     int delWebtoonFav(FavWebtoonEntity entity);
+    List<FavWebtoonEntity> selWebtoonLikeList(FavWebtoonEntity entity);
+    List<WebtoonGenreEntity> selWebtoonLikeInfoList(FavWebtoonEntity entity);
 }

@@ -1,5 +1,6 @@
 {
-    // let rtBtns = document.querySelectorAll(".rtBtn");
+
+// let rtBtns = document.querySelectorAll(".rtBtn");
     let ppBtns = document.querySelectorAll(".ppBtn");
     let kdBtns = document.querySelectorAll(".kdBtn");
     let pfBtns = document.querySelectorAll(".pfBtn");
@@ -737,7 +738,7 @@
     let dataElem = document.querySelector("#data");
     let gameCmtFrmElem = document.querySelector("#gameCmtFrm");
 
-    if(dataElem.dataset.iuser <= 0) {
+    if (dataElem.dataset.iuser <= 0) {
         gameCmtFrmElem.style.display = 'none';
     }
 
@@ -1059,7 +1060,7 @@
     let likeCountElem = document.querySelector(".like_count")
 
 
-    const isLike = function(selectedGameNm) {
+    const isLike = function (selectedGameNm) {
         gameNm = selectedGameNm
         console.log(gameNm);
         fetch(`/game/like/${gameNm}`)
@@ -1082,16 +1083,16 @@
     }
 
     const offLike = () => {
-        if(likeBtnElem) {
-            likeBtnElem.classList.remove('fa-heart');
-            likeBtnElem.classList.add('fa-heart-crack');
+        if (likeBtnElem) {
+            likeBtnElem.classList.remove('fas');
+            likeBtnElem.classList.add('far');
         }
     }
 
     const onLike = () => {
-        if(likeBtnElem) {
-            likeBtnElem.classList.remove('fa-heart-crack');
-            likeBtnElem.classList.add('fa-heart');
+        if (likeBtnElem) {
+            likeBtnElem.classList.remove('far');
+            likeBtnElem.classList.add('fas');
         }
     }
 
@@ -1101,13 +1102,15 @@
             return;
         }
 
-        if(e.target.classList.contains('fa-heart-crack')) {
-            const param = {gameNm : gameNm,
-                           'iuser' : dataElem.dataset.iuser};
+        if (e.target.classList.contains('far')) {
+            const param = {
+                gameNm: gameNm,
+                'iuser': dataElem.dataset.iuser
+            };
 
             fetch('/game/like', {
                 'method': 'post',
-                'headers': { 'Content-Type': 'application/json' },
+                'headers': {'Content-Type': 'application/json'},
                 'body': JSON.stringify(param)
             })
                 .then(res => res.json())
@@ -1117,10 +1120,10 @@
                     onLike();
                     isLike(gameNm);
                 })
-        } else  {
+        } else {
             fetch(`/game/like/${gameNm}`, {
                 'method': 'delete',
-                'headers': { 'Content-Type': 'application/json' },
+                'headers': {'Content-Type': 'application/json'},
             }).then(res => res.json())
                 .then(data => {
                     console.log(data);
@@ -1130,6 +1133,4 @@
                 });
         }
     })
-
-
 }

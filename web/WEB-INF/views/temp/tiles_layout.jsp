@@ -26,14 +26,16 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
     <script defer src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/res/css/<tiles:getAsString name='common'/>.css">
-    <link rel="stylesheet" href="/res/css/<tiles:getAsString name='addr1'/>/index.css">
-    <link rel="stylesheet" href="/res/css/<tiles:getAsString name='addr2'/>.css">
+
 <%--    <link rel="stylesheet" href="/res/css/<tiles:getAsString name='addr3'/>.css">--%>
 
     <script defer src="/res/js/<tiles:getAsString name='common'/>.js"></script>
     <script defer src="/res/js/<tiles:getAsString name='addr1'/>/index.js"></script>
     <script defer src="/res/js/<tiles:getAsString name='addr2'/>.js"></script>
+
+    <link rel="stylesheet" href="/res/css/<tiles:getAsString name='common'/>.css">
+    <link rel="stylesheet" href="/res/css/<tiles:getAsString name='addr1'/>/index.css">
+    <link rel="stylesheet" href="/res/css/<tiles:getAsString name='addr2'/>.css">
     <title><tiles:insertAttribute name="title" ignore="true" /></title>
 </head>
 <body>

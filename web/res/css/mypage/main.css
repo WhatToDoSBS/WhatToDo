@@ -46,7 +46,16 @@ td {
 }
 
 .info .info_profileCard div {
-    margin-top: 20px;
+    margin-top: 10px;
+}
+
+.like_info_profileCard {
+    align-items: center;
+    text-align: center;
+}
+
+table {
+    text-align: center;
 }
 
 .info .info_profileCard .nickname {
@@ -57,6 +66,8 @@ td {
 
 .btn-link {
     text-align: center;
+    margin-top: 10px;
+    border-radius: 5px;
 }
 
 .card-title span {
