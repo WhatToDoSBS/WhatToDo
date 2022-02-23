@@ -4,10 +4,7 @@ import com.koreait.whattodo.UserUtils;
 import com.koreait.whattodo.board.fav.FavWebtoonMapper;
 import com.koreait.whattodo.board.like.LikeMapper;
 import com.koreait.whattodo.game.like.GameLikeMapper;
-import com.koreait.whattodo.model.BoardLikeEntity;
-import com.koreait.whattodo.model.FavWebtoonEntity;
-import com.koreait.whattodo.model.GameCmtEntity;
-import com.koreait.whattodo.model.GameLikeEntity;
+import com.koreait.whattodo.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,6 +45,12 @@ public class UserMypageLikeController {
     public List<FavWebtoonEntity> selWebtoonLikeList(FavWebtoonEntity entity) {
         entity.setIuser(userUtils.getLoginUserPk());
         return favWebtoonMapper.selWebtoonLikeList(entity);
+    }
+
+    @GetMapping("/webtoonInfo")
+    public List<WebtoonGenreEntity> selWebtoonLikeInfoList(FavWebtoonEntity entity) {
+        entity.setIuser(userUtils.getLoginUserPk());
+        return favWebtoonMapper.selWebtoonLikeInfoList(entity);
     }
 
     @GetMapping("/all")

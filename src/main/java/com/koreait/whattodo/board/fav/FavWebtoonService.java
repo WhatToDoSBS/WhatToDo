@@ -29,8 +29,6 @@ public class FavWebtoonService {
         return mapper.selWebtoonFavCount(entity).getCount();
     }
 
-
-
     public int delWebtoonFav(String nm) {
         return mapper.delWebtoonFav(createBoardFavEntity(nm));
     }

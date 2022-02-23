@@ -25,6 +25,17 @@
         WHERE nm = #{nm}
     </select>
 
+    <select id="selWebtoonLikeInfoList" resultType="WebtoonGenreEntity">
+        SELECT * FROM webtoon
+        WHERE nm = (SELECT nm FROM fav_webtoon where iuser = ${iuser})
+        UNION all
+        SELECT * FROM webtoon_genre
+        WHERE nm = (SELECT nm FROM fav_webtoon where iuser = ${iuser})
+        UNION ALL
+        SELECT * FROM webtoon_recommand
+        WHERE nm = (SELECT nm FROM fav_webtoon where iuser = ${iuser})
+    </select>
+
     <select id="selWebtoonLikeList" resultType="FavWebtoonEntity">
         SELECT *
         FROM fav_webtoon
