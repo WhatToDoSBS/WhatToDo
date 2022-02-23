@@ -26,14 +26,23 @@
     </select>
 
     <select id="selWebtoonLikeInfoList" resultType="WebtoonGenreEntity">
-        SELECT * FROM webtoon
-        WHERE nm = (SELECT nm FROM fav_webtoon where iuser = ${iuser})
-        UNION all
-        SELECT * FROM webtoon_genre
-        WHERE nm = (SELECT nm FROM fav_webtoon where iuser = ${iuser})
-        UNION ALL
-        SELECT * FROM webtoon_recommand
-        WHERE nm = (SELECT nm FROM fav_webtoon where iuser = ${iuser})
+        (SELECT distinct a.nm, a.img, a.link FROM webtoon a
+                                                      INNER JOIN fav_webtoon b
+                                                                 ON a.nm = b.nm
+                                                                     AND iuser = ${iuser}
+        )
+        UNION
+        (SELECT distinct a.nm, a.img, a.link FROM webtoon_genre a
+                                                      INNER JOIN fav_webtoon b
+                                                                 ON a.nm = b.nm
+                                                                     AND iuser = ${iuser}
+        )
+        UNION
+        (SELECT distinct a.nm, a.img, a.link FROM webtoon_recommand a
+                                                      INNER JOIN fav_webtoon b
+                                                                 ON a.nm = b.nm
+                                                                     AND iuser = ${iuser}
+        )
     </select>
 
     <select id="selWebtoonLikeList" resultType="FavWebtoonEntity">
