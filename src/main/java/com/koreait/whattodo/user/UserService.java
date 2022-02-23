@@ -3,15 +3,12 @@ package com.koreait.whattodo.user;
 import com.koreait.whattodo.UserUtils;
 import com.koreait.whattodo.enums.user.LoginEnum;
 import com.koreait.whattodo.model.user.UserDto;
-import com.koreait.whattodo.model.user.UserEntity;
 import com.koreait.whattodo.model.user.UserVo;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

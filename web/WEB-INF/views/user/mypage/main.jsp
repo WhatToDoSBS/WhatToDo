@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="my" uri="tld/MyCustomJstlTag.tld" %>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -10,11 +11,11 @@
                 <div class="card-body info_profileCard">
                     <h5 class="card-title"><i class="fa-solid fa-id-card"></i>Profile Card</h5>
                     <div>
-
-                        <img src="${sessionScope.loginUser.profileimg}" alt="" class="wh-80 circular--img">
+                        <my:profileImg iuser="${sessionScope.loginUser.iuser}" profileImgVal="${sessionScope.loginUser.profileimg}" classVal="wh-80 circular--img"/>
                         <span class="nickname">별명 : ${sessionScope.loginUser.nm}</span>
                     </div>
                     <div class="btn-link">
+                        <input type="file" value="수정" accept="image/*">
                         <a href="#" class="card-link"><button>수정</button></a>
                     </div>
                 </div>

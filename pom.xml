@@ -96,6 +96,7 @@
             <scope>provided</scope>
         </dependency>
 
+        <!--   암호화     -->
         <dependency>
             <groupId>org.mindrot</groupId>
             <artifactId>jbcrypt</artifactId>
@@ -114,6 +115,7 @@
             <version>1.9.13</version>
         </dependency>
 
+        <!--   java 크롤링     -->
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
@@ -143,6 +145,12 @@
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
             <version>1.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.3</version>
         </dependency>
     </dependencies>
 
