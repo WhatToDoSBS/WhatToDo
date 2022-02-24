@@ -103,6 +103,14 @@ button {
     color: midnightblue;
 }
 
+.input_for_label {
+    color: black;
+    cursor: pointer;
+    background-color: #EFEFEF;
+    padding: 5px 10px;
+}
+
+
 .password_change {
     text-align: center;
 }

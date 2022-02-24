@@ -15,8 +15,8 @@
                         <span class="nickname">별명 : ${sessionScope.loginUser.nm}</span>
                     </div>
                     <div class="btn-link">
-                        <input type="file" value="수정" accept="image/*">
-                        <a href="#" class="card-link"><button>수정</button></a>
+                        <label for="input_file" class="input_for_label">수정</label>
+                        <input type="file" value="수정" accept="image/*" id="input_file" class="hidden">
                     </div>
                 </div>
             </div>
