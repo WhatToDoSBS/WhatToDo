@@ -22,4 +22,12 @@
     </bean>
 
     <mybatis-spring:scan base-package="com.koreait.whattodo" />
+
+    <!-- fileUpload -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="52428800"/> <!-- 50MB -->
+    </bean>
+
+
+
 </beans>
