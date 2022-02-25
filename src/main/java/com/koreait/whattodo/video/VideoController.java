@@ -26,10 +26,9 @@ public class VideoController {
     }
 
     @GetMapping("/videomCrawling")
-    public String videoCrawling() {
+    public String videoCrawling(VideoMovieEntity entity) {
         service.delMovie();
         service.insertMovie();
-
         return "redirect:/board/video";
     }
 }

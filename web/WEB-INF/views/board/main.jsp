@@ -29,7 +29,7 @@
                         </div>
                         <div class="swiper-slide">
                             <span>${randomGame.gameNm}</span>
-                            <div><a href="${randomGame.selLink}"><img src="${randomGame.imgsrc}" alt=""></a></div>
+                            <div><a href="${randomGame.selLink}"><img src="${randomGame.imgsrc}" style="max-height: 150px" alt=""></a></div>
                         </div>
                         <div class="swiper-slide">
                             <c:forEach var="item" items="${weeklyMovieList}" begin="0" end="0">
@@ -159,15 +159,15 @@
                             </div>
                         </li>
                         <li>
-                            <img src="/res/img/profile_taejun.jpg" alt="">
+                            <img src="/res/img/피카츄.jpg" alt="">
                             <div class="member_info">
                                 <div class="member_name">
                                     <span>손주영</span>
                                 </div>
                                 <ul>
-                                    <li>한 일</li>
-                                    <li>한 일</li>
-                                    <li>한 일</li>
+                                    <li>게임, 게시판, 영화, 마이페이지 LIKE PART</li>
+                                    <li>조건 별 랜덤 로직 구현 / 게시판 CRUD / 각 파트 좋아요, 댓글 구현 / 마이페이지와 게임, 웹툰, 게시판 정보 매핑 / 영화 css 및 api를 통해 정보 띄우고 평점 표시</li>
+                                    <li>JAVA, JAVASCRIPT, CSS, JSP, BOOTSTRAP, REST API</li>
                                 </ul>
                             </div>
                         </li>

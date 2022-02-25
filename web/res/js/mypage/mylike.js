@@ -111,13 +111,16 @@
         console.log(e);
     })
 
+    let distinctNmParam;
+
     function likeListLink(list) {
         list.forEach(function (item) {
-            item.addEventListener("click", () => {
+            item.addEventListener("click", function() {
 
                 if (optionVal == 2) {
 
-                    console.log(changeVal());
+                    distinctNmParam = 1;
+
                     let selectedWebtoonNm = item.childNodes[1].textContent;
                     webtoonNm = selectedWebtoonNm;
                     console.log(selectedWebtoonNm);
@@ -128,56 +131,14 @@
 
                     document.querySelector(".modalTitle").textContent = "오늘의 웹툰";
 
-                    const likeBtnElem = document.querySelector('#likeBtn');
-                    let likeCountElem = document.querySelector(".like_count")
-
                     getloadWebtoonInfo();
 
                     getWtCmtList(selectedWebtoonNm);
-
-                    insWtCmt();
 
                     isLike();
 
                     likeBtnOperation();
 
-                    likeBtnElem.addEventListener('click', (e) => {
-                        if (dataElem.dataset.iuser <= 0) {
-                            alert("로그인 해주세요.");
-                            return;
-                        }
-
-                        if (e.target.classList.contains('far')) {
-                            const param = {
-                                'nm': selectedWebtoonNm,
-                                'iuser': dataElem.dataset.iuser
-                            };
-
-                            fetch('/webtoon/fav', {
-                                'method': 'post',
-                                'headers': {'Content-Type': 'application/json'},
-                                'body': JSON.stringify(param)
-                            })
-                                .then(res => res.json())
-                                .then(data => {
-                                    console.log(data);
-                                    console.log("ins like webtoonNm : " + selectedWebtoonNm)
-                                    onLike();
-                                    isLike(selectedWebtoonNm);
-                                })
-                        } else {
-                            fetch(`/webtoon/fav/${selectedWebtoonNm}`, {
-                                'method': 'delete',
-                                'headers': {'Content-Type': 'application/json'},
-                            }).then(res => res.json())
-                                .then(data => {
-                                    console.log(data);
-                                    console.log("del like webtoonNm : " + selectedWebtoonNm);
-                                    offLike();
-                                    isLike(selectedWebtoonNm);
-                                });
-                        }
-                    })
 
                     modalXBtn.addEventListener('click', () => {
                         modalWindow.style.display = 'none';
@@ -197,8 +158,8 @@
 
                 if (item.dataset.iboard > 0) {
                     location.href = `/board/detail?iboard=${item.dataset.iboard}`;
-                }
-                else if (webtoonNmLikeList.includes(selectedGameNm)) {
+                } else if (webtoonNmLikeList.includes(selectedGameNm)) {
+                    distinctNmParam = 1;
                     let selectedWebtoonNm = selectedGameNm;
                     webtoonNm = selectedWebtoonNm;
                     console.log(selectedWebtoonNm);
@@ -209,14 +170,10 @@
 
                     document.querySelector(".modalTitle").textContent = "오늘의 웹툰";
 
-                    const likeBtnElem = document.querySelector('#likeBtn');
-                    let likeCountElem = document.querySelector(".like_count")
 
                     getloadWebtoonInfo();
 
                     getWtCmtList(selectedWebtoonNm);
-
-                    insWtCmt();
 
                     isLike();
 
@@ -232,8 +189,8 @@
                             gameCmtFrmElem.ctnt = null;
                         }
                     })
-                    return;
                 } else {
+                    distinctNmParam = 2;
                     gameNm = selectedGameNm;
                     console.log(selectedGameNm);
                     const modalWindow = document.querySelector("#modal-like")
@@ -246,10 +203,8 @@
 
                     getMrloadGameInfo();
 
-
                     getCmtList(selectedGameNm);
 
-                    insCmt();
                     const isLike = function () {
 
                         console.log(selectedGameNm);
@@ -326,7 +281,6 @@
                                 });
                         }
                     })
-
 
                     modalXBtn.addEventListener('click', () => {
                         modalWindow.style.display = 'none';
@@ -590,6 +544,7 @@
     }
 
     let insCmt = function () {
+        console.log("inscmt ready")
         if (gameCmtFrmElem) {
             gameCmtFrmElem.addEventListener("submit", (e) => {
                 e.preventDefault();
@@ -602,7 +557,11 @@
                 } else if (cmtVal.includes("<") || cmtVal.includes(">")) {
                     alert("내용에 < 혹은 >를 사용하실 수 없습니다.");
                 } else {
-                    insGameCmtAjax(cmtVal);
+                    if(distinctNmParam == 1) {
+                        insWebtoonCmtAjax(cmtVal, webtoonNm);
+                    } else{
+                        insGameCmtAjax(cmtVal);
+                    }
                     // location.href="/board/detail?iboard="+ iboard;
                 }
             });
@@ -641,6 +600,8 @@
             }
         }
     }
+
+    insCmt();
 
     const setLikeList = (list) => {
         if (list.length === 0) {
@@ -837,31 +798,31 @@
         });
     }
 
-    let insWtCmt = function () {
-        console.log("dddd")
-        if (gameCmtFrmElem) {
-            gameCmtFrmElem.addEventListener("submit", (e) => {
-                e.preventDefault();
-            });
-            gameCmtFrmElem.cmt_submit.addEventListener('click', () => {
-                console.log("inswtcmt");
-                let cmtVal = gameCmtFrmElem.ctnt.value;
-                selectedWebtoonNm = webtoonNm;
-                if (cmtVal.length === 0) {
-                    alert("내용을 입력해 주세요.");
-                } else if (cmtVal.includes("<") || cmtVal.includes(">")) {
-                    alert("내용에 < 혹은 >를 사용하실 수 없습니다.");
-                } else {
-                    insWebtoonCmtAjax(cmtVal, selectedWebtoonNm);
-                    // location.href="/board/detail?iboard="+ iboard;
-                }
-            });
+    // let insWtCmt = function () {
+    //     console.log("insWtcmt ready")
+    //     if (gameCmtFrmElem) {
+    //         gameCmtFrmElem.addEventListener("submit", (e) => {
+    //             e.preventDefault();
+    //         });
+    //         gameCmtFrmElem.cmt_submit.addEventListener('click', () => {
+    //             console.log("inswtcmt");
+    //             let cmtVal = gameCmtFrmElem.ctnt.value;
+    //             selectedWebtoonNm = webtoonNm;
+    //             if (cmtVal.length === 0) {
+    //                 alert("내용을 입력해 주세요.");
+    //             } else if (cmtVal.includes("<") || cmtVal.includes(">")) {
+    //                 alert("내용에 < 혹은 >를 사용하실 수 없습니다.");
+    //             } else {
+    //                 insWebtoonCmtAjax(cmtVal, selectedWebtoonNm);
+    //                 // location.href="/board/detail?iboard="+ iboard;
+    //             }
+    //         });
             // const item = {
             //     icmt: data.result,
             //     iuser: parseInt(dataElem.dataset.iuser),
             //     ctnt: gameCmtFrmElem.ctnt.value,
             // }
-            let insWebtoonCmtAjax = (val, selectedWebtoonNm) => {
+            function insWebtoonCmtAjax (val, selectedWebtoonNm) {
 
 
                 console.log("ins cmt webtoonNm : " + selectedWebtoonNm)
@@ -889,8 +850,8 @@
                     console.log(e);
                 })
             }
-        }
-    }
+        // }
+    // }
 
     const likeBtnElem = document.querySelector('#likeBtn');
     const isLike = function () {
@@ -932,42 +893,43 @@
 
     function likeBtnOperation() {
         likeBtnElem.addEventListener('click', (e) => {
-        let selectedWebtoonNm = webtoonNm;
-        if (dataElem.dataset.iuser <= 0) {
-            alert("로그인 해주세요.");
-            return;
-        }
+            let selectedWebtoonNm = webtoonNm;
+            if (dataElem.dataset.iuser <= 0) {
+                alert("로그인 해주세요.");
+                return;
+            }
 
-        if (e.target.classList.contains('far')) {
-            const param = {
-                'nm': selectedWebtoonNm,
-                'iuser': dataElem.dataset.iuser
-            };
+            if (e.target.classList.contains('far')) {
+                const param = {
+                    'nm': selectedWebtoonNm,
+                    'iuser': dataElem.dataset.iuser
+                };
 
-            fetch('/webtoon/fav', {
-                'method': 'post',
-                'headers': {'Content-Type': 'application/json'},
-                'body': JSON.stringify(param)
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    console.log("ins like webtoonNm : " + selectedWebtoonNm)
-                    onLike();
-                    isLike(selectedWebtoonNm);
+                fetch('/webtoon/fav', {
+                    'method': 'post',
+                    'headers': {'Content-Type': 'application/json'},
+                    'body': JSON.stringify(param)
                 })
-        } else {
-            fetch(`/webtoon/fav/${selectedWebtoonNm}`, {
-                'method': 'delete',
-                'headers': {'Content-Type': 'application/json'},
-            }).then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    console.log("del like webtoonNm : " + selectedWebtoonNm);
-                    offLike();
-                    isLike(selectedWebtoonNm);
-                });
-        }
-    })}
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        console.log("ins like webtoonNm : " + selectedWebtoonNm)
+                        onLike();
+                        isLike(selectedWebtoonNm);
+                    })
+            } else {
+                fetch(`/webtoon/fav/${selectedWebtoonNm}`, {
+                    'method': 'delete',
+                    'headers': {'Content-Type': 'application/json'},
+                }).then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        console.log("del like webtoonNm : " + selectedWebtoonNm);
+                        offLike();
+                        isLike(selectedWebtoonNm);
+                    });
+            }
+        })
+    }
 
 }

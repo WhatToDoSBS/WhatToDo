@@ -12,4 +12,5 @@ public interface VideoMapper {
     void delBoxOffice();
     List<VideoMovieEntity> selBoxOffice();
     List<VideoMovieEntity> selBoxOfficeRandom();
+    void updMovieRating(VideoMovieEntity entity);
 }

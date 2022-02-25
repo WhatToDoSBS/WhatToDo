@@ -104,6 +104,7 @@ public class VideoService {
                 entity.setShowRange(DATE_FMT.format(cal.getTime()));
                 entity.setRank((String)boxOffice.get("rank"));
                 entity.setMovieCd((String)boxOffice.get("movieCd"));
+                entity.setOpenDt((String)boxOffice.get("openDt"));
                 System.out.printf("%s위 %s\n", boxOffice.get("rnum"), boxOffice.get("movieCd"));
                 boxofiiceList.add(entity);
                 mapper.insertBoxOffice(boxofiiceList);
@@ -176,6 +177,7 @@ public class VideoService {
                 entity.setShowRange(DATE_FMT.format(cal.getTime()));
                 entity.setRank((String)boxOffice.get("rank"));
                 entity.setMovieCd((String)boxOffice.get("movieCd"));
+                entity.setOpenDt((String)boxOffice.get("openDt"));
                 System.out.printf("%s위 %s\n", boxOffice.get("rnum"), boxOffice.get("movieCd"));
                 boxofiiceList.add(entity);
                 mapper.insertBoxOffice(boxofiiceList);
@@ -226,22 +228,30 @@ public class VideoService {
             JSONObject responseBody = new JSONObject(response.toString());
             // 데이터 추출
             JSONArray naverMovieResult = responseBody.getJSONArray("items");
-            System.out.println("responseBody : " + responseBody);
-            System.out.println("naverMovieResult : " + naverMovieResult);
+//            System.out.println("responseBody : " + responseBody);
+//            System.out.println("naverMovieResult : " + naverMovieResult);
             Iterator<Object> iter = naverMovieResult.iterator();
 
             List<String> list = new ArrayList<>();
             while(iter.hasNext()) {
                 JSONObject naverMovie = (JSONObject) iter.next();
                 list.add((String) naverMovie.get("image"));
+                list.add((String) naverMovie.get(("userRating")));
+                list.add((String) naverMovie.get("actor"));
             }
             imgLink = list.get(0);  // 맨첫번째 검색결과의 이미지(최신)
+            String userRating = list.get(1);
+            String actor = list.get(2);
             VideoMovieEntity entity = new VideoMovieEntity();
             entity.setImg(imgLink);
             entity.setMovieNm(searchMovieNm);
+            entity.setRating(userRating);
+            entity.setActor(actor);
             mapper.updateImgBoxOffice(entity);
             System.out.println("entity : " + entity);
             System.out.println("imgLink : " + imgLink);
+            System.out.println("userranting : " + userRating);
+            System.out.println("actor : " + actor);
         } catch (Exception e) {
             System.out.println(e);
         }
