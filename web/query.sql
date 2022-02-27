@@ -140,3 +140,15 @@ CREATE TABLE review_webtoon
     PRIMARY KEY (rnum),
     FOREIGN KEY (`nm`) REFERENCES `webtoon` (`nm`)
 );
+
+ALTER TABLE `game_like`
+    ADD COLUMN `iboardNull` INT NULL;
+
+ALTER TABLE `video_movie`
+    ADD COLUMN `rating` varchar(10);
+
+ALTER TABLE `video_movie`
+    ADD COLUMN `actor` varchar(100);
+
+ALTER TABLE `video_movie`
+    ADD COLUMN `director` varchar(20);

@@ -12,6 +12,7 @@
                     <h5 class="card-title"><i class="fa-solid fa-id-card"></i>Profile Card</h5>
                     <div>
                         <my:profileImg iuser="${sessionScope.loginUser.iuser}" profileImgVal="${sessionScope.loginUser.profileimg}" classVal="wh-80 circular--img"/>
+                        <span hidden id="data" data-iuser="${sessionScope.loginUser.iuser}"></span>
                         <span class="nickname">별명 : ${sessionScope.loginUser.nm}</span>
                     </div>
                     <div class="btn-link">

@@ -57,11 +57,11 @@ public class UserMypageController {
     @PostMapping("/mypage/profileimg")
     public Map<String, String> profileImgCha(MultipartFile profileimg) {
         System.out.println("profileimg : " + profileimg);
+        String fileNm = userMypageService.uploadProfileImg(profileimg);
 
-
-        Map<String, String> res = new HashMap();
-        res.put("image", "profileimg");
-        return res;
+        Map<String, String> result = new HashMap();
+        result.put("image", fileNm);
+        return result;
     }
 
     @PostMapping("/mypage/cheUpw")

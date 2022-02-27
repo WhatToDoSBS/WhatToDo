@@ -1,6 +1,7 @@
 {
     const fileInputBtn = document.querySelector('#input_file');
     const fileInputLabel = document.querySelector('#input_for_label');
+    const dataSpan = document.querySelector('#data');
 
     if (fileInputLabel) {
         fileInputLabel.addEventListener('click', () => {
@@ -22,11 +23,6 @@
     const uploadProfileImg = (img) => {
         const fData = new FormData();
         fData.append('profileimg', img);
-        console.log(img);
-
-        for (var pair of fData.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]);
-        }
 
         fetch('/user/mypage/profileimg', {
             method: 'POST',
@@ -35,9 +31,23 @@
             .then((res) => res.json())
             .then((data) => {
                 console.log(data.image);
+                setProfileImg(data);
             })
             .catch(e => {
                 console.log(e);
             });
+    }
+
+    const setProfileImg = (data) => {
+        if (!data.result) {
+            return;
+        }
+
+        //프로필 이미지
+        const iuser = dataSpan.dataset.iuser;
+        const src = `/images/user/${iuser}/${data.result}`;
+
+        const fileImg = fileInputLabel.querySelector('img');
+        fileImg.src = src;
     }
 }
