@@ -37,7 +37,7 @@ public class UserMypageService {
 
         final String PATH = Config.UPLOAD_IMG_PATH + "/user/" + loginUser.getIuser();
         String fileNm = fileUtils.saveFile(PATH, profileimg);
-        System.out.println(fileNm);
+        System.out.println("fileNm : " + fileNm);
 
         if (fileNm == null) {
             return null;

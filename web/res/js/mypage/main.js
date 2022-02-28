@@ -30,7 +30,7 @@
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data.image);
+                console.log(data);
                 setProfileImg(data);
             })
             .catch(e => {
@@ -39,15 +39,20 @@
     }
 
     const setProfileImg = (data) => {
-        if (!data.result) {
+
+        if (!data.image) {
             return;
         }
 
         //프로필 이미지
         const iuser = dataSpan.dataset.iuser;
-        const src = `/images/user/${iuser}/${data.result}`;
+        const src = `/images/user/${iuser}/${data.image}`;
 
-        const fileImg = fileInputLabel.querySelector('img');
-        fileImg.src = src;
+        console.log('iuser : ' + iuser);
+        console.log('src : ' + src);
+
+        const profileImg = document.querySelector('#profileimg');
+        profileImg.src = src;
+        console.log(profileImg.src);
     }
 }
