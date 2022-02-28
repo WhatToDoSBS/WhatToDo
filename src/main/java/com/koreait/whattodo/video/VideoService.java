@@ -237,8 +237,8 @@ public class VideoService {
                 JSONObject naverMovie = (JSONObject) iter.next();
                 list.add((String) naverMovie.get("image"));
                 list.add((String) naverMovie.get(("userRating")));
-                list.add(naverMovie.get("actor").toString().substring(0, naverMovie.get("actor").toString().length()-1));
-                list.add(naverMovie.get("director").toString().substring(0, naverMovie.get("director").toString().length()-1));
+                list.add(naverMovie.get("actor").toString().replaceAll("\\|$", ""));
+                list.add(naverMovie.get("director").toString().replaceAll("\\|$", ""));
             }
             imgLink = list.get(0);  // 맨첫번째 검색결과의 이미지(최신)
             String userRating = list.get(1);
