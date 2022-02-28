@@ -9,6 +9,7 @@
 
     <mvc:annotation-driven />
     <mvc:resources mapping="/res/**" location="/res/" />
+    <mvc:resources mapping="/images/**" location="file:///D:/upload/images/" />
 
 
     <mvc:interceptors>  <!-- 자동로그인 인터셉터 설정 -->

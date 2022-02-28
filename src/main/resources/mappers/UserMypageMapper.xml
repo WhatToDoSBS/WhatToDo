@@ -13,6 +13,10 @@
         SELECT * from whattodo_user WHERE iuser = ${iuser}
     </select>
 
+    <update id="updProfileImg">
+        UPDATE whattodo_user SET profileimg = #{profileimg} WHERE iuser = ${iuser}
+    </update>
+
     <update id="updUpw">
         UPDATE whattodo_user SET upw = #{newUpw} WHERE iuser = ${iuser}
     </update>

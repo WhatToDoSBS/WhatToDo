@@ -1,6 +1,9 @@
 package com.koreait.whattodo.user.mypage;
 
+import com.koreait.whattodo.FileUtils;
 import com.koreait.whattodo.UserUtils;
+import com.koreait.whattodo.model.user.UserDto;
+import com.koreait.whattodo.model.user.UserEntity;
 import com.koreait.whattodo.model.user.UserVo;
 import com.koreait.whattodo.model.user.mypage.ChaUpwEntity;
 import com.koreait.whattodo.model.user.mypage.ChaUpwVo;
@@ -8,6 +11,7 @@ import com.koreait.whattodo.user.UserService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class UserMypageService {
@@ -17,6 +21,43 @@ public class UserMypageService {
 
     @Autowired
     UserUtils userUtils;
+    @Autowired
+    FileUtils fileUtils;
+
+    public static class Config{
+        public static final String UPLOAD_IMG_PATH = "D:/upload/images";
+    }
+
+    public String uploadProfileImg(MultipartFile profileimg) {
+        if (profileimg == null) {
+            return null;
+        }
+
+        UserEntity loginUser = userUtils.getLoginUser();
+
+        final String PATH = Config.UPLOAD_IMG_PATH + "/user/" + loginUser.getIuser();
+        String fileNm = fileUtils.saveFile(PATH, profileimg);
+        System.out.println("fileNm : " + fileNm);
+
+        if (fileNm == null) {
+            return null;
+        }
+
+        UserDto dto = new UserDto();
+        dto.setIuser(loginUser.getIuser());
+
+        // 기존 이미지 제거
+        String oldFile = PATH + "/" + loginUser.getProfileimg();
+        fileUtils.delFile(oldFile);
+
+        // UserDB에 이미지값 update 시키기
+        dto.setProfileimg(fileNm);
+        mapper.updProfileImg(dto);
+
+        // 세션에 프로필 이미지값 업데이트
+        loginUser.setProfileimg(fileNm);
+        return fileNm;
+    }
 
     public ChaUpwVo passwordChange(ChaUpwEntity entity) { // 패스워드 변경
         ChaUpwVo vo = new ChaUpwVo(); // 실패시 결과값을 담아서 반환할 vo

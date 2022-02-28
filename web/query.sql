@@ -163,6 +163,7 @@ CREATE TABLE review_webtoon
     FOREIGN KEY (`nm`) REFERENCES `webtoon` (`nm`)
 );
 
+
 ALTER TABLE webtoon
     ADD COLUMN stateNull INT NULL;
 
