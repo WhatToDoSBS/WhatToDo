@@ -9,7 +9,7 @@
     </insert>
 
     <update id="updateImgBoxOffice">
-        UPDATE video_movie SET img = #{img}, rating = #{rating}, actor = #{actor} WHERE movieNm=#{movieNm};
+        UPDATE video_movie SET img = #{img}, rating = #{rating}, actor = #{actor}, director = #{director} WHERE movieNm=#{movieNm};
     </update>
 
     <delete id="delBoxOffice">

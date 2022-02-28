@@ -238,15 +238,18 @@ public class VideoService {
                 list.add((String) naverMovie.get("image"));
                 list.add((String) naverMovie.get(("userRating")));
                 list.add((String) naverMovie.get("actor"));
+                list.add((String) naverMovie.get("director"));
             }
             imgLink = list.get(0);  // 맨첫번째 검색결과의 이미지(최신)
             String userRating = list.get(1);
             String actor = list.get(2);
+            String director = list.get(3);
             VideoMovieEntity entity = new VideoMovieEntity();
             entity.setImg(imgLink);
             entity.setMovieNm(searchMovieNm);
             entity.setRating(userRating);
             entity.setActor(actor);
+            entity.setDirector(director);
             mapper.updateImgBoxOffice(entity);
             System.out.println("entity : " + entity);
             System.out.println("imgLink : " + imgLink);

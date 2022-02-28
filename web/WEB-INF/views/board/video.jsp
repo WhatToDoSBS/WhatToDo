@@ -38,6 +38,7 @@
             <div class="card-body">
                 <h4 class="card-title" style="font-family: 'HS-Regular'">${item.movieNm}</h4>
                 <p class="card-text" style="font-family: 'HS-Regular'">개봉일 : ${item.openDt}</p>
+                <p class="card-text" style="font-family: 'HS-Regular'">감독 : ${item.director}</p>
                 <p class="card-text" style="font-family: 'HS-Regular'">배우 : ${item.actor}</p>
                 <p class="rating card-text" style="font-family: 'HS-Regular'">평점 : ${item.rating}</p>
                 <div class="progress">

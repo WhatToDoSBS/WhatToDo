@@ -16,4 +16,5 @@ public class VideoMovieEntity {
     private String openDt;
     private String rating;
     private String actor;
+    private String director;
 }
