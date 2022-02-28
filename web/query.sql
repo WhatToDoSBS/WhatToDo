@@ -1,16 +1,3 @@
-CREATE TABLE freeboard
-(
-    iboard    INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    icategory INT UNSIGNED,
-    title     VARCHAR(100) NOT NULL,
-    ctnt      TEXT         NOT NULL,
-    iuser     INT UNSIGNED NOT NULL,
-    hits      INT UNSIGNED     DEFAULT 0,
-    isdel     TINYINT UNSIGNED DEFAULT 0,
-    rdt       DATETIME         DEFAULT CURRENT_TIMESTAMP,
-    mdt       DATETIME         DEFAULT CURRENT_TIMESTAMP,
-    lastip    varchar(15)
-);
 
 CREATE TABLE menu_category
 (
@@ -32,6 +19,75 @@ VALUES ('game'),
        ('youtube'),
        ('list');
 
+CREATE TABLE freeboard(
+                          iboard INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                          title VARCHAR(100) NOT NULL,
+                          ctnt TEXT NOT NULL,
+                          iuser INT UNSIGNED NOT NULL,
+                          hits INT UNSIGNED DEFAULT 0,
+                          isdel TINYINT UNSIGNED DEFAULT 0,
+                          rdt DATETIME DEFAULT CURRENT_TIMESTAMP,
+                          mdt DATETIME DEFAULT CURRENT_TIMESTAMP,
+                          lastip varchar(15)
+);
+
+CREATE TABLE freeboard_cmt(
+                              icmt INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                              iboard INT UNSIGNED NOT NULL,
+                              iuser INT UNSIGNED NOT NULL,
+                              ctnt TEXT NOT NULL,
+                              rdt DATETIME DEFAULT CURRENT_TIMESTAMP,
+                              mdt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE freeboard_like(
+                               iboard INT UNSIGNED,
+                               iuser INT UNSIGNED,
+                               rdt DATETIME DEFAULT CURRENT_TIMESTAMP,
+                               PRIMARY KEY (iboard, iuser)
+);
+
+CREATE TABLE meca_rankdb (
+                             irank INT AUTO_INCREMENT,
+                             rankNum VARCHAR(10),
+                             gameNm VARCHAR(100),
+                             company VARCHAR(50),
+                             imgsrc VARCHAR(200),
+                             selLink VARCHAR(300),
+                             PRIMARY KEY (irank)
+);
+
+CREATE TABLE platform_rankdb (
+                                 irank INT AUTO_INCREMENT,
+                                 rankNum VARCHAR(10),
+                                 gameNm VARCHAR(100),
+                                 company VARCHAR(50),
+                                 genre VARCHAR(30),
+                                 selLink VARCHAR(300),
+                                 PRIMARY KEY (irank)
+);
+
+CREATE TABLE platform_img (
+                              i_img INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                              imgsrc VARCHAR(500),
+                              gameNm VARCHAR(100)
+);
+
+CREATE TABLE game_cmt(
+                         icmt INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                         gameNm VARCHAR(50) NOT NULL,
+                         iuser INT UNSIGNED NOT NULL,
+                         ctnt VARCHAR(50) NOT NULL,
+                         rdt DATETIME DEFAULT CURRENT_TIMESTAMP,
+                         mdt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE freeboard_like(
+                               iboard INT UNSIGNED,
+                               iuser INT UNSIGNED,
+                               rdt DATETIME DEFAULT CURRENT_TIMESTAMP,
+                               PRIMARY KEY (iboard, iuser)
+);
 
 CREATE TABLE whattodo_user
 (
@@ -45,40 +101,6 @@ CREATE TABLE whattodo_user
     mdt        DATETIME              DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT PRIMARY KEY (iuser),
     CONSTRAINT UNIQUE (uid)
-);
-
-CREATE TABLE rating_Game
-(
-    rnum       INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    gameNm     VARCHAR(100),
-    gameRating VARCHAR(10),
-    gameRank   VARCHAR(10)
-);
-
-
-CREATE TABLE meca_rankdb
-(
-    irank   INT AUTO_INCREMENT,
-    rankNum VARCHAR(10),
-    rankNm  VARCHAR(100),
-    company VARCHAR(50),
-    PRIMARY KEY (irank)
-);
-
-CREATE TABLE steam_rankdb
-(
-    irank   INT AUTO_INCREMENT,
-    rankNum VARCHAR(10),
-    rankNm  VARCHAR(100),
-    PRIMARY KEY (irank)
-);
-
-CREATE TABLE rating_Game
-(
-    rnum       INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    gameNm     VARCHAR(100),
-    gameRating VARCHAR(10),
-    gameRank   VARCHAR(10)
 );
 
 
@@ -139,6 +161,20 @@ CREATE TABLE review_webtoon
     wnum     INT unsigned,
     PRIMARY KEY (rnum),
     FOREIGN KEY (`nm`) REFERENCES `webtoon` (`nm`)
+);
+
+
+ALTER TABLE webtoon
+    ADD COLUMN stateNull INT NULL;
+
+ALTER TABLE webtoon_recommand
+    ADD COLUMN stateNull INT NULL;
+
+CREATE TABLE game_like(
+                          gameNm VARCHAR(100) NOT null,
+                          iuser INT UNSIGNED,
+                          rdt DATETIME DEFAULT CURRENT_TIMESTAMP,
+                          PRIMARY KEY (gameNm, iuser)
 );
 
 ALTER TABLE `game_like`

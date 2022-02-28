@@ -95,4 +95,3 @@ $(window).scroll(function () {
         guideBox.style.top = '300px';
     }
 });
-

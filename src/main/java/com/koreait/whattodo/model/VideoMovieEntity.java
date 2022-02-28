@@ -13,4 +13,8 @@ public class VideoMovieEntity {
     private String movieNm;
     private String movieCd;
     private String img;
+    private String openDt;
+    private String rating;
+    private String actor;
+    private String director;
 }
