@@ -30,4 +30,4 @@ Mybatis foreach 활용, JOIN, DISTINCT, LIMIT 활용
 
 ## Game Page
 
-## Login&Logout
+## Login
