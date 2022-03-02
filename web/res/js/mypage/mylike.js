@@ -198,6 +198,8 @@
 
                     modalWindow.style.display = 'flex';
 
+                    document.querySelector(".modalTitle").textContent = "오늘의 게임";
+
                     const likeBtnElem = document.querySelector('#likeBtn');
                     let likeCountElem = document.querySelector(".like_count")
 
