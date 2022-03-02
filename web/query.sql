@@ -1,5 +1,9 @@
+CREATE DATABASE whattodo;
 
-CREATE TABLE menu_category
+use whattodo;
+
+
+CREATE TABLE menu_category # 메인페이지 메뉴
 (
     icategory INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     nm        VARCHAR(10) NOT NULL,
@@ -7,129 +11,128 @@ CREATE TABLE menu_category
     orderby   TINYINT     NOT NULL DEFAULT 0
 );
 
-INSERT INTO menu_category (nm)
-VALUES ('게임'),
-       ('넷플릭스'),
-       ('유튜브'),
-       ('게시판');
+INSERT INTO menu_category (nm, nmval)
+VALUES ('게임', 'game'),
+       ('넷플릭스', 'netflix'),
+       ('유튜브', 'youtube'),
+       ('게시판', 'list');
 
-INSERT INTO menu_category (nmval)
-VALUES ('game'),
-       ('netflix'),
-       ('youtube'),
-       ('list');
-
-CREATE TABLE freeboard(
-                          iboard INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                          title VARCHAR(100) NOT NULL,
-                          ctnt TEXT NOT NULL,
-                          iuser INT UNSIGNED NOT NULL,
-                          hits INT UNSIGNED DEFAULT 0,
-                          isdel TINYINT UNSIGNED DEFAULT 0,
-                          rdt DATETIME DEFAULT CURRENT_TIMESTAMP,
-                          mdt DATETIME DEFAULT CURRENT_TIMESTAMP,
-                          lastip varchar(15)
-);
-
-CREATE TABLE freeboard_cmt(
-                              icmt INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                              iboard INT UNSIGNED NOT NULL,
-                              iuser INT UNSIGNED NOT NULL,
-                              ctnt TEXT NOT NULL,
-                              rdt DATETIME DEFAULT CURRENT_TIMESTAMP,
-                              mdt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-
-CREATE TABLE freeboard_like(
-                               iboard INT UNSIGNED,
-                               iuser INT UNSIGNED,
-                               rdt DATETIME DEFAULT CURRENT_TIMESTAMP,
-                               PRIMARY KEY (iboard, iuser)
-);
-
-CREATE TABLE meca_rankdb (
-                             irank INT AUTO_INCREMENT,
-                             rankNum VARCHAR(10),
-                             gameNm VARCHAR(100),
-                             company VARCHAR(50),
-                             imgsrc VARCHAR(200),
-                             selLink VARCHAR(300),
-                             PRIMARY KEY (irank)
-);
-
-CREATE TABLE platform_rankdb (
-                                 irank INT AUTO_INCREMENT,
-                                 rankNum VARCHAR(10),
-                                 gameNm VARCHAR(100),
-                                 company VARCHAR(50),
-                                 genre VARCHAR(30),
-                                 selLink VARCHAR(300),
-                                 PRIMARY KEY (irank)
-);
-
-CREATE TABLE platform_img (
-                              i_img INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                              imgsrc VARCHAR(500),
-                              gameNm VARCHAR(100)
-);
-
-CREATE TABLE game_cmt(
-                         icmt INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                         gameNm VARCHAR(50) NOT NULL,
-                         iuser INT UNSIGNED NOT NULL,
-                         ctnt VARCHAR(50) NOT NULL,
-                         rdt DATETIME DEFAULT CURRENT_TIMESTAMP,
-                         mdt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-
-CREATE TABLE freeboard_like(
-                               iboard INT UNSIGNED,
-                               iuser INT UNSIGNED,
-                               rdt DATETIME DEFAULT CURRENT_TIMESTAMP,
-                               PRIMARY KEY (iboard, iuser)
-);
-
-CREATE TABLE whattodo_user
+CREATE TABLE freeboard # 자유게시판
 (
-    iuser      INT UNSIGNED AUTO_INCREMENT,
-    uid        VARCHAR(15)  NOT NULL,
-    upw        VARCHAR(100) NOT NULL,
-    nm         VARCHAR(10)  NOT NULL,
-    gender     TINYINT      NOT NULL DEFAULT 3 CHECK (gender IN (1, 2, 3)),
-    profileimg VARCHAR(100),
-    rdt        DATETIME              DEFAULT CURRENT_TIMESTAMP,
-    mdt        DATETIME              DEFAULT CURRENT_TIMESTAMP,
+    iboard INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    title  VARCHAR(100) NOT NULL,
+    ctnt   TEXT         NOT NULL,
+    iuser  INT UNSIGNED NOT NULL,
+    hits   INT UNSIGNED     DEFAULT 0,
+    isdel  TINYINT UNSIGNED DEFAULT 0,
+    rdt    DATETIME         DEFAULT CURRENT_TIMESTAMP,
+    mdt    DATETIME         DEFAULT CURRENT_TIMESTAMP,
+    lastip VARCHAR(15),
+    nm     VARCHAR(15)  NOT NULL
+);
+
+CREATE TABLE freeboard_cmt # 자유게시판 댓글
+(
+    icmt   INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    iboard INT UNSIGNED NOT NULL,
+    iuser  INT UNSIGNED NOT NULL,
+    ctnt   TEXT         NOT NULL,
+    rdt    DATETIME DEFAULT CURRENT_TIMESTAMP,
+    mdt    DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    nm     VARCHAR(15)  NOT NULL
+);
+
+CREATE TABLE freeboard_like # 자유게시판 좋아요
+(
+    iboard INT UNSIGNED,
+    iuser  INT UNSIGNED,
+    rdt    DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (iboard, iuser)
+);
+
+CREATE TABLE meca_rankdb # 게임메카 순위 DB
+(
+    irank   INT AUTO_INCREMENT,
+    rankNum VARCHAR(10),
+    gameNm  VARCHAR(100),
+    company VARCHAR(50),
+    imgsrc  VARCHAR(200),
+    selLink VARCHAR(300),
+    PRIMARY KEY (irank)
+);
+
+CREATE TABLE platform_rankdb
+(
+    irank   INT AUTO_INCREMENT,
+    rankNum VARCHAR(10),
+    gameNm  VARCHAR(100),
+    company VARCHAR(50),
+    genre   VARCHAR(30),
+    selLink VARCHAR(300),
+    PRIMARY KEY (irank)
+);
+
+CREATE TABLE platform_img
+(
+    i_img  INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    imgsrc VARCHAR(500),
+    gameNm VARCHAR(100)
+);
+
+CREATE TABLE game_cmt # 게임 댓글
+(
+    icmt   INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    gameNm VARCHAR(50)  NOT NULL,
+    iuser  INT UNSIGNED NOT NULL,
+    ctnt   VARCHAR(50)  NOT NULL,
+    rdt    DATETIME DEFAULT CURRENT_TIMESTAMP,
+    mdt    DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    nm     VARCHAR(15)  NOT NULL
+);
+
+CREATE TABLE whattodo_user # 유저정보관리 DB
+(
+    iuser      INT UNSIGNED AUTO_INCREMENT,                                 # primary
+    uid        VARCHAR(100) NOT NULL,                                       # email
+    upw        VARCHAR(100) NOT NULL,                                       # password
+    nm         VARCHAR(15)  NOT NULL,                                       # 성명
+    gender     TINYINT      NOT NULL DEFAULT 3 CHECK (gender IN (1, 2, 3)), # 성별 1: 남자 2: 여자 3: 선택안함
+    profileimg VARCHAR(100),                                                # 프로필이미지
+    rdt        DATETIME              DEFAULT CURRENT_TIMESTAMP,             # 계정 생성일
+    mdt        DATETIME              DEFAULT CURRENT_TIMESTAMP,             # 계정 수정일
     CONSTRAINT PRIMARY KEY (iuser),
     CONSTRAINT UNIQUE (uid)
 );
 
 
-CREATE TABLE webtoon
+CREATE TABLE webtoon # 웹툰 크롤링
 (
-    wnum     INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    nm       VARCHAR(50) NOT NULL,
-    writer   VARCHAR(20) NOT NULL,
-    rating   VARCHAR(10),
-    img      VARCHAR(300),
-    weekend  VARCHAR(10),
-    homepage INT DEFAULT 1,
+    wnum      INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    nm        VARCHAR(50) NOT NULL,
+    writer    VARCHAR(20) NOT NULL,
+    rating    VARCHAR(10),
+    img       VARCHAR(300),
+    weekend   VARCHAR(10),
+    homepage  INT DEFAULT 1,
+    stateNull INT,
     CONSTRAINT UNIQUE (nm)
 );
 
-CREATE TABLE webtoon_recommand
+CREATE TABLE webtoon_recommand # 추천 웹툰
 (
-    wrnum    INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    nm       VARCHAR(50) NOT NULL,
-    writer   VARCHAR(20) NOT NULL,
-    rating   VARCHAR(10),
-    img      VARCHAR(300),
-    weekend  VARCHAR(10),
-    link     VARCHAR(100),
-    homepage INT DEFAULT 1
+    wrnum     INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    nm        VARCHAR(50) NOT NULL,
+    writer    VARCHAR(20) NOT NULL,
+    rating    VARCHAR(10),
+    img       VARCHAR(300),
+    weekend   VARCHAR(10),
+    link      VARCHAR(100),
+    homepage  INT DEFAULT 1,
+    stateNull INT
 );
 
 
-CREATE TABLE auto_login
+CREATE TABLE auto_login # 자동로그인 전용 DB
 (
     `index`         INT UNSIGNED AUTO_INCREMENT,         # primary 값
     auto_key        VARCHAR(100) NOT NULL,               # 자동로그인 key
@@ -151,40 +154,58 @@ CREATE TABLE fav_webtoon
     PRIMARY KEY (nm, iuser)
 );
 
-CREATE TABLE review_webtoon
+CREATE TABLE review_webtoon # 웹툰 댓글
 (
-    rnum     INT UNSIGNED auto_increment,
+    rnum     INT UNSIGNED AUTO_INCREMENT,
     ctnt     VARCHAR(500) NOT NULL,
-    nm       VARCHAR(50)  NOT NULL,
-    nickname VARCHAR(50),
-    iuser    INT unsigned,
-    wnum     INT unsigned,
+    nm       VARCHAR(50)  NOT NULL, # 웹툰 이름
+    nickname VARCHAR(50),           # 유저 이름
+    iuser    INT UNSIGNED,
+    wnum     INT UNSIGNED,
     PRIMARY KEY (rnum),
     FOREIGN KEY (`nm`) REFERENCES `webtoon` (`nm`)
 );
 
-
-ALTER TABLE webtoon
-    ADD COLUMN stateNull INT NULL;
-
-ALTER TABLE webtoon_recommand
-    ADD COLUMN stateNull INT NULL;
-
-CREATE TABLE game_like(
-                          gameNm VARCHAR(100) NOT null,
-                          iuser INT UNSIGNED,
-                          rdt DATETIME DEFAULT CURRENT_TIMESTAMP,
-                          PRIMARY KEY (gameNm, iuser)
+CREATE TABLE game_like # 게임 게시판 좋아요
+(
+    gameNm     VARCHAR(100) NOT NULL,
+    iuser      INT UNSIGNED,
+    rdt        DATETIME DEFAULT CURRENT_TIMESTAMP,
+    iboardNull INT,
+    PRIMARY KEY (gameNm, iuser)
 );
 
-ALTER TABLE `game_like`
-    ADD COLUMN `iboardNull` INT NULL;
+CREATE TABLE webtoon_genre # 장르별 웹툰
+(
+    wgnum    INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    nm       VARCHAR(50) NOT NULL,
+    writer   VARCHAR(20) NOT NULL,
+    rating   VARCHAR(10),
+    img      VARCHAR(300),
+    genre    VARCHAR(10),
+    state    VARCHAR(10),
+    link     VARCHAR(100),
+    homepage INT DEFAULT 1
+);
 
-ALTER TABLE `video_movie`
-    ADD COLUMN `rating` varchar(10);
+CREATE TABLE video_movie # 영화 크롤링 DB
+(
+    mnum          INT AUTO_INCREMENT PRIMARY KEY,
+    movieNm       VARCHAR(50) NOT NULL,
+    rank          VARCHAR(5),
+    boxofficeType VARCHAR(20),
+    showRange     VARCHAR(20),
+    movieCd       VARCHAR(30),
+    img           VARCHAR(100),
+    rating        VARCHAR(10),
+    actor         VARCHAR(100),
+    director      VARCHAR(20)
+);
 
-ALTER TABLE `video_movie`
-    ADD COLUMN `actor` varchar(100);
-
-ALTER TABLE `video_movie`
-    ADD COLUMN `director` varchar(20);
+CREATE TABLE rating_game
+(
+    rnum       INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    gameNm     VARCHAR(100),
+    gameRating VARCHAR(10),
+    gameRank   VARCHAR(10)
+);
