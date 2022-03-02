@@ -1,3 +1,8 @@
+CREATE DATABASE whattodo;
+
+use whattodo;
+
+
 CREATE TABLE menu_category # 메인페이지 메뉴
 (
     icategory INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
