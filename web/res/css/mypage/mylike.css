@@ -149,3 +149,7 @@ tbody > td {
 .gameCmtList > table {
     width: 100%;
 }
+
+.pagination {
+    justify-content: center;
+}

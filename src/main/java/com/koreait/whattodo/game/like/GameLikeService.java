@@ -3,10 +3,12 @@ package com.koreait.whattodo.game.like;
 import com.koreait.whattodo.UserUtils;
 import com.koreait.whattodo.model.BoardLikeEntity;
 import com.koreait.whattodo.model.GameLikeEntity;
+import com.koreait.whattodo.model.user.UserPagingDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -23,6 +25,16 @@ public class GameLikeService {
 
     public GameLikeEntity selGameLike(GameLikeEntity entity) {
         return mapper.selGameLike(entity);
+    }
+
+    public List<GameLikeEntity> selGameLikeList(UserPagingDTO dto) {
+        dto.setIuser(userUtils.getLoginUserPk());
+        return mapper.selGameLikeList(dto);
+    }
+
+    public List<GameLikeEntity> selGameLikeListPaging(UserPagingDTO dto) {
+        dto.setIuser(userUtils.getLoginUserPk());
+        return mapper.selGameLikeListPaging(dto);
     }
 
     public GameLikeEntity gameLikeCount(GameLikeEntity entity) {

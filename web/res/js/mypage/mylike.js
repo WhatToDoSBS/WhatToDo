@@ -1,30 +1,35 @@
 {
 
-    let optionElem = document.querySelector("select");
     let optionVal;
 
     function changeVal(val) {
+        let optionElem = document.querySelector("select");
 
         console.log(val);
         if (val == 1) {
-            location.href = "/user/mypage/mylike";
+            location.href = "/user/mypage/mylike?category=1";
             // allLikeList()
         } else if (val == 2) {
             optionVal = optionElem.options[optionElem.selectedIndex].value;
             console.log(optionVal);
+            location.href = "/user/mypage/mylike?category=" + val;
             webtoonLikeList();
-
+            optionVal = val;
         } else if (val == 3) {
             optionVal = optionElem.options[optionElem.selectedIndex].value;
             console.log(optionVal);
+            location.href = "/user/mypage/mylike?category=" + val;
             gameLikeList();
+            optionVal = val;
 
         } else if (val == 4) {
             optionVal = optionElem.options[optionElem.selectedIndex].value;
             console.log(optionVal);
+            location.href = "/user/mypage/mylike?category=" + val;
             boardLikeList();
-
+            optionVal = val;
         }
+
     }
 
     const myLike = document.querySelector(".myLike");

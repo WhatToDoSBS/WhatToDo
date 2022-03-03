@@ -2,6 +2,7 @@ package com.koreait.whattodo.board.fav;
 
 import com.koreait.whattodo.UserUtils;
 import com.koreait.whattodo.model.FavWebtoonEntity;
+import com.koreait.whattodo.model.user.UserPagingDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,16 @@ public class FavWebtoonService {
 
     public FavWebtoonEntity selWebtoondFav(String nm) {
         return mapper.selWebtoondFav(createBoardFavEntity(nm));
+    }
+
+    public List<FavWebtoonEntity> selWebtoonLikeList(UserPagingDTO dto) {
+        dto.setIuser(userUtils.getLoginUserPk());
+        return mapper.selWebtoonLikeList(dto);
+    }
+
+    public List<FavWebtoonEntity> selWebtoonLikeListPaging(UserPagingDTO dto) {
+        dto.setIuser(userUtils.getLoginUserPk());
+        return mapper.selWebtoonLikeListPaging(dto);
     }
 
     public int selWebtoonFavCnt(String nm) {

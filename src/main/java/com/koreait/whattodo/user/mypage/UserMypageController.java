@@ -1,10 +1,15 @@
 package com.koreait.whattodo.user.mypage;
 
 import com.koreait.whattodo.UserUtils;
+import com.koreait.whattodo.board.fav.FavWebtoonMapper;
 import com.koreait.whattodo.board.fav.FavWebtoonService;
 import com.koreait.whattodo.board.like.LikeService;
 import com.koreait.whattodo.game.cmt.GameCmtService;
+import com.koreait.whattodo.game.like.GameLikeMapper;
+import com.koreait.whattodo.game.like.GameLikeService;
 import com.koreait.whattodo.model.BoardLikeEntity;
+import com.koreait.whattodo.model.FavWebtoonEntity;
+import com.koreait.whattodo.model.GameLikeEntity;
 import com.koreait.whattodo.model.user.UserPagingDTO;
 import com.koreait.whattodo.model.user.UserPagingMaker;
 import com.koreait.whattodo.model.user.mypage.ChaUpwEntity;
@@ -41,11 +46,17 @@ public class UserMypageController {
     @Autowired
     GameCmtService gameCmtService = new GameCmtService();
     @Autowired
-    LikeService likeService;
+    private LikeService likeService;
+    @Autowired
+    private GameLikeService gameLikeService;
     @Autowired
     private UserService userService;
     @Autowired
     private UserMypageService userMypageService;
+    @Autowired
+    private FavWebtoonMapper webtoonMapper;
+    @Autowired
+    private GameLikeMapper gameLikeMapper;
 
     @GetMapping("/mypage/main")
     public String main(Model model, BoardLikeEntity entity) {
@@ -112,7 +123,23 @@ public class UserMypageController {
     }
 
     @GetMapping("/mypage/mylike")
-    public void myfav(Model model, BoardLikeEntity entity) {
-        model.addAttribute("likeAll", likeService.selAllLikeList(entity));
+    public void myfav(Model model, BoardLikeEntity entity, UserPagingDTO dto) {
+        UserPagingMaker pageMaker = new UserPagingMaker();
+        pageMaker.setUserPagingDTO(dto);
+
+        if(dto.getCategory()==2) {
+            model.addAttribute("pageList", favWebtoonService.selWebtoonLikeListPaging(dto));
+            pageMaker.setTotalCount(favWebtoonService.selWebtoonLikeList(dto).size());
+        } else if(dto.getCategory()==3) {
+            model.addAttribute("pageList", gameLikeService.selGameLikeListPaging(dto));
+            pageMaker.setTotalCount(gameLikeMapper.selGameLikeList(dto).size());
+        } else if(dto.getCategory()==4) {
+            model.addAttribute("pageList", likeService.selBoardLikeListPaging(dto));
+            pageMaker.setTotalCount(likeService.selBoardLikeList(dto).size());
+        } else {
+            model.addAttribute("pageList", likeService.selAllLikeListPaging(dto));
+            pageMaker.setTotalCount(likeService.selAllLikeList(entity).size());
+        }
+        model.addAttribute("pageMaker", pageMaker);
     }
 }
