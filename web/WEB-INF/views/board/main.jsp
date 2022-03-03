@@ -146,7 +146,7 @@
                             </div>
                         </li>
                         <li>
-                            <img src="/res/img/profile_taejun.jpg" alt="">
+                            <img src="/res/img/profile_sengwan.jpg" alt="">
                             <div class="member_info">
                                 <div class="member_name">
                                     <span>최성완</span>
