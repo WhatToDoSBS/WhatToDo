@@ -147,10 +147,11 @@ CREATE TABLE auto_login # 자동로그인 전용 DB
 
 CREATE TABLE fav_webtoon
 (
-    nm    VARCHAR(50),
-    iuser INT UNSIGNED,
-    rdt   DATETIME DEFAULT CURRENT_TIMESTAMP,
-    mdt   DATETIME DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP,
+    nm     VARCHAR(50),
+    iuser  INT UNSIGNED,
+    rdt    DATETIME DEFAULT CURRENT_TIMESTAMP,
+    mdt    DATETIME DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP,
+    iboard INT,
     PRIMARY KEY (nm, iuser)
 );
 
@@ -168,13 +169,13 @@ CREATE TABLE review_webtoon # 웹툰 댓글
 
 CREATE TABLE game_like # 게임 게시판 좋아요
 (
-    gameNm     VARCHAR(100) NOT NULL,
-    iuser      INT UNSIGNED,
-    rdt        DATETIME DEFAULT CURRENT_TIMESTAMP,
-    iboardNull INT,
+    gameNm VARCHAR(100) NOT NULL,
+    iuser  INT UNSIGNED,
+    rdt    DATETIME DEFAULT CURRENT_TIMESTAMP,
+    iboard INT,
     PRIMARY KEY (gameNm, iuser)
 );
-
+drop table game_like;
 CREATE TABLE webtoon_genre # 장르별 웹툰
 (
     wgnum    INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
