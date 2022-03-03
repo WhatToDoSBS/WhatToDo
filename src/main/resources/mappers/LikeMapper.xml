@@ -33,6 +33,15 @@
         ORDER BY rdt desc
     </select>
 
+    <select id="selBoardLikeListPaging" resultType="BoardLikeEntity">
+        SELECT a.title as nm, b.rdt, b.iboard
+        FROM freeboard a
+                 INNER JOIN freeboard_like b
+                            ON a.iuser = b.iuser
+                                AND a.iboard = b.iboard
+        ORDER BY rdt desc LIMIT ${pageStart}, ${perPageNum}
+    </select>
+
     <select id="selAllLikeList" resultType="BoardLikeEntity">
         (SELECT a.title AS nm, b.rdt, a.iboard
          FROM freeboard a
@@ -40,10 +49,24 @@
                              ON a.iuser = b.iuser
                                  AND a.iboard = b.iboard)
         UNION ALL
-        SELECT gameNm AS nm, rdt, iboardNull FROM game_like
+        SELECT gameNm AS nm, rdt, iboard FROM game_like
         WHERE iuser = ${iuser}
         UNION ALL
-        SELECT nm, rdt, iboardNull FROM fav_webtoon
+        SELECT nm, rdt, iboard FROM fav_webtoon
         WHERE iuser = ${iuser} ORDER BY rdt desc
+    </select>
+
+    <select id="selAllLikeListPaging" resultType="BoardLikeEntity">
+        (SELECT a.title AS nm, b.rdt, a.iboard
+         FROM freeboard a
+                  INNER JOIN freeboard_like b
+                             ON a.iuser = b.iuser
+                                 AND a.iboard = b.iboard)
+        UNION ALL
+        SELECT gameNm AS nm, rdt, iboard FROM game_like
+        WHERE iuser = ${iuser}
+        UNION ALL
+        SELECT nm, rdt, iboard FROM fav_webtoon
+        WHERE iuser = ${iuser} ORDER BY rdt desc LIMIT ${pageStart}, ${perPageNum}
     </select>
 </mapper>

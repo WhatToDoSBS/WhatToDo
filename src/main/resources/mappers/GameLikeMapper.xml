@@ -32,5 +32,12 @@
         WHERE iuser = ${iuser}
         ORDER BY rdt desc
     </select>
+
+    <select id="selGameLikeListPaging" resultType="GameLikeEntity">
+        SELECT gameNm as nm, iuser, rdt
+        FROM game_like
+        WHERE iuser = ${iuser}
+        ORDER BY rdt desc LIMIT ${pageStart}, ${perPageNum}
+    </select>
     
 </mapper>

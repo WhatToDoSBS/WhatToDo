@@ -3,6 +3,7 @@ package com.koreait.whattodo.board.like;
 import com.koreait.whattodo.UserUtils;
 import com.koreait.whattodo.model.BoardLikeEntity;
 import com.koreait.whattodo.model.GameLikeEntity;
+import com.koreait.whattodo.model.user.UserPagingDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,21 @@ public class LikeService {
     public List<BoardLikeEntity> selAllLikeList(BoardLikeEntity entity) {
         entity.setIuser(userUtils.getLoginUserPk());
         return mapper.selAllLikeList(entity);
+    }
+
+    public List<BoardLikeEntity> selAllLikeListPaging(UserPagingDTO dto) {
+        dto.setIuser(userUtils.getLoginUserPk());
+        return mapper.selAllLikeListPaging(dto);
+    }
+
+    public List<BoardLikeEntity> selBoardLikeList(UserPagingDTO dto) {
+        dto.setIuser(userUtils.getLoginUserPk());
+        return mapper.selBoardLikeList(dto);
+    }
+
+    public List<BoardLikeEntity> selBoardLikeListPaging(UserPagingDTO dto) {
+        dto.setIuser(userUtils.getLoginUserPk());
+        return mapper.selBoardLikeListPaging(dto);
     }
 
     public BoardLikeEntity boardLikeCount(BoardLikeEntity entity) {

@@ -11,5 +11,5 @@ public class GameLikeEntity {
     private String rdt;
     private int count;
     private String nm;
-    private int iboardNull;
+    private int iboard;
 }
