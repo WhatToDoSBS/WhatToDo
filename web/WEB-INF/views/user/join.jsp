@@ -41,6 +41,15 @@
             </span>
         </div>
         <div>
+            <h4 class="join_title">주소</h4>
+            <input name="postAddress" placeholder="우편번호" type="text" class="textBox">
+            <input type="button" value="우편번호찾기" onclick="kakaopost()">
+            <br>
+            <input name="addressFirst" type="text" class="textBox">
+            <br>
+            <input name="addressSecond" type="text" class="textBox">
+        </div>
+        <div>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 약관 확인하기
@@ -113,4 +122,5 @@
         </span>
     </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </div>

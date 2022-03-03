@@ -107,17 +107,17 @@ CREATE TABLE whattodo_user # 유저정보관리 DB
 
 CREATE TABLE webtoon # 웹툰 크롤링
 (
-    wnum      INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    nm        VARCHAR(50) NOT NULL,
-    writer    VARCHAR(20) NOT NULL,
-    rating    VARCHAR(10),
-    img       VARCHAR(300),
-    weekend   VARCHAR(10),
-    homepage  INT DEFAULT 1,
-    stateNull INT,
-    CONSTRAINT UNIQUE (nm)
+    wnum     INT UNSIGNED,
+    nm       VARCHAR(50) NOT NULL,
+    writer   VARCHAR(20) NOT NULL,
+    rating   VARCHAR(10),
+    img      VARCHAR(300),
+    weekend  VARCHAR(10),
+    link     VARCHAR(100),
+    homepage INT DEFAULT 1,
+    PRIMARY KEY (nm, weekend)
 );
-
+drop table webtoon;
 CREATE TABLE webtoon_recommand # 추천 웹툰
 (
     wrnum     INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,

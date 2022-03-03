@@ -60,6 +60,7 @@ public class CrawlingController {
         List<WebtoonRecommandEntity> webtoonRecommandEntityList = webtoonService.listRecommandWebtoon();
 
         // 랜덤번째 리스트를 전달해줌
+        System.out.println(gameList.size());
         int randomGameNum = utils.randomNumOutput(gameList.size());
         int randomWebtoon = utils.randomNumOutput(webtoonRecommandEntityList.size());
         System.out.println("랜덤 [게임] 숫자 : " + randomGameNum);
