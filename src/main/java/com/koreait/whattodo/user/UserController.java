@@ -121,8 +121,6 @@ public class UserController {
         if (loginUser != null) {
             return "redirect:/board/main";
         }
-
-        System.out.println();
         int result = service.join(dto);
         if (result == 1) {
             return "redirect:/user/login";

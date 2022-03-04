@@ -9,9 +9,11 @@
     // 우편번호 api
     joinFrmElem['addressPostFindButton'].addEventListener('click', () => {
         new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-                // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+            oncomplete: (data) => {
+                joinFrmElem['postAddress'].value = data['zonecode'];
+                joinFrmElem['addressFirst'].value = data['address'];
+                joinFrmElem['addressSecond'].value = '';
+                joinFrmElem['addressSecond'].focus();
             }
         }).open();
     });
@@ -25,7 +27,10 @@
             const upwChk = joinFrmElem.querySelector('#upw-chk').value;
             const nm = joinFrmElem.nm.value;
             const gender = joinFrmElem.gender.value;
+            const postaddr = joinFrmElem.postAddress.value;
+            const address = joinFrmElem.addressFirst.value;
             const prevChk = joinFrmElem.prevChk;
+
 
             if (!idRegex.test(uid)) {
                 alert('아이디를 바르게 적어주세요');
@@ -45,6 +50,9 @@
                 e.preventDefault();
             } else if(gender === '0') {
                 alert('성별을 선택해주세요');
+                e.preventDefault();
+            } else if (!postRegex.test(postaddr)) {
+                alert('주소가 필요합니다.');
                 e.preventDefault();
             } else if (prevChk.checked !== true) {
                 alert('약관동의에 체크해주세요.');

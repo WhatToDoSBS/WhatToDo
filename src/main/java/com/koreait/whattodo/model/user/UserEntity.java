@@ -13,7 +13,11 @@ public class UserEntity {
     private String upw;
     private String nm;
     private int gender;
+    private int postAddress;
+    private String addressFirst;
+    private String addressSecond;
     private String profileimg;
     private String rdt;
     private String mdt;
+    private int level;
 }

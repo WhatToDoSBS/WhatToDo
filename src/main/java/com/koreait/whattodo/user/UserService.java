@@ -45,7 +45,7 @@ public class UserService {
 
         String hashPw = BCrypt.hashpw(copyEntity.getUpw(), BCrypt.gensalt());
         copyEntity.setUpw(hashPw); // 비밀번호 해시화 해서 넣음
-        System.out.println(dto.getGender());
+        copyEntity.setLevel(2);
         return mapper.insUser(copyEntity);
     }
 
