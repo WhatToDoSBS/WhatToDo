@@ -56,11 +56,13 @@ public class UserController {
 
         vo = service.login(dto); // 로그인 결과
         if (vo.getLoginResult().equals(LoginEnum.UID_REGEX_ERR) || vo.getLoginResult().equals(LoginEnum.UPW_REGEX_ERR)) { // 정규식 오류
+            reAttr.addFlashAttribute("dto", dto);
             reAttr.addFlashAttribute("nmsg", "");
             reAttr.addFlashAttribute("keymsg", "");
             reAttr.addFlashAttribute("rmsg", "아이디와 비밀번호를 바르게 작성해주세요.");
             return "redirect:/user/login";
         } else if (vo.getLoginResult().equals(LoginEnum.UID_ERR) || vo.getLoginResult().equals(LoginEnum.UPW_ERR)) { // 아이디, 비번 오류
+            reAttr.addFlashAttribute("dto", dto);
             reAttr.addFlashAttribute("nmsg", "");
             reAttr.addFlashAttribute("keymsg", "아이디 또는 비밀번호가 일치하지 않습니다. <br>다시 시도해 주세요.");
             reAttr.addFlashAttribute("rmsg", "");
@@ -141,4 +143,9 @@ public class UserController {
         System.out.println("API 로그인 결과 : " + result);
         return result;
     }
+
+
+
+    @GetMapping("/forgot-id")
+    public void forgotId() {}
 }

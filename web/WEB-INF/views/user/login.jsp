@@ -4,8 +4,8 @@
     <h1>로그인</h1>
     <div>
         <form class="login_container" method="post" action="/user/login" id="login-form">
-            <div><input type="text" name="uid" class="login_input" placeholder="아이디"></div>
-            <div><input type="password" name="upw" class="login_input" placeholder="비밀번호"></div>
+            <div><input type="text" name="uid" class="login_input" placeholder="아이디" value="${requestScope.dto.uid}"></div>
+            <div><input type="password" name="upw" class="login_input" placeholder="비밀번호" value="${requestScope.dto.upw}"></div>
             <div>
                 <h5 class="err_msg_b">${requestScope.keymsg}</h5> <%--   아이디 또는 비밀번호가 일치하지 않습니다. <br>다시 시도해 주세요.     --%>
                 <h5 class="err_msg_b">${requestScope.nmsg}</h5><%--   알 수 없는 이유로 로그인에 실패하였습니다.     --%>
@@ -24,7 +24,7 @@
     <div>
         <div class="login_find">
             <ul>
-                <li>아이디 찾기</li>
+                <li><a href="/user/forgot-id">아이디 찾기</a></li>
                 <li>비밀번호 찾기</li>
                 <li><a href="/user/join">회원가입</a></li>
             </ul>

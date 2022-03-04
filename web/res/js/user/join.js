@@ -27,8 +27,8 @@
             const upwChk = joinFrmElem.querySelector('#upw-chk').value;
             const nm = joinFrmElem.nm.value;
             const gender = joinFrmElem.gender.value;
+            const phone = joinFrmElem.contact.value;
             const postaddr = joinFrmElem.postAddress.value;
-            const address = joinFrmElem.addressFirst.value;
             const prevChk = joinFrmElem.prevChk;
 
 
@@ -51,7 +51,11 @@
             } else if(gender === '0') {
                 alert('성별을 선택해주세요');
                 e.preventDefault();
-            } else if (!postRegex.test(postaddr)) {
+            } else if (!phoneRegex.test(phone)) {
+                alert('휴대폰 번호를 정확히 입력해주세요.');
+                e.preventDefault();
+            }
+            else if (!postRegex.test(postaddr)) {
                 alert('주소가 필요합니다.');
                 e.preventDefault();
             } else if (prevChk.checked !== true) {

@@ -139,6 +139,7 @@ CREATE TABLE whattodo_user # 유저정보관리 DB
     upw        VARCHAR(100) NOT NULL,                                       # password
     nm         VARCHAR(15)  NOT NULL,                                       # 성명
     gender     TINYINT      NOT NULL DEFAULT 3 CHECK (gender IN (1, 2, 3)), # 성별 1: 남자 2: 여자 3: 선택안함
+    contact    INT          NOT NULL,                                       # 연락처(휴대폰)
     postaddr   INT          NOT NULL,                                       # 우편번호
     addrfirst  VARCHAR(100) NOT NULL,                                       # 주소
     addrsecond VARCHAR(100),                                                # 상세주소
