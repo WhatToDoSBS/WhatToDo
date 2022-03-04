@@ -25,7 +25,7 @@ public class UserMypageService {
     FileUtils fileUtils;
 
     public static class Config{
-        public static final String UPLOAD_IMG_PATH = "D:/upload/images";
+        public static final String UPLOAD_IMG_PATH = "D:/upload/images"; // 이미지 저장 경로
     }
 
     public String uploadProfileImg(MultipartFile profileimg) {
@@ -33,18 +33,18 @@ public class UserMypageService {
             return null;
         }
 
-        UserEntity loginUser = userUtils.getLoginUser();
+        UserEntity loginUser = userUtils.getLoginUser(); // 로그인 유저정보
 
-        final String PATH = Config.UPLOAD_IMG_PATH + "/user/" + loginUser.getIuser();
-        String fileNm = fileUtils.saveFile(PATH, profileimg);
+        final String PATH = Config.UPLOAD_IMG_PATH + "/user/" + loginUser.getIuser(); // 경로생성 D:/upload/images/user/${iuser}/
+        String fileNm = fileUtils.saveFile(PATH, profileimg); // 경로에 파일 생성
         System.out.println("fileNm : " + fileNm);
 
-        if (fileNm == null) {
+        if (fileNm == null) { // 생성 실패하면 리턴
             return null;
         }
 
         UserDto dto = new UserDto();
-        dto.setIuser(loginUser.getIuser());
+        dto.setIuser(loginUser.getIuser()); // update 쿼리에 쓸 iuser 값 dto로 가져오기
 
         // 기존 이미지 제거
         String oldFile = PATH + "/" + loginUser.getProfileimg();
