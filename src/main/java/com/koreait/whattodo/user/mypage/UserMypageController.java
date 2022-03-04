@@ -62,7 +62,7 @@ public class UserMypageController {
     public String main(Model model, BoardLikeEntity entity) {
         model.addAttribute("webtoonReviewMy",reviewService.selReviewWebtoonMy());
         model.addAttribute("myLike",likeService.selAllLikeList(entity));
-        if(userUtils.getLoginUserPk()!=0) {
+        if(userUtils.getLoginUserPk()!=0) { // 내 정보는 로그인한 사람만 들어올수있음
             return "user/mypage/main";
         }
         return "redirect:/user/login";
@@ -71,11 +71,10 @@ public class UserMypageController {
     @ResponseBody
     @PostMapping("/mypage/profileimg")
     public Map<String, String> profileImgCha(MultipartFile profileimg) {
-        System.out.println("profileimg : " + profileimg);
-        String fileNm = userMypageService.uploadProfileImg(profileimg);
+        String fileNm = userMypageService.uploadProfileImg(profileimg); // file이름 새로 만들어서 DB에 update 시키고 이름 가지고옴
 
         Map<String, String> result = new HashMap();
-        result.put("image", fileNm);
+        result.put("image", fileNm); // image 이름으로 view로 보냄
         return result;
     }
 
