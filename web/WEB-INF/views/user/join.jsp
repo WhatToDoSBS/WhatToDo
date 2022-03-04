@@ -42,10 +42,10 @@
         </div>
         <div>
             <h4 class="join_title">주소</h4>
-            <input name="postAddress" placeholder="우편번호" type="text" class="textBox">
-            <input type="button" value="우편번호찾기" onclick="kakaopost()">
+            <input name="postAddress" placeholder="우편번호" type="text" class="textBox" readonly>
+            <input type="button" value="우편번호찾기" name="addressPostFindButton">
             <br>
-            <input name="addressFirst" type="text" class="textBox">
+            <input name="addressFirst" type="text" class="textBox" readonly>
             <br>
             <input name="addressSecond" type="text" class="textBox">
         </div>

@@ -10,7 +10,7 @@ public interface CrawlingMapper {
     // 게임메카 관련
     void insertRankMecaDb(List<MecaRankEntity> mecaList);
     void delMecaRank();
-    List<MecaRankEntity> mecaRankList(MecaRankEntity entity);
+    List<MecaRankEntity> mecaRankList();
 
     // 스팀 관련
     void insertRankSteamDb(List<SteamRankEntity> steamList);

@@ -49,7 +49,7 @@
                     <h6>변경 후 로그아웃 됩니다.</h6>
                     <form action="/user/mypage/cheUpw" method="post">
                         <label>
-                            <span>현제 비밀번호</span>
+                            <span>현재 비밀번호</span>
                             <input type="password" name="oldUpw">
                         </label>
                         <label>
