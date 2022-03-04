@@ -56,11 +56,10 @@ public class CrawlingController {
 
         // 게임
         crawlingService.insertRating(ratingUrl);
-        List gameList = crawlingService.mecaRankList(entity);
+        List gameList = crawlingService.mecaRankList();
         List<WebtoonRecommandEntity> webtoonRecommandEntityList = webtoonService.listRecommandWebtoon();
 
         // 랜덤번째 리스트를 전달해줌
-        System.out.println(gameList.size());
         int randomGameNum = utils.randomNumOutput(gameList.size());
         int randomWebtoon = utils.randomNumOutput(webtoonRecommandEntityList.size());
         System.out.println("랜덤 [게임] 숫자 : " + randomGameNum);
@@ -96,7 +95,7 @@ public class CrawlingController {
         // json ajax통신
         Gson gson = new Gson();
 
-        String mecaListJson = gson.toJson(crawlingService.mecaRankList(mecaRankEntity));
+        String mecaListJson = gson.toJson(crawlingService.mecaRankList());
         String steamListJson = gson.toJson(crawlingService.steamRankList(steamRankEntity));
 
         System.out.println("randomGameNum : " + randomGameNum);
@@ -117,7 +116,7 @@ public class CrawlingController {
         // json ajax통신
         Gson gson = new Gson();
 
-        String mecaListJson = gson.toJson(crawlingService.mecaRankList(entity));
+        String mecaListJson = gson.toJson(crawlingService.mecaRankList());
 
         System.out.println(mecaListJson);
         return mecaListJson;
@@ -139,16 +138,16 @@ public class CrawlingController {
 
     //모바일, pc온라인, 스팀
     @GetMapping("/game")
-    public void game(Model model, MecaRankEntity entity1, PlatformRankEntity entity2) {
+    public void game(Model model, PlatformRankEntity entity) {
 
-            List gameList = crawlingService.mecaRankList(entity1);
-            List platformGameList = crawlingService.platformListWithImg(entity2);
+            List gameList = crawlingService.mecaRankList();
+            List platformGameList = crawlingService.platformListWithImg(entity);
             model.addAttribute("gameList", gameList);
             model.addAttribute("pfGameList", platformGameList);
         }
 
     @GetMapping("/gameCrawling")
-    public String gameCrawling(Model model, MecaRankEntity entity1, PlatformRankEntity entity2) {
+    public String gameCrawling(Model model, PlatformRankEntity entity2) {
 
         String platformUrl = "https://trees.gamemeca.com/gamerank/";
         String mecaUrl = "https://www.gamemeca.com/ranking.php";
@@ -167,12 +166,12 @@ public class CrawlingController {
             crawlingService.insertPlatform(platformUrl);
             crawlingService.insertPlatformImgList(entity2);
 
-            List gameList = crawlingService.mecaRankList(entity1);
+            List gameList = crawlingService.mecaRankList();
             List platformGameList = crawlingService.platformListWithImg(entity2);
             model.addAttribute("gameList", gameList);
             model.addAttribute("pfGameList", platformGameList);
         } else {
-            List gameList = crawlingService.mecaRankList(entity1);
+            List gameList = crawlingService.mecaRankList();
             List platformGameList = crawlingService.platformListWithImg(entity2);
             model.addAttribute("gameList", gameList);
             model.addAttribute("pfGameList", platformGameList);

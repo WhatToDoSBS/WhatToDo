@@ -82,8 +82,8 @@ public class CrawlingService {
         mapper.insertRankMecaDb(list);
     }
 
-    public List<MecaRankEntity> mecaRankList(MecaRankEntity entity) {
-        return mapper.mecaRankList(entity);
+    public List<MecaRankEntity> mecaRankList() {
+        return mapper.mecaRankList();
     }
 
     // ★★★★★ 스팀 관련 ★★★★★

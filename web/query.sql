@@ -175,7 +175,7 @@ CREATE TABLE game_like # 게임 게시판 좋아요
     iboard INT,
     PRIMARY KEY (gameNm, iuser)
 );
-drop table game_like;
+
 CREATE TABLE webtoon_genre # 장르별 웹툰
 (
     wgnum    INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
