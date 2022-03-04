@@ -143,4 +143,9 @@ public class UserController {
         System.out.println("API 로그인 결과 : " + result);
         return result;
     }
+
+
+
+    @GetMapping("/forgot-id")
+    public void forgotId() {}
 }

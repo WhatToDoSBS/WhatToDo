@@ -13,6 +13,7 @@ public class UserEntity {
     private String upw;
     private String nm;
     private int gender;
+    private int contact;
     private int postAddress;
     private String addressFirst;
     private String addressSecond;

@@ -7,26 +7,26 @@
     <div class="err_msg_b">${requestScope.msg}</div>
     <form action="/user/join" method="post" id="join-frm">
         <div>
-            <h4 class="join_title" style="padding-right: 15rem;">아이디</h4>
+            <h4 class="join_title" style="padding-right: 14rem;">아이디</h4>
             <input type="text" name="uid" class="textBox" id="uidInput" required>
             <h5 class="msg_n" id="err-idMsg">아이디는 대소문자, 숫자조합<br> 4~15글자가 되어야 합니다.</h5>
             <h5 class="msg_n" id="duplication-uid">이미 존재하는 계정입니다.</h5>
             <h5 class="msg_n" id="available-uid">사용 가능한 계정입니다.</h5>
         </div>
         <div>
-            <h4 class="join_title" style="padding-right: 14rem;">패스워드</h4>
+            <h4 class="join_title" style="padding-right: 12.5rem;">패스워드</h4>
             <input type="password" name="upw" class="textBox" id="upwInput" required>
             <h5 class="msg_n" id="err-pwMsg">비밀번호는 대소문자, 숫자, !@_ 조합<br> 4~20글자가 되어야 합니다.</h5>
             <h5 class="msg_n" id="good-pwMsg">사용 가능한 비밀번호입니다.</h5>
         </div>
         <div>
-            <h4 class="join_title" style="padding-right: 10rem;">패스워드 확인</h4>
+            <h4 class="join_title" style="padding-right: 9rem;">패스워드 확인</h4>
             <input type="password" name="upw-check" id="upw-chk" class="textBox" required>
             <h5 class="msg_n" id="err-pwChkMsg">비밀번호와 체크 비밀번호를 확인해 주세요.</h5>
             <h5 class="msg_n" id="good-pwChkMsg">비밀번호가 같습니다.</h5>
         </div>
         <div>
-            <h4 class="join_title" style="padding-right: 16rem;">이름</h4>
+            <h4 class="join_title" style="padding-right: 15.5rem;">이름</h4>
             <input type="text" name="nm" class="textBox" required>
         </div>
         <div>
@@ -41,7 +41,11 @@
             </span>
         </div>
         <div>
-            <h4 class="join_title">주소</h4>
+            <h4 class="join_title" style="padding-right: 14rem;">휴대폰</h4>
+            <input type="text" name="contact" class="textBox" maxlength="8" placeholder="010 제외, '-'빼고 휴대폰 번호">
+        </div>
+        <div>
+            <h4 class="join_title" style="padding-right: 16rem;">주소</h4>
             <input name="postAddress" placeholder="우편번호" type="text" class="addrTextBox" readonly maxlength="5">
             <input type="button" value="우편번호찾기" name="addressPostFindButton">
             <br>

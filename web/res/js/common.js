@@ -1,8 +1,10 @@
 const idRegex = /^([a-zA-Z0-9]{4,15})$/;
 const pwRegex = /^([a-zA-Z0-9!@_]{4,20})$/;
 const nmRegex = /^([가-힣a-zA-Z]{2,15})$/;
+const phoneRegex = /^([0-9]{8})$/;
 const postRegex = /^([0-9]{5,6})$/;
 const ctntRegex = /^[^><]*$/;
+
 function isWrongWith(target, val) {
     return (target && val) ? !ctntRegex.test(val) : true;
 }
