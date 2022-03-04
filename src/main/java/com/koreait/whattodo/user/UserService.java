@@ -139,8 +139,17 @@ public class UserService {
             dto.setGender(3);
         }
 
+        if (dto.getPostAddress() == 0) { // 우편번호 없으면 기본값
+            dto.setPostAddress(12345);
+        }
+
+        if (dto.getAddressFirst() == null)  { // 주소 없으면 기본값
+            dto.setAddressFirst("주소없음");
+        }
+
         try {
             if (mapper.selUser(dto) == null) {
+                dto.setLevel(3); // 소셜 유저는 3번
                 mapper.insUser(dto);
                 vo = mapper.selUser(dto); // iuser 값 필요해서 넘어온 db값을 vo에 다시 담음
                 userUtils.setLoginUser(vo);
