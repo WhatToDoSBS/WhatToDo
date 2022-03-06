@@ -58,7 +58,7 @@ public class CrawlingController {
         crawlingService.insertRating(ratingUrl);
         List gameList = crawlingService.mecaRankList();
         List<WebtoonRecommandEntity> webtoonRecommandEntityList = webtoonService.listRecommandWebtoon();
-
+        System.out.println(gameList.size());
         // 랜덤번째 리스트를 전달해줌
         int randomGameNum = utils.randomNumOutput(gameList.size());
         int randomWebtoon = utils.randomNumOutput(webtoonRecommandEntityList.size());
