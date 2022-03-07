@@ -43,5 +43,9 @@
         WHERE uid = #{uid}
     </select>
 
-
+    <select id="forgotEmailSel" resultType="UserVo"><!--  아이디 찾기  -->
+        SELECT * FROM whattodo_user
+        WHERE nm = #{nm}
+          AND contact = ${contact};
+    </select>
 </mapper>

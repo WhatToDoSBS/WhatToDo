@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -163,4 +164,32 @@ public class UserService {
         }
         return 0;   // db에서 값 반환이 안됨
     }
+
+
+    public List<UserVo>  forgotId(UserDto dto) {
+        List<UserVo> vo = null;
+        vo = mapper.forgotEmailSel(dto);
+        return vo;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

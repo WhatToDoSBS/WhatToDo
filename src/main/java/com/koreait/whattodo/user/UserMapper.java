@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import javax.servlet.http.Cookie;
+import java.util.List;
 
 @Mapper
 public interface UserMapper {
@@ -23,5 +24,8 @@ public interface UserMapper {
 
     void delAutoLoginKey(@Param("key") String key); // 자동로그인 키 만료
 
-    UserVo selUser(UserEntity entity); // 로그인
+    UserVo selUser(UserEntity entity); // 아아디 중복검사
+
+    List<UserVo> forgotEmailSel(UserDto dto); // 아이디 찾기
+
 }

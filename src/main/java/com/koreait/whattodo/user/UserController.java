@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -148,4 +149,32 @@ public class UserController {
 
     @GetMapping("/forgot-id")
     public void forgotId() {}
+
+    @PostMapping("/forgot-id")
+    public String forgotIdPost(UserDto dto, RedirectAttributes reAttr) {
+        List<UserVo> list = service.forgotId(dto);
+        reAttr.addFlashAttribute("list", list);
+        return "redirect:/user/forgot-id";
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
