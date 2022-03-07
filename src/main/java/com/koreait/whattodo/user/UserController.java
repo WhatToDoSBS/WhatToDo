@@ -153,6 +153,9 @@ public class UserController {
     @PostMapping("/forgot-id")
     public String forgotIdPost(UserDto dto, RedirectAttributes reAttr) {
         List<UserVo> list = service.forgotId(dto);
+        if (list == null) {
+            reAttr.addFlashAttribute("list", null);
+        }
         reAttr.addFlashAttribute("list", list);
         return "redirect:/user/forgot-id";
     }
