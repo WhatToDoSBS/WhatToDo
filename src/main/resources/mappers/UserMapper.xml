@@ -44,7 +44,7 @@
     </select>
 
     <select id="forgotEmailSel" resultType="UserVo"><!--  아이디 찾기  -->
-        SELECT * FROM whattodo_user
+        SELECT uid, DATE_FORMAT(rdt, '%Y.%m.%d') AS rdt FROM whattodo_user
         WHERE nm = #{nm}
           AND contact = ${contact};
     </select>

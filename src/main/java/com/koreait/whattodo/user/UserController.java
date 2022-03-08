@@ -151,13 +151,22 @@ public class UserController {
     public void forgotId() {}
 
     @PostMapping("/forgot-id")
-    public String forgotIdPost(UserDto dto, RedirectAttributes reAttr) {
+    public String forgotIdPost(UserDto dto, HttpSession session, RedirectAttributes reAttr) {
         List<UserVo> list = service.forgotId(dto);
-        if (list == null) {
-            reAttr.addFlashAttribute("list", null);
+        if (list.size() > 0) {
+            session.setAttribute("uidData", list);
+            return "redirect:/user/find-id";
         }
-        reAttr.addFlashAttribute("list", list);
+        reAttr.addFlashAttribute("err", "계정이 존재하지 않습니다.");
         return "redirect:/user/forgot-id";
+    }
+
+    @GetMapping("/find-id")
+    public void findId() {}
+
+    @PostMapping("/find-id")
+    public String findIdPost() {
+        return null;
     }
 }
 
