@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -148,4 +149,44 @@ public class UserController {
 
     @GetMapping("/forgot-id")
     public void forgotId() {}
+
+    @PostMapping("/forgot-id")
+    public String forgotIdPost(UserDto dto, HttpSession session, RedirectAttributes reAttr) {
+        List<UserVo> list = service.forgotId(dto);
+        if (list.size() > 0) {
+            session.setAttribute("uidData", list);
+            return "redirect:/user/find-id";
+        }
+        reAttr.addFlashAttribute("err", "계정이 존재하지 않습니다.");
+        return "redirect:/user/forgot-id";
+    }
+
+    @GetMapping("/find-id")
+    public void findId() {}
+
+    @PostMapping("/find-id")
+    public String findIdPost() {
+        return null;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

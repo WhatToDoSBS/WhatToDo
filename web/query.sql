@@ -90,21 +90,6 @@ CREATE TABLE game_cmt # 게임 댓글
     nm     VARCHAR(15)  NOT NULL
 );
 
-CREATE TABLE whattodo_user # 유저정보관리 DB
-(
-    iuser      INT UNSIGNED AUTO_INCREMENT,                                 # primary
-    uid        VARCHAR(100) NOT NULL,                                       # email
-    upw        VARCHAR(100) NOT NULL,                                       # password
-    nm         VARCHAR(15)  NOT NULL,                                       # 성명
-    gender     TINYINT      NOT NULL DEFAULT 3 CHECK (gender IN (1, 2, 3)), # 성별 1: 남자 2: 여자 3: 선택안함
-    profileimg VARCHAR(100),                                                # 프로필이미지
-    rdt        DATETIME              DEFAULT CURRENT_TIMESTAMP,             # 계정 생성일
-    mdt        DATETIME              DEFAULT CURRENT_TIMESTAMP,             # 계정 수정일
-    CONSTRAINT PRIMARY KEY (iuser),
-    CONSTRAINT UNIQUE (uid)
-);
-
-
 CREATE TABLE webtoon # 웹툰 크롤링
 (
     wnum     INT UNSIGNED,
@@ -149,6 +134,19 @@ CREATE TABLE whattodo_user # 유저정보관리 DB
     level      TINYINT      NOT NULL CHECK ( level IN (1, 2, 3)),           # 유저 종류 구분 1: 관리자 2: 자체유저 3: 소셜유저
     CONSTRAINT PRIMARY KEY (iuser),
     CONSTRAINT UNIQUE (uid)
+);
+
+CREATE TABLE auto_login # 자동로그인
+(
+    `index`         INT UNSIGNED AUTO_INCREMENT,         # primary 값
+    auto_key        VARCHAR(100) NOT NULL,               # 자동로그인 key
+    user_id         VARCHAR(15)  NOT NULL,               # 유저 id
+    create_at       DATETIME     NOT NULL DEFAULT NOW(), # 키 생성일
+    expiration_at   DATETIME     NOT NULL,               # 키 만료일
+    expiration_flag BOOLEAN      NOT NULL DEFAULT FALSE, # 키 만료여부
+    CONSTRAINT PRIMARY KEY (`index`),
+    CONSTRAINT UNIQUE (auto_key),
+    CONSTRAINT FOREIGN KEY (user_id) REFERENCES whattodo_user (uid)
 );
 
 CREATE TABLE fav_webtoon
