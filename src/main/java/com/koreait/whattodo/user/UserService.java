@@ -25,6 +25,8 @@ public class UserService {
 
     public static class Config{
         public static final int AUTO_LOGIN_KEY_EXPIRY_DATE = 7; // 자동로그인 사용가능 기간
+        public static final int FIND_PW_KEY_EXPIRY_DATE = 1; // 자동로그인 사용가능 기간
+        public static final int COOKIE_ENCRYPTION_COUNT = 10; // 쿠키 암호화 숫자
     }
 
     private static class Regex { // 정규식
@@ -50,7 +52,7 @@ public class UserService {
         return mapper.insUser(copyEntity);
     }
 
-    public int idChk(String uid) { // 아이디 중복검사
+    public int idChk(String uid) { // 아이디 중복검사 & 아이디 찾기 1단계
         if (!checkUid(uid)) { // id 정규식검사
             return 2;
         }
@@ -166,10 +168,31 @@ public class UserService {
     }
 
 
-    public List<UserVo>  forgotId(UserDto dto) {
+    public List<UserVo> forgotId(UserDto dto) { // 아이디 찾기
         List<UserVo> vo = null;
         vo = mapper.forgotEmailSel(dto);
         return vo;
+    }
+
+
+    public String forgotPwKey(String uid) {
+        String cookie = String.format("%s%s%f",
+                uid,
+                new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()),
+                Math.random());
+        for (int i = 0; i < Config.COOKIE_ENCRYPTION_COUNT; i++) {
+                cookie = BCrypt.hashpw(cookie, BCrypt.gensalt());
+        }
+        mapper.forgotPw(cookie, uid, Config.FIND_PW_KEY_EXPIRY_DATE);
+        return cookie;
+    }
+
+    public int selKey(String key) {
+        int result = mapper.selFindPwKey(key);
+        if (result <= 0) {
+            return 0;
+        }
+        return 1;
     }
 }
 

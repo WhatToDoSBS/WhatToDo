@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div>
-    <form method="post" action="/user/forgot-id">
+    <form method="post">
         <label>
             <span>이름</span>
             <input type="text" name="nm" class="textBox" required>

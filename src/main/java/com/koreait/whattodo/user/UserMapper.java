@@ -28,4 +28,9 @@ public interface UserMapper {
 
     List<UserVo> forgotEmailSel(UserDto dto); // 아이디 찾기
 
+    void forgotPw(@Param("cookie") String cookie,
+                  @Param("uid") String uid,
+                  @Param("expiration_at") int expiration_at); // 비밀번호 찾은 후 다음진행을위한 쿠키생성
+
+    int selFindPwKey(@Param("key") String key);
 }

@@ -14,8 +14,8 @@
 
     <mvc:interceptors>  <!-- 자동로그인 인터셉터 설정 -->
         <mvc:interceptor>
-            <mvc:mapping path="/user/login"/>
-            <mvc:mapping path="/user/join"/>
+            <mvc:mapping path="/user/**"/>
+            <mvc:mapping path="/board/**"/>
             <bean class="com.koreait.whattodo.interceptor.AutoLoginInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>

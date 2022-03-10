@@ -147,27 +147,63 @@ public class UserController {
 
 
 
-    @GetMapping("/forgot-id")
+    @GetMapping("/forgot/id")
     public void forgotId() {}
 
-    @PostMapping("/forgot-id")
+    @PostMapping("/forgot/id")
     public String forgotIdPost(UserDto dto, HttpSession session, RedirectAttributes reAttr) {
         List<UserVo> list = service.forgotId(dto);
         if (list.size() > 0) {
             session.setAttribute("uidData", list);
-            return "redirect:/user/find-id";
+            return "redirect:/user/forgot/find-id";
         }
         reAttr.addFlashAttribute("err", "계정이 존재하지 않습니다.");
-        return "redirect:/user/forgot-id";
+        return "redirect:/user/forgot/id";
     }
 
-    @GetMapping("/find-id")
+    @GetMapping("/forgot/find-id")
     public void findId() {}
 
-    @PostMapping("/find-id")
+    @PostMapping("/forgot/find-id")
     public String findIdPost() {
         return null;
     }
+
+
+    @GetMapping("/forgot/pwf")
+    public void forgotPwF() {}
+
+    @PostMapping("/forgot/pwf")
+    public String forgotPwFPost(String uid, HttpServletResponse response) {
+        int result = service.idChk(uid);
+        if (result == 0) {
+            String key = service.forgotPwKey(uid);
+            Cookie cookie = new Cookie("findPw", key);
+            cookie.setMaxAge(60*60*24*UserService.Config.FIND_PW_KEY_EXPIRY_DATE);
+            cookie.setPath("/");
+            response.addCookie(cookie);
+            return "redirect:/user/forgot/pws";
+        }
+        return null;
+    }
+
+    @GetMapping("/forgot/pws")
+    public String forgotPwS(HttpServletRequest request, HttpServletResponse response) {
+        Cookie result = null;
+        for (Cookie cookie : request.getCookies()) {
+            if (cookie.getName().equals("findPw")) {
+                result = cookie;
+                break;
+            }
+        }
+        System.out.println(result.getValue());
+        return "redirect:/user/forgot/pws";
+    }
+
+//    @PostMapping("/forgot/pws")
+//    public String forgotPwSPost() {
+//        return null;
+//    }
 }
 
 

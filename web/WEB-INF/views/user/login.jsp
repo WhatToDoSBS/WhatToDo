@@ -24,8 +24,8 @@
     <div>
         <div class="login_find">
             <ul>
-                <li><a href="/user/forgot-id">아이디 찾기</a></li>
-                <li>비밀번호 찾기</li>
+                <li><a href="/user/forgot/id">아이디 찾기</a></li>
+                <li><a href="/user/forgot/pwf">비밀번호 찾기</a></li>
                 <li><a href="/user/join">회원가입</a></li>
             </ul>
         </div>
