@@ -214,3 +214,17 @@ CREATE TABLE rating_game
     gameRating VARCHAR(10),
     gameRank   VARCHAR(10)
 );
+
+CREATE TABLE find_pw
+(
+    pk              INT UNSIGNED AUTO_INCREMENT,         # primary
+    cookie          VARCHAR(100)  NOT NULL,               # 비밀번호찾기 쿠키
+    uid             VARCHAR(100) NOT NULL,               # 유저 id
+    create_at       DATETIME     NOT NULL DEFAULT NOW(), # 키 생성일
+    expiration_at   DATETIME     NOT NULL,               # 키 만료일
+    expiration_flag BOOLEAN      NOT NULL DEFAULT FALSE, # 키 만료여부
+    CONSTRAINT PRIMARY KEY (pk),
+    CONSTRAINT UNIQUE (cookie),
+    CONSTRAINT FOREIGN KEY (uid) REFERENCES whattodo_user (uid)
+);
+
