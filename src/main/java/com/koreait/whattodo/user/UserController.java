@@ -5,6 +5,9 @@ import com.koreait.whattodo.enums.user.LoginEnum;
 import com.koreait.whattodo.model.user.UserDto;
 import com.koreait.whattodo.model.user.UserEntity;
 import com.koreait.whattodo.model.user.UserVo;
+import com.koreait.whattodo.model.user.mypage.ChaUpwEntity;
+import com.koreait.whattodo.model.user.mypage.ChaUpwVo;
+import com.koreait.whattodo.user.mypage.UserMypageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +30,8 @@ public class UserController {
     private UserService service;
     @Autowired
     private UserUtils userUtils;
+    @Autowired
+    private UserMypageService userMypageService;
 
     @GetMapping("/idChk/{uid}")
     @ResponseBody
@@ -147,26 +152,58 @@ public class UserController {
 
 
 
-    @GetMapping("/forgot-id")
+    @GetMapping("/forgot/id")
     public void forgotId() {}
 
-    @PostMapping("/forgot-id")
+    @PostMapping("/forgot/id")
     public String forgotIdPost(UserDto dto, HttpSession session, RedirectAttributes reAttr) {
         List<UserVo> list = service.forgotId(dto);
         if (list.size() > 0) {
             session.setAttribute("uidData", list);
-            return "redirect:/user/find-id";
+            return "redirect:/user/forgot/find-id";
         }
         reAttr.addFlashAttribute("err", "계정이 존재하지 않습니다.");
-        return "redirect:/user/forgot-id";
+        return "redirect:/user/forgot/id";
     }
 
-    @GetMapping("/find-id")
+    @GetMapping("/forgot/find-id")
     public void findId() {}
 
-    @PostMapping("/find-id")
+    @PostMapping("/forgot/find-id")
     public String findIdPost() {
         return null;
+    }
+
+
+    @GetMapping("/forgot/pwf")
+    public void forgotPwF(UserEntity entity) {}
+
+    @PostMapping("/forgot/pwf")
+    public String forgotPwFPost(String uid, HttpServletResponse response) {
+        int result = service.idChk(uid);
+        if (result == 0) {
+            String key = service.forgotPwKey(uid);
+            Cookie cookie = new Cookie("findPw", key);
+            cookie.setMaxAge(60*60*24*UserService.Config.FIND_PW_KEY_EXPIRY_DATE);
+            cookie.setPath("/");
+            response.addCookie(cookie);
+            return "redirect:/user/forgot/pws";
+        }
+        return null;
+    }
+
+    @GetMapping("/forgot/pws")
+    public void forgotPwS() {}
+
+    @PostMapping("/forgot/pws")
+    public String forgotPwSPost(ChaUpwEntity entity, RedirectAttributes reAttr) {
+        ChaUpwVo result = service.findPw(entity);
+        reAttr.addFlashAttribute("result", result.getChaUpwResult());
+        System.out.println(result.getChaUpwResult());
+        if (result.getChaUpwResult().equals("비밀번호가 변경되었습니다.")) {
+            return "/user/forgot/find-pw";
+        }
+        return "redirect:/user/forgot/pws";
     }
 }
 

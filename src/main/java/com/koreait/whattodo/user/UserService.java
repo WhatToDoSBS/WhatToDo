@@ -4,6 +4,8 @@ import com.koreait.whattodo.UserUtils;
 import com.koreait.whattodo.enums.user.LoginEnum;
 import com.koreait.whattodo.model.user.UserDto;
 import com.koreait.whattodo.model.user.UserVo;
+import com.koreait.whattodo.model.user.mypage.ChaUpwEntity;
+import com.koreait.whattodo.model.user.mypage.ChaUpwVo;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,8 @@ public class UserService {
 
     public static class Config{
         public static final int AUTO_LOGIN_KEY_EXPIRY_DATE = 7; // 자동로그인 사용가능 기간
+        public static final int FIND_PW_KEY_EXPIRY_DATE = 1; // 자동로그인 사용가능 기간
+        public static final int COOKIE_ENCRYPTION_COUNT = 10; // 쿠키 암호화 숫자
     }
 
     private static class Regex { // 정규식
@@ -50,7 +54,7 @@ public class UserService {
         return mapper.insUser(copyEntity);
     }
 
-    public int idChk(String uid) { // 아이디 중복검사
+    public int idChk(String uid) { // 아이디 중복검사 & 아이디 찾기 1단계
         if (!checkUid(uid)) { // id 정규식검사
             return 2;
         }
@@ -166,10 +170,60 @@ public class UserService {
     }
 
 
-    public List<UserVo>  forgotId(UserDto dto) {
+    public List<UserVo> forgotId(UserDto dto) { // 아이디 찾기 2단계
         List<UserVo> vo = null;
         vo = mapper.forgotEmailSel(dto);
         return vo;
+    }
+
+
+    public String forgotPwKey(String uid) { // 비밀번호 찾기 1단계
+        String cookie = String.format("%s%s%f",
+                uid,
+                new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()),
+                Math.random());
+        for (int i = 0; i < Config.COOKIE_ENCRYPTION_COUNT; i++) {
+                cookie = BCrypt.hashpw(cookie, BCrypt.gensalt());
+        }
+        mapper.forgotPw(cookie, uid, Config.FIND_PW_KEY_EXPIRY_DATE);
+        return cookie;
+    }
+
+    public int selKey(String key) { // 비밀번호 찾기 2단계
+        int iuser = mapper.selFindPwKey(key);
+        return iuser;
+    }
+
+    public void delKey(String key, int iuser) { // 비밀번호 찾기 2.5단계
+        mapper.delFindPwKey(key, iuser);
+    }
+
+    public ChaUpwVo findPw(ChaUpwEntity entity) {
+        ChaUpwVo vo = new ChaUpwVo(); // 실패시 결과값을 담아서 반환할 vo
+        if (!UserService.checkUpw(entity.getNewUpw()) ||
+                !UserService.checkUpw(entity.getNewUpwChk())) { // 정규식 체크
+            vo.setChaUpwResult("값을 올바르게 작성해 주세요.");
+            return vo;
+        }
+
+        if (!entity.getNewUpw().equals(entity.getNewUpwChk())) { // 새 비밀번호와 확인값이 같은지 체크
+            vo.setChaUpwResult("비밀번호와 비밀번호 확인이 같지 않습니다.");
+            return vo;
+        }
+        entity.setNewUpw(BCrypt.hashpw(entity.getNewUpw(), BCrypt.gensalt()));
+
+        try {
+            System.out.println(entity.getNewUpw());
+            System.out.println(entity.getIuser());
+            System.out.println(entity.getNewUpwChk());
+            mapper.findPw(entity); // 모든게 확인됬을경우 새 비밀번호를 암호화해서 db에 update 시도
+            vo.setChaUpwResult("비밀번호가 변경되었습니다.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            vo.setChaUpwResult("알 수 없는 오류로 실패하였습니다. 잠시 후 다시 시도해주세요."); // update 실패
+        }
+
+        return vo; // 그후 vo => result == 결과값 Controller로 전성
     }
 }
 

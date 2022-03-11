@@ -8,7 +8,7 @@
 
     <insert id="insAutoLoginKey"><!--  자동로그인 키 생성  -->
         INSERT INTO auto_login (auto_key, user_id, expiration_at)
-        VALUES (#{key}, #{uid}, DATE_ADD(NOW(), INTERVAL #{day} DAY))
+        VALUES (#{key}, #{uid}, DATE_ADD(NOW(), INTERVAL ${day} DAY))
     </insert>
 
     <select id="selUserWithAutoLogin" resultType="UserVo"><!--  자동로그인 키 확인  -->
@@ -48,4 +48,24 @@
         WHERE nm = #{nm}
           AND contact = ${contact};
     </select>
+
+    <insert id="forgotPw"><!--  비밀번호찾기 쿠키값 저장  -->
+        INSERT INTO find_pw (cookie, iuser, expiration_at)
+        VALUES (#{cookie}, (SELECT iuser FROM whattodo_user WHERE uid = #{uid}), DATE_ADD(NOW(), INTERVAL ${expiration_at} DAY));
+    </insert>
+
+    <select id="selFindPwKey" resultType="int"><!--  비밀번호찾기 쿠키값으로 iuser 가져옴 -->
+        SELECT iuser FROM find_pw WHERE cookie = #{key};
+    </select>
+
+    <update id="delFindPwKey"><!--  사용다한 쿠키값 만료시키기  -->
+        UPDATE find_pw
+        SET expiration_at = NOW(), expiration_flag = TRUE
+        WHERE cookie = #{cookie}
+          AND iuser = ${iuser};
+    </update>
+
+    <update id="findPw"><!--  비밀번호 변경시키기  -->
+        UPDATE whattodo_user SET upw = #{newUpw} WHERE iuser = ${iuser}
+    </update>
 </mapper>
