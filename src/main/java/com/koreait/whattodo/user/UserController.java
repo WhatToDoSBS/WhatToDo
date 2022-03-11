@@ -5,6 +5,9 @@ import com.koreait.whattodo.enums.user.LoginEnum;
 import com.koreait.whattodo.model.user.UserDto;
 import com.koreait.whattodo.model.user.UserEntity;
 import com.koreait.whattodo.model.user.UserVo;
+import com.koreait.whattodo.model.user.mypage.ChaUpwEntity;
+import com.koreait.whattodo.model.user.mypage.ChaUpwVo;
+import com.koreait.whattodo.user.mypage.UserMypageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +30,8 @@ public class UserController {
     private UserService service;
     @Autowired
     private UserUtils userUtils;
+    @Autowired
+    private UserMypageService userMypageService;
 
     @GetMapping("/idChk/{uid}")
     @ResponseBody
@@ -171,7 +176,7 @@ public class UserController {
 
 
     @GetMapping("/forgot/pwf")
-    public void forgotPwF() {}
+    public void forgotPwF(UserEntity entity) {}
 
     @PostMapping("/forgot/pwf")
     public String forgotPwFPost(String uid, HttpServletResponse response) {
@@ -188,22 +193,18 @@ public class UserController {
     }
 
     @GetMapping("/forgot/pws")
-    public String forgotPwS(HttpServletRequest request, HttpServletResponse response) {
-        Cookie result = null;
-        for (Cookie cookie : request.getCookies()) {
-            if (cookie.getName().equals("findPw")) {
-                result = cookie;
-                break;
-            }
+    public void forgotPwS() {}
+
+    @PostMapping("/forgot/pws")
+    public String forgotPwSPost(ChaUpwEntity entity, RedirectAttributes reAttr) {
+        ChaUpwVo result = service.findPw(entity);
+        reAttr.addFlashAttribute("result", result.getChaUpwResult());
+        System.out.println(result.getChaUpwResult());
+        if (result.getChaUpwResult().equals("비밀번호가 변경되었습니다.")) {
+            return "/user/forgot/find-pw";
         }
-        System.out.println(result.getValue());
         return "redirect:/user/forgot/pws";
     }
-
-//    @PostMapping("/forgot/pws")
-//    public String forgotPwSPost() {
-//        return null;
-//    }
 }
 
 

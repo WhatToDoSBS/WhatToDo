@@ -18,6 +18,10 @@
             <mvc:mapping path="/board/**"/>
             <bean class="com.koreait.whattodo.interceptor.AutoLoginInterceptor" />
         </mvc:interceptor>
+        <mvc:interceptor> <!--   비밀번호 찾기 인터셉터     -->
+            <mvc:mapping path="/user/forgot/pws"/>
+            <bean class="com.koreait.whattodo.interceptor.FindPwSInterceptor" />
+        </mvc:interceptor>
     </mvc:interceptors>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

@@ -4,6 +4,8 @@ import com.koreait.whattodo.UserUtils;
 import com.koreait.whattodo.enums.user.LoginEnum;
 import com.koreait.whattodo.model.user.UserDto;
 import com.koreait.whattodo.model.user.UserVo;
+import com.koreait.whattodo.model.user.mypage.ChaUpwEntity;
+import com.koreait.whattodo.model.user.mypage.ChaUpwVo;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -168,14 +170,14 @@ public class UserService {
     }
 
 
-    public List<UserVo> forgotId(UserDto dto) { // 아이디 찾기
+    public List<UserVo> forgotId(UserDto dto) { // 아이디 찾기 2단계
         List<UserVo> vo = null;
         vo = mapper.forgotEmailSel(dto);
         return vo;
     }
 
 
-    public String forgotPwKey(String uid) {
+    public String forgotPwKey(String uid) { // 비밀번호 찾기 1단계
         String cookie = String.format("%s%s%f",
                 uid,
                 new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()),
@@ -187,12 +189,41 @@ public class UserService {
         return cookie;
     }
 
-    public int selKey(String key) {
-        int result = mapper.selFindPwKey(key);
-        if (result <= 0) {
-            return 0;
+    public int selKey(String key) { // 비밀번호 찾기 2단계
+        int iuser = mapper.selFindPwKey(key);
+        return iuser;
+    }
+
+    public void delKey(String key, int iuser) { // 비밀번호 찾기 2.5단계
+        mapper.delFindPwKey(key, iuser);
+    }
+
+    public ChaUpwVo findPw(ChaUpwEntity entity) {
+        ChaUpwVo vo = new ChaUpwVo(); // 실패시 결과값을 담아서 반환할 vo
+        if (!UserService.checkUpw(entity.getNewUpw()) ||
+                !UserService.checkUpw(entity.getNewUpwChk())) { // 정규식 체크
+            vo.setChaUpwResult("값을 올바르게 작성해 주세요.");
+            return vo;
         }
-        return 1;
+
+        if (!entity.getNewUpw().equals(entity.getNewUpwChk())) { // 새 비밀번호와 확인값이 같은지 체크
+            vo.setChaUpwResult("비밀번호와 비밀번호 확인이 같지 않습니다.");
+            return vo;
+        }
+        entity.setNewUpw(BCrypt.hashpw(entity.getNewUpw(), BCrypt.gensalt()));
+
+        try {
+            System.out.println(entity.getNewUpw());
+            System.out.println(entity.getIuser());
+            System.out.println(entity.getNewUpwChk());
+            mapper.findPw(entity); // 모든게 확인됬을경우 새 비밀번호를 암호화해서 db에 update 시도
+            vo.setChaUpwResult("비밀번호가 변경되었습니다.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            vo.setChaUpwResult("알 수 없는 오류로 실패하였습니다. 잠시 후 다시 시도해주세요."); // update 실패
+        }
+
+        return vo; // 그후 vo => result == 결과값 Controller로 전성
     }
 }
 
