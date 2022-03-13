@@ -204,7 +204,8 @@ CREATE TABLE video_movie # 영화 크롤링 DB
     img           VARCHAR(100),
     rating        VARCHAR(10),
     actor         VARCHAR(100),
-    director      VARCHAR(20)
+    director      VARCHAR(20),
+    openDt        VARCHAR(30)
 );
 
 CREATE TABLE rating_game
