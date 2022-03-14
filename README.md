@@ -30,5 +30,7 @@ Mybatis foreach 활용, JOIN, DISTINCT, LIMIT 활용
 
 ## Game Page
 
+## Movie Page
+
 ## Login
 로컬 로그인로직 포함 소셜로그인, 자동로그인, 아이디&비밀번호 찾기, 회원가입
