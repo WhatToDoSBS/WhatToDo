@@ -32,5 +32,6 @@ Mybatis foreach 활용, JOIN, DISTINCT, LIMIT 활용
 
 ## Movie Page
 
-## Login
-로컬 로그인로직 포함 소셜로그인, 자동로그인, 아이디&비밀번호 찾기, 회원가입
+## USER
+로컬 로그인을 포함한 소셜 로그인 구현, interceptor와 cookie를 활용한 자동로그인, cookie를 이용한 아이디&비밀번호 찾기, 회원가입에 우편번호 API 활용 및 BOOTSTRAP 일부 활용
+내정보 페이지 프로필 사진변경, 비밀번호 변경, 좋아요&댓글 조회
