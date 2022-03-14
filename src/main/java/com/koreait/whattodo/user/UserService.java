@@ -198,7 +198,7 @@ public class UserService {
         mapper.delFindPwKey(key, iuser);
     }
 
-    public ChaUpwVo findPw(ChaUpwEntity entity) {
+    public ChaUpwVo findPw(ChaUpwEntity entity) { // 비밀번호 찾기 3단계
         ChaUpwVo vo = new ChaUpwVo(); // 실패시 결과값을 담아서 반환할 vo
         if (!UserService.checkUpw(entity.getNewUpw()) ||
                 !UserService.checkUpw(entity.getNewUpwChk())) { // 정규식 체크
@@ -213,9 +213,6 @@ public class UserService {
         entity.setNewUpw(BCrypt.hashpw(entity.getNewUpw(), BCrypt.gensalt()));
 
         try {
-            System.out.println(entity.getNewUpw());
-            System.out.println(entity.getIuser());
-            System.out.println(entity.getNewUpwChk());
             mapper.findPw(entity); // 모든게 확인됬을경우 새 비밀번호를 암호화해서 db에 update 시도
             vo.setChaUpwResult("비밀번호가 변경되었습니다.");
         } catch (Exception e) {
