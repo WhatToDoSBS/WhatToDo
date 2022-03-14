@@ -15,7 +15,7 @@ Jsoup을 활용한 크롤링 및 Database CRUD 작업, RestAPI 구현, 영화진
 Mybatis, tiles, Servlet, taglib, hikari, jbcrypt 등 다양한 라이브러리 활용
 
 ### JavaScript/HTML&CSS
-KaKao Login, Ajax 통신 활용, Youtube api 활용, RestAPI 구현, Swiper library 사용(슬라이더), BootStrap 사용
+KaKao&NAVER Login, Ajax 통신 활용, Youtube api 활용, RestAPI 구현, Swiper library 사용(슬라이더), BootStrap 사용
 
 ### Maria DB
 크롤링 데이터 CRUD로 데이터베이스에 활용, Select문에서 ORDER BY RAND()를 활용해 랜덤하게 뿌려줌.
