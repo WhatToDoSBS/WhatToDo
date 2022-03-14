@@ -201,7 +201,7 @@ public class UserController {
         reAttr.addFlashAttribute("result", result.getChaUpwResult());
         System.out.println(result.getChaUpwResult());
         if (result.getChaUpwResult().equals("비밀번호가 변경되었습니다.")) {
-            return "/user/forgot/find-pw";
+            return "redirect:/user/login";
         }
         return "redirect:/user/forgot/pws";
     }
