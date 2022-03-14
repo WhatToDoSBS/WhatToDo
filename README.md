@@ -22,7 +22,7 @@ KaKao&NAVER Login, Ajax 통신 활용, Youtube api 활용, RestAPI 구현, Swipe
 Mybatis foreach 활용, JOIN, DISTINCT, LIMIT 활용
 
 ## Main Page
-![main](https://https://user-images.githubusercontent.com/75936092/158113818-d69ca981-5770-4603-a396-945833c75015.PNG)
+![main](https://user-images.githubusercontent.com/75936092/158113818-d69ca981-5770-4603-a396-945833c75015.PNG)
 
 ## Webtoon Page
 
