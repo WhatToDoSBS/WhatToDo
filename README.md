@@ -84,3 +84,9 @@ Mybatis foreach 활용, JOIN, DISTINCT, LIMIT 활용
 ## Login Page
 카카오, 네이버API 활용 로그인 구현
 ![image](https://user-images.githubusercontent.com/91525736/159208879-7aeba6c2-6748-4486-a226-07f9f7e1daf3.png)
+
+## DB 구성도
+![image](https://user-images.githubusercontent.com/91525736/159648453-76000d25-9ae8-4e85-992d-e7b9aad03209.png)
+
+## 전체 페이지 구성도
+![image](https://user-images.githubusercontent.com/91525736/159648545-4e856f5a-28e3-497e-adfb-d5d26c054546.png)
