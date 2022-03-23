@@ -117,14 +117,14 @@ API를 통한 최신 영화정보를 불러와서 랜덤으로 화면에 구현
 ## DB 구성도
 <br/>
 <br/>
-![DB구성](https://user-images.githubusercontent.com/91525736/159641646-d2c01cb8-2c41-4995-85dc-3daacf285cf8.png)
+![image](https://user-images.githubusercontent.com/91525736/159641646-d2c01cb8-2c41-4995-85dc-3daacf285cf8.png)
 <br/>
 <br/>
 
 ## 페이지 전체 구성도
 <br/>
 <br/>
-![전체 페이지 구성도](https://user-images.githubusercontent.com/91525736/159641773-82ade263-3cb6-48ba-93b9-ab1573891acf.png)
+![image](https://user-images.githubusercontent.com/91525736/159641773-82ade263-3cb6-48ba-93b9-ab1573891acf.png)
 
 <br/>
 <br/>
