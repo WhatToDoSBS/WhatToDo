@@ -87,8 +87,6 @@ Mybatis foreach 활용, JOIN, DISTINCT, LIMIT 활용
 
 ## DB 구성도
 ![Untitled](https://user-images.githubusercontent.com/59411333/173093432-a1651adc-2cec-4ac1-ace0-0e80376eed2e.png)
-![image](https://user-images.githubusercontent.com/91525736/159648453-76000d25-9ae8-4e85-992d-e7b9aad03209.png)
-
 
 ## 전체 페이지 구성도
-![image](https://user-images.githubusercontent.com/91525736/159648545-4e856f5a-28e3-497e-adfb-d5d26c054546.png)
+![Untitled (1)](https://user-images.githubusercontent.com/59411333/173093747-f04075dc-d676-438e-852c-aaa8bf226023.png)
